@@ -1,4 +1,4 @@
-# I am no longer supporting this mod, if you wish mroe information please talk to Brandon3655 or Covers1624
+# I am no longer supporting this mod, if you wish more information please talk to Brandon3655 or Covers1624
  
  1.10.2 --> 1.17x are END OF LIFE, we will NOT be accepting PR's etc for those versions. There are no plans to backport once 1.18 is Released.
 
