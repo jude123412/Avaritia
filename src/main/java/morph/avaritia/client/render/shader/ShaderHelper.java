@@ -20,6 +20,7 @@ import org.lwjgl.opengl.GL11;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.stream.IntStream;
 
 public final class ShaderHelper {
 
@@ -45,10 +46,11 @@ public final class ShaderHelper {
         ARBShaderObjects.glUseProgramObjectARB(shader);
 
         if (shader != 0) {
-            int time = ARBShaderObjects.glGetUniformLocationARB(shader, "time");
             Minecraft mc = Minecraft.getMinecraft();
+            int time = ARBShaderObjects.glGetUniformLocationARB(shader, "time");
+
             if (mc.player != null && mc.player.world != null) {
-                ARBShaderObjects.glUniform1iARB(time, (int) (mc.player.world.getWorldTime() % Integer.MAX_VALUE));
+                    ARBShaderObjects.glUniform1iARB(time, (int) (mc.player.ticksExisted % 36000));
             }
 
             if (callback != null) {
