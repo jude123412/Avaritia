@@ -48,10 +48,10 @@ public final class ShaderHelper {
         if (shader != 0) {
             Minecraft mc = Minecraft.getMinecraft();
             int time = ARBShaderObjects.glGetUniformLocationARB(shader, "time");
-            int animationTime = (int) (mc.player.ticksExisted % 12000);
+            int animationTime = (int) (mc.player.ticksExisted % 24000);
 
             if (mc.player != null && mc.player.world != null) {
-                ARBShaderObjects.glUniform1iARB(time, animationTime <= 6000 ? animationTime : animationTime * -1 + 12000);
+                ARBShaderObjects.glUniform1iARB(time, animationTime <= 12000 ? animationTime : animationTime * -1 + 24000);
             }
 
             if (callback != null) {
