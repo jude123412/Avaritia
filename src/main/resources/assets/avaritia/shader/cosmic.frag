@@ -22,7 +22,7 @@ uniform mat2 cosmicuvs[cosmiccount];
 varying vec3 position;
 
 float rand2d(vec2 x) {
-    return fract(sin(mod(dot(x, vec2(12.9898, 78.233)), 3.14)) * 43758.5453);
+	return fract(sin(mod(dot(x, vec2(12.9898, 78.233)), M_PI)) * 43758.5453);
 }
 
 mat4 rotationMatrix(vec3 axis, float angle)
@@ -44,7 +44,7 @@ void main (void)
     vec4 light = gl_Color;
     vec4 mask = texture2D(texture0, gl_TexCoord[0].xy);
     light.rgb *= lightlevel;
-    
+
     float oneOverExternalScale = 1.0/externalScale;
     
     int uvtiles = 16;
@@ -105,6 +105,8 @@ void main (void)
 		int tv = int(mod(floor(v*uvtiles),uvtiles)); 
 		
 		// get pseudorandom variants
+
+		int position = ((1777541 * tu) + (7649689 * tv) + (3612703 * (i+31)) + 1723609 ) ^ 50943779;
 		int symbol = int(rand2d(vec2(tu, tv + i * 10.0)) * cosmicoutof);
 		int rotation = int(mod(pow(tu,float(tv)) + tu + 3 + tv*i, 8));
 		bool flip = false;
