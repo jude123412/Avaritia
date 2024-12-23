@@ -1,4 +1,4 @@
-#version 130
+#version 120
 
 #define M_PI 3.1415926535897932384626433832795
 
@@ -77,9 +77,9 @@ void main (void)
 	
 		// get semi-random stuff
 		int j = i + 7;
-		float rand1 = (j * j * 4321 + j * 8) * 2.0F;
+		float rand1 = (j * j * 4321 + j * 8) * 2.0;
 		int k = j + 1;
-		float rand2 = (k * k * k * 239 + k * 37) * 3.6F;
+		float rand2 = (k * k * k * 239 + k * 37) * 3.6;
 		float rand3 = rand1 * 347.4 + rand2 * 63.4;
 		
 		// random rotation matrix by random rotation around random axis
@@ -105,6 +105,7 @@ void main (void)
 		int tv = int(mod(floor(v*uvtiles),uvtiles)); 
 		
 		// get pseudorandom variants
+
 		int position = ((1777541 * tu) + (7649689 * tv) + (3612703 * (i+31)) + 1723609 ) ^ 50943779;
 		int symbol = int(rand2d(vec2(tu, tv + i * 10.0)) * cosmicoutof);
 		int rotation = int(mod(pow(tu,float(tv)) + tu + 3 + tv*i, 8));
