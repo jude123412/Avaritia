@@ -1,12 +1,12 @@
-# I am no longer supporting this mod, if you wish more information please talk to Brandon3655 or Covers1624
- 
- 1.10.2 --> 1.17x are END OF LIFE, we will NOT be accepting PR's etc for those versions. There are no plans to backport once 1.18 is Released.
+# The Continuation of Avaritia.
+I'm now maintaing this project to keep it alive on 1.12.2.
+I originally was going to fork this repository for my modpack GTHH (GregTech, Higher & Higher) but now it will be avalible to everyone who want to use it.
+The latest release is avalible on CurseForge at -> https://www.curseforge.com/minecraft/mc-mods/avaritia-1-1x-unofficial <-
 
 # Avaritia
 Are you the type of modded Minecraft player that makes a beeline for the designated "end game" and then gives up on ever playing again once you get there? Do you wish there was a way to make the process take significantly longer? Do you love GregTech, but wish it weren't so short? Do you sit down on your chest full of Galgadorian Drills and wish there was a mod that didn't just hand things to you on a silver platter?
 
 This might be the mod for you!
-
 
 # LICSENSE - MIT
 
