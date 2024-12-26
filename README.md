@@ -1,6 +1,6 @@
 # The Continuation of Avaritia.
 I'm now maintaing this project to keep it alive on 1.12.2.
-I originally was going to fork this repository for my modpack GTHH (GregTech, Higher & Higher) but now it will be avalible to everyone who want to use it.
+I originally was going to fork this repository for my modpack GTHH (GregTech, Higher & Higher) but now it will be avalible to everyone who wants to use it.
 The latest release is avalible on CurseForge at -> https://www.curseforge.com/minecraft/mc-mods/avaritia-1-1x-unofficial <-
 
 # Avaritia
