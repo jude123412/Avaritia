@@ -35,7 +35,7 @@ public class BlockNeutroniumCompressor extends BlockContainer implements IModelR
         super(Material.IRON);
         setSoundType(SoundType.METAL);
         setHardness(20);
-        setUnlocalizedName("avaritia:neutronium_compressor");
+        setTranslationKey("avaritia:neutronium_compressor");
         setRegistryName("neutronium_compressor");
         setHarvestLevel("pickaxe", 3);
         setCreativeTab(Avaritia.tab);

@@ -23,7 +23,7 @@ public class ItemBlockResource extends ItemBlock {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        return "tile.avaritia:block_resource." + BlockResource.Type.byMetadata(stack.getItemDamage()).getName() + ".name";
+    public String getTranslationKey(ItemStack stack) {
+        return "tile.avaritia:block_resource." + BlockResource.Type.byMetadata(stack.getItemDamage()).getName();
     }
 }

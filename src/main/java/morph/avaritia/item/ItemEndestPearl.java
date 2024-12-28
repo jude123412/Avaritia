@@ -28,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemEndestPearl extends ItemEnderPearl implements IHaloRenderItem, IModelRegister {
 
     public ItemEndestPearl() {
-        setUnlocalizedName("avaritia:endest_pearl");
+        setTranslationKey("avaritia:endest_pearl");
         setRegistryName("endest_pearl");
         setMaxStackSize(64);
         setCreativeTab(Avaritia.tab);

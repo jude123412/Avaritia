@@ -66,9 +66,9 @@ tile.avaritia:double_compressed_crafting_table.name=Дважды сжатый в
 tile.avaritia:extreme_crafting_table.name=Экстремальный верстак
 #
 # Resource
-tile.avaritia:block_resource.neutronium.name.name=Блок нейтрония
-tile.avaritia:block_resource.infinity.name.name=Блок бесконечности
-tile.avaritia:block_resource.crystal_matrix.name.name=Кристалическая матрица
+tile.avaritia:block_resource.neutronium.name=Блок нейтрония
+tile.avaritia:block_resource.infinity.name=Блок бесконечности
+tile.avaritia:block_resource.crystal_matrix.name=Кристалическая матрица
 #
 # Machines
 tile.avaritia:neutron_collector.name=Сборщик нейтрония

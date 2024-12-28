@@ -27,9 +27,9 @@ import static morph.avaritia.Avaritia.*;
 @Mod (modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, acceptedMinecraftVersions = CodeChickenLib.MC_VERSION_DEP, dependencies = DEPENDENCIES)
 public class Avaritia {
 
-    public static final String MOD_ID = "avaritia";
-    public static final String MOD_NAME = "Avaritia";
-    public static final String MOD_VERSION = "${mod_version}";
+    public static final String MOD_ID = Tags.MODID;
+    public static final String MOD_NAME = Tags.MODNAME;
+    public static final String MOD_VERSION = Tags.VERSION;
     public static final String DEPENDENCIES = "" + CodeChickenLib.MOD_VERSION_DEP;
 
     public static CreativeTabs tab = new SimpleCreativeTab(MOD_ID, "avaritia:resource", 5);
@@ -52,6 +52,7 @@ public class Avaritia {
         OreDictionary.registerOre("ingotCosmicNeutronium", ModItems.neutronium_ingot);
         OreDictionary.registerOre("ingotInfinity", ModItems.infinity_ingot);
         OreDictionary.registerOre("nuggetCosmicNeutronium", ModItems.neutron_nugget);
+        OreDictionary.registerOre("gemInfinityCatalyst", ModItems.infinity_catalyst);
     }
 
     @Mod.EventHandler

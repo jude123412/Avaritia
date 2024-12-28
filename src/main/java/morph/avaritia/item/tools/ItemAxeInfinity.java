@@ -39,7 +39,7 @@ public class ItemAxeInfinity extends ItemAxe {
 
     public ItemAxeInfinity() {
         super(opAxe, 20.0F, -3.0F);
-        setUnlocalizedName("avaritia:infinity_axe");
+        setTranslationKey("avaritia:infinity_axe");
         setRegistryName("infinity_axe");
         setCreativeTab(Avaritia.tab);
         MinecraftForge.EVENT_BUS.register(this);

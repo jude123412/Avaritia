@@ -93,7 +93,7 @@ public class AvaritiaRecipeManager {
             JsonContext ctx = new JsonContext(mod.getModId());
             Path fPath = null;
             if (mod.getSource().isFile()) {
-                fs = FileSystems.newFileSystem(mod.getSource().toPath(), null);
+                fs = FileSystems.newFileSystem(mod.getSource().toPath(), (ClassLoader) null);
                 fPath = fs.getPath("/assets/" + ctx.getModId() + "/avaritia_recipes/_factories.json");
             } else if (mod.getSource().isDirectory()) {
                 fPath = mod.getSource().toPath().resolve("assets/" + ctx.getModId() + "/avaritia_recipes/_factories.json");

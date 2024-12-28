@@ -66,9 +66,9 @@ tile.avaritia:double_compressed_crafting_table.name=Bancada de Trabalho Duplamen
 tile.avaritia:extreme_crafting_table.name=Bancada de Trabalho Extrema
 #
 # Resource
-tile.avaritia:block_resource.neutronium.name.name=Bloco de Neutronium
-tile.avaritia:block_resource.infinity.name.name=Bloco do Infinito
-tile.avaritia:block_resource.crystal_matrix.name.name=Cristal Matriz
+tile.avaritia:block_resource.neutronium.name=Bloco de Neutronium
+tile.avaritia:block_resource.infinity.name=Bloco do Infinito
+tile.avaritia:block_resource.crystal_matrix.name=Cristal Matriz
 #
 # Machines
 tile.avaritia:neutron_collector.name=Coletor de Nêutrons

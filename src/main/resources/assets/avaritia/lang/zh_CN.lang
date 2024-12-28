@@ -67,9 +67,9 @@ tile.avaritia:double_compressed_crafting_table.name=二重压缩工作台
 tile.avaritia:extreme_crafting_table.name=终极工作台
 #
 # Resource
-tile.avaritia:block_resource.neutronium.name.name=中子态素块
-tile.avaritia:block_resource.infinity.name.name=无尽之块
-tile.avaritia:block_resource.crystal_matrix.name.name=水晶矩阵
+tile.avaritia:block_resource.neutronium.name=中子态素块
+tile.avaritia:block_resource.infinity.name=无尽之块
+tile.avaritia:block_resource.crystal_matrix.name=水晶矩阵
 #
 # Machines
 tile.avaritia:neutron_collector.name=中子态素收集器

@@ -15,7 +15,7 @@ public class ItemSwordSkulls extends ItemSword {
 
     public ItemSwordSkulls() {
         super(ToolMaterial.DIAMOND);
-        setUnlocalizedName("avaritia:skullfire_sword");
+        setTranslationKey("avaritia:skullfire_sword");
         setRegistryName("skullfire_sword");
         setCreativeTab(Avaritia.tab);
     }

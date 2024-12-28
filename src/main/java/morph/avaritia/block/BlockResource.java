@@ -31,7 +31,7 @@ public class BlockResource extends Block implements IModelRegister {
 
     public BlockResource() {
         super(Material.IRON);
-        setUnlocalizedName("avaritia:block_resource");
+        setTranslationKey("avaritia:block_resource");
         setRegistryName("block_resource");
         setSoundType(SoundType.METAL);
         setHarvestLevel("pickaxe", 3);

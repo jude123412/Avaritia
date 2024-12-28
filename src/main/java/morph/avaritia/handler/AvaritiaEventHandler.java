@@ -148,7 +148,7 @@ public class AvaritiaEventHandler {
                 //    ToolHelper.dropItem(drop, event.getEntityPlayer().worldObj, event.getPos());
                 //} else {
                 //    block.harvestBlock(event.getWorld(), event.getEntityPlayer(), event.getPos(), state, null, null);
-                ///}
+                //}
                 //event.getWorld().setBlockToAir(event.getPos());
                 //event.world.playAuxSFX(2001, event.getPos(), Block.getIdFromBlock(block) + (meta << 12));
             }

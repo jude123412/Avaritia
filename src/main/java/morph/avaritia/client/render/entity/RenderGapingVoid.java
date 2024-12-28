@@ -48,9 +48,9 @@ public class RenderGapingVoid extends Render<EntityGapingVoid> {
         double halocoord = 0.58 * scale;
         double haloscaledist = 2.2 * scale;
 
-        double dx = ent.posX - renderManager.renderPosX;
-        double dy = ent.posY - renderManager.renderPosY;
-        double dz = ent.posZ - renderManager.renderPosZ;
+        double dx = ent.posX - renderManager.viewerPosX;
+        double dy = ent.posY - renderManager.viewerPosY;
+        double dz = ent.posZ - renderManager.viewerPosZ;
 
         double xzlen = Math.sqrt(dx * dx + dz * dz);
         double len = Math.sqrt(dx * dx + dy * dy + dz * dz);
@@ -63,8 +63,8 @@ public class RenderGapingVoid extends Render<EntityGapingVoid> {
         double yang = Math.atan2(xzlen, dy) * MathHelper.todeg;
         double xang = Math.atan2(dx, dz) * MathHelper.todeg;
 
-        //Lumberjack.info("dx: "+dx+", dy: "+dy+", dz: "+dz+", xang: "+xang);
-        //Lumberjack.info("x: "+x+", y: "+y+", z: "+z);
+//        Lumberjack.info("dx: "+dx+", dy: "+dy+", dz: "+dz+", xang: "+xang);
+//        Lumberjack.info("x: "+x+", y: "+y+", z: "+z);
 
         GlStateManager.disableLighting();
         mc.entityRenderer.disableLightmap();

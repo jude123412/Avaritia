@@ -66,9 +66,9 @@ tile.avaritia:double_compressed_crafting_table.name=Double Compressed Crafting T
 tile.avaritia:extreme_crafting_table.name=Extreme Crafting Table
 #
 # Resource
-tile.avaritia:block_resource.neutronium.name.name=Neutronium Block
-tile.avaritia:block_resource.infinity.name.name=Infinity Block
-tile.avaritia:block_resource.crystal_matrix.name.name=Crystal Matrix
+tile.avaritia:block_resource.neutronium.name=Neutronium Block
+tile.avaritia:block_resource.infinity.name=Infinity Block
+tile.avaritia:block_resource.crystal_matrix.name=Crystal Matrix
 #
 # Machines
 tile.avaritia:neutron_collector.name=Neutron Collector
@@ -96,6 +96,8 @@ tooltip.matter_cluster.counter=items
 itemGroup.avaritia=Avaritia
 container.neutron_collector=Neutron Collector
 container.neutronium_compressor=Neutronium Compressor
+container.extreme=Xtreme
+container.crafting=Crafting
 crafting.extreme=Xtreme Crafting
 crafting.extreme.shapeless=Xtreme Shapeless
 crafting.extreme_compression=Neutronium Compressor

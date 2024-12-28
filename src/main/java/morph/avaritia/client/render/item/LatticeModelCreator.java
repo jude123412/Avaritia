@@ -1,11 +1,18 @@
 package morph.avaritia.client.render.item;
 
+//import codechicken.lib.colour.Colour;
+//import codechicken.lib.colour.ColourRGBA;
+//import codechicken.lib.util.VertexDataUtils;
+//import codechicken.lib.vec.Vector3;
+//import codechicken.lib.vec.Vertex5;
+//import codechicken.lib.vec.uv.UV;
 import codechicken.lib.colour.Colour;
 import codechicken.lib.colour.ColourRGBA;
 import codechicken.lib.util.VertexDataUtils;
 import codechicken.lib.vec.Vector3;
 import codechicken.lib.vec.Vertex5;
 import codechicken.lib.vec.uv.UV;
+import codechicken.lib.vec.uv.UVTransformation;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -13,10 +20,16 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
+//import net.minecraft.client.renderer.vertex.VertexFormatElement;
+//import net.minecraft.util.EnumFacing;
+//import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
+import static codechicken.lib.util.VertexDataUtils.buildQuad;
 
 /**
  * Generates a lattice model same as 1.7's item renderer.
@@ -28,7 +41,27 @@ public class LatticeModelCreator {
     public static List<BakedQuad> generateLatticeModel(Set<TextureAtlasSprite> sprites) {
         List<BakedQuad> quads = new LinkedList<>();
         VertexFormat format = DefaultVertexFormats.ITEM;
-        Colour colour = new ColourRGBA(0xFFFFFFFF);
+        Colour colour = new ColourRGBA(0xFFFFFFFF) {
+            @Override
+            public int pack() {
+                return 0;
+            }
+
+            @Override
+            public float[] packArray() {
+                return new float[0];
+            }
+
+            @Override
+            public Colour copy() {
+                return null;
+            }
+
+            @Override
+            public Colour set(int colour) {
+                return null;
+            }
+        };
         double scale = 1D / 16D;
 
         int i = 0;
@@ -105,8 +138,6 @@ public class LatticeModelCreator {
                 v4.set(1.0D, d1, 0.0F - scale, (double) minU, d2);
                 quads.add(buildQuad(format, sprite, EnumFacing.DOWN, colour, i, v1, v2, v3, v4));
             }
-
-            i++;
         }
         return quads;
     }
@@ -135,7 +166,7 @@ public class LatticeModelCreator {
                     builder.put(e, (float) vec.x, (float) vec.y, (float) vec.z, 1);
                     break;
                 case NORMAL:
-                    builder.put(e, face.getFrontOffsetX(), face.getFrontOffsetY(), face.getFrontOffsetZ(), 0);
+                    builder.put(e, face.getXOffset(), face.getYOffset(), face.getZOffset(), 0);
                     break;
                 case COLOR:
                     builder.put(e, (colour.r & 0xFF) / 255F, (colour.g & 0xFF) / 255F, (colour.b & 0xFF) / 255F, (colour.a & 0xFF) / 255F);

@@ -40,7 +40,7 @@ public class ItemPickaxeInfinity extends ItemPickaxe {
 
     public ItemPickaxeInfinity() {
         super(TOOL_MATERIAL);
-        setUnlocalizedName("avaritia:infinity_pickaxe");
+        setTranslationKey("avaritia:infinity_pickaxe");
         setRegistryName("infinity_pickaxe");
         setCreativeTab(Avaritia.tab);
     }

@@ -66,9 +66,9 @@ tile.avaritia:double_compressed_crafting_table.name=Doppelt komprimierte Werkban
 tile.avaritia:extreme_crafting_table.name=Extreme Werkbank
 #
 # Resource
-tile.avaritia:block_resource.neutronium.name.name=Neutroniumblock
-tile.avaritia:block_resource.infinity.name.name=Unendlichkeitsblock
-tile.avaritia:block_resource.crystal_matrix.name.name=Kristallmatrix
+tile.avaritia:block_resource.neutronium.name=Neutroniumblock
+tile.avaritia:block_resource.infinity.name=Unendlichkeitsblock
+tile.avaritia:block_resource.crystal_matrix.name=Kristallmatrix
 #
 # Machines
 tile.avaritia:neutron_collector.name=Neutronensammler

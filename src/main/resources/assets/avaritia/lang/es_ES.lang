@@ -66,9 +66,9 @@ tile.avaritia:double_compressed_crafting_table.name=Mesa de Trabajo Doble Compri
 tile.avaritia:extreme_crafting_table.name=Mesa de Trabajo Extrema
 #
 # Resource
-tile.avaritia:block_resource.neutronium.name.name=Bloque de Neutronio
-tile.avaritia:block_resource.infinity.name.name=Bloque Infinito
-tile.avaritia:block_resource.crystal_matrix.name.name=Matriz de Cristal
+tile.avaritia:block_resource.neutronium.name=Bloque de Neutronio
+tile.avaritia:block_resource.infinity.name=Bloque Infinito
+tile.avaritia:block_resource.crystal_matrix.name=Matriz de Cristal
 #
 # Machines
 tile.avaritia:neutron_collector.name=Coleccionista de Neutrones

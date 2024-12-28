@@ -41,7 +41,7 @@ public class EntityEndestPearl extends EntityThrowable {
             EnumFacing dir = pos.sideHit;
             Vector3 offset = Vector3.zero.copy();
             if (pos.sideHit != null) {
-                offset = new Vector3(dir.getFrontOffsetX(), dir.getFrontOffsetY(), dir.getFrontOffsetZ());
+                offset = new Vector3(dir.getXOffset(), dir.getYOffset(), dir.getZOffset());
             }
             ent.setLocationAndAngles(posX + offset.x * 0.25, posY + offset.y * 0.25, posZ + offset.z * 0.25, rotationYaw, 0.0F);
             world.spawnEntity(ent);

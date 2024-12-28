@@ -17,13 +17,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockDoubleCompressedCraftingTable extends Block implements IModelRegister {
 
     public BlockDoubleCompressedCraftingTable() {
         super(Material.WOOD);
         setHardness(20F);
-        setUnlocalizedName("avaritia:double_compressed_crafting_table");
+        setTranslationKey("avaritia:double_compressed_crafting_table");
         setSoundType(SoundType.WOOD);
         setHarvestLevel("axe", 1);
         setCreativeTab(Avaritia.tab);

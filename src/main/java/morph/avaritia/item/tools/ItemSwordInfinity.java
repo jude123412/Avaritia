@@ -36,7 +36,7 @@ public class ItemSwordInfinity extends ItemSword implements ICosmicRenderItem, I
 
     public ItemSwordInfinity() {
         super(TOOL_MATERIAL);
-        setUnlocalizedName("avaritia:infinity_sword");
+        setTranslationKey("avaritia:infinity_sword");
         setRegistryName("infinity_sword");
         setCreativeTab(Avaritia.tab);
     }
@@ -57,7 +57,7 @@ public class ItemSwordInfinity extends ItemSword implements ICosmicRenderItem, I
             }
         }
 
-        victim.recentlyHit = 60;
+//        victim.recentlyHit = 60;
         victim.getCombatTracker().trackDamage(new DamageSourceInfinitySword(player), victim.getHealth(), victim.getHealth());
         victim.setHealth(0);
         victim.onDeath(new EntityDamageSource("infinity", player));

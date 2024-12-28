@@ -1,15 +1,24 @@
 package morph.avaritia.entity;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.item.ItemExpireEvent;
 
 public class EntityImmortalItem extends EntityItem {
+
+    private int age;
+    private int pickupDelay;
+
+    private int extraLife;
 
     public EntityImmortalItem(World world, Entity original, ItemStack stack) {
         this(world, original.posX, original.posY, original.posZ, stack);
@@ -47,9 +56,9 @@ public class EntityImmortalItem extends EntityItem {
         return false;
     }
 
-    @Override
+
     public void onUpdate() {
-        ItemStack stack = getDataManager().get(ITEM);
+        ItemStack stack = getItem();
         if (!stack.isEmpty()) {
             if (stack.getItem().onEntityItemUpdate(this)) {
                 return;
@@ -78,12 +87,13 @@ public class EntityImmortalItem extends EntityItem {
                     motionY = 0.20000000298023224D;
                     motionX = (rand.nextFloat() - rand.nextFloat()) * 0.2F;
                     motionZ = (rand.nextFloat() - rand.nextFloat()) * 0.2F;
-                    //this.playSound("random.fizz", 0.4F, 2.0F + this.rand.nextFloat() * 0.4F);
+                    this.playSound(SoundEvents.ENTITY_GENERIC_BURN, 0.4F, 2.0F + this.rand.nextFloat() * 0.4F);
                 }
 
-                if (!world.isRemote) {
-                    searchForOtherItemsNearby();
-                }
+                // Technically not needed
+//                if (!world.isRemote) {
+//                    searchForOtherItemsNearby();
+//                }
             }
 
             float f = 0.98F;
@@ -102,19 +112,16 @@ public class EntityImmortalItem extends EntityItem {
 
             ++age;
 
-            ItemStack item = getDataManager().get(ITEM);
+            ItemStack item = getItem();
 
             if (!world.isRemote && age >= lifespan) {
                 if (!item.isEmpty()) {
-                    /*ItemExpireEvent event = new ItemExpireEvent(this, (item.getItem() == null ? 6000 : item.getItem().getEntityLifespan(item, worldObj)));
-                    if (MinecraftForge.EVENT_BUS.post(event))
-					{
-					    lifespan += event.extraLife;
-					}
-					else
-					{
+                    ItemExpireEvent event = new ItemExpireEvent(this, (item.getItem() == null ? 6000 : item.getItem().getEntityLifespan(item, Minecraft.getMinecraft().world)));
+                    if (MinecraftForge.EVENT_BUS.post(event)) {
+					    lifespan += extraLife;
+					} else {
 					    this.setDead();
-					}*/
+					}
                 } else {
                     setDead();
                 }

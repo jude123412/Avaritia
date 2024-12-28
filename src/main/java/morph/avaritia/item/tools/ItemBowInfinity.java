@@ -12,11 +12,13 @@ import morph.avaritia.client.render.item.CosmicItemRender;
 import morph.avaritia.client.render.item.InfinityBowModelBakery;
 import morph.avaritia.client.render.item.InfinityBowModelWrapper;
 import morph.avaritia.entity.EntityHeavenArrow;
+import morph.avaritia.entity.EntityImmortalItem;
 import morph.avaritia.init.AvaritiaTextures;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -46,7 +48,7 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
         maxStackSize = 1;
         setMaxDamage(9999);
         setCreativeTab(Avaritia.tab);
-        setUnlocalizedName("avaritia:infinity_bow");
+        setTranslationKey("avaritia:infinity_bow");
         setRegistryName("infinity_bow");
     }
 
@@ -228,5 +230,15 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
     @Override
     public IBakery getBakery() {
         return InfinityBowModelBakery.INSTANCE;
+    }
+
+    @Override
+    public boolean hasCustomEntity(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public Entity createEntity(World world, Entity location, ItemStack itemstack) {
+        return new EntityImmortalItem(world, location, itemstack);
     }
 }

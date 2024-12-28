@@ -17,13 +17,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockCompressedCraftingTable extends Block implements IModelRegister {
 
     public BlockCompressedCraftingTable() {
         super(Material.WOOD);
         setHardness(4.0F);
-        setUnlocalizedName("avaritia:compressed_crafting_table");
+        setTranslationKey("avaritia:compressed_crafting_table");
         setSoundType(SoundType.WOOD);
         setCreativeTab(Avaritia.tab);
         setRegistryName("compressed_crafting_table");
@@ -45,7 +46,7 @@ public class BlockCompressedCraftingTable extends Block implements IModelRegiste
         ModelResourceLocation loc = new ModelResourceLocation("avaritia:crafting", "type=compressed");
         ModelLoader.setCustomStateMapper(this, new StateMapperBase() {
             @Override
-            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+            protected @NotNull ModelResourceLocation getModelResourceLocation(@NotNull IBlockState state) {
                 return loc;
             }
         });

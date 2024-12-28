@@ -36,7 +36,7 @@ public class ItemMatterCluster extends Item {
 
     public ItemMatterCluster() {
         setMaxStackSize(1);
-        setUnlocalizedName("avaritia:matter_cluster");
+        setTranslationKey("avaritia:matter_cluster");
         setRegistryName("matter_cluster");
     }
 
@@ -63,7 +63,7 @@ public class ItemMatterCluster extends Item {
                 ItemStack countstack = new ItemStack(tag.getCompoundTag(ITEMTAG));
                 int count = tag.getInteger(COUNTTAG);
 
-                tooltip.add(countstack.getItem().getRarity(countstack).rarityColor + countstack.getDisplayName() + TextFormatting.GRAY + " x " + count);
+                tooltip.add(countstack.getItem().getRarity(countstack).getColor() + countstack.getDisplayName() + TextFormatting.GRAY + " x " + count);
             }
         } else {
             tooltip.add(TextFormatting.DARK_GRAY + I18n.format("tooltip.matter_cluster.desc"));

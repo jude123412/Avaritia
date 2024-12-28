@@ -36,7 +36,7 @@ public class BlockNeutronCollector extends BlockContainer implements IModelRegis
         super(Material.IRON);
         setSoundType(SoundType.METAL);
         setHardness(20);
-        setUnlocalizedName("avaritia:neutron_collector");
+        setTranslationKey("avaritia:neutron_collector");
         setHarvestLevel("pickaxe", 3);
         setCreativeTab(Avaritia.tab);
         setRegistryName("neutron_collector");

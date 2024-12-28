@@ -1,16 +1,20 @@
 [
 	{
-		"modid": "Avaritia",
-		"name": "Avaritia",
+		"modid": "${modid}",
+		"name": "${modname}",
 		"description": "A mod to see how hard people are willing to grind.",
 		"version": "${version}",
-		"mcversion": "${mc_version}",
+		"mcversion": "${mcversion}",
 		"url": "",
-		"updateUrl": "",
-		"authorList": ["SpitefulFox", "TTFTCUTS"],
-		"credits": "Vazkii, Greg, brandon3055, vswe, Algorithm",
-		"logoFile": "",
-		"screenshots": [],
+		"authorList": [
+			"SpitefulFox",
+			"TTFTCUTS",
+			"Covers1624",
+			"Brandon3055",
+			"Morpheus11011",
+			"xXjudeXx"
+		],
+		"credits": "Vazkii, Greg, brandon3055, vswe, Algorithm, Covers1624, Morpheus11011",
 		"dependencies": []
 	}
 ]

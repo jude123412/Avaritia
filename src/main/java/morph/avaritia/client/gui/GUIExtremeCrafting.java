@@ -5,6 +5,7 @@ import morph.avaritia.container.ContainerExtremeCrafting;
 import morph.avaritia.tile.TileDireCraftingTable;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -22,8 +23,10 @@ public class GUIExtremeCrafting extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int i, int j) {
-        //this.fontRendererObj.drawString(StatCollector.translateToLocal("container.extreme_crafting"), 28, 6, 4210752);
-        //this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+        super.drawGuiContainerForegroundLayer(i,j);
+        this.fontRenderer.drawString(I18n.format("container.extreme"), 180, 6, 4210752);
+        this.fontRenderer.drawString(I18n.format("container.crafting"), 186, 18, 4210752);
+        this.fontRenderer.drawString(I18n.format("container.inventory"), 180, this.ySize - 96 + 2, 4210752);
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {

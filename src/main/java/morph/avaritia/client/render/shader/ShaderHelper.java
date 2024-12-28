@@ -47,9 +47,13 @@ public final class ShaderHelper {
         if (shader != 0) {
             Minecraft mc = Minecraft.getMinecraft();
             int time = ARBShaderObjects.glGetUniformLocationARB(shader, "time");
+
+            // Limits the animation time to a max value of 24000 ticks before resetting to 0
             int animationTime = (int) (mc.player.ticksExisted % 24000);
 
             if (mc.player != null && mc.player.world != null) {
+
+                // at 12000 ticks starts the render in reverse at the correct time
                 ARBShaderObjects.glUniform1iARB(time, animationTime <= 12000 ? animationTime : animationTime * -1 + 24000);
             }
 

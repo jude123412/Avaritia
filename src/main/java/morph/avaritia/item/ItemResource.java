@@ -54,7 +54,7 @@ public class ItemResource extends ItemMultiType implements IHaloRenderItem, IMod
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         int meta = stack.getItemDamage();
         if (meta != 0) {
-            tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.translateToLocal("tooltip." + getUnlocalizedName(stack) + ".desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + ".desc"));
         }
     }
 

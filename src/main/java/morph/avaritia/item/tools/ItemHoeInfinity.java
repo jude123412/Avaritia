@@ -44,7 +44,7 @@ public class ItemHoeInfinity extends ItemHoe {
 
     public ItemHoeInfinity() {
         super(TOOL_MATERIAL);
-        setUnlocalizedName("avaritia:infinity_hoe");
+        setTranslationKey("avaritia:infinity_hoe");
         setRegistryName("infinity_hoe");
         setCreativeTab(Avaritia.tab);
     }

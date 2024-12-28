@@ -32,7 +32,7 @@ public class BlockExtremeCraftingTable extends BlockContainer implements IModelR
         super(Material.IRON);
         setHardness(50F);
         setResistance(2000F);
-        setUnlocalizedName("avaritia:extreme_crafting_table");
+        setTranslationKey("avaritia:extreme_crafting_table");
         setHarvestLevel("pickaxe", 3);
         setSoundType(SoundType.GLASS);
         setCreativeTab(Avaritia.tab);

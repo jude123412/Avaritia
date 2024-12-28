@@ -142,19 +142,19 @@ public class ModItems {
         infinity_hoe = registerItem(new ItemHoeInfinity());
 
         infinity_helmet = new ItemArmorInfinity(EntityEquipmentSlot.HEAD);
-        infinity_helmet.setUnlocalizedName("avaritia:infinity_helmet");
+        infinity_helmet.setTranslationKey("avaritia:infinity_helmet");
         registerItem(infinity_helmet.setRegistryName("infinity_helmet"));
 
         infinity_chestplate = new ItemArmorInfinity(EntityEquipmentSlot.CHEST);
-        infinity_chestplate.setUnlocalizedName("avaritia:infinity_chestplate");
+        infinity_chestplate.setTranslationKey("avaritia:infinity_chestplate");
         registerItem(infinity_chestplate.setRegistryName("infinity_chestplate"));
 
         infinity_pants = new ItemArmorInfinity(EntityEquipmentSlot.LEGS);
-        infinity_pants.setUnlocalizedName("avaritia:infinity_pants");
+        infinity_pants.setTranslationKey("avaritia:infinity_pants");
         registerItem(infinity_pants.setRegistryName("infinity_pants"));
 
         infinity_boots = new ItemArmorInfinity(EntityEquipmentSlot.FEET);
-        infinity_boots.setUnlocalizedName("avaritia:infinity_boots");
+        infinity_boots.setTranslationKey("avaritia:infinity_boots");
         registerItem(infinity_boots.setRegistryName("infinity_boots"));
 
         skull_sword = registerItem(new ItemSwordSkulls());
@@ -163,11 +163,11 @@ public class ModItems {
 
         ultimate_stew = new ItemFood(20, 20, false);
         registerItem(ultimate_stew.setRegistryName("ultimate_stew"));
-        ultimate_stew.setPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 1), 1.0F).setUnlocalizedName("avaritia:ultimate_stew").setCreativeTab(Avaritia.tab);
+        ultimate_stew.setPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 1), 1.0F).setTranslationKey("avaritia:ultimate_stew").setCreativeTab(Avaritia.tab);
 
         cosmic_meatballs = new ItemFood(20, 20, false);
         registerItem(cosmic_meatballs.setRegistryName("cosmic_meatballs"));
-        cosmic_meatballs.setPotionEffect(new PotionEffect(MobEffects.STRENGTH, 300, 1), 1.0F).setUnlocalizedName("avaritia:cosmic_meatballs").setCreativeTab(Avaritia.tab);
+        cosmic_meatballs.setPotionEffect(new PotionEffect(MobEffects.STRENGTH, 300, 1), 1.0F).setTranslationKey("avaritia:cosmic_meatballs").setCreativeTab(Avaritia.tab);
 
         if (ConfigHandler.fracturedOres) {
             fractured_ore = registerItem(new ItemFracturedOre());

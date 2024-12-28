@@ -33,7 +33,7 @@ public class ItemShovelInfinity extends ItemSpade {
 
     public ItemShovelInfinity() {
         super(TOOL_MATERIAL);
-        setUnlocalizedName("avaritia:infinity_shovel");
+        setTranslationKey("avaritia:infinity_shovel");
         setRegistryName("infinity_shovel");
         setCreativeTab(Avaritia.tab);
     }

@@ -24,7 +24,7 @@ public class ItemFracturedOre extends Item {
 
     public ItemFracturedOre() {
         setCreativeTab(Avaritia.tab);
-        setUnlocalizedName("avaritia:fractured_ore");
+        setTranslationKey("avaritia:fractured_ore");
         setRegistryName("fractured_ore");
         setHasSubtypes(true);
     }
@@ -137,7 +137,7 @@ public class ItemFracturedOre extends Item {
         int size;
 
         public NameStack(ItemStack source) {
-            this(source.getItem().delegate.name().getResourcePath(), source.getItemDamage(), source.getCount(), source.getTagCompound());
+            this(source.getItem().delegate.name().getPath(), source.getItemDamage(), source.getCount(), source.getTagCompound());
         }
 
         public NameStack(String name, int damage, int size, NBTTagCompound nbt) {
