@@ -2,9 +2,15 @@ package morph.avaritia.client.render.shader;
 
 import morph.avaritia.client.AvaritiaClientEventHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.lwjgl.opengl.ARBShaderObjects;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
 
 public class CosmicShaderHelper {
 
@@ -14,6 +20,8 @@ public class CosmicShaderHelper {
 
     public static boolean inventoryRender = false;
     public static float cosmicOpacity = 1.0f;
+
+    private static EntityRenderer entityRenderer;
 
     static {
         shaderCallback = new ShaderCallback() {
@@ -66,28 +74,32 @@ public class CosmicShaderHelper {
     }
 
     public static void setLightFromLocation(World world, BlockPos pos) {
-//          Doesn't appear to break when code commented
-//          Not Sure How to fix
+        try {
 
-//        if (world == null) {
-//            setLightLevel(1.0f);
-//            return;
-//        }
-//
-//        int coord = world.getCombinedLight(pos, 0);
+            int[] map = (int[]) FieldUtils.readDeclaredField(entityRenderer,"lightmapColors");
 
-//        int[] map = Minecraft.getMinecraft().entityRenderer.lightmapColors;
-//        if (map == null) {
-//            setLightLevel(1.0f);
-//            return;
-//        }
+            if (world == null) {
+                setLightLevel(1.0f);
+                return;
+            }
 
-//        int mx = (coord % 65536) / 16;
-//        int my = (coord / 65536) / 16;
-//
-//        int lightcolour = map[my * 16 + mx];
-//
-//        setLightLevel(((lightcolour >> 16) & 0xFF) / 256.0f, ((lightcolour >> 8) & 0xFF) / 256.0f, ((lightcolour) & 0xFF) / 256.0f);
+            int coord = world.getCombinedLight(pos, 0);
+
+            if (map == null) {
+                setLightLevel(1.0f);
+                return;
+            }
+
+            int mx = (coord % 65536) / 16;
+            int my = (coord / 65536) / 16;
+
+            int lightcolour = map[my * 16 + mx];
+
+            setLightLevel(((lightcolour >> 16) & 0xFF) / 256.0f, ((lightcolour >> 8) & 0xFF) / 256.0f, ((lightcolour) & 0xFF) / 256.0f);
+
+        } catch(Exception e) {
+            System.out.println("Something went wrong.");
+        }
     }
 
     public static void setLightLevel(float level) {
