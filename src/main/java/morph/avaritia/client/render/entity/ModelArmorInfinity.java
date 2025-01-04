@@ -282,29 +282,22 @@ public class ModelArmorInfinity extends ModelBiped {
         overlay.swingProgress = swingProgress;
         invulnOverlay.swingProgress = swingProgress;
 
-        leftArmPose = ArmPose.EMPTY;
-        rightArmPose = ArmPose.EMPTY;
-
-        overlay.leftArmPose = ArmPose.EMPTY;
-        overlay.rightArmPose = ArmPose.EMPTY;
-
-        invulnOverlay.leftArmPose = ArmPose.EMPTY;
-        invulnOverlay.rightArmPose = ArmPose.EMPTY;
-
-        if (entityLiving instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entityLiving;
+        if (entityLiving instanceof EntityPlayer player) {
 
             ItemStack main_hand = player.getHeldItem(EnumHand.MAIN_HAND);
 
-            if (main_hand != null) {
+            rightArmPose = ArmPose.EMPTY;
+            overlay.rightArmPose = ArmPose.EMPTY;
+            invulnOverlay.rightArmPose = ArmPose.EMPTY;
+
+            if (!main_hand.isEmpty()) {
+
+                EnumAction enumaction = main_hand.getItemUseAction();
+
                 rightArmPose = ArmPose.ITEM;
                 overlay.rightArmPose = ArmPose.ITEM;
                 invulnOverlay.rightArmPose = ArmPose.ITEM;
-
                 if (player.getItemInUseCount() > 0) {
-
-                    EnumAction enumaction = main_hand.getItemUseAction();
-
                     if (enumaction == EnumAction.BOW) {
                         rightArmPose = ArmPose.BOW_AND_ARROW;
                         overlay.rightArmPose = ArmPose.BOW_AND_ARROW;
@@ -314,21 +307,24 @@ public class ModelArmorInfinity extends ModelBiped {
                         overlay.rightArmPose = ArmPose.BLOCK;
                         invulnOverlay.rightArmPose = ArmPose.BLOCK;
                     }
-
                 }
-
             }
 
             ItemStack off_hand = player.getHeldItem(EnumHand.OFF_HAND);
-            if (off_hand != null) {
+
+            leftArmPose = ArmPose.EMPTY;
+            overlay.leftArmPose = ArmPose.EMPTY;
+            invulnOverlay.leftArmPose = ArmPose.EMPTY;
+
+            if (!off_hand.isEmpty()) {
+
+                EnumAction enumaction = off_hand.getItemUseAction();
+
                 leftArmPose = ArmPose.ITEM;
                 overlay.leftArmPose = ArmPose.ITEM;
                 invulnOverlay.leftArmPose = ArmPose.ITEM;
 
                 if (player.getItemInUseCount() > 0) {
-
-                    EnumAction enumaction = off_hand.getItemUseAction();
-
                     if (enumaction == EnumAction.BOW) {
                         leftArmPose = ArmPose.BOW_AND_ARROW;
                         overlay.leftArmPose = ArmPose.BOW_AND_ARROW;
@@ -338,12 +334,9 @@ public class ModelArmorInfinity extends ModelBiped {
                         overlay.leftArmPose = ArmPose.BLOCK;
                         invulnOverlay.leftArmPose = ArmPose.BLOCK;
                     }
-
                 }
-
             }
         }
-
     }
 
     @Override
