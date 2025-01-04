@@ -58,7 +58,7 @@ public class AvaritiaJEIPlugin implements IModPlugin {
 
     private static void setupDrawables(IGuiHelper helper) {
         ResourceLocation location = new ResourceLocation("avaritia:textures/gui/extreme_jei.png");
-        extreme_crafting = helper.createDrawable(location, 0, 0, 189, 163);
+        extreme_crafting = helper.createDrawable(location, 0, 0, 163, 221);
 
         location = new ResourceLocation("avaritia:textures/gui/compressor.png");
         neutronium_compressor = helper.createDrawable(location, 37, 29, 102, 41);
