@@ -58,7 +58,7 @@ public class ExtremeCraftingCategory implements IRecipeCategory<ExtremeRecipeWra
     public void setRecipe(IRecipeLayout layout, ExtremeRecipeWrapper wrapper, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = layout.getItemStacks();
 
-        guiItemStacks.init(craftOutputSlot, false, 167, 73);
+        guiItemStacks.init(craftOutputSlot, false, 73, 185);
 
         for (int y = 0; y < 9; ++y) {
             for (int x = 0; x < 9; ++x) {

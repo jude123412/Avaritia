@@ -42,12 +42,12 @@ public class ContainerExtremeCrafting extends Container {
 
         for (wy = 0; wy < 3; ++wy) {
             for (ex = 0; ex < 9; ++ex) {
-                addSlotToContainer(new Slot(player, ex + wy * 9 + 9, 39 + ex * 18, 174 + wy * 18));
+                addSlotToContainer(new Slot(player, ex + wy * 9 + 9, 12 + ex * 18, 174 + wy * 18));
             }
         }
 
         for (ex = 0; ex < 9; ++ex) {
-            addSlotToContainer(new Slot(player, ex, 39 + ex * 18, 232));
+            addSlotToContainer(new Slot(player, ex, 12 + ex * 18, 232));
         }
 
         onCraftMatrixChanged(craftMatrix);

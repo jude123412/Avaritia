@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 
 public class TileNeutronCollector extends TileMachineBase implements IInventory {
 
-    public static final int PRODUCTION_TICKS = 7111;//TODO config.
+    public static final int PRODUCTION_TICKS = 6000;//TODO config.
 
     private ItemStack neutrons = ItemStack.EMPTY;
     private int progress;

@@ -28,13 +28,27 @@ public class GUINeutronCollector extends GuiMachineBase<TileNeutronCollector, Co
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        int color = 0x404040;
+
+        if (machineTile.getProgress() > 0) {
+            color = 0xFF0000;
+        }
+        if (machineTile.getProgress() > 1500) {
+            color = 0xFF7F00;
+        }
+        if (machineTile.getProgress() > 3000) {
+            color = 0xFFFF00;
+        }
+        if (machineTile.getProgress() > 4500) {
+            color = 0x00FF00;
+        }
 
         String s = I18n.format("container.neutron_collector");
         float scaled_progress = scaleF(machineTile.getProgress(), TileNeutronCollector.PRODUCTION_TICKS, 100);
         String progress = "Progress: " + MathHelper.round(scaled_progress, 10) + "%";
 
         fontRenderer.drawString(s, xSize / 2 - fontRenderer.getStringWidth(s) / 2, 6, 0x404040);
-        fontRenderer.drawString(progress, xSize / 2 - fontRenderer.getStringWidth(progress) / 2, 60, 0x404040);
+        fontRenderer.drawString(progress, xSize / 2 - fontRenderer.getStringWidth(progress) / 2, 60, color);
         fontRenderer.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 0x404040);
     }
 

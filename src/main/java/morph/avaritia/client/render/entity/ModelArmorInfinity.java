@@ -2,6 +2,8 @@ package morph.avaritia.client.render.entity;
 
 import codechicken.lib.math.MathHelper;
 import codechicken.lib.texture.TextureUtils;
+import mezz.jei.config.KeyBindings;
+import mezz.jei.plugins.jei.JEIInternalPlugin;
 import morph.avaritia.client.ColourHelper;
 import morph.avaritia.client.render.shader.CosmicShaderHelper;
 import morph.avaritia.init.AvaritiaTextures;
@@ -125,8 +127,8 @@ public class ModelArmorInfinity extends ModelBiped {
         Minecraft mc = Minecraft.getMinecraft();
         boolean isFlying = entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying && entity.isAirBorne;
 
-        //copyBipedAngles(this, this.overlay);
-        //copyBipedAngles(this, this.invulnOverlay);
+        copyBipedAngles(this, this.overlay);
+        copyBipedAngles(this, this.invulnOverlay);
 
         super.render(entity, f, f1, f2, f3, f4, f5);
 
@@ -215,7 +217,6 @@ public class ModelArmorInfinity extends ModelBiped {
             }
             GlStateManager.enableLighting();
             GlStateManager.color(1, 1, 1, 1);
-
         }
 
     }
@@ -230,10 +231,10 @@ public class ModelArmorInfinity extends ModelBiped {
         ItemStack leg = entityLiving.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
         ItemStack foot = entityLiving.getItemStackFromSlot(EntityEquipmentSlot.FEET);
 
-        boolean hasHat = hat != null && hat.getItem() == ModItems.infinity_helmet; //&& !((ItemArmorInfinity) (ModItems.infinity_helmet)).hasPhantomInk(hat);
-        boolean hasChest = chest != null && chest.getItem() == ModItems.infinity_chestplate; // && !((ItemArmorInfinity) (ModItems.infinity_chestplate)).hasPhantomInk(chest);
-        boolean hasLeg = leg != null && leg.getItem() == ModItems.infinity_pants; // && !((ItemArmorInfinity) (ModItems.infinity_pants)).hasPhantomInk(leg);
-        boolean hasFoot = foot != null && foot.getItem() == ModItems.infinity_boots; // && !((ItemArmorInfinity) (ModItems.infinity_boots)).hasPhantomInk(foot);
+        boolean hasHat = hat.getItem() == ModItems.infinity_helmet; //&& !((ItemArmorInfinity) (ModItems.infinity_helmet)).hasPhantomInk(hat);
+        boolean hasChest = chest.getItem() == ModItems.infinity_chestplate; // && !((ItemArmorInfinity) (ModItems.infinity_chestplate)).hasPhantomInk(chest);
+        boolean hasLeg = leg.getItem() == ModItems.infinity_pants; // && !((ItemArmorInfinity) (ModItems.infinity_pants)).hasPhantomInk(leg);
+        boolean hasFoot = foot.getItem() == ModItems.infinity_boots; // && !((ItemArmorInfinity) (ModItems.infinity_boots)).hasPhantomInk(foot);
 
         if (armorSlot == EntityEquipmentSlot.HEAD) {//TODO, Wot.
             if (hasHat && hasChest && hasLeg && hasFoot) {

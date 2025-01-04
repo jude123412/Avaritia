@@ -26,7 +26,7 @@ public class GUIExtremeCrafting extends GuiContainer {
         super.drawGuiContainerForegroundLayer(i,j);
         this.fontRenderer.drawString(I18n.format("container.extreme"), 180, 6, 4210752);
         this.fontRenderer.drawString(I18n.format("container.crafting"), 186, 18, 4210752);
-        this.fontRenderer.drawString(I18n.format("container.inventory"), 180, this.ySize - 96 + 2, 4210752);
+        this.fontRenderer.drawString(I18n.format("container.inventory"), 180, this.ySize - 59, 4210752);
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
