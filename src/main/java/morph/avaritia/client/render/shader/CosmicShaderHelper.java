@@ -66,26 +66,25 @@ public class CosmicShaderHelper {
     }
 
     public static void setLightFromLocation(World world, BlockPos pos) {
-//          Doesn't appear to break when code is commented
-//          Not Sure How to fix
-//
-//        if (world == null) {
-//            setLightLevel(1.0f);
-//            return;
-//        }
-//
-//        int coord = world.getCombinedLight(pos, 0);
-//        int[] map = Minecraft.getMinecraft().entityRenderer.lightmapColors;
-//        if (map == null) {
-//            setLightLevel(1.0f);
-//            return;
-//        }
-//        int mx = (coord % 65536) / 16;
-//        int my = (coord / 65536) / 16;
-//
-//        int lightcolour = map[my * 16 + mx];
-//
-//        setLightLevel(((lightcolour >> 16) & 0xFF) / 256.0f, ((lightcolour >> 8) & 0xFF) / 256.0f, ((lightcolour) & 0xFF) / 256.0f);
+
+        if (world == null) {
+            setLightLevel(1.0f);
+            return;
+        }
+
+        if (pos == null) {
+            setLightLevel(0.0f);
+            return;
+        }
+
+        int coord = world.getLight(pos, true);
+
+        int mx = (coord % 65536) / 16;
+        int my = (coord / 65536) / 16;
+
+        int lightcolour = my * 16 + mx;
+
+        setLightLevel(((lightcolour >> 16) & 0xFF) / 256.0f, ((lightcolour >> 8) & 0xFF) / 256.0f, ((lightcolour) & 0xFF) / 256.0f);
     }
 
     public static void setLightLevel(float level) {
