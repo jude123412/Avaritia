@@ -67,6 +67,8 @@ public class CosmicShaderHelper {
 
     public static void setLightFromLocation(World world, BlockPos pos) {
 
+        // This is a temporary fix for Light From Location
+
         if (world == null) {
             setLightLevel(1.0f);
             return;
