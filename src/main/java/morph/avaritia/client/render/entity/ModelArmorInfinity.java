@@ -2,8 +2,6 @@ package morph.avaritia.client.render.entity;
 
 import codechicken.lib.math.MathHelper;
 import codechicken.lib.texture.TextureUtils;
-import mezz.jei.config.KeyBindings;
-import mezz.jei.plugins.jei.JEIInternalPlugin;
 import morph.avaritia.client.ColourHelper;
 import morph.avaritia.client.render.shader.CosmicShaderHelper;
 import morph.avaritia.init.AvaritiaTextures;

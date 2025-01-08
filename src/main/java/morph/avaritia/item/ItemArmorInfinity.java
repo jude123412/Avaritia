@@ -59,7 +59,6 @@ public class ItemArmorInfinity extends ItemArmor {
                 nv = new PotionEffect(MobEffects.NIGHT_VISION, 319,  0, false, false);
                 player.addPotionEffect(nv);
             }
-//            nv.duration = 300;
         } else if (armorType == EntityEquipmentSlot.CHEST) {
             player.capabilities.allowFlying = true;
             List<PotionEffect> effects = Lists.newArrayList(player.getActivePotionEffects());
