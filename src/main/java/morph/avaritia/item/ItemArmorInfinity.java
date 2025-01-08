@@ -73,6 +73,8 @@ public class ItemArmorInfinity extends ItemArmor {
             if (player.isBurning()) {
                 player.extinguish();
             }
+        } else if (armorType == EntityEquipmentSlot.FEET) {
+            player.stepHeight = 1.0f;
         }
     }
 
