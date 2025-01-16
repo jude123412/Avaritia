@@ -9,6 +9,7 @@ import org.lwjgl.opengl.ARBShaderObjects;
 public class CosmicShaderHelper {
 
     public static final ShaderCallback shaderCallback;
+    public static final ShaderCallback alternateShaderCallback;
 
     public static float[] lightlevel = new float[3];
 
@@ -34,24 +35,48 @@ public class CosmicShaderHelper {
                 }
 
                 int x = ARBShaderObjects.glGetUniformLocationARB(shader, "yaw");
-                ARBShaderObjects.glUniform1fARB(x, yaw);
-
                 int z = ARBShaderObjects.glGetUniformLocationARB(shader, "pitch");
-                ARBShaderObjects.glUniform1fARB(z, pitch);
-
                 int l = ARBShaderObjects.glGetUniformLocationARB(shader, "lightlevel");
-                ARBShaderObjects.glUniform3fARB(l, lightlevel[0], lightlevel[1], lightlevel[2]);
-
                 int lightmix = ARBShaderObjects.glGetUniformLocationARB(shader, "lightmix");
-                ARBShaderObjects.glUniform1fARB(lightmix, 0.2f);
-
                 int uvs = ARBShaderObjects.glGetUniformLocationARB(shader, "cosmicuvs");
-                ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
-
                 int s = ARBShaderObjects.glGetUniformLocationARB(shader, "externalScale");
-                ARBShaderObjects.glUniform1fARB(s, scale);
-
                 int o = ARBShaderObjects.glGetUniformLocationARB(shader, "opacity");
+
+                ARBShaderObjects.glUniform1fARB(x, yaw);
+                ARBShaderObjects.glUniform1fARB(z, pitch);
+                ARBShaderObjects.glUniform3fARB(l, lightlevel[0], lightlevel[1], lightlevel[2]);
+                ARBShaderObjects.glUniform1fARB(lightmix, 0.2f);
+                ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
+                ARBShaderObjects.glUniform1fARB(s, scale);
+                ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
+            }
+        };
+    }
+    static {
+        alternateShaderCallback = new ShaderCallback() {
+            @Override
+            public void call(int shader) {
+                // Alternate Shader
+                // Used to render an Item Model with Cosmic Effect While in toolbar
+
+                float yaw = 0;
+                float pitch = 0;
+                float scale = 25.0f;
+
+                int x = ARBShaderObjects.glGetUniformLocationARB(shader, "yaw");
+                int z = ARBShaderObjects.glGetUniformLocationARB(shader, "pitch");
+                int l = ARBShaderObjects.glGetUniformLocationARB(shader, "lightlevel");
+                int lightmix = ARBShaderObjects.glGetUniformLocationARB(shader, "lightmix");
+                int uvs = ARBShaderObjects.glGetUniformLocationARB(shader, "cosmicuvs");
+                int s = ARBShaderObjects.glGetUniformLocationARB(shader, "externalScale");
+                int o = ARBShaderObjects.glGetUniformLocationARB(shader, "opacity");
+
+                ARBShaderObjects.glUniform1fARB(x, yaw);
+                ARBShaderObjects.glUniform1fARB(z, pitch);
+                ARBShaderObjects.glUniform3fARB(l, lightlevel[0], lightlevel[1], lightlevel[2]);
+                ARBShaderObjects.glUniform1fARB(lightmix, 0.2f);
+                ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
+                ARBShaderObjects.glUniform1fARB(s, scale);
                 ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
             }
         };
@@ -59,6 +84,10 @@ public class CosmicShaderHelper {
 
     public static void useShader() {
         ShaderHelper.useShader(ShaderHelper.cosmicShader, shaderCallback);
+    }
+
+    public static void useAlternateShader() {
+        ShaderHelper.useShader(ShaderHelper.cosmicShader, alternateShaderCallback);
     }
 
     public static void releaseShader() {
