@@ -123,7 +123,7 @@ public class ModelArmorInfinity extends ModelBiped {
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         Minecraft mc = Minecraft.getMinecraft();
-        boolean isFlying = entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying && entity.isAirBorne;
+        boolean isFlying = entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying && !entity.onGround;
 
         copyBipedAngles(this, this.overlay);
         copyBipedAngles(this, this.invulnOverlay);
