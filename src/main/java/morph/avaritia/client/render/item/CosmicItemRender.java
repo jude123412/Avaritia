@@ -8,6 +8,7 @@ import codechicken.lib.util.TransformUtils;
 import com.google.common.collect.ImmutableList;
 import morph.avaritia.api.ICosmicRenderItem;
 import morph.avaritia.client.render.shader.CosmicShaderHelper;
+import morph.avaritia.init.AvaritiaTextures;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
@@ -74,9 +75,12 @@ public class CosmicItemRender extends WrappedItemRenderer {
 
             TextureAtlasSprite cosmicSprite = cri.getMaskTexture(stack, player);
 
+            if (cosmicSprite == null) {
+                cosmicSprite = AvaritiaTextures.FALLBACK;
+            }
+
             IBakedModel cosmicModel = spriteQuadCache.computeIfAbsent(cosmicSprite, CosmicItemRender::computeModel);
 
-            CosmicShaderHelper.cosmicOpacity = cri.getMaskOpacity(stack, player);
             CosmicShaderHelper.useShader();
 
             renderModel(cosmicModel, stack);
@@ -114,10 +118,14 @@ public class CosmicItemRender extends WrappedItemRenderer {
             GlStateManager.disableDepth();
 
             TextureAtlasSprite sprite = cri.getMaskTexture(stack, player);
+
+            if (sprite == null) {
+                sprite = AvaritiaTextures.FALLBACK;
+            }
+
             IBakedModel cosmicModel = spriteQuadCache.computeIfAbsent(sprite, CosmicItemRender::computeModel);
 
             GlStateManager.color(1F, 1F, 1F, 1F);
-            CosmicShaderHelper.cosmicOpacity = cri.getMaskOpacity(stack, player);
             CosmicShaderHelper.useAlternateShader();
 
             renderModel(cosmicModel, stack);

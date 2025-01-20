@@ -14,7 +14,9 @@ public class CosmicShaderHelper {
     public static float[] lightlevel = new float[3];
 
     public static boolean inventoryRender = false;
-    public static float cosmicOpacity = 1.0f;
+
+    // Un-used, kept for Compatibility
+    public static float cosmicOpacity;
 
     static {
         shaderCallback = new ShaderCallback() {
@@ -48,7 +50,7 @@ public class CosmicShaderHelper {
                 ARBShaderObjects.glUniform1fARB(lightmix, 0.2f);
                 ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
                 ARBShaderObjects.glUniform1fARB(s, scale);
-                ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
+                ARBShaderObjects.glUniform1fARB(o, 1.0f);
             }
         };
     }
@@ -78,7 +80,7 @@ public class CosmicShaderHelper {
                 ARBShaderObjects.glUniform1fARB(lightmix, 0.2f);
                 ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
                 ARBShaderObjects.glUniform1fARB(s, scale);
-                ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
+                ARBShaderObjects.glUniform1fARB(o, 1.0f);
             }
         };
     }
