@@ -52,6 +52,7 @@ public class CosmicShaderHelper {
             }
         };
     }
+
     static {
         alternateShaderCallback = new ShaderCallback() {
             @Override
