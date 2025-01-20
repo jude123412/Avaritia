@@ -81,6 +81,7 @@ public class CosmicItemRender extends WrappedItemRenderer {
 
             IBakedModel cosmicModel = spriteQuadCache.computeIfAbsent(cosmicSprite, CosmicItemRender::computeModel);
 
+            CosmicShaderHelper.cosmicOpacity = cri.getMaskOpacity(stack, player);
             CosmicShaderHelper.useShader();
 
             renderModel(cosmicModel, stack);
@@ -126,6 +127,7 @@ public class CosmicItemRender extends WrappedItemRenderer {
             IBakedModel cosmicModel = spriteQuadCache.computeIfAbsent(sprite, CosmicItemRender::computeModel);
 
             GlStateManager.color(1F, 1F, 1F, 1F);
+            CosmicShaderHelper.cosmicOpacity = cri.getMaskOpacity(stack, player);
             CosmicShaderHelper.useAlternateShader();
 
             renderModel(cosmicModel, stack);

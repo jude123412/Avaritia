@@ -15,8 +15,7 @@ public class CosmicShaderHelper {
 
     public static boolean inventoryRender = false;
 
-    // Un-used, kept for Compatibility
-    public static float cosmicOpacity;
+    public static float cosmicOpacity = 1.0f;
 
     static {
         shaderCallback = new ShaderCallback() {
@@ -36,6 +35,12 @@ public class CosmicShaderHelper {
                     scale = 25.0f;
                 }
 
+                // Prevents Cosmic Opacity from being less than 1.0f
+                // This fixes Desync between Rendering Infinity Armor Cosmic Model and Items with Cosmic Opacity less than 1.0f in JEI
+                if (cosmicOpacity < 1.0f) {
+                    cosmicOpacity = 1.0f;
+                }
+
                 int x = ARBShaderObjects.glGetUniformLocationARB(shader, "yaw");
                 int z = ARBShaderObjects.glGetUniformLocationARB(shader, "pitch");
                 int l = ARBShaderObjects.glGetUniformLocationARB(shader, "lightlevel");
@@ -50,7 +55,7 @@ public class CosmicShaderHelper {
                 ARBShaderObjects.glUniform1fARB(lightmix, 0.2f);
                 ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
                 ARBShaderObjects.glUniform1fARB(s, scale);
-                ARBShaderObjects.glUniform1fARB(o, 1.0f);
+                ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
             }
         };
     }
@@ -66,6 +71,12 @@ public class CosmicShaderHelper {
                 float pitch = 0;
                 float scale = 25.0f;
 
+                // Prevents Cosmic Opacity from being less than 1.0f
+                // This fixes Desync between Rendering Infinity Armor Cosmic Model and Items with Cosmic Opacity less than 1.0f in JEI
+                if (cosmicOpacity < 1.0f) {
+                    cosmicOpacity = 1.0f;
+                }
+
                 int x = ARBShaderObjects.glGetUniformLocationARB(shader, "yaw");
                 int z = ARBShaderObjects.glGetUniformLocationARB(shader, "pitch");
                 int l = ARBShaderObjects.glGetUniformLocationARB(shader, "lightlevel");
@@ -80,7 +91,7 @@ public class CosmicShaderHelper {
                 ARBShaderObjects.glUniform1fARB(lightmix, 0.2f);
                 ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
                 ARBShaderObjects.glUniform1fARB(s, scale);
-                ARBShaderObjects.glUniform1fARB(o, 1.0f);
+                ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
             }
         };
     }

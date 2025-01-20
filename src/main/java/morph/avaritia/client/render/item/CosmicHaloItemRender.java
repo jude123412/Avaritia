@@ -120,6 +120,7 @@ public class CosmicHaloItemRender extends WrappedItemRenderer {
                 cosmicSprite = AvaritiaTextures.FALLBACK;
             }
             IBakedModel cosmicModel = (IBakedModel)spriteQuadCache.computeIfAbsent(cosmicSprite, CosmicHaloItemRender::computeModel);
+            CosmicShaderHelper.cosmicOpacity = cri.getMaskOpacity(stack, player);
             CosmicShaderHelper.useShader();
             renderModel(cosmicModel, stack);
             CosmicShaderHelper.releaseShader();
@@ -155,6 +156,7 @@ public class CosmicHaloItemRender extends WrappedItemRenderer {
             }
             IBakedModel cosmicModel = (IBakedModel)spriteQuadCache.computeIfAbsent(sprite, CosmicHaloItemRender::computeModel);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            CosmicShaderHelper.cosmicOpacity = cri.getMaskOpacity(stack, player);
             CosmicShaderHelper.useAlternateShader();
             renderModel(cosmicModel, stack);
             CosmicShaderHelper.releaseShader();
