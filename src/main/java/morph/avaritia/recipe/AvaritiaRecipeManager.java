@@ -12,6 +12,7 @@ import morph.avaritia.util.Lumberjack;
 import morph.avaritia.util.TriConsumer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -31,6 +32,7 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -256,5 +258,26 @@ public class AvaritiaRecipeManager {
             stacks.set(i, matrix.getStackInSlot(i));
         }
         return stacks;
+    }
+
+    /** Created by xXjudeXx on 25/01/2025
+     *
+     * @param output The singularity as an ItemStack
+     * @param input The input material as an ItemStack
+     * @param inputAmount the amount the input will need
+     * @param absolute
+     */
+    public static void addNeutroniumCompressorRecipe(ItemStack output, ItemStack input, int inputAmount, boolean absolute) {
+        if(input == null) {
+            throw new IllegalArgumentException("input cannot be null!");
+        } else if (inputAmount <= 0) {
+            throw new IllegalArgumentException("inputAmount cannot be less than one!");
+        } else if (output == null) {
+            throw new IllegalArgumentException("output cannot be null!");
+        } else {
+            ICompressorRecipe recipe = new CompressorRecipe(output, inputAmount, absolute, Collections.singletonList(Ingredient.fromStacks(input)));
+            recipe.setRegistryName(new ResourceLocation("avaritia", "internal/compressor/" + output.toString()));
+            COMPRESSOR_RECIPES.put(new ResourceLocation(output.toString()), recipe);
+        }
     }
 }
