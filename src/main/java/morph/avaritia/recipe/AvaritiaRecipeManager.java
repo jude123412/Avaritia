@@ -3,7 +3,6 @@ package morph.avaritia.recipe;
 import codechicken.lib.reflect.ObfMapping;
 import codechicken.lib.reflect.ReflectionManager;
 import com.google.gson.*;
-import morph.avaritia.compat.crafttweaker.RemoveRecipeAction;
 import morph.avaritia.recipe.compressor.CompressorRecipe;
 import morph.avaritia.recipe.compressor.ICompressorRecipe;
 import morph.avaritia.recipe.extreme.ExtremeShapedRecipe;
@@ -11,7 +10,6 @@ import morph.avaritia.recipe.extreme.ExtremeShapelessRecipe;
 import morph.avaritia.recipe.extreme.IExtremeRecipe;
 import morph.avaritia.util.Lumberjack;
 import morph.avaritia.util.TriConsumer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -23,7 +21,6 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
@@ -35,7 +32,6 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -265,8 +261,8 @@ public class AvaritiaRecipeManager {
         return stacks;
     }
 
-    /** Created by xXjudeXx on 25/01/2025
-     *
+    /**
+     * Added by xXjudeXx on 25/01/2025
      * @param output The singularity as an ItemStack
      * @param input The input material as an ItemStack
      * @param inputAmount the amount the input will need
@@ -286,13 +282,17 @@ public class AvaritiaRecipeManager {
         }
     }
 
-    public static void removeNeutroniumCompressorRecipe(ItemStack stack) {
+    /**
+     * Added by xXjudeXx on 25/01/2025
+     * @param output The output item required to remove the recipe, Example : ModItems.copperSingularity. The ItemStack of Avaritias Copper Singularity
+     */
+    public static void removeNeutroniumCompressorRecipe(ItemStack output) {
         Map<ResourceLocation, ICompressorRecipe> TO_REMOVE = new HashMap<>();
-        if (stack == null){
+        if (output == null){
             throw new IllegalArgumentException("stack cannot be null!");
         } else {
             COMPRESSOR_RECIPES.entrySet().stream()
-                    .filter(recipe -> recipe.getValue().getResult().isItemEqual(stack))
+                    .filter(recipe -> recipe.getValue().getResult().isItemEqual(output))
                     .forEach(recipe -> TO_REMOVE.put(recipe.getKey(), recipe.getValue()));
         }
         TO_REMOVE.entrySet().stream().forEach(entry -> COMPRESSOR_RECIPES.remove(entry.getKey(), entry.getValue()));
