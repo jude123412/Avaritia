@@ -116,7 +116,7 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
 
     @Override
     public int getMaxItemUseDuration(ItemStack stack) {
-        return 13;
+        return 12;
     }
 
     @Override
@@ -193,14 +193,14 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
     public TextureAtlasSprite getMaskTexture(ItemStack stack, EntityLivingBase player) {
         int frame = -1;
         if (player != null) {
-            int bframe = InfinityBowModelWrapper.getBowFrame(player);
-            frame = bframe != 0 ? bframe : -1;
+            frame = InfinityBowModelWrapper.getBowFrame(player);
         }
         //Lumberjack.info(frame);
-        if (frame == -1) {
-            return AvaritiaTextures.INFINITY_BOW_IDLE_MASK;
+        if (frame != -1) {
+            System.out.println(frame);
+            return AvaritiaTextures.INFINITY_BOW_PULL_MASK[frame];
         }
-        return AvaritiaTextures.INFINITY_BOW_PULL_MASK[frame];
+        return AvaritiaTextures.INFINITY_BOW_IDLE_MASK;
     }
 
     @Override

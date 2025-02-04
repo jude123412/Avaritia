@@ -83,6 +83,10 @@ public class ProxyClient extends Proxy {
         {
             ModelResourceLocation pickaxe = new ModelResourceLocation(tools, "infinity_pickaxe=pickaxe");
             ModelResourceLocation hammer = new ModelResourceLocation(tools, "infinity_pickaxe=hammer");
+            IBakedModel pickaxeWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(pickaxe));
+            IBakedModel hammerWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(hammer));
+            ModelRegistryHelper.register(pickaxe, pickaxeWrapped);
+            ModelRegistryHelper.register(hammer, hammerWrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_pickaxe, pickaxe, hammer);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_pickaxe, stack -> {
                 if (stack.hasTagCompound()) {
@@ -114,12 +118,16 @@ public class ProxyClient extends Proxy {
 
         {
             ModelResourceLocation axe = new ModelResourceLocation(tools, "type=infinity_axe");
+            IBakedModel axerWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(axe));
+            ModelRegistryHelper.register(axe, axerWrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_axe, axe);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_axe, (ItemStack stack) -> axe);
         }
 
         {
             ModelResourceLocation hoe = new ModelResourceLocation(tools, "type=infinity_hoe");
+            IBakedModel hoeWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(hoe));
+            ModelRegistryHelper.register(hoe, hoeWrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_axe, hoe);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_hoe, (ItemStack stack) -> hoe);
         }

@@ -52,7 +52,8 @@ public class AvaritiaTextures implements IIconRegister {
 
         INFINITY_SHOVEL_MASK_0   = register(TOOLS_ + "infinity_shovel/mask_0");
         INFINITY_SHOVEL_MASK_1   = register(TOOLS_ + "infinity_shovel/mask_1");
-        INFINITY_PICKAXE_MASK   = register(TOOLS_ + "infinity_pickaxe/mask");
+        INFINITY_PICKAXE_MASK_0   = register(TOOLS_ + "infinity_pickaxe/mask_0");
+        INFINITY_PICKAXE_MASK_1   = register(TOOLS_ + "infinity_pickaxe/mask_1");
         INFINITY_AXE_MASK   = register(TOOLS_ + "infinity_axe/mask");
         INFINITY_HOE_MASK   = register(TOOLS_ + "infinity_hoe/mask");
 
@@ -128,7 +129,8 @@ public class AvaritiaTextures implements IIconRegister {
     public static TextureAtlasSprite INFINITY_SWORD_MASK;
     public static TextureAtlasSprite INFINITY_SHOVEL_MASK_0;
     public static TextureAtlasSprite INFINITY_SHOVEL_MASK_1;
-    public static TextureAtlasSprite INFINITY_PICKAXE_MASK;
+    public static TextureAtlasSprite INFINITY_PICKAXE_MASK_0;
+    public static TextureAtlasSprite INFINITY_PICKAXE_MASK_1;
     public static TextureAtlasSprite INFINITY_AXE_MASK;
     public static TextureAtlasSprite INFINITY_HOE_MASK;
 

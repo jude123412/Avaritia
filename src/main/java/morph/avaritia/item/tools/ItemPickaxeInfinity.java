@@ -7,6 +7,7 @@ import morph.avaritia.Avaritia;
 import morph.avaritia.api.ICosmicRenderItem;
 import morph.avaritia.entity.EntityImmortalItem;
 import morph.avaritia.handler.AvaritiaEventHandler;
+import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.util.ToolHelper;
 import net.minecraft.block.material.Material;
@@ -188,7 +189,13 @@ public class ItemPickaxeInfinity extends ItemPickaxe implements ICosmicRenderIte
 
     @Override
     public TextureAtlasSprite getMaskTexture(ItemStack stack, @Nullable EntityLivingBase player) {
-        return null;
+        if (stack.hasTagCompound()) {
+            assert stack.getTagCompound() != null;
+            if (stack.getTagCompound().getBoolean("hammer")) {
+                return AvaritiaTextures.INFINITY_PICKAXE_MASK_1;
+            }
+        }
+        return AvaritiaTextures.INFINITY_PICKAXE_MASK_0;
     }
 
     @Override

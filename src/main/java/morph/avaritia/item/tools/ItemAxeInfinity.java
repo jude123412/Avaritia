@@ -8,13 +8,17 @@ package morph.avaritia.item.tools;
 
 import codechicken.lib.raytracer.RayTracer;
 import morph.avaritia.Avaritia;
+import morph.avaritia.api.ICosmicRenderItem;
 import morph.avaritia.entity.EntityImmortalItem;
 import morph.avaritia.handler.AvaritiaEventHandler;
+import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.util.ToolHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemAxe;
@@ -30,10 +34,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 
-public class ItemAxeInfinity extends ItemAxe {
+public class ItemAxeInfinity extends ItemAxe implements ICosmicRenderItem {
 
     private static final ToolMaterial opAxe = EnumHelper.addToolMaterial("INFINITY_PICKAXE", 32, 9999, 9999F, 20.0F, 200);
 
@@ -109,5 +114,15 @@ public class ItemAxeInfinity extends ItemAxe {
     @SideOnly (Side.CLIENT)
     public boolean hasEffect(ItemStack par1ItemStack) {
         return false;
+    }
+
+    @Override
+    public TextureAtlasSprite getMaskTexture(ItemStack stack, @Nullable EntityLivingBase player) {
+        return AvaritiaTextures.INFINITY_AXE_MASK;
+    }
+
+    @Override
+    public float getMaskOpacity(ItemStack stack, @Nullable EntityLivingBase player) {
+        return 1.0f;
     }
 }

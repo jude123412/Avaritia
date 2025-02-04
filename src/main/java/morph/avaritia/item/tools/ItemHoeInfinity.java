@@ -2,14 +2,18 @@ package morph.avaritia.item.tools;
 
 import codechicken.lib.util.ItemUtils;
 import morph.avaritia.Avaritia;
+import morph.avaritia.api.ICosmicRenderItem;
 import morph.avaritia.entity.EntityImmortalItem;
 import morph.avaritia.handler.AvaritiaEventHandler;
+import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.item.ItemMatterCluster;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -30,6 +34,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
@@ -38,7 +43,7 @@ import java.util.Set;
  * Created by covers1624 on 31/07/2017.
  * Credits mostly to brandon3055, this is his AOE code.
  */
-public class ItemHoeInfinity extends ItemHoe {
+public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
 
     private static final ToolMaterial TOOL_MATERIAL = EnumHelper.addToolMaterial("INFINITY_HOE", 32, 9999, 9999F, 20.0F, 200);
 
@@ -203,5 +208,15 @@ public class ItemHoeInfinity extends ItemHoe {
     @SideOnly (Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return false;
+    }
+
+    @Override
+    public TextureAtlasSprite getMaskTexture(ItemStack stack, @Nullable EntityLivingBase player) {
+        return AvaritiaTextures.INFINITY_HOE_MASK;
+    }
+
+    @Override
+    public float getMaskOpacity(ItemStack stack, @Nullable EntityLivingBase player) {
+        return 1.0f;
     }
 }
