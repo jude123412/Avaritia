@@ -3,11 +3,14 @@ package morph.avaritia.item;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import morph.avaritia.Avaritia;
+import morph.avaritia.api.ICosmicRenderItem;
 import morph.avaritia.client.render.entity.ModelArmorInfinity;
+import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.util.ModHelper;
 import morph.avaritia.util.TextUtils;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,10 +27,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ItemArmorInfinity extends ItemArmor {
+public class ItemArmorInfinity extends ItemArmor implements ICosmicRenderItem {
 
     public static final ArmorMaterial infinite_armor = EnumHelper.addArmorMaterial("avaritia_infinity", "", 9999, new int[] { 6, 16, 12, 6 }, 1000, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
     public final EntityEquipmentSlot slot;
@@ -107,4 +111,23 @@ public class ItemArmorInfinity extends ItemArmor {
         return false;
     }
 
+    @Override
+    public TextureAtlasSprite getMaskTexture(ItemStack stack, @Nullable EntityLivingBase player) {
+        if (slot == EntityEquipmentSlot.HEAD) {
+            return AvaritiaTextures.INFINITY_HELMET_MASK;
+        } else if (slot == EntityEquipmentSlot.CHEST) {
+            return AvaritiaTextures.INFINITY_CHESTPLATE_MASK;
+        } else if (slot == EntityEquipmentSlot.LEGS){
+            return AvaritiaTextures.INFINITY_LEGGINGS_MASK;
+        } else if (slot == EntityEquipmentSlot.FEET) {
+            return AvaritiaTextures.INFINITY_BOOTS_MASK;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public float getMaskOpacity(ItemStack stack, @Nullable EntityLivingBase player) {
+        return 1.0f;
+    }
 }

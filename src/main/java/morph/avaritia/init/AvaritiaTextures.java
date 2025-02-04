@@ -18,6 +18,11 @@ public class AvaritiaTextures implements IIconRegister {
         HALO = register(ITEMS_ + "halo");
         HALO_NOISE = register(ITEMS_ + "halo_noise");
 
+        INFINITY_HELMET_MASK = register(ITEMS_ + "armor/helmet/layer_0_mask");
+        INFINITY_CHESTPLATE_MASK = register(ITEMS_ + "armor/chestplate/layer_0_mask");
+        INFINITY_LEGGINGS_MASK = register(ITEMS_ + "armor/legs/layer_0_mask");
+        INFINITY_BOOTS_MASK = register(ITEMS_ + "armor/boots/layer_0_mask");
+
         INFINITY_ARMOR_MASK = register(MODELS_ + "infinity_armor_mask");
         INFINITY_ARMOR_MASK_INV = register(MODELS_ + "infinity_armor_mask_inv");
         INFINITY_ARMOR_MASK_WINGS = register(MODELS_ + "infinity_armor_mask_wings");
@@ -44,6 +49,12 @@ public class AvaritiaTextures implements IIconRegister {
         INFINITY_BOW_PULL_0_MASK = register(TOOLS_ + "infinity_bow/pull_0_mask");
         INFINITY_BOW_PULL_1_MASK = register(TOOLS_ + "infinity_bow/pull_1_mask");
         INFINITY_BOW_PULL_2_MASK = register(TOOLS_ + "infinity_bow/pull_2_mask");
+
+        INFINITY_SHOVEL_MASK_0   = register(TOOLS_ + "infinity_shovel/mask_0");
+        INFINITY_SHOVEL_MASK_1   = register(TOOLS_ + "infinity_shovel/mask_1");
+        INFINITY_PICKAXE_MASK   = register(TOOLS_ + "infinity_pickaxe/mask");
+        INFINITY_AXE_MASK   = register(TOOLS_ + "infinity_axe/mask");
+        INFINITY_HOE_MASK   = register(TOOLS_ + "infinity_hoe/mask");
 
         FALLBACK = register(TOOLS_ + "fallback");
 
@@ -97,6 +108,11 @@ public class AvaritiaTextures implements IIconRegister {
     public static TextureAtlasSprite INFINITY_ARMOR_MASK_INV;
     public static TextureAtlasSprite INFINITY_ARMOR_MASK_WINGS;
 
+    public static TextureAtlasSprite INFINITY_HELMET_MASK;
+    public static TextureAtlasSprite INFINITY_CHESTPLATE_MASK;
+    public static TextureAtlasSprite INFINITY_LEGGINGS_MASK;
+    public static TextureAtlasSprite INFINITY_BOOTS_MASK;
+
     public static TextureAtlasSprite[] COSMIC;
     public static TextureAtlasSprite COSMIC_0;
     public static TextureAtlasSprite COSMIC_1;
@@ -110,6 +126,11 @@ public class AvaritiaTextures implements IIconRegister {
     public static TextureAtlasSprite COSMIC_9;
 
     public static TextureAtlasSprite INFINITY_SWORD_MASK;
+    public static TextureAtlasSprite INFINITY_SHOVEL_MASK_0;
+    public static TextureAtlasSprite INFINITY_SHOVEL_MASK_1;
+    public static TextureAtlasSprite INFINITY_PICKAXE_MASK;
+    public static TextureAtlasSprite INFINITY_AXE_MASK;
+    public static TextureAtlasSprite INFINITY_HOE_MASK;
 
     public static TextureAtlasSprite FALLBACK;
 

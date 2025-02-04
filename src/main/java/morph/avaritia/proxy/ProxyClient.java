@@ -1,13 +1,16 @@
 package morph.avaritia.proxy;
 
+import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.packet.PacketCustom;
 import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.util.ItemNBTUtils;
+import codechicken.lib.util.TransformUtils;
 import morph.avaritia.api.registration.IModelRegister;
 import morph.avaritia.client.AvaritiaClientEventHandler;
 import morph.avaritia.client.render.entity.RenderGapingVoid;
 import morph.avaritia.client.render.entity.RenderHeavenArrow;
 import morph.avaritia.client.render.entity.WrappedEntityItemRenderer;
+import morph.avaritia.client.render.item.CosmicItemRender;
 import morph.avaritia.client.render.shader.ShaderHelper;
 import morph.avaritia.entity.EntityEndestPearl;
 import morph.avaritia.entity.EntityGapingVoid;
@@ -19,6 +22,7 @@ import morph.avaritia.item.ItemMatterCluster;
 import morph.avaritia.network.ClientPacketHandler;
 import morph.avaritia.network.NetworkDispatcher;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.entity.Render;
@@ -93,6 +97,10 @@ public class ProxyClient extends Proxy {
         {
             ModelResourceLocation shovel = new ModelResourceLocation(tools, "infinity_shovel=shovel");
             ModelResourceLocation destroyer = new ModelResourceLocation(tools, "infinity_shovel=destroyer");
+            IBakedModel shovelWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(shovel));
+            IBakedModel destroyerWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(destroyer));
+            ModelRegistryHelper.register(shovel, shovelWrapped);
+            ModelRegistryHelper.register(destroyer, destroyerWrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_shovel, shovel, destroyer);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_shovel, stack -> {
                 if (stack.hasTagCompound()) {
@@ -118,24 +126,32 @@ public class ProxyClient extends Proxy {
 
         {
             ModelResourceLocation helmet = new ModelResourceLocation(tools, "armor=helmet");
+            IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(helmet));
+            ModelRegistryHelper.register(helmet, wrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_helmet, helmet);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_helmet, (ItemStack stack) -> helmet);
         }
 
         {
             ModelResourceLocation chestplate = new ModelResourceLocation(tools, "armor=chestplate");
+            IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(chestplate));
+            ModelRegistryHelper.register(chestplate, wrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_chestplate, chestplate);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_chestplate, (ItemStack stack) -> chestplate);
         }
 
         {
             ModelResourceLocation legs = new ModelResourceLocation(tools, "armor=legs");
+            IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(legs));
+            ModelRegistryHelper.register(legs, wrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_pants, legs);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_pants, (ItemStack stack) -> legs);
         }
 
         {
             ModelResourceLocation boots = new ModelResourceLocation(tools, "armor=boots");
+            IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(boots));
+            ModelRegistryHelper.register(boots, wrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_boots, boots);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_boots, (ItemStack stack) -> boots);
         }

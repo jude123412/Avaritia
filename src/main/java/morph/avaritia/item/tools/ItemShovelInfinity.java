@@ -2,12 +2,16 @@ package morph.avaritia.item.tools;
 
 import codechicken.lib.raytracer.RayTracer;
 import morph.avaritia.Avaritia;
+import morph.avaritia.api.ICosmicRenderItem;
 import morph.avaritia.entity.EntityImmortalItem;
+import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.util.ToolHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemSpade;
@@ -24,8 +28,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.Nullable;
 
-public class ItemShovelInfinity extends ItemSpade {
+public class ItemShovelInfinity extends ItemSpade implements ICosmicRenderItem {
 
     private static final ToolMaterial TOOL_MATERIAL = EnumHelper.addToolMaterial("INFINITY_SHOVEL", 32, 9999, 9999F, 7.0F, 200);
 
@@ -148,4 +153,20 @@ public class ItemShovelInfinity extends ItemSpade {
         return false;
     }
 
+    @Override
+    public TextureAtlasSprite getMaskTexture(ItemStack stack, @Nullable EntityLivingBase player) {
+
+        if (stack.hasTagCompound()) {
+            assert stack.getTagCompound() != null;
+            if (stack.getTagCompound().getBoolean("destroyer")) {
+                return AvaritiaTextures.INFINITY_SHOVEL_MASK_1;
+            }
+        }
+        return AvaritiaTextures.INFINITY_SHOVEL_MASK_0;
+    }
+
+    @Override
+    public float getMaskOpacity(ItemStack stack, @Nullable EntityLivingBase player) {
+        return 1.0f;
+    }
 }
