@@ -91,7 +91,16 @@ tooltip.skullfire_sword.desc=Beheads skeletons and scorches them black.
 tooltip.matter_cluster.desc=Use to deconstruct.
 tooltip.matter_cluster.desc2=Hold SHIFT for contents.
 tooltip.matter_cluster.counter=items
-tooltip.tile.avaritia:neutron_collector.desc=Produces A Pile of Neutrons every 300 Seconds once placed
+tooltip.tile.avaritia:neutron_collector.desc=Produces A Pile of Neutrons every 300 Seconds once placed.
+tooltip.item.avaritia:infinity_axe.desc=Shift Right Click to remove all organic matter in a 27x27 radius.
+tooltip.item.avaritia:infinity_bow.desc=Hold Right Click for auto-fire. Rains arrows from above.
+tooltip.item.avaritia:infinity_hoe.desc=Tills a 7x7 area.
+tooltip.item.avaritia:infinity_pickaxe_0.desc=Shift Right Click for Hammer mode.
+tooltip.item.avaritia:infinity_pickaxe_1.desc=In Hammer mode breaks a 16x16 radius.
+tooltip.item.avaritia:infinity_pickaxe_2.desc=This includes bedrock and excludes Axe blocks.
+tooltip.item.avaritia:infinity_shovel_0.desc=Shift Right Click for Destroyer mode.
+tooltip.item.avaritia:infinity_shovel_1.desc=In Destroyer mode breaks a 16x16 radius excluding Axe or Pick blocks.
+tooltip.item.avaritia:infinity_sword.desc=Effectively preforms the /kill command on any entity you attack.
 #
 # Other
 itemGroup.avaritia=Avaritia
