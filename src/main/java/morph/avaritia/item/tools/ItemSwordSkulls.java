@@ -1,6 +1,7 @@
 package morph.avaritia.item.tools;
 
 import morph.avaritia.Avaritia;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -28,6 +29,10 @@ public class ItemSwordSkulls extends ItemSword {
     @SuppressWarnings ({ "unchecked", "rawtypes" })
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.translateToLocal("tooltip.skullfire_sword.desc"));
+        if (GuiScreen.isShiftKeyDown()) {
+            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip.skullfire_sword.desc"));
+        } else {
+            tooltip.add(TextFormatting.GRAY + "" + I18n.translateToLocal("tooltip.item.avaritia:tool.desc"));
+        }
     }
 }
