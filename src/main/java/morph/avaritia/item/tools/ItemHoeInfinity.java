@@ -199,10 +199,9 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
                         return true;
                 }
             }
-
-            if (block instanceof IGrowable) {
-                return true;
-            }
+        }
+        if (block instanceof IGrowable) {
+            return true;
         }
         return false;
     }
