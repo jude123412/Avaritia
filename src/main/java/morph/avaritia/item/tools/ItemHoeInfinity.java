@@ -114,7 +114,7 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
                     world.setBlockToAir(aoePos.up());
                 }
 
-                if (!(block instanceof BlockGrass) && !(block instanceof BlockFarmland) && !(block instanceof BlockDirt)) {
+                if (block instanceof IGrowable && !(block instanceof BlockGrass)) {
                     if (ToolHelper.useBonemeal(world, player, aoePos) || ToolHelper.useBonemeal(world, player, origin)) {
                         if (!world.isRemote) {
                             world.playEvent(2005, aoePos, 0);
@@ -200,7 +200,7 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
                 }
             }
 
-            if (block instanceof BlockCrops || block instanceof BlockSapling ) {
+            if (block instanceof IGrowable) {
                 return true;
             }
         }
