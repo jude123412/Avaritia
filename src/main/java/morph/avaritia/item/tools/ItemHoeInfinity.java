@@ -8,8 +8,11 @@ import morph.avaritia.handler.AvaritiaEventHandler;
 import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.item.ItemMatterCluster;
+import morph.avaritia.util.ToolHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -70,53 +73,64 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos origin, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
-        if (!attemptHoe(stack, player, world, origin, facing)) {
-            if (world.getBlockState(origin).getBlock() != Blocks.FARMLAND) {
-                return EnumActionResult.FAIL;
-            }
-        }
+        IBlockState state = world.getBlockState(origin);
+        Block block = state.getBlock();
 
         if (player.isSneaking()) {
-            return EnumActionResult.FAIL;
-        }
-
-        int aoe_range = 4;
-        AvaritiaEventHandler.enableItemCapture();
-        for (BlockPos aoePos : BlockPos.getAllInBox(origin.add(-aoe_range, 0, -aoe_range), origin.add(aoe_range, 0, aoe_range))) {
-            if (aoePos.equals(origin)) {
-                continue;
-            }
-
-            boolean airOrReplaceable = world.isAirBlock(aoePos) || world.getBlockState(aoePos).getBlock().isReplaceable(world, aoePos);
-            boolean lowerBlockOk = world.isSideSolid(aoePos.down(), EnumFacing.UP) || world.getBlockState(aoePos.down()).getBlock() == Blocks.FARMLAND;
-
-            if (airOrReplaceable && lowerBlockOk && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(Blocks.DIRT)))) {
-                BlockEvent.PlaceEvent event = ForgeEventFactory.onPlayerBlockPlace(player, new BlockSnapshot(world, aoePos, Blocks.DIRT.getDefaultState()), EnumFacing.UP, player.getActiveHand());
-
-                if (!event.isCanceled() && (player.capabilities.isCreativeMode || consumeStack(new ItemStack(Blocks.DIRT), player.inventory))) {
-                    world.setBlockState(aoePos, Blocks.DIRT.getDefaultState());
+            return super.onItemUse(player, world, origin, hand, facing, hitX, hitY, hitZ);
+        } else {
+            if (!attemptHoe(stack, player, world, origin, facing)) {
+                if (world.getBlockState(origin).getBlock() != Blocks.FARMLAND) {
+                    return EnumActionResult.FAIL;
                 }
             }
 
-            boolean canDropAbove = world.getBlockState(aoePos.up()).getBlock() == Blocks.DIRT || world.getBlockState(aoePos.up()).getBlock() == Blocks.GRASS || world.getBlockState(aoePos.up()).getBlock() == Blocks.FARMLAND;
-            boolean canRemoveAbove = canDropAbove || world.getBlockState(aoePos.up()).getBlock().isReplaceable(world, aoePos.up());
-            boolean up2OK = world.isAirBlock(aoePos.up().up()) || world.getBlockState(aoePos.up().up()).getBlock().isReplaceable(world, aoePos.up().up());
-
-            if (!world.isAirBlock(aoePos.up()) && canRemoveAbove && up2OK) {
-                if (!world.isRemote && canDropAbove) {
-                    world.spawnEntity(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Blocks.DIRT)));
+            int aoe_range = 4;
+            AvaritiaEventHandler.enableItemCapture();
+            for (BlockPos aoePos : BlockPos.getAllInBox(origin.add(-aoe_range, 0, -aoe_range), origin.add(aoe_range, 0, aoe_range))) {
+                if (aoePos.equals(origin)) {
+                    continue;
                 }
-                world.setBlockToAir(aoePos.up());
-            }
-            attemptHoe(stack, player, world, aoePos, facing);
-        }
 
-        AvaritiaEventHandler.stopItemCapture();
-        Set<ItemStack> drops = AvaritiaEventHandler.getCapturedDrops();
-        if (!world.isRemote) {
-            List<ItemStack> clusters = ItemMatterCluster.makeClusters(drops);
-            for (ItemStack cluster : clusters) {
-                ItemUtils.dropItem(world, origin.up(), cluster);
+                boolean airOrReplaceable = world.isAirBlock(aoePos) || world.getBlockState(aoePos).getBlock().isReplaceable(world, aoePos);
+                boolean lowerBlockOk = world.isSideSolid(aoePos.down(), EnumFacing.UP) || world.getBlockState(aoePos.down()).getBlock() == Blocks.FARMLAND;
+
+                if (airOrReplaceable && lowerBlockOk && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(Blocks.DIRT)))) {
+                    BlockEvent.PlaceEvent event = ForgeEventFactory.onPlayerBlockPlace(player, new BlockSnapshot(world, aoePos, Blocks.DIRT.getDefaultState()), EnumFacing.UP, player.getActiveHand());
+
+                    if (!event.isCanceled() && (player.capabilities.isCreativeMode || consumeStack(new ItemStack(Blocks.DIRT), player.inventory))) {
+                        world.setBlockState(aoePos, Blocks.DIRT.getDefaultState());
+                    }
+                }
+
+                boolean canDropAbove = world.getBlockState(aoePos.up()).getBlock() == Blocks.DIRT || world.getBlockState(aoePos.up()).getBlock() == Blocks.GRASS || world.getBlockState(aoePos.up()).getBlock() == Blocks.FARMLAND;
+                boolean canRemoveAbove = canDropAbove || world.getBlockState(aoePos.up()).getBlock().isReplaceable(world, aoePos.up());
+                boolean up2OK = world.isAirBlock(aoePos.up().up()) || world.getBlockState(aoePos.up().up()).getBlock().isReplaceable(world, aoePos.up().up());
+
+                if (!world.isAirBlock(aoePos.up()) && canRemoveAbove && up2OK) {
+                    if (!world.isRemote && canDropAbove) {
+                        world.spawnEntity(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Blocks.DIRT)));
+                    }
+                    world.setBlockToAir(aoePos.up());
+                }
+                attemptHoe(stack, player, world, aoePos, facing);
+            }
+
+            AvaritiaEventHandler.stopItemCapture();
+            Set<ItemStack> drops = AvaritiaEventHandler.getCapturedDrops();
+            if (!world.isRemote) {
+                List<ItemStack> clusters = ItemMatterCluster.makeClusters(drops);
+                for (ItemStack cluster : clusters) {
+                    ItemUtils.dropItem(world, origin.up(), cluster);
+                }
+            }
+
+            if (block != Blocks.GRASS) {
+                if (ToolHelper.useBonemeal(world, player, origin)) {
+                    if (!world.isRemote) {
+                        world.playEvent(2005, origin, 0);
+                    }
+                }
             }
         }
 
@@ -183,6 +197,10 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
                         setBlock(hoeStack, player, world, pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
                         return true;
                 }
+            }
+
+            if (block instanceof BlockCrops || block instanceof BlockSapling ) {
+                return true;
             }
         }
         return false;
