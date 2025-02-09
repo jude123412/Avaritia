@@ -9,10 +9,7 @@ import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.item.ItemMatterCluster;
 import morph.avaritia.util.ToolHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockSapling;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -94,12 +91,15 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
 
                 boolean airOrReplaceable = world.isAirBlock(aoePos) || world.getBlockState(aoePos).getBlock().isReplaceable(world, aoePos);
                 boolean lowerBlockOk = world.isSideSolid(aoePos.down(), EnumFacing.UP) || world.getBlockState(aoePos.down()).getBlock() == Blocks.FARMLAND;
+                boolean waterBlockState = world.getBlockState(aoePos).getBlock() == Blocks.WATER;
 
-                if (airOrReplaceable && lowerBlockOk && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(Blocks.DIRT)))) {
-                    BlockEvent.PlaceEvent event = ForgeEventFactory.onPlayerBlockPlace(player, new BlockSnapshot(world, aoePos, Blocks.DIRT.getDefaultState()), EnumFacing.UP, player.getActiveHand());
+                if(!(block instanceof IGrowable)) {
+                    if (airOrReplaceable && lowerBlockOk && !waterBlockState && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(Blocks.DIRT)))) {
+                        BlockEvent.PlaceEvent event = ForgeEventFactory.onPlayerBlockPlace(player, new BlockSnapshot(world, aoePos, Blocks.DIRT.getDefaultState()), EnumFacing.UP, player.getActiveHand());
 
-                    if (!event.isCanceled() && (player.capabilities.isCreativeMode || consumeStack(new ItemStack(Blocks.DIRT), player.inventory))) {
-                        world.setBlockState(aoePos, Blocks.DIRT.getDefaultState());
+                        if (!event.isCanceled() && (player.capabilities.isCreativeMode || consumeStack(new ItemStack(Blocks.DIRT), player.inventory))) {
+                            world.setBlockState(aoePos, Blocks.DIRT.getDefaultState());
+                        }
                     }
                 }
 
@@ -113,6 +113,15 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
                     }
                     world.setBlockToAir(aoePos.up());
                 }
+
+                if (!(block instanceof BlockGrass) && !(block instanceof BlockFarmland) && !(block instanceof BlockDirt)) {
+                    if (ToolHelper.useBonemeal(world, player, aoePos) || ToolHelper.useBonemeal(world, player, origin)) {
+                        if (!world.isRemote) {
+                            world.playEvent(2005, aoePos, 0);
+                        }
+                    }
+                }
+
                 attemptHoe(stack, player, world, aoePos, facing);
             }
 
@@ -122,14 +131,6 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
                 List<ItemStack> clusters = ItemMatterCluster.makeClusters(drops);
                 for (ItemStack cluster : clusters) {
                     ItemUtils.dropItem(world, origin.up(), cluster);
-                }
-            }
-
-            if (block != Blocks.GRASS) {
-                if (ToolHelper.useBonemeal(world, player, origin)) {
-                    if (!world.isRemote) {
-                        world.playEvent(2005, origin, 0);
-                    }
                 }
             }
         }
@@ -183,7 +184,7 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
         Block block = state.getBlock();
 
         if (face != EnumFacing.DOWN && world.isAirBlock(pos.up())) {
-            if (block == Blocks.GRASS || block == Blocks.GRASS_PATH) {
+            if (block instanceof BlockGrass || block instanceof BlockGrassPath) {
                 setBlock(hoeStack, player, world, pos, Blocks.FARMLAND.getDefaultState());
                 return true;
             }
