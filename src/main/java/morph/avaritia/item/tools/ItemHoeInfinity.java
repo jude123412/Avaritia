@@ -43,6 +43,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
+import static morph.avaritia.util.ToolHelper.isHoldingControl;
+
 /**
  * Created by covers1624 on 31/07/2017.
  * Credits mostly to brandon3055, this is his AOE code.
@@ -61,7 +63,8 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (GuiScreen.isShiftKeyDown()) {
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + ".desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + ".desc_0"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + ".desc_1"));
         } else {
             tooltip.add(TextFormatting.GRAY + "" + I18n.translateToLocal("tooltip.item.avaritia:tool.desc"));
         }
@@ -84,46 +87,54 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
 
             int aoe_range = 4;
             AvaritiaEventHandler.enableItemCapture();
-            for (BlockPos aoePos : BlockPos.getAllInBox(origin.add(-aoe_range, 0, -aoe_range), origin.add(aoe_range, 0, aoe_range))) {
-                if (aoePos.equals(origin)) {
-                    continue;
-                }
 
-                boolean airOrReplaceable = world.isAirBlock(aoePos) || world.getBlockState(aoePos).getBlock().isReplaceable(world, aoePos);
-                boolean lowerBlockOk = world.isSideSolid(aoePos.down(), EnumFacing.UP) || world.getBlockState(aoePos.down()).getBlock() == Blocks.FARMLAND;
-                boolean waterBlockState = world.getBlockState(aoePos).getBlock() == Blocks.WATER;
+                for (BlockPos aoePos : BlockPos.getAllInBox(origin.add(-aoe_range, 0, -aoe_range), origin.add(aoe_range, 0, aoe_range))) {
+                    if (!isHoldingControl()) {
+                        if (aoePos.equals(origin)) {
+                            continue;
+                        }
 
-                if(!(block instanceof IGrowable)) {
-                    if (airOrReplaceable && lowerBlockOk && !waterBlockState && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(Blocks.DIRT)))) {
-                        BlockEvent.PlaceEvent event = ForgeEventFactory.onPlayerBlockPlace(player, new BlockSnapshot(world, aoePos, Blocks.DIRT.getDefaultState()), EnumFacing.UP, player.getActiveHand());
+                        boolean airOrReplaceable = world.isAirBlock(aoePos) || world.getBlockState(aoePos).getBlock().isReplaceable(world, aoePos);
+                        boolean lowerBlockOk = world.isSideSolid(aoePos.down(), EnumFacing.UP) || world.getBlockState(aoePos.down()).getBlock() == Blocks.FARMLAND;
+                        boolean waterBlockState = world.getBlockState(aoePos).getBlock() == Blocks.WATER;
 
-                        if (!event.isCanceled() && (player.capabilities.isCreativeMode || consumeStack(new ItemStack(Blocks.DIRT), player.inventory))) {
-                            world.setBlockState(aoePos, Blocks.DIRT.getDefaultState());
+
+                        if (airOrReplaceable && lowerBlockOk && !waterBlockState && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(Blocks.DIRT)))) {
+                            BlockEvent.PlaceEvent event = ForgeEventFactory.onPlayerBlockPlace(player, new BlockSnapshot(world, aoePos, Blocks.DIRT.getDefaultState()), EnumFacing.UP, player.getActiveHand());
+
+                            if (!event.isCanceled() && (player.capabilities.isCreativeMode || consumeStack(new ItemStack(Blocks.DIRT), player.inventory))) {
+                                world.setBlockState(aoePos, Blocks.DIRT.getDefaultState());
+                            }
+                        }
+
+
+                        boolean canDropAbove = world.getBlockState(aoePos.up()).getBlock() == Blocks.DIRT || world.getBlockState(aoePos.up()).getBlock() == Blocks.GRASS || world.getBlockState(aoePos.up()).getBlock() == Blocks.FARMLAND;
+                        boolean canRemoveAbove = canDropAbove || world.getBlockState(aoePos.up()).getBlock().isReplaceable(world, aoePos.up());
+                        boolean up2OK = world.isAirBlock(aoePos.up().up()) || world.getBlockState(aoePos.up().up()).getBlock().isReplaceable(world, aoePos.up().up());
+
+                        if (!world.isAirBlock(aoePos.up()) && canRemoveAbove && up2OK) {
+                            if (!world.isRemote && canDropAbove) {
+                                world.spawnEntity(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Blocks.DIRT)));
+                            }
+                            world.setBlockToAir(aoePos.up());
                         }
                     }
-                }
 
-                boolean canDropAbove = world.getBlockState(aoePos.up()).getBlock() == Blocks.DIRT || world.getBlockState(aoePos.up()).getBlock() == Blocks.GRASS || world.getBlockState(aoePos.up()).getBlock() == Blocks.FARMLAND;
-                boolean canRemoveAbove = canDropAbove || world.getBlockState(aoePos.up()).getBlock().isReplaceable(world, aoePos.up());
-                boolean up2OK = world.isAirBlock(aoePos.up().up()) || world.getBlockState(aoePos.up().up()).getBlock().isReplaceable(world, aoePos.up().up());
-
-                if (!world.isAirBlock(aoePos.up()) && canRemoveAbove && up2OK) {
-                    if (!world.isRemote && canDropAbove) {
-                        world.spawnEntity(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Blocks.DIRT)));
-                    }
-                    world.setBlockToAir(aoePos.up());
-                }
-
-                if (block instanceof IGrowable && !(block instanceof BlockGrass)) {
-                    if (ToolHelper.useBonemeal(world, player, aoePos) || ToolHelper.useBonemeal(world, player, origin)) {
-                        if (!world.isRemote) {
-                            world.playEvent(2005, aoePos, 0);
+                    if (isHoldingControl() && block instanceof IGrowable) {
+                        if (ToolHelper.useBonemeal(world, player, aoePos)) {
+                            if (world.isRemote) {
+                                world.playEvent(2005, aoePos, 0);
+                            }
+                        }
+                        if (ToolHelper.useBonemeal(world, player, origin)) {
+                            if (world.isRemote) {
+                                world.playEvent(2005, origin, 0);
+                            }
                         }
                     }
-                }
 
-                attemptHoe(stack, player, world, aoePos, facing);
-            }
+                    attemptHoe(stack, player, world, aoePos, facing);
+                }
 
             AvaritiaEventHandler.stopItemCapture();
             Set<ItemStack> drops = AvaritiaEventHandler.getCapturedDrops();
@@ -133,6 +144,7 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
                     ItemUtils.dropItem(world, origin.up(), cluster);
                 }
             }
+
         }
 
         return EnumActionResult.SUCCESS;
@@ -183,7 +195,7 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
 
-        if (face != EnumFacing.DOWN && world.isAirBlock(pos.up())) {
+        if (face != EnumFacing.DOWN && world.isAirBlock(pos.up()) && !isHoldingControl()) {
             if (block instanceof BlockGrass || block instanceof BlockGrassPath) {
                 setBlock(hoeStack, player, world, pos, Blocks.FARMLAND.getDefaultState());
                 return true;
@@ -200,9 +212,11 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
                 }
             }
         }
-        if (block instanceof IGrowable) {
+
+        if (block instanceof IGrowable && isHoldingControl()) {
             return true;
         }
+
         return false;
     }
 

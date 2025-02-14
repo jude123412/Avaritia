@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.oredict.OreDictionary;
+import org.lwjgl.input.Keyboard;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -175,4 +176,9 @@ public class ToolHelper {
         ItemStack stack = new ItemStack(Items.DYE, 1, 15);
         return ItemDye.applyBonemeal(stack, world, position, player, EnumHand.MAIN_HAND);
     }
+
+    public static boolean isHoldingControl() {
+        return Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157);
+    }
+
 }
