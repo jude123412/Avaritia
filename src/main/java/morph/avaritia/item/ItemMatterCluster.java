@@ -1,12 +1,17 @@
 package morph.avaritia.item;
 
 import codechicken.lib.util.ItemUtils;
+import morph.avaritia.api.ICosmicRenderItem;
+import morph.avaritia.api.registration.IModelRegister;
+import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.util.ItemStackWrapper;
 import morph.avaritia.util.ToolHelper;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -18,11 +23,12 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.Map.Entry;
 
-public class ItemMatterCluster extends Item {
+public class ItemMatterCluster extends Item implements ICosmicRenderItem {
 
     protected static Random randy = new Random();
 
@@ -80,12 +86,13 @@ public class ItemMatterCluster extends Item {
         int currentTotal = 0;
         Map<ItemStackWrapper, Integer> currentItems = new HashMap<>();
 
+        int count = 0;
         while (!itemlist.isEmpty()) {
             Entry<ItemStackWrapper, Integer> e = itemlist.get(0);
             ItemStackWrapper wrap = e.getKey();
             int wrapcount = e.getValue();
 
-            int count = Math.min(CAPACITY - currentTotal, wrapcount);
+            count = Math.min(CAPACITY - currentTotal, wrapcount);
 
             if (!currentItems.containsKey(e.getKey())) {
                 currentItems.put(wrap, count);
@@ -233,4 +240,16 @@ public class ItemMatterCluster extends Item {
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
+    @Override
+    public TextureAtlasSprite getMaskTexture(ItemStack stack, @Nullable EntityLivingBase player) {
+        if (getClusterSize(stack) != 4096) {
+            return AvaritiaTextures.CLUSTER_EMPTY;
+        }
+        return AvaritiaTextures.CLUSTER_FULL;
+    }
+
+    @Override
+    public float getMaskOpacity(ItemStack stack, @Nullable EntityLivingBase player) {
+        return 1.0f;
+    }
 }

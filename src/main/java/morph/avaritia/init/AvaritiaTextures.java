@@ -84,6 +84,9 @@ public class AvaritiaTextures implements IIconRegister {
                 COSMIC_8,
                 COSMIC_9
         };
+
+        CLUSTER_EMPTY = register(CLUSTER_ + "empty_mask");
+        CLUSTER_FULL = register(CLUSTER_ + "full_mask");
         //@formatter:on
 
     }
@@ -101,6 +104,7 @@ public class AvaritiaTextures implements IIconRegister {
     private static final String MODELS_ = "avaritia:models/";
     private static final String SHADER_ = "avaritia:shader/";
     private static final String TOOLS_ = ITEMS_ + "tools/";
+    private static final String CLUSTER_ = ITEMS_ + "matter_cluster/";
 
     public static TextureAtlasSprite HALO;
     public static TextureAtlasSprite HALO_NOISE;
@@ -148,4 +152,6 @@ public class AvaritiaTextures implements IIconRegister {
     public static TextureAtlasSprite INFINITY_BOW_PULL_1_MASK;
     public static TextureAtlasSprite INFINITY_BOW_PULL_2_MASK;
 
+    public static TextureAtlasSprite CLUSTER_EMPTY;
+    public static TextureAtlasSprite CLUSTER_FULL;
 }

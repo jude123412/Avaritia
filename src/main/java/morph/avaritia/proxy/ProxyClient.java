@@ -185,6 +185,10 @@ public class ProxyClient extends Proxy {
         {
             ModelResourceLocation empty = new ModelResourceLocation(resource, "matter_cluster=empty");
             ModelResourceLocation full = new ModelResourceLocation(resource, "matter_cluster=full");
+            IBakedModel wrappedEmpty = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(empty));
+            ModelRegistryHelper.register(empty, wrappedEmpty);
+            IBakedModel wrappedFull = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(full));
+            ModelRegistryHelper.register(full, wrappedFull);
             ModelLoader.registerItemVariants(ModItems.matter_cluster, empty, full);
             ModelLoader.setCustomMeshDefinition(ModItems.matter_cluster, (ItemStack stack) -> {
                 if (ItemMatterCluster.getClusterSize(stack) == ItemMatterCluster.CAPACITY) {
