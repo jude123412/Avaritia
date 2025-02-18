@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import morph.avaritia.Avaritia;
 import morph.avaritia.api.registration.IModelRegister;
 import morph.avaritia.client.gui.GUIHandler;
+import morph.avaritia.compat.BloodMagic;
 import morph.avaritia.entity.EntityEndestPearl;
 import morph.avaritia.entity.EntityGapingVoid;
 import morph.avaritia.entity.EntityHeavenArrow;
@@ -13,6 +14,7 @@ import morph.avaritia.handler.AvaritiaEventHandler;
 import morph.avaritia.handler.ConfigHandler;
 import morph.avaritia.init.ModBlocks;
 import morph.avaritia.init.ModItems;
+import morph.avaritia.util.Lumberjack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,8 +23,11 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import org.apache.logging.log4j.Level;
 
 import java.util.UUID;
+
+import static morph.avaritia.compat.Compat.BloodMagicIsLoaded;
 
 public class Proxy {
 
@@ -31,6 +36,14 @@ public class Proxy {
     public void preInit(FMLPreInitializationEvent event) {
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         ModItems.init();
+        if (BloodMagicIsLoaded) {
+            try {
+                BloodMagic.registerItems();
+            } catch (Throwable e) {
+                Lumberjack.log(Level.INFO, "Avaritia decided to use a Infinity Armour instead.");
+                e.printStackTrace();
+            }
+        }
         ModBlocks.init();
         NetworkRegistry.INSTANCE.registerGuiHandler(Avaritia.instance, new GUIHandler());
         MinecraftForge.EVENT_BUS.register(new AbilityHandler());

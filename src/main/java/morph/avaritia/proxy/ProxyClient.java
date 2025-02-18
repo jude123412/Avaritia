@@ -11,6 +11,7 @@ import morph.avaritia.client.render.entity.RenderGapingVoid;
 import morph.avaritia.client.render.entity.RenderHeavenArrow;
 import morph.avaritia.client.render.entity.WrappedEntityItemRenderer;
 import morph.avaritia.client.render.item.CosmicItemRender;
+import morph.avaritia.client.render.item.HaloRenderItem;
 import morph.avaritia.client.render.shader.ShaderHelper;
 import morph.avaritia.entity.EntityEndestPearl;
 import morph.avaritia.entity.EntityGapingVoid;
@@ -76,6 +77,7 @@ public class ProxyClient extends Proxy {
         for (IModelRegister register : modelRegisters) {
             register.registerModels();
         }
+
         ShaderHelper.initShaders();
         ResourceLocation tools = new ResourceLocation("avaritia:tools");
         ResourceLocation resource = new ResourceLocation("avaritia:resource");
@@ -197,6 +199,7 @@ public class ProxyClient extends Proxy {
                 return empty;
             });
         }
+
         registerRenderers();
         PacketCustom.assignHandler(NetworkDispatcher.NET_CHANNEL, new ClientPacketHandler());
     }

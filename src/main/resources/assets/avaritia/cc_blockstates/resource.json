@@ -68,6 +68,11 @@
 				"textures": {
 					"layer0": "items/cosmic_meatballs/layer_0"
 				}
+			},
+			"armok_orb": {
+				"textures": {
+					"layer0": "items/armok_orb"
+				}
 			}
 		},
 		"matter_cluster": {

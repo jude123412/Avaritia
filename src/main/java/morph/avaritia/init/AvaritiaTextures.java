@@ -57,7 +57,7 @@ public class AvaritiaTextures implements IIconRegister {
         INFINITY_AXE_MASK   = register(TOOLS_ + "infinity_axe/mask");
         INFINITY_HOE_MASK   = register(TOOLS_ + "infinity_hoe/mask");
 
-        FALLBACK = register(TOOLS_ + "fallback");
+        FALLBACK = register(ITEMS_ + "fallback");
 
         INFINITY_BOW_PULL = new TextureAtlasSprite[] {
                 INFINITY_BOW_PULL_0,

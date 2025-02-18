@@ -55,7 +55,8 @@ item.avaritia_fracturedore.prefix=Fractured
 item.avaritia:matter_cluster.name=Matter Cluster
 item.avaritia:matter_cluster.full.name=Critical Matter Cluster
 #
-#
+# Integration
+item.avaritia:armok_orb.name=Armok's Blood Orb
 ##############
 #   Blocks   #
 ##############

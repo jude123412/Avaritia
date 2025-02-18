@@ -2,7 +2,6 @@ package morph.avaritia.item;
 
 import codechicken.lib.util.ItemUtils;
 import morph.avaritia.api.ICosmicRenderItem;
-import morph.avaritia.api.registration.IModelRegister;
 import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.util.ItemStackWrapper;
