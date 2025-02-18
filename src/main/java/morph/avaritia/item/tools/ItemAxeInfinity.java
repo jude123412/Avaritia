@@ -53,7 +53,6 @@ public class ItemAxeInfinity extends ItemAxe implements ICosmicRenderItem {
         setTranslationKey("avaritia:infinity_axe");
         setRegistryName("infinity_axe");
         setCreativeTab(Avaritia.tab);
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     @Override

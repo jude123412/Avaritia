@@ -2,7 +2,6 @@ package morph.avaritia.init;
 
 import morph.avaritia.Avaritia;
 import morph.avaritia.api.registration.IModelRegister;
-import morph.avaritia.compat.Compat;
 import morph.avaritia.handler.ConfigHandler;
 import morph.avaritia.item.*;
 import morph.avaritia.item.tools.*;
@@ -19,8 +18,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.function.Consumer;
-
-import static morph.avaritia.compat.Compat.*;
 
 /**
  * Created by covers1624 on 11/04/2017.
