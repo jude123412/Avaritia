@@ -1,4 +1,4 @@
-package morph.avaritia.item;
+package morph.avaritia.compat.bloodmagic;
 
 import WayofTime.bloodmagic.altar.AltarTier;
 import WayofTime.bloodmagic.core.data.Binding;
@@ -64,8 +64,6 @@ public class ItemOrbArmok extends ItemBindableBase implements IBloodOrb, IBindab
         if (binding != null) {
             SoulNetwork soulNetwork = NetworkHelper.getSoulNetwork(binding);
             soulNetwork.add(SoulTicket.item(stack, world, player, 200), this.getCapacity());
-            world.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
-            soulNetwork.hurtPlayer(player, 200.0F);
         }
         return super.onItemRightClick(world, player, hand);
     }

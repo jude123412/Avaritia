@@ -4,7 +4,7 @@ import com.mojang.authlib.GameProfile;
 import morph.avaritia.Avaritia;
 import morph.avaritia.api.registration.IModelRegister;
 import morph.avaritia.client.gui.GUIHandler;
-import morph.avaritia.compat.BloodMagic;
+import morph.avaritia.compat.bloodmagic.BloodMagic;
 import morph.avaritia.entity.EntityEndestPearl;
 import morph.avaritia.entity.EntityGapingVoid;
 import morph.avaritia.entity.EntityHeavenArrow;
@@ -15,9 +15,11 @@ import morph.avaritia.handler.ConfigHandler;
 import morph.avaritia.init.ModBlocks;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.util.Lumberjack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -40,10 +42,11 @@ public class Proxy {
             try {
                 BloodMagic.registerItems();
             } catch (Throwable e) {
-                Lumberjack.log(Level.INFO, "Avaritia decided to use a Infinity Armour instead.");
+                Lumberjack.log(Level.INFO, "Avaritia decided to use the Healing Axe instead.");
                 e.printStackTrace();
             }
         }
+
         ModBlocks.init();
         NetworkRegistry.INSTANCE.registerGuiHandler(Avaritia.instance, new GUIHandler());
         MinecraftForge.EVENT_BUS.register(new AbilityHandler());
@@ -56,10 +59,23 @@ public class Proxy {
     }
 
     public void init(FMLInitializationEvent event) {
+
     }
 
     public void postInit(FMLPostInitializationEvent event) {
 
+    }
+
+
+    public void initRecipes(RegistryEvent.Register<IRecipe> event) {
+        if (BloodMagicIsLoaded) {
+            try {
+                BloodMagic.registerRecipes();
+            } catch (Throwable e) {
+                Lumberjack.log(Level.INFO, "Avaritia decided to use the Healing Axe instead.");
+                e.printStackTrace();
+            }
+        }
     }
 
     public void addModelRegister(IModelRegister register) {

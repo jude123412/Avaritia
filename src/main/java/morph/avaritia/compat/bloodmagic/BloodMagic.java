@@ -1,8 +1,8 @@
-package morph.avaritia.compat;
+package morph.avaritia.compat.bloodmagic;
 
 import WayofTime.bloodmagic.ConfigHandler;
 import morph.avaritia.init.ModItems;
-import morph.avaritia.item.ItemOrbArmok;
+import morph.avaritia.compat.bloodmagic.ItemOrbArmok;
 import morph.avaritia.recipe.extreme.ExtremeCraftingRecipeManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -40,14 +40,14 @@ public class BloodMagic {
                     "  NNNNN  ",
                     " NNNNNNN ",
                     "NNNIIINNN",
-                    "NNIOIOINN",
-                    "NNIIXIINN",
-                    "NNIOIOINN",
+                    "NNIXIXINN",
+                    "NNIIOIINN",
+                    "NNIXIXINN",
                     "NNNIIINNN",
                     " NNNNNNN ",
                     "  NNNNN  ",
                     'I', "ingotInfinity",
-                    'X', new ItemStack(ModItems.resource, 1, 5),
+                    'X', "gemInfinityCatalyst",
                     'N', "ingotCosmicNeutronium",
                     'O', archOrb);
         }

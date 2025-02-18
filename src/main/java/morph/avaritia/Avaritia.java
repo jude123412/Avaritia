@@ -2,7 +2,7 @@ package morph.avaritia;
 
 import codechicken.lib.CodeChickenLib;
 import codechicken.lib.gui.SimpleCreativeTab;
-import morph.avaritia.compat.BloodMagic;
+import morph.avaritia.compat.bloodmagic.BloodMagic;
 import morph.avaritia.init.FoodRecipes;
 import morph.avaritia.init.ModBlocks;
 import morph.avaritia.init.ModItems;
