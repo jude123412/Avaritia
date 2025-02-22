@@ -23,7 +23,7 @@ public class CompressorRecipeManager {
         if(input == null) {
             throw new IllegalArgumentException("input cannot be null!");
         } else if (inputAmount <= 0) {
-            throw new IllegalArgumentException("inputAmount cannot be less than one!");
+            throw new IllegalArgumentException("input Amount cannot be less than one!");
         } else if (output == null) {
             throw new IllegalArgumentException("output cannot be null!");
         } else {
@@ -35,7 +35,7 @@ public class CompressorRecipeManager {
 
     /**
      * Added by xXjudeXx on 25/01/2025
-     * @param output The output item required to remove the recipe, Example : ModItems.copperSingularity. The ItemStack of Avaritias Copper Singularity
+     * @param output Removes a recipe based on the Recipes Result
      */
     public static void removeNeutroniumCompressorRecipe(ItemStack output) {
         Map<ResourceLocation, ICompressorRecipe> TO_REMOVE = new HashMap<>();

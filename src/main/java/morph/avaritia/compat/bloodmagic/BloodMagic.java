@@ -1,9 +1,7 @@
 package morph.avaritia.compat.bloodmagic;
 
 import WayofTime.bloodmagic.ConfigHandler;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.compat.bloodmagic.ItemOrbArmok;
-import morph.avaritia.recipe.extreme.ExtremeCraftingRecipeManager;
+import morph.avaritia.recipe.extreme.ExtremeRecipeManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -35,7 +33,7 @@ public class BloodMagic {
             }
             archOrb.setTagCompound(tag);
 
-            ExtremeCraftingRecipeManager.addExtremeShapedRecipe("armok_orb",
+            ExtremeRecipeManager.addExtremeShapedRecipe("armok_orb",
                     new ItemStack(armok_orb, 1),
                     "  NNNNN  ",
                     " NNNNNNN ",
