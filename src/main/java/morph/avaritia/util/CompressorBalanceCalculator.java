@@ -68,8 +68,8 @@ public class CompressorBalanceCalculator {
             multiplier += 1;
         }
 
-        modifier = Math.max(modifier + ConfigHandler.modifier, 0);
-        multiplier = Math.max(multiplier + ConfigHandler.multiplier, 0);
+        modifier = Math.max(modifier + ConfigHandler.compressor_modifier, 0);
+        multiplier = Math.max(multiplier + ConfigHandler.compressor_multiplier, 0);
     }
 
     public static int balanceCost(int cost) {

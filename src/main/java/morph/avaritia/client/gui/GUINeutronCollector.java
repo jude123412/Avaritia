@@ -3,6 +3,7 @@ package morph.avaritia.client.gui;
 import codechicken.lib.math.MathHelper;
 import morph.avaritia.container.ContainerNeutronCollector;
 import morph.avaritia.tile.TileNeutronCollector;
+import morph.avaritia.util.TextUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -30,7 +31,9 @@ public class GUINeutronCollector extends GuiMachineBase<TileNeutronCollector, Co
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         int color = 0x404040;
 
-        if (machineTile.getProgress() > 0) {
+        String progress;
+
+        if (machineTile.getProgress() > 1) {
             color = 0xFF0000;
         }
         if (machineTile.getProgress() > 1500) {
@@ -44,8 +47,14 @@ public class GUINeutronCollector extends GuiMachineBase<TileNeutronCollector, Co
         }
 
         String s = I18n.format("container.neutron_collector");
-        float scaled_progress = scaleF(machineTile.getProgress(), TileNeutronCollector.PRODUCTION_TICKS, 100);
-        String progress = "Progress: " + MathHelper.round(scaled_progress, 10) + "%";
+        float scaled_progress = scaleF(machineTile.getProgress(), TileNeutronCollector.productionTicks, 100);
+
+        //Shhhh, Don't tell anyone!
+        if (machineTile.getProductionTicks() > 1) {
+            progress = "Progress: " + MathHelper.round(scaled_progress, 10) + "%";
+        } else {
+            progress = TextUtils.makeFabulous("∞");
+        }
 
         fontRenderer.drawString(s, xSize / 2 - fontRenderer.getStringWidth(s) / 2, 6, 0x404040);
         fontRenderer.drawString(progress, xSize / 2 - fontRenderer.getStringWidth(progress) / 2, 60, color);

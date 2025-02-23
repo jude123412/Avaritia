@@ -92,7 +92,6 @@ tooltip.skullfire_sword.desc=Beheads skeletons and scorches them black.
 tooltip.matter_cluster.desc=Use to deconstruct.
 tooltip.matter_cluster.desc2=Hold SHIFT for contents.
 tooltip.matter_cluster.counter=items
-tooltip.tile.avaritia:neutron_collector.desc=Produces A Pile of Neutrons every 300 Seconds once placed.
 tooltip.item.avaritia:tool.desc=Hold SHIFT for more Info.
 tooltip.item.avaritia:infinity_axe.desc=Shift Right Click to remove all organic matter in a 26x26 radius.
 tooltip.item.avaritia:infinity_bow_0.desc=Hold Right Click for auto-fire.

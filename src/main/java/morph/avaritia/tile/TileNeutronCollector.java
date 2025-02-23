@@ -3,6 +3,7 @@ package morph.avaritia.tile;
 import codechicken.lib.packet.PacketCustom;
 import codechicken.lib.util.BlockUtils;
 import codechicken.lib.util.ItemUtils;
+import morph.avaritia.handler.ConfigHandler;
 import morph.avaritia.init.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -17,14 +18,14 @@ import javax.annotation.Nullable;
 
 public class TileNeutronCollector extends TileMachineBase implements IInventory {
 
-    public static final int PRODUCTION_TICKS = 6000;//TODO config.
+    public static final int productionTicks = ConfigHandler.collector_duration;
 
     private ItemStack neutrons = ItemStack.EMPTY;
     private int progress;
 
     @Override
     public void doWork() {
-        if (++progress >= PRODUCTION_TICKS) {
+        if (++progress >= productionTicks) {
             if (neutrons.isEmpty()) {
                 neutrons = ItemUtils.copyStack(ModItems.neutron_pile, 1);
             } else if (ItemUtils.areStacksSameType(neutrons, ModItems.neutron_pile)) {
@@ -49,6 +50,10 @@ public class TileNeutronCollector extends TileMachineBase implements IInventory 
 
     public int getProgress() {
         return progress;
+    }
+
+    public int getProductionTicks() {
+        return productionTicks;
     }
 
     @Override

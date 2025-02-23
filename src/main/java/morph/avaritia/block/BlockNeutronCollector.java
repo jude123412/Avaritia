@@ -36,6 +36,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
+
 public class BlockNeutronCollector extends BlockContainer implements IModelRegister {
 
     public BlockNeutronCollector() {
@@ -61,10 +62,23 @@ public class BlockNeutronCollector extends BlockContainer implements IModelRegis
 
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+
+        int productionTicks = TileNeutronCollector.productionTicks;
         if (GuiScreen.isShiftKeyDown()) {
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey() + ".desc"));
+            if (productionTicks == 1) {
+                tooltip.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted("Produces a Pile of Neutrons every tick", new Object[]{}));
+            }
+            if (productionTicks > 1 && productionTicks < 20) {
+                tooltip.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted("Produces a Pile of Neutrons every " + TileNeutronCollector.productionTicks + " ticks", new Object[]{}));
+            }
+            if (productionTicks >= 20 && productionTicks < 40){
+                tooltip.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted("Produces a Pile of Neutrons approximately every second", new Object[]{}));
+            }
+            if (productionTicks >= 40) {
+                tooltip.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted("Produces a Pile of Neutrons approximately every " + Math.round((float) TileNeutronCollector.productionTicks / 20) + " seconds", new Object[]{}));
+            }
         } else {
-            tooltip.add(TextFormatting.GRAY + "" + I18n.translateToLocal("tooltip.item.avaritia:tool.desc"));
+            tooltip.add(TextFormatting.GRAY + I18n.translateToLocal("tooltip.item.avaritia:tool.desc"));
         }
     }
 

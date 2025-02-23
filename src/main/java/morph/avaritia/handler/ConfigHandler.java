@@ -33,8 +33,11 @@ public class ConfigHandler {
     public static boolean platinum = true;
     public static boolean iridium = true;
 
-    public static int modifier = 0;
-    public static int multiplier = 0;
+    public static int compressor_modifier = 0;
+    public static int compressor_multiplier = 0;
+    public static int compressor_duration = 1;
+
+    public static int collector_duration = 6000;
 
 //    public static boolean storagedrawers = false;
 //    public static boolean refinedstorage = false;
@@ -117,16 +120,29 @@ public class ConfigHandler {
         }
 
         {
-            ConfigTag balance = config.getTag("balance");
-            balance.setComment("Balance modifications for the Compressor.");
+            ConfigTag compressor_balance = config.getTag("compressor_balance");
+            compressor_balance.setComment("Balance modifications for the Compressor.");
 
-            tag = balance.getTag("cost_modifier");
+            tag = compressor_balance.getTag("cost_modifier");
             tag.setComment("Added to the existing modifier to make prices more expensive or cheaper. Can be negative.");
-            modifier = tag.setDefaultInt(0).getInt();
+            compressor_modifier = tag.setDefaultInt(0).getInt();
 
-            tag = balance.getTag("cost_multiplier");
+            tag = compressor_balance.getTag("cost_multiplier");
             tag.setComment("Added to the existing multiplier to make prices more expensive or cheaper. Can be negative.");
-            multiplier = tag.setDefaultInt(0).getInt();
+            compressor_multiplier = tag.setDefaultInt(0).getInt();
+
+            tag = compressor_balance.getTag("consumption_duration");
+            tag.setComment("How long it takes for the compressor to consume an item. Can't be less than 1");
+            compressor_duration = Math.max(tag.setDefaultInt(1).getInt(), 1);
+        }
+
+        {
+            ConfigTag collector_balance = config.getTag("collector_balance");
+            collector_balance.setComment("Balance modifications for the Neutron Collector.");
+
+            tag = collector_balance.getTag("duration");
+            tag.setComment("How long it takes for the compressor to output a neutron. Can't be less than 1.");
+            collector_duration = Math.max(tag.setDefaultInt(6000).getInt(), 1) ;
         }
 
 //        {

@@ -2,6 +2,7 @@ package morph.avaritia.tile;
 
 import codechicken.lib.packet.PacketCustom;
 import codechicken.lib.util.ItemUtils;
+import morph.avaritia.handler.ConfigHandler;
 import morph.avaritia.recipe.AvaritiaRecipeManager;
 import morph.avaritia.recipe.compressor.ICompressorRecipe;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 public class TileNeutroniumCompressor extends TileMachineBase implements ISidedInventory {
 
     //Number of ticks needed to consume an item.
-    public static int CONSUME_TICKS = 1;//TODO Config.
+    public static int CONSUME_TICKS = ConfigHandler.compressor_duration;
 
     //The consumption progress.
     private int consumption_progress;
