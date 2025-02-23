@@ -17,6 +17,7 @@ public class AvaritiaTextures implements IIconRegister {
         //@formatter:off
         HALO = register(ITEMS_ + "halo");
         HALO_NOISE = register(ITEMS_ + "halo_noise");
+        HALO_GODLY = register(ITEMS_ + "halo_godly");
 
         INFINITY_HELMET_MASK = register(ITEMS_ + "armor/helmet/layer_0_mask");
         INFINITY_CHESTPLATE_MASK = register(ITEMS_ + "armor/chestplate/layer_0_mask");
@@ -108,6 +109,7 @@ public class AvaritiaTextures implements IIconRegister {
 
     public static TextureAtlasSprite HALO;
     public static TextureAtlasSprite HALO_NOISE;
+    public static TextureAtlasSprite HALO_GODLY;
 
     public static TextureAtlasSprite INFINITY_ARMOR_MASK;
     public static TextureAtlasSprite INFINITY_ARMOR_MASK_INV;
