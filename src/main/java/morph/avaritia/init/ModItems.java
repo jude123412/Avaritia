@@ -25,6 +25,7 @@ import java.util.function.Consumer;
 public class ModItems {
 
     public static EnumRarity COSMIC_RARITY = EnumHelper.addRarity("COSMIC", TextFormatting.RED, "Cosmic");
+    public static EnumRarity DEMONIC_RARITY = EnumHelper.addRarity("DEMONIC", TextFormatting.DARK_GRAY, "Demonic");
 
     public static ItemResource resource;
 

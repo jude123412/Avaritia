@@ -57,6 +57,11 @@ item.avaritia:matter_cluster.full.name=Critical Matter Cluster
 #
 # Integration
 item.avaritia:armok_orb.name=Armok's Blood Orb
+item.avaritia:darkhold.name=Darkhold
+
+# Thaumcraft research
+avaritia.research.darkhold.title=The Darkhold
+avaritia.research.darkhold.stage.2=Using the forces of light and dark, I have discovered a new way to clear or accumulate warp. This book, designed by Demons allows for such a thing to happen, simply right click the book in hand to pile on warp, Alternatively shift right clicking the book will remove all warp you have.
 ##############
 #   Blocks   #
 ##############
@@ -105,6 +110,7 @@ tooltip.item.avaritia:infinity_shovel_0.desc=Shift Right Click for Destroyer mod
 tooltip.item.avaritia:infinity_shovel_1.desc=In Destroyer mode breaks a 16x16 radius.
 tooltip.item.avaritia:infinity_shovel_2.desc=This excludes Axe or Pick blocks.
 tooltip.item.avaritia:infinity_sword.desc=Effectively preforms the /kill command on any entity you attack.
+tooltip.item.avaritia:darkhold.desc=Simply right click or shift right click to gain or subtract warp!
 #
 # Other
 itemGroup.avaritia=Avaritia

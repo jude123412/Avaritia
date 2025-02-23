@@ -5,6 +5,7 @@ import morph.avaritia.Avaritia;
 import morph.avaritia.api.registration.IModelRegister;
 import morph.avaritia.client.gui.GUIHandler;
 import morph.avaritia.compat.bloodmagic.BloodMagic;
+import morph.avaritia.compat.thaumcraft.Thaumcraft;
 import morph.avaritia.entity.EntityEndestPearl;
 import morph.avaritia.entity.EntityGapingVoid;
 import morph.avaritia.entity.EntityHeavenArrow;
@@ -30,6 +31,7 @@ import org.apache.logging.log4j.Level;
 import java.util.UUID;
 
 import static morph.avaritia.compat.Compat.BloodMagicIsLoaded;
+import static morph.avaritia.compat.Compat.ThaumcraftIsLoaded;
 
 public class Proxy {
 
@@ -38,13 +40,18 @@ public class Proxy {
     public void preInit(FMLPreInitializationEvent event) {
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         ModItems.init();
-        if (BloodMagicIsLoaded) {
-            try {
-                BloodMagic.registerItems();
-            } catch (Throwable e) {
-                Lumberjack.log(Level.INFO, "Avaritia decided to use the Healing Axe instead.");
-                e.printStackTrace();
-            }
+        try {
+            BloodMagic.registerItems();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia decided to use the Healing Axe instead.");
+            e.printStackTrace();
+        }
+
+        try {
+            Thaumcraft.registerItems();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia decided to research everything instead.");
+            e.printStackTrace();
         }
 
         ModBlocks.init();
@@ -59,7 +66,12 @@ public class Proxy {
     }
 
     public void init(FMLInitializationEvent event) {
-
+        try {
+            Thaumcraft.registerTCRecipes();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia decided to research everything instead.");
+            e.printStackTrace();
+        }
     }
 
     public void postInit(FMLPostInitializationEvent event) {
@@ -67,14 +79,20 @@ public class Proxy {
     }
 
 
-    public void initRecipes(RegistryEvent.Register<IRecipe> event) {
-        if (BloodMagicIsLoaded) {
-            try {
-                BloodMagic.registerRecipes();
-            } catch (Throwable e) {
-                Lumberjack.log(Level.INFO, "Avaritia decided to use the Healing Axe instead.");
-                e.printStackTrace();
-            }
+    public static void initRecipes(RegistryEvent.Register<IRecipe> event) {
+
+        try {
+            BloodMagic.registerRecipes();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia decided to use the Healing Axe instead.");
+            e.printStackTrace();
+        }
+
+        try {
+            Thaumcraft.registerRecipes();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia decided to research everything instead.");
+            e.printStackTrace();
         }
     }
 

@@ -73,6 +73,11 @@
 				"textures": {
 					"layer0": "items/armok_orb"
 				}
+			},
+			"darkhold": {
+				"textures": {
+					"layer0": "items/darkhold"
+				}
 			}
 		},
 		"matter_cluster": {

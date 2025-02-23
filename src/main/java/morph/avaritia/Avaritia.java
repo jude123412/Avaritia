@@ -74,14 +74,6 @@ public class Avaritia {
         CompressorBalanceCalculator.gatherBalanceModifier();
         AvaritiaRecipeManager.init();
         FoodRecipes.initFoodRecipes();
-
-        if (BloodMagicIsLoaded) {
-            try {
-                BloodMagic.registerRecipes();
-            } catch (Throwable e) {
-                Lumberjack.log(Level.INFO, "Avaritia decided to use a Infinity Armour instead.");
-                e.printStackTrace();
-            }
-        }
+        Proxy.initRecipes(event);
     }
 }

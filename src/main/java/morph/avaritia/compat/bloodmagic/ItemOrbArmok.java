@@ -40,13 +40,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@Optional.Interface(
-        modid = "bloodmagic",
-        iface = "WayofTime.bloodmagic.orb.IBloodOrb")
-@Optional.Interface(
-        modid = "bloodmagic",
-        iface = "WayofTime.bloodmagic.iface.IBindable")
-
 public class ItemOrbArmok extends ItemBindableBase implements IBloodOrb, IBindable, IOrbBlood, IHaloRenderItem, IModelRegister {
 
     public ItemOrbArmok() {
