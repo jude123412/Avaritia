@@ -1,12 +1,13 @@
 package morph.avaritia.compat.crafttweaker;
 
-import crafttweaker.api.item.IIngredient;
-import crafttweaker.api.minecraft.CraftTweakerMC;
-import crafttweaker.mc1120.item.MCItemStack;
+import javax.annotation.Nullable;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
-import javax.annotation.Nullable;
+import crafttweaker.api.item.IIngredient;
+import crafttweaker.api.minecraft.CraftTweakerMC;
+import crafttweaker.mc1120.item.MCItemStack;
 
 /**
  * Created by covers1624 on 14/12/18.

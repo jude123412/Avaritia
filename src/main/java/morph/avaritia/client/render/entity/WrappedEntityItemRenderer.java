@@ -1,6 +1,5 @@
 package morph.avaritia.client.render.entity;
 
-import morph.avaritia.client.render.item.IEntityItemTickCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -9,6 +8,8 @@ import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+
+import morph.avaritia.client.render.item.IEntityItemTickCallback;
 
 /**
  * Created by covers1624 on 14/04/2017.

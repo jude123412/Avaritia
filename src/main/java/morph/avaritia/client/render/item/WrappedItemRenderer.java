@@ -1,6 +1,8 @@
 package morph.avaritia.client.render.item;
 
-import codechicken.lib.model.ModelRegistryHelper;
+import java.util.LinkedList;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.EntityRenderer;
@@ -17,8 +19,7 @@ import net.minecraft.util.registry.IRegistry;
 import net.minecraftforge.client.model.pipeline.LightUtil;
 import net.minecraftforge.common.model.IModelState;
 
-import java.util.LinkedList;
-import java.util.List;
+import codechicken.lib.model.ModelRegistryHelper;
 
 /**
  * Created by covers1624 on 16/04/2017.
@@ -66,7 +67,6 @@ public abstract class WrappedItemRenderer extends PerspectiveAwareItemRenderer {
      * @param alphaOverride Th alpha override 1.0 -> 0.0
      */
     public static void renderModel(IBakedModel model, ItemStack stack, float alphaOverride) {
-
         ItemColors itemColorProvider = Minecraft.getMinecraft().getItemColors();
         Tessellator tess = Tessellator.getInstance();
         BufferBuilder buffer = tess.getBuffer();
@@ -96,5 +96,4 @@ public abstract class WrappedItemRenderer extends PerspectiveAwareItemRenderer {
 
         tess.draw();
     }
-
 }

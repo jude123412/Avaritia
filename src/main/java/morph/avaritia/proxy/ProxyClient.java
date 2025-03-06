@@ -1,27 +1,8 @@
 package morph.avaritia.proxy;
 
-import codechicken.lib.model.ModelRegistryHelper;
-import codechicken.lib.packet.PacketCustom;
-import codechicken.lib.texture.TextureUtils;
-import codechicken.lib.util.ItemNBTUtils;
-import codechicken.lib.util.TransformUtils;
-import morph.avaritia.api.registration.IModelRegister;
-import morph.avaritia.client.AvaritiaClientEventHandler;
-import morph.avaritia.client.render.entity.RenderGapingVoid;
-import morph.avaritia.client.render.entity.RenderHeavenArrow;
-import morph.avaritia.client.render.entity.WrappedEntityItemRenderer;
-import morph.avaritia.client.render.item.CosmicItemRender;
-import morph.avaritia.client.render.item.HaloRenderItem;
-import morph.avaritia.client.render.shader.ShaderHelper;
-import morph.avaritia.entity.EntityEndestPearl;
-import morph.avaritia.entity.EntityGapingVoid;
-import morph.avaritia.entity.EntityHeavenArrow;
-import morph.avaritia.entity.EntityHeavenSubArrow;
-import morph.avaritia.init.AvaritiaTextures;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.item.ItemMatterCluster;
-import morph.avaritia.network.ClientPacketHandler;
-import morph.avaritia.network.NetworkDispatcher;
+import java.util.HashSet;
+import java.util.Set;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -39,8 +20,27 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import java.util.HashSet;
-import java.util.Set;
+import codechicken.lib.model.ModelRegistryHelper;
+import codechicken.lib.packet.PacketCustom;
+import codechicken.lib.texture.TextureUtils;
+import codechicken.lib.util.ItemNBTUtils;
+import codechicken.lib.util.TransformUtils;
+import morph.avaritia.api.registration.IModelRegister;
+import morph.avaritia.client.AvaritiaClientEventHandler;
+import morph.avaritia.client.render.entity.RenderGapingVoid;
+import morph.avaritia.client.render.entity.RenderHeavenArrow;
+import morph.avaritia.client.render.entity.WrappedEntityItemRenderer;
+import morph.avaritia.client.render.item.CosmicItemRender;
+import morph.avaritia.client.render.shader.ShaderHelper;
+import morph.avaritia.entity.EntityEndestPearl;
+import morph.avaritia.entity.EntityGapingVoid;
+import morph.avaritia.entity.EntityHeavenArrow;
+import morph.avaritia.entity.EntityHeavenSubArrow;
+import morph.avaritia.init.AvaritiaTextures;
+import morph.avaritia.init.ModItems;
+import morph.avaritia.item.ItemMatterCluster;
+import morph.avaritia.network.ClientPacketHandler;
+import morph.avaritia.network.NetworkDispatcher;
 
 public class ProxyClient extends Proxy {
 
@@ -69,7 +69,6 @@ public class ProxyClient extends Proxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
-
         super.preInit(event);
         TextureUtils.addIconRegister(new AvaritiaTextures());
         MinecraftForge.EVENT_BUS.register(new AvaritiaClientEventHandler());
@@ -85,8 +84,10 @@ public class ProxyClient extends Proxy {
         {
             ModelResourceLocation pickaxe = new ModelResourceLocation(tools, "infinity_pickaxe=pickaxe");
             ModelResourceLocation hammer = new ModelResourceLocation(tools, "infinity_pickaxe=hammer");
-            IBakedModel pickaxeWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(pickaxe));
-            IBakedModel hammerWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(hammer));
+            IBakedModel pickaxeWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+                    modelRegistry -> modelRegistry.getObject(pickaxe));
+            IBakedModel hammerWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+                    modelRegistry -> modelRegistry.getObject(hammer));
             ModelRegistryHelper.register(pickaxe, pickaxeWrapped);
             ModelRegistryHelper.register(hammer, hammerWrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_pickaxe, pickaxe, hammer);
@@ -103,8 +104,10 @@ public class ProxyClient extends Proxy {
         {
             ModelResourceLocation shovel = new ModelResourceLocation(tools, "infinity_shovel=shovel");
             ModelResourceLocation destroyer = new ModelResourceLocation(tools, "infinity_shovel=destroyer");
-            IBakedModel shovelWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(shovel));
-            IBakedModel destroyerWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(destroyer));
+            IBakedModel shovelWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+                    modelRegistry -> modelRegistry.getObject(shovel));
+            IBakedModel destroyerWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+                    modelRegistry -> modelRegistry.getObject(destroyer));
             ModelRegistryHelper.register(shovel, shovelWrapped);
             ModelRegistryHelper.register(destroyer, destroyerWrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_shovel, shovel, destroyer);
@@ -120,7 +123,8 @@ public class ProxyClient extends Proxy {
 
         {
             ModelResourceLocation axe = new ModelResourceLocation(tools, "type=infinity_axe");
-            IBakedModel axerWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(axe));
+            IBakedModel axerWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+                    modelRegistry -> modelRegistry.getObject(axe));
             ModelRegistryHelper.register(axe, axerWrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_axe, axe);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_axe, (ItemStack stack) -> axe);
@@ -128,7 +132,8 @@ public class ProxyClient extends Proxy {
 
         {
             ModelResourceLocation hoe = new ModelResourceLocation(tools, "type=infinity_hoe");
-            IBakedModel hoeWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(hoe));
+            IBakedModel hoeWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+                    modelRegistry -> modelRegistry.getObject(hoe));
             ModelRegistryHelper.register(hoe, hoeWrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_axe, hoe);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_hoe, (ItemStack stack) -> hoe);
@@ -136,7 +141,8 @@ public class ProxyClient extends Proxy {
 
         {
             ModelResourceLocation helmet = new ModelResourceLocation(tools, "armor=helmet");
-            IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(helmet));
+            IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+                    modelRegistry -> modelRegistry.getObject(helmet));
             ModelRegistryHelper.register(helmet, wrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_helmet, helmet);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_helmet, (ItemStack stack) -> helmet);
@@ -144,7 +150,8 @@ public class ProxyClient extends Proxy {
 
         {
             ModelResourceLocation chestplate = new ModelResourceLocation(tools, "armor=chestplate");
-            IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(chestplate));
+            IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+                    modelRegistry -> modelRegistry.getObject(chestplate));
             ModelRegistryHelper.register(chestplate, wrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_chestplate, chestplate);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_chestplate, (ItemStack stack) -> chestplate);
@@ -152,7 +159,8 @@ public class ProxyClient extends Proxy {
 
         {
             ModelResourceLocation legs = new ModelResourceLocation(tools, "armor=legs");
-            IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(legs));
+            IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+                    modelRegistry -> modelRegistry.getObject(legs));
             ModelRegistryHelper.register(legs, wrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_pants, legs);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_pants, (ItemStack stack) -> legs);
@@ -160,7 +168,8 @@ public class ProxyClient extends Proxy {
 
         {
             ModelResourceLocation boots = new ModelResourceLocation(tools, "armor=boots");
-            IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(boots));
+            IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+                    modelRegistry -> modelRegistry.getObject(boots));
             ModelRegistryHelper.register(boots, wrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_boots, boots);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_boots, (ItemStack stack) -> boots);
@@ -187,9 +196,11 @@ public class ProxyClient extends Proxy {
         {
             ModelResourceLocation empty = new ModelResourceLocation(resource, "matter_cluster=empty");
             ModelResourceLocation full = new ModelResourceLocation(resource, "matter_cluster=full");
-            IBakedModel wrappedEmpty = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(empty));
+            IBakedModel wrappedEmpty = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+                    modelRegistry -> modelRegistry.getObject(empty));
             ModelRegistryHelper.register(empty, wrappedEmpty);
-            IBakedModel wrappedFull = new CosmicItemRender(TransformUtils.DEFAULT_TOOL, modelRegistry -> modelRegistry.getObject(full));
+            IBakedModel wrappedFull = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+                    modelRegistry -> modelRegistry.getObject(full));
             ModelRegistryHelper.register(full, wrappedFull);
             ModelLoader.registerItemVariants(ModItems.matter_cluster, empty, full);
             ModelLoader.setCustomMeshDefinition(ModItems.matter_cluster, (ItemStack stack) -> {
@@ -204,13 +215,14 @@ public class ProxyClient extends Proxy {
         PacketCustom.assignHandler(NetworkDispatcher.NET_CHANNEL, new ClientPacketHandler());
     }
 
-    @SuppressWarnings ("unchecked")
+    @SuppressWarnings("unchecked")
     @Override
     public void postInit(FMLPostInitializationEvent event) {
         super.postInit(event);
 
         ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
-        itemColors.registerItemColorHandler((stack, tintIndex) -> SINGULARITY_COLOURS[tintIndex ^ 1][stack.getItemDamage()], ModItems.singularity);
+        itemColors.registerItemColorHandler(
+                (stack, tintIndex) -> SINGULARITY_COLOURS[tintIndex ^ 1][stack.getItemDamage()], ModItems.singularity);
 
         RenderManager manager = Minecraft.getMinecraft().getRenderManager();
 
@@ -227,7 +239,9 @@ public class ProxyClient extends Proxy {
     }
 
     private void registerRenderers() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityEndestPearl.class, manager -> new RenderSnowball<>(manager, ModItems.endest_pearl, Minecraft.getMinecraft().getRenderItem()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityEndestPearl.class,
+                manager -> new RenderSnowball<>(manager, ModItems.endest_pearl,
+                        Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityGapingVoid.class, RenderGapingVoid::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHeavenArrow.class, RenderHeavenArrow::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHeavenSubArrow.class, RenderHeavenArrow::new);

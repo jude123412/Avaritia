@@ -1,7 +1,5 @@
 package morph.avaritia.block;
 
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.registration.IModelRegister;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -17,7 +15,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
+
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.registration.IModelRegister;
 
 public class BlockDoubleCompressedCraftingTable extends Block implements IModelRegister {
 
@@ -32,7 +32,8 @@ public class BlockDoubleCompressedCraftingTable extends Block implements IModelR
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+                                    EnumFacing side, float hitX, float hitY, float hitZ) {
         if (world.isRemote) {
             return true;
         } else {
@@ -42,10 +43,11 @@ public class BlockDoubleCompressedCraftingTable extends Block implements IModelR
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public void registerModels() {
         ModelResourceLocation loc = new ModelResourceLocation("avaritia:crafting", "type=double_compressed");
         ModelLoader.setCustomStateMapper(this, new StateMapperBase() {
+
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 return loc;

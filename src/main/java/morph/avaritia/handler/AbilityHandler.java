@@ -1,6 +1,11 @@
 package morph.avaritia.handler;
 
-import morph.avaritia.item.ItemArmorInfinity;
+import static net.minecraft.inventory.EntityEquipmentSlot.*;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Predicate;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,11 +19,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Predicate;
-
-import static net.minecraft.inventory.EntityEquipmentSlot.*;
+import morph.avaritia.item.ItemArmorInfinity;
 
 /**
  * Handles all abilities for ANY EntityLivingBase.
@@ -34,13 +35,14 @@ public class AbilityHandler {
     public static final Set<String> entitiesWithFlight =      new HashSet<>();
     //@formatter:on
 
-    public static boolean isPlayerWearing(EntityLivingBase entity, EntityEquipmentSlot slot, Predicate<Item> predicate) {
+    public static boolean isPlayerWearing(EntityLivingBase entity, EntityEquipmentSlot slot,
+                                          Predicate<Item> predicate) {
         ItemStack stack = entity.getItemStackFromSlot(slot);
         return !stack.isEmpty() && predicate.test(stack.getItem());
     }
 
     @SubscribeEvent
-    //Updates all ability states for an entity, Handles firing updates and state changes.
+    // Updates all ability states for an entity, Handles firing updates and state changes.
     public void updateAbilities(LivingUpdateEvent event) {
         if (!(event.getEntity() instanceof EntityPlayer)) {
             return;
@@ -50,11 +52,12 @@ public class AbilityHandler {
         String key = entity.getCachedUniqueIdString() + "|" + entity.world.isRemote;
 
         boolean hasHelmet = isPlayerWearing(event.getEntityLiving(), HEAD, item -> item instanceof ItemArmorInfinity);
-        boolean hasChestplate = isPlayerWearing(event.getEntityLiving(), CHEST, item -> item instanceof ItemArmorInfinity);
+        boolean hasChestplate = isPlayerWearing(event.getEntityLiving(), CHEST,
+                item -> item instanceof ItemArmorInfinity);
         boolean hasLeggings = isPlayerWearing(event.getEntityLiving(), LEGS, item -> item instanceof ItemArmorInfinity);
         boolean hasBoots = isPlayerWearing(event.getEntityLiving(), FEET, item -> item instanceof ItemArmorInfinity);
 
-        //Helmet toggle.
+        // Helmet toggle.
         if (hasHelmet) {
             entitiesWithHelmets.add(key);
             handleHelmetStateChange(entity, true);
@@ -64,7 +67,7 @@ public class AbilityHandler {
             handleHelmetStateChange(entity, false);
         }
 
-        //Chestplate toggle.
+        // Chestplate toggle.
         if (hasChestplate) {
             entitiesWithChestplates.add(key);
             handleChestplateStateChange(entity, true);
@@ -74,7 +77,7 @@ public class AbilityHandler {
             handleChestplateStateChange(entity, false);
         }
 
-        //Leggings toggle.
+        // Leggings toggle.
         if (hasLeggings) {
             entitiesWithLeggings.add(key);
             handleLeggingsStateChange(entity, true);
@@ -84,7 +87,7 @@ public class AbilityHandler {
             handleLeggingsStateChange(entity, false);
         }
 
-        //Boots toggle.
+        // Boots toggle.
         if (hasBoots) {
             handleBootsStateChange(entity);
             entitiesWithBoots.add(key);
@@ -94,7 +97,7 @@ public class AbilityHandler {
             entitiesWithBoots.remove(key);
         }
 
-        //Active ability ticking.
+        // Active ability ticking.
         if (entitiesWithHelmets.contains(key)) {
             tickHelmetAbilities(entity);
         }
@@ -134,9 +137,9 @@ public class AbilityHandler {
         }
     }
 
-    //region StateChanging
+    // region StateChanging
     private static void handleHelmetStateChange(EntityLivingBase entity, boolean isNew) {
-        //TODO, Helmet abilities? Water breathing, NightVision, Auto Eat or No Hunger, No bad effects.
+        // TODO, Helmet abilities? Water breathing, NightVision, Auto Eat or No Hunger, No bad effects.
     }
 
     private static void handleChestplateStateChange(EntityLivingBase entity, boolean isNew) {
@@ -156,15 +159,14 @@ public class AbilityHandler {
         }
     }
 
-    private static void handleLeggingsStateChange(EntityLivingBase entity, boolean isNew) {
-
-    }
+    private static void handleLeggingsStateChange(EntityLivingBase entity, boolean isNew) {}
 
     private static void handleBootsStateChange(EntityLivingBase entity) {
         String temp_key = entity.getCachedUniqueIdString() + "|" + entity.world.isRemote;
         boolean hasBoots = isPlayerWearing(entity, FEET, item -> item instanceof ItemArmorInfinity);
         if (hasBoots) {
-            entity.stepHeight = 1.0625F;//Step 17 pixels, Allows for stepping directly from a path to the top of a block next to the path.
+            entity.stepHeight = 1.0625F;// Step 17 pixels, Allows for stepping directly from a path to the top of a
+                                        // block next to the path.
             if (!entitiesWithBoots.contains(temp_key)) {
                 entitiesWithBoots.add(temp_key);
             }
@@ -175,20 +177,14 @@ public class AbilityHandler {
             }
         }
     }
-    //endregion
+    // endregion
 
-    //region Ability Ticking
-    private static void tickHelmetAbilities(EntityLivingBase entity) {
+    // region Ability Ticking
+    private static void tickHelmetAbilities(EntityLivingBase entity) {}
 
-    }
+    private static void tickChestplateAbilities(EntityLivingBase entity) {}
 
-    private static void tickChestplateAbilities(EntityLivingBase entity) {
-
-    }
-
-    private static void tickLeggingsAbilities(EntityLivingBase entity) {
-
-    }
+    private static void tickLeggingsAbilities(EntityLivingBase entity) {}
 
     private static void tickBootsAbilities(EntityLivingBase entity) {
         boolean flying = entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying;
@@ -197,7 +193,7 @@ public class AbilityHandler {
             boolean sneaking = entity.isSneaking();
 
             float speed = 0.15f * (flying ? 1.1f : 1.0f)
-                    //* (swimming ? 1.2f : 1.0f)
+            // * (swimming ? 1.2f : 1.0f)
                     * (sneaking ? 0.1f : 1.0f);
 
             if (entity.moveForward > 0f) {
@@ -211,20 +207,20 @@ public class AbilityHandler {
             }
         }
     }
-    //endregion
+    // endregion
 
-    //region Ability Specific Events
+    // region Ability Specific Events
     @SubscribeEvent
     public void jumpBoost(LivingJumpEvent event) {
         EntityLivingBase entity = event.getEntityLiving();
-        if (entitiesWithBoots.contains( entity.getCachedUniqueIdString() + "|" + entity.world.isRemote)) {
+        if (entitiesWithBoots.contains(entity.getCachedUniqueIdString() + "|" + entity.world.isRemote)) {
             entity.motionY += 0.4f;
         }
     }
-    //endregion
+    // endregion
 
-    //region Ability Striping Events
-    //These are anything that should strip all abilities from an entity, Anything that creates an entity.
+    // region Ability Striping Events
+    // These are anything that should strip all abilities from an entity, Anything that creates an entity.
     @SubscribeEvent
     public void onPlayerDemensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
         stripAbilities(event.player);
@@ -248,7 +244,7 @@ public class AbilityHandler {
     @SubscribeEvent
     public void entityContstructedEvent(EntityConstructing event) {
         if (event.getEntity() instanceof EntityLivingBase) {
-            //stripAbilities((EntityLivingBase) event.getEntity());
+            // stripAbilities((EntityLivingBase) event.getEntity());
         }
     }
 
@@ -256,5 +252,5 @@ public class AbilityHandler {
     public void onEntityDeath(LivingDeathEvent event) {
         stripAbilities(event.getEntityLiving());
     }
-    //endregion
+    // endregion
 }

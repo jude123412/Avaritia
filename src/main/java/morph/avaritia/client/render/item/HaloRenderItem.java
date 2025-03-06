@@ -1,7 +1,7 @@
 package morph.avaritia.client.render.item;
 
-import codechicken.lib.colour.Colour;
-import morph.avaritia.api.IHaloRenderItem;
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +16,8 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.model.IModelState;
 
-import java.util.Random;
+import codechicken.lib.colour.Colour;
+import morph.avaritia.api.IHaloRenderItem;
 
 /**
  * Created by covers1624 on 14/04/2017.I

@@ -1,10 +1,10 @@
 package morph.avaritia.init;
 
-import morph.avaritia.handler.ConfigHandler;
-import morph.avaritia.recipe.AvaritiaRecipeManager;
-import morph.avaritia.recipe.extreme.ExtremeShapelessRecipe;
-import morph.avaritia.recipe.extreme.IExtremeRecipe;
-import morph.avaritia.util.Lumberjack;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -13,12 +13,14 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
+
 import org.apache.logging.log4j.Level;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import morph.avaritia.handler.ConfigHandler;
+import morph.avaritia.recipe.AvaritiaRecipeManager;
+import morph.avaritia.recipe.extreme.ExtremeShapelessRecipe;
+import morph.avaritia.recipe.extreme.IExtremeRecipe;
+import morph.avaritia.util.Lumberjack;
 
 public class FoodRecipes {
 
@@ -51,9 +53,11 @@ public class FoodRecipes {
         knownMeats.add(new ItemStack(Items.PORKCHOP));
         knownMeats.add(new ItemStack(Items.RABBIT));
 
-		/*for (int i=0; i<ItemFishFood.FishType.values().length; i++) {
-            knownMeats.add(new ItemStack(Items.fish, 1, i));
-		}*/
+        /*
+         * for (int i=0; i<ItemFishFood.FishType.values().length; i++) {
+         * knownMeats.add(new ItemStack(Items.fish, 1, i));
+         * }
+         */
         knownMeats.add(new ItemStack(Items.FISH));
         OreDictionary.registerOre("cropCactus", new ItemStack(Blocks.CACTUS));
         OreDictionary.registerOre("cropMushroomRed", new ItemStack(Blocks.RED_MUSHROOM));
@@ -62,9 +66,8 @@ public class FoodRecipes {
 
     private static Random randy;
 
-    //TODO, FIXME, Make these json recipes.
+    // TODO, FIXME, Make these json recipes.
     public static void initFoodRecipes() {
-
         if (ConfigHandler.boringFood) {
             List<Ingredient> ings = new ArrayList<>();
             {
@@ -112,14 +115,14 @@ public class FoodRecipes {
         List<String> rawMeats = new ArrayList<>();
         List<String> meats = new ArrayList<>();
 
-        //Cull banned ore names.
+        // Cull banned ore names.
         for (String oreName : oreNames) {
             if (oreName.startsWith("crop") && !isBannedCrop(oreName) && !oreName.startsWith("cropBotania")) {
                 rawCrops.add(oreName);
             }
         }
 
-        //Lumberjack.info("End of ore crop names: "+rawCrops.size()+" names found.");
+        // Lumberjack.info("End of ore crop names: "+rawCrops.size()+" names found.");
 
         // Ultimate Stew recipe
 
@@ -143,7 +146,7 @@ public class FoodRecipes {
             }
         }
 
-        //Lumberjack.info("pre-sort: "+cropSortingList);
+        // Lumberjack.info("pre-sort: "+cropSortingList);
 
         // sort into size/alphabetic order first to standardise them
         cropSortingList.sort((a, b) -> {
@@ -154,7 +157,7 @@ public class FoodRecipes {
             return a.orename.compareTo(b.orename);
         });
 
-        //Lumberjack.info("first sort: "+cropSortingList);
+        // Lumberjack.info("first sort: "+cropSortingList);
 
         // sort into size/random order, should be deterministic because previous sort
         Collections.shuffle(cropSortingList, randy);
@@ -167,7 +170,7 @@ public class FoodRecipes {
             return 0;
         });
 
-        //Lumberjack.info("second sort: "+cropSortingList);
+        // Lumberjack.info("second sort: "+cropSortingList);
 
         // CULL!
 
@@ -180,7 +183,7 @@ public class FoodRecipes {
         }
 
         // calculate how much stew the recipe makes!
-        //int types = Math.min(80,crops.size());
+        // int types = Math.min(80,crops.size());
         int croptypes = crops.size();
         int cropmultiplier = 1;
 
@@ -190,7 +193,7 @@ public class FoodRecipes {
 
         int makesstew = (int) Math.round(croptypes * cropmultiplier / 9.0);
 
-        //Lumberjack.info(types+" types x"+multiplier+" = "+(multiplier*types)+" items, makes "+makes+" pots of stew");
+        // Lumberjack.info(types+" types x"+multiplier+" = "+(multiplier*types)+" items, makes "+makes+" pots of stew");
 
         // time to actually MAKE the damn thing...
 
@@ -201,13 +204,14 @@ public class FoodRecipes {
                 stewInputs.add(new OreIngredient(crop));
             }
         }
-        IExtremeRecipe stew_recipe = new ExtremeShapelessRecipe(stewInputs, new ItemStack(ModItems.ultimate_stew, makesstew));
+        IExtremeRecipe stew_recipe = new ExtremeShapelessRecipe(stewInputs,
+                new ItemStack(ModItems.ultimate_stew, makesstew));
         stew_recipe.setRegistryName(new ResourceLocation("avaritia", "ultimate_stew"));
         AvaritiaRecipeManager.EXTREME_RECIPES.put(stew_recipe.getRegistryName(), stew_recipe);
 
         // ok, now on to the meatballs!
 
-        //#####################################################################
+        // #####################################################################
 
         // Cosmic Meatball recipe
         List<FoodInfo> meatSortingList = new ArrayList<>();
@@ -234,7 +238,7 @@ public class FoodRecipes {
             return a.orename.compareTo(b.orename);
         });
 
-        //Lumberjack.info("first sort: "+meatSortingList);
+        // Lumberjack.info("first sort: "+meatSortingList);
 
         // sort into size/random order, should be deterministic because previous sort
         meatSortingList.sort((a, b) -> {
@@ -245,7 +249,7 @@ public class FoodRecipes {
             return randy.nextBoolean() ? 1 : -1;
         });
 
-        //Lumberjack.info("second sort: "+meatSortingList);
+        // Lumberjack.info("second sort: "+meatSortingList);
 
         // CULL!
 
@@ -267,7 +271,7 @@ public class FoodRecipes {
 
         int makesmeatballs = (int) Math.round(meattypes * meatmultiplier / 9.0);
 
-        //Lumberjack.info(types+" types x"+multiplier+" = "+(multiplier*types)+" items, makes "+makes+" pots of stew");
+        // Lumberjack.info(types+" types x"+multiplier+" = "+(multiplier*types)+" items, makes "+makes+" pots of stew");
 
         // time to actually MAKE the damn thing...
 
@@ -284,7 +288,8 @@ public class FoodRecipes {
                 meatballInputs.add(new OreIngredient(meat));
             }
         }
-        IExtremeRecipe metaball_recipe = new ExtremeShapelessRecipe(meatballInputs, new ItemStack(ModItems.cosmic_meatballs, makesmeatballs));
+        IExtremeRecipe metaball_recipe = new ExtremeShapelessRecipe(meatballInputs,
+                new ItemStack(ModItems.cosmic_meatballs, makesmeatballs));
         metaball_recipe.setRegistryName(new ResourceLocation("avaritia", "cosmic_meatballs"));
         AvaritiaRecipeManager.EXTREME_RECIPES.put(metaball_recipe.getRegistryName(), metaball_recipe);
     }
@@ -312,5 +317,4 @@ public class FoodRecipes {
         }
         return false;
     }
-
 }

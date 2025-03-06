@@ -1,15 +1,8 @@
 package morph.avaritia.item.tools;
 
-import codechicken.lib.math.MathHelper;
-import codechicken.lib.raytracer.RayTracer;
-import com.google.common.collect.Sets;
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.ICosmicRenderItem;
-import morph.avaritia.entity.EntityImmortalItem;
-import morph.avaritia.handler.AvaritiaEventHandler;
-import morph.avaritia.init.AvaritiaTextures;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.util.ToolHelper;
+import java.util.List;
+import java.util.Set;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
@@ -35,17 +28,30 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Set;
+import com.google.common.collect.Sets;
+
+import codechicken.lib.math.MathHelper;
+import codechicken.lib.raytracer.RayTracer;
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.ICosmicRenderItem;
+import morph.avaritia.entity.EntityImmortalItem;
+import morph.avaritia.handler.AvaritiaEventHandler;
+import morph.avaritia.init.AvaritiaTextures;
+import morph.avaritia.init.ModItems;
+import morph.avaritia.util.ToolHelper;
 
 public class ItemPickaxeInfinity extends ItemPickaxe implements ICosmicRenderItem {
 
-    private static final ToolMaterial TOOL_MATERIAL = EnumHelper.addToolMaterial("INFINITY_PICKAXE", 32, 9999, 9999F, 6.0F, 200);
-    //private IIcon hammer;
+    private static final ToolMaterial TOOL_MATERIAL = EnumHelper.addToolMaterial("INFINITY_PICKAXE", 32, 9999, 9999F,
+            6.0F, 200);
+    // private IIcon hammer;
 
-    public static final Set<Material> MATERIALS = Sets.newHashSet(Material.ROCK, Material.IRON, Material.ICE, Material.GLASS, Material.PISTON, Material.ANVIL, Material.GRASS, Material.GROUND, Material.SAND, Material.SNOW, Material.CRAFTED_SNOW, Material.CLAY);
+    public static final Set<Material> MATERIALS = Sets.newHashSet(Material.ROCK, Material.IRON, Material.ICE,
+            Material.GLASS, Material.PISTON, Material.ANVIL, Material.GRASS, Material.GROUND, Material.SAND,
+            Material.SNOW, Material.CRAFTED_SNOW, Material.CLAY);
 
     public ItemPickaxeInfinity() {
         super(TOOL_MATERIAL);
@@ -57,9 +63,12 @@ public class ItemPickaxeInfinity extends ItemPickaxe implements ICosmicRenderIte
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (GuiScreen.isShiftKeyDown()) {
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_0.desc"));
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_1.desc"));
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_2.desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_0.desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_1.desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_2.desc"));
         } else {
             tooltip.add(TextFormatting.GRAY + "" + I18n.translateToLocal("tooltip.item.avaritia:tool.desc"));
         }
@@ -70,7 +79,7 @@ public class ItemPickaxeInfinity extends ItemPickaxe implements ICosmicRenderIte
         super.setDamage(stack, 0);
     }
 
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
         if (isInCreativeTab(tab)) {
@@ -98,28 +107,28 @@ public class ItemPickaxeInfinity extends ItemPickaxe implements ICosmicRenderIte
         return Math.max(super.getDestroySpeed(stack, state), 6.0F);
     }
 
-    //@SideOnly (Side.CLIENT)
-    //public void registerIcons(IIconRegister ir) {
-    //    this.itemIcon = ir.registerIcon("avaritia:infinity_pickaxe");
-    //    hammer = ir.registerIcon("avaritia:infinity_hammer");
-    //}
+    // @SideOnly (Side.CLIENT)
+    // public void registerIcons(IIconRegister ir) {
+    // this.itemIcon = ir.registerIcon("avaritia:infinity_pickaxe");
+    // hammer = ir.registerIcon("avaritia:infinity_hammer");
+    // }
 
-    //@Override
-    //public IIcon getIcon(ItemStack stack, int pass) {
-    //    NBTTagCompound tags = stack.getTagCompound();
-    //    if (tags != null) {
-    //        if (tags.getBoolean("hammer")) {
-    //            return hammer;
-    //        }
-    //    }
-    //    return itemIcon;
-    //}
+    // @Override
+    // public IIcon getIcon(ItemStack stack, int pass) {
+    // NBTTagCompound tags = stack.getTagCompound();
+    // if (tags != null) {
+    // if (tags.getBoolean("hammer")) {
+    // return hammer;
+    // }
+    // }
+    // return itemIcon;
+    // }
 
-    //@SideOnly (Side.CLIENT)
-    //@Override
-    //public IIcon getIconIndex(ItemStack stack) {
-    //    return getIcon(stack, 0);
-    //}
+    // @SideOnly (Side.CLIENT)
+    // @Override
+    // public IIcon getIconIndex(ItemStack stack) {
+    // return getIcon(stack, 0);
+    // }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
@@ -146,7 +155,8 @@ public class ItemPickaxeInfinity extends ItemPickaxe implements ICosmicRenderIte
             if (stack.getTagCompound().getBoolean("hammer")) {
                 if (!(victim instanceof EntityPlayer && AvaritiaEventHandler.isInfinite((EntityPlayer) victim))) {
                     int i = 10;
-                    victim.addVelocity(-MathHelper.sin(player.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F, 2.0D, MathHelper.cos(player.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F);
+                    victim.addVelocity(-MathHelper.sin(player.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F, 2.0D,
+                            MathHelper.cos(player.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F);
                 }
             }
         }
@@ -165,7 +175,6 @@ public class ItemPickaxeInfinity extends ItemPickaxe implements ICosmicRenderIte
     }
 
     public void breakOtherBlock(EntityPlayer player, ItemStack stack, BlockPos pos, EnumFacing sideHit) {
-
         World world = player.world;
         IBlockState state = world.getBlockState(pos);
         Material mat = state.getMaterial();
@@ -184,7 +193,6 @@ public class ItemPickaxeInfinity extends ItemPickaxe implements ICosmicRenderIte
         BlockPos maxOffset = new BlockPos(range, doY ? range * 2 - 2 : range, range);
 
         ToolHelper.aoeBlocks(player, stack, world, pos, minOffset, maxOffset, null, MATERIALS, true);
-
     }
 
     @Override
@@ -198,7 +206,7 @@ public class ItemPickaxeInfinity extends ItemPickaxe implements ICosmicRenderIte
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return false;
     }

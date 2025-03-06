@@ -1,9 +1,10 @@
 package morph.avaritia.init;
 
-import codechicken.lib.texture.TextureUtils.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
+
+import codechicken.lib.texture.TextureUtils.IIconRegister;
 
 /**
  * Created by covers1624 on 17/04/2017.
@@ -89,16 +90,14 @@ public class AvaritiaTextures implements IIconRegister {
         CLUSTER_EMPTY = register(CLUSTER_ + "empty_mask");
         CLUSTER_FULL = register(CLUSTER_ + "full_mask");
         //@formatter:on
-
     }
 
     // Bouncer to make the class readable.
     private static TextureAtlasSprite register(String sprite) {
-
         return map.registerSprite(new ResourceLocation(sprite));
     }
 
-    //Assign the TextureMap to a file to make things even more readable!.
+    // Assign the TextureMap to a file to make things even more readable!.
     private static TextureMap map;
 
     private static final String ITEMS_ = "avaritia:items/";

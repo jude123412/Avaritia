@@ -14,7 +14,6 @@ public class EntityHeavenSubArrow extends EntityArrow {
 
     public EntityHeavenSubArrow(World world, EntityLivingBase entity) {
         super(world, entity);
-
     }
 
     public EntityHeavenSubArrow(World world) {

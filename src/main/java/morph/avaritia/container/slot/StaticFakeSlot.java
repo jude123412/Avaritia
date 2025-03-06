@@ -1,9 +1,10 @@
 package morph.avaritia.container.slot;
 
-import net.minecraft.item.ItemStack;
+import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
-import java.util.function.Supplier;
+
+import net.minecraft.item.ItemStack;
 
 /**
  * Created by covers1624 on 22/05/2017.

@@ -1,12 +1,7 @@
 package morph.avaritia.block;
 
-import codechicken.lib.util.ItemUtils;
-import codechicken.lib.util.RotationUtils;
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.registration.IModelRegister;
-import morph.avaritia.init.AvaritiaProps;
-import morph.avaritia.tile.TileMachineBase;
-import morph.avaritia.tile.TileNeutronCollector;
+import java.util.List;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -34,8 +29,13 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-
+import codechicken.lib.util.ItemUtils;
+import codechicken.lib.util.RotationUtils;
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.registration.IModelRegister;
+import morph.avaritia.init.AvaritiaProps;
+import morph.avaritia.tile.TileMachineBase;
+import morph.avaritia.tile.TileNeutronCollector;
 
 public class BlockNeutronCollector extends BlockContainer implements IModelRegister {
 
@@ -47,7 +47,8 @@ public class BlockNeutronCollector extends BlockContainer implements IModelRegis
         setHarvestLevel("pickaxe", 3);
         setCreativeTab(Avaritia.tab);
         setRegistryName("neutron_collector");
-        setDefaultState(getDefaultState().withProperty(AvaritiaProps.HORIZONTAL_FACING, EnumFacing.NORTH).withProperty(AvaritiaProps.ACTIVE, false));
+        setDefaultState(getDefaultState().withProperty(AvaritiaProps.HORIZONTAL_FACING, EnumFacing.NORTH)
+                .withProperty(AvaritiaProps.ACTIVE, false));
     }
 
     @Override
@@ -62,20 +63,26 @@ public class BlockNeutronCollector extends BlockContainer implements IModelRegis
 
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-
         int productionTicks = TileNeutronCollector.productionTicks;
         if (GuiScreen.isShiftKeyDown()) {
             if (productionTicks == 1) {
-                tooltip.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted("Produces a Pile of Neutrons every tick", new Object[]{}));
+                tooltip.add(TextFormatting.DARK_GRAY +
+                        I18n.translateToLocalFormatted("Produces a Pile of Neutrons every tick", new Object[] {}));
             }
             if (productionTicks > 1 && productionTicks < 20) {
-                tooltip.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted("Produces a Pile of Neutrons every " + TileNeutronCollector.productionTicks + " ticks", new Object[]{}));
+                tooltip.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted(
+                        "Produces a Pile of Neutrons every " + TileNeutronCollector.productionTicks + " ticks",
+                        new Object[] {}));
             }
-            if (productionTicks >= 20 && productionTicks < 40){
-                tooltip.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted("Produces a Pile of Neutrons approximately every second", new Object[]{}));
+            if (productionTicks >= 20 && productionTicks < 40) {
+                tooltip.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted(
+                        "Produces a Pile of Neutrons approximately every second", new Object[] {}));
             }
             if (productionTicks >= 40) {
-                tooltip.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted("Produces a Pile of Neutrons approximately every " + Math.round((float) TileNeutronCollector.productionTicks / 20) + " seconds", new Object[]{}));
+                tooltip.add(TextFormatting.DARK_GRAY + I18n.translateToLocalFormatted(
+                        "Produces a Pile of Neutrons approximately every " +
+                                Math.round((float) TileNeutronCollector.productionTicks / 20) + " seconds",
+                        new Object[] {}));
             }
         } else {
             tooltip.add(TextFormatting.GRAY + I18n.translateToLocal("tooltip.item.avaritia:tool.desc"));
@@ -94,7 +101,8 @@ public class BlockNeutronCollector extends BlockContainer implements IModelRegis
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+                                    EnumFacing side, float hitX, float hitY, float hitZ) {
         if (world.isRemote) {
             return true;
         } else {
@@ -109,7 +117,8 @@ public class BlockNeutronCollector extends BlockContainer implements IModelRegis
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player,
+                                ItemStack stack) {
         TileEntity tile = world.getTileEntity(pos);
         if (tile instanceof TileNeutronCollector) {
             TileNeutronCollector machine = (TileNeutronCollector) tile;
@@ -134,10 +143,11 @@ public class BlockNeutronCollector extends BlockContainer implements IModelRegis
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public void registerModels() {
         ResourceLocation location = new ResourceLocation("avaritia:machine");
         ModelLoader.setCustomStateMapper(this, new StateMapperBase() {
+
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 String modelLoc = "type=neutron_collector";
@@ -146,7 +156,8 @@ public class BlockNeutronCollector extends BlockContainer implements IModelRegis
                 return new ModelResourceLocation(location, modelLoc);
             }
         });
-        ModelResourceLocation invLoc = new ModelResourceLocation(location, "type=neutron_collector,facing=north,active=true");
+        ModelResourceLocation invLoc = new ModelResourceLocation(location,
+                "type=neutron_collector,facing=north,active=true");
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, invLoc);
         ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(this), stack -> invLoc);
     }

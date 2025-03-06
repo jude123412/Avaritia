@@ -1,10 +1,8 @@
 package morph.avaritia.entity;
 
-import codechicken.lib.vec.Cuboid6;
-import codechicken.lib.vec.Vector3;
-import com.google.common.base.Predicate;
-import morph.avaritia.init.ModSounds;
-import morph.avaritia.proxy.Proxy;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,12 +24,17 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-import java.util.Random;
+import com.google.common.base.Predicate;
+
+import codechicken.lib.vec.Cuboid6;
+import codechicken.lib.vec.Vector3;
+import morph.avaritia.init.ModSounds;
+import morph.avaritia.proxy.Proxy;
 
 public class EntityGapingVoid extends Entity {
 
-    public static final DataParameter<Integer> AGE_PARAMETER = EntityDataManager.createKey(EntityGapingVoid.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> AGE_PARAMETER = EntityDataManager.createKey(EntityGapingVoid.class,
+            DataSerializers.VARINT);
 
     private static Random randy = new Random();
     public static final int maxLifetime = 186;
@@ -83,7 +86,7 @@ public class EntityGapingVoid extends Entity {
         dataManager.register(AGE_PARAMETER, 0);
     }
 
-    @SuppressWarnings ("unchecked")
+    @SuppressWarnings("unchecked")
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -102,11 +105,11 @@ public class EntityGapingVoid extends Entity {
         }
 
         if (world.isRemote) {
-            //we dont want to do any of this on the client.
+            // we dont want to do any of this on the client.
             return;
         }
         if (fakePlayer == null) {
-            //wot.
+            // wot.
             setDead();
             return;
         }
@@ -125,7 +128,8 @@ public class EntityGapingVoid extends Entity {
             velocity.multiply(particlespeed);
             particlePos.add(pos);
 
-            world.spawnParticle(EnumParticleTypes.PORTAL, particlePos.x, particlePos.y, particlePos.z, velocity.x, velocity.y, velocity.z);
+            world.spawnParticle(EnumParticleTypes.PORTAL, particlePos.x, particlePos.y, particlePos.z, velocity.x,
+                    velocity.y, velocity.z);
         }
 
         // *slurping noises*
@@ -198,7 +202,11 @@ public class EntityGapingVoid extends Entity {
                             BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(world, blockPos, state, fakePlayer);
                             MinecraftForge.EVENT_BUS.post(event);
                             if (!event.isCanceled()) {
-                                float resist = state.getBlock().getExplosionResistance(this);//TODO HELP state.getExplosionResistance(this, this.worldObj, lx, ly, lz, this.posX, this.posY, this.posZ);
+                                float resist = state.getBlock().getExplosionResistance(this);// TODO HELP
+                                                                                             // state.getExplosionResistance(this,
+                                                                                             // this.worldObj, lx, ly,
+                                                                                             // lz, this.posX,
+                                                                                             // this.posY, this.posZ);
                                 if (resist <= 10.0) {
                                     state.getBlock().dropBlockAsItemWithChance(world, blockPos, state, 0.9F, 0);
                                     world.setBlockToAir(blockPos);
@@ -255,7 +263,7 @@ public class EntityGapingVoid extends Entity {
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean isInRangeToRenderDist(double distance) {
         return true;
     }

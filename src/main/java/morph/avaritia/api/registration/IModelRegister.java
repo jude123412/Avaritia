@@ -11,7 +11,6 @@ public interface IModelRegister {
     /**
      * Called when it is time to initialize models in preInit.
      */
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     void registerModels();
-
 }

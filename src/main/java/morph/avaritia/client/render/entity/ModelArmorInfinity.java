@@ -1,11 +1,8 @@
 package morph.avaritia.client.render.entity;
 
-import codechicken.lib.math.MathHelper;
-import codechicken.lib.texture.TextureUtils;
-import morph.avaritia.client.ColourHelper;
-import morph.avaritia.client.render.shader.CosmicShaderHelper;
-import morph.avaritia.init.AvaritiaTextures;
-import morph.avaritia.init.ModItems;
+import java.util.ArrayList;
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
@@ -27,18 +24,24 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.Random;
+import codechicken.lib.math.MathHelper;
+import codechicken.lib.texture.TextureUtils;
+import morph.avaritia.client.ColourHelper;
+import morph.avaritia.client.render.shader.CosmicShaderHelper;
+import morph.avaritia.init.AvaritiaTextures;
+import morph.avaritia.init.ModItems;
 
-@SideOnly (Side.CLIENT)
+@SideOnly(Side.CLIENT)
 public class ModelArmorInfinity extends ModelBiped {
 
     public static final ModelArmorInfinity armorModel = new ModelArmorInfinity(1.0f);
     public static final ModelArmorInfinity legModel = new ModelArmorInfinity(0.5f).setLegs(true);
 
     public static ResourceLocation eyeTex = new ResourceLocation("avaritia", "textures/models/infinity_armor_eyes.png");
-    public static ResourceLocation wingTex = new ResourceLocation("avaritia", "textures/models/infinity_armor_wing.png");
-    public static ResourceLocation wingGlowTex = new ResourceLocation("avaritia", "textures/models/infinity_armor_wingglow.png");
+    public static ResourceLocation wingTex = new ResourceLocation("avaritia",
+            "textures/models/infinity_armor_wing.png");
+    public static ResourceLocation wingGlowTex = new ResourceLocation("avaritia",
+            "textures/models/infinity_armor_wingglow.png");
     public static int itempagewidth = 0;
     public static int itempageheight = 0;
     public boolean legs = false;
@@ -91,9 +94,8 @@ public class ModelArmorInfinity extends ModelBiped {
         return this;
     }
 
-    @SuppressWarnings ("rawtypes")
+    @SuppressWarnings("rawtypes")
     public void rebuildWings() {
-
         // remove the old items from the list so that the new ones don't just stack up
         if (bipedBody.childModels == null) {
             bipedBody.childModels = new ArrayList();
@@ -123,7 +125,8 @@ public class ModelArmorInfinity extends ModelBiped {
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         Minecraft mc = Minecraft.getMinecraft();
-        boolean isFlying = entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying && !entity.onGround;
+        boolean isFlying = entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying &&
+                !entity.onGround;
 
         copyBipedAngles(this, this.overlay);
         copyBipedAngles(this, this.invulnOverlay);
@@ -216,7 +219,6 @@ public class ModelArmorInfinity extends ModelBiped {
             GlStateManager.enableLighting();
             GlStateManager.color(1, 1, 1, 1);
         }
-
     }
 
     public void update(EntityLivingBase entityLiving, ItemStack itemstack, EntityEquipmentSlot armorSlot) {
@@ -229,12 +231,16 @@ public class ModelArmorInfinity extends ModelBiped {
         ItemStack leg = entityLiving.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
         ItemStack foot = entityLiving.getItemStackFromSlot(EntityEquipmentSlot.FEET);
 
-        boolean hasHat = hat.getItem() == ModItems.infinity_helmet; //&& !((ItemArmorInfinity) (ModItems.infinity_helmet)).hasPhantomInk(hat);
-        boolean hasChest = chest.getItem() == ModItems.infinity_chestplate; // && !((ItemArmorInfinity) (ModItems.infinity_chestplate)).hasPhantomInk(chest);
-        boolean hasLeg = leg.getItem() == ModItems.infinity_pants; // && !((ItemArmorInfinity) (ModItems.infinity_pants)).hasPhantomInk(leg);
-        boolean hasFoot = foot.getItem() == ModItems.infinity_boots; // && !((ItemArmorInfinity) (ModItems.infinity_boots)).hasPhantomInk(foot);
+        boolean hasHat = hat.getItem() == ModItems.infinity_helmet; // && !((ItemArmorInfinity)
+                                                                    // (ModItems.infinity_helmet)).hasPhantomInk(hat);
+        boolean hasChest = chest.getItem() == ModItems.infinity_chestplate; // && !((ItemArmorInfinity)
+                                                                            // (ModItems.infinity_chestplate)).hasPhantomInk(chest);
+        boolean hasLeg = leg.getItem() == ModItems.infinity_pants; // && !((ItemArmorInfinity)
+                                                                   // (ModItems.infinity_pants)).hasPhantomInk(leg);
+        boolean hasFoot = foot.getItem() == ModItems.infinity_boots; // && !((ItemArmorInfinity)
+                                                                     // (ModItems.infinity_boots)).hasPhantomInk(foot);
 
-        if (armorSlot == EntityEquipmentSlot.HEAD) {//TODO, Wot.
+        if (armorSlot == EntityEquipmentSlot.HEAD) {// TODO, Wot.
             if (hasHat && hasChest && hasLeg && hasFoot) {
                 invulnRender = true;
             }
@@ -339,7 +345,8 @@ public class ModelArmorInfinity extends ModelBiped {
     }
 
     @Override
-    public void setRotationAngles(float f1, float speed, float ticks, float headYaw, float headPitch, float f6, Entity entity) {
+    public void setRotationAngles(float f1, float speed, float ticks, float headYaw, float headPitch, float f6,
+                                  Entity entity) {
         super.setRotationAngles(f1, speed, ticks, headYaw, headPitch, f6, entity);
         overlay.setRotationAngles(f1, speed, ticks, headYaw, headPitch, f6, entity);
         invulnOverlay.setRotationAngles(f1, speed, ticks, headYaw, headPitch, f6, entity);
@@ -429,7 +436,7 @@ public class ModelArmorInfinity extends ModelBiped {
             this.expand = expand;
         }
 
-        @SuppressWarnings ("rawtypes")
+        @SuppressWarnings("rawtypes")
         public void rebuild(TextureAtlasSprite icon, TextureAtlasSprite wingicon) {
             int ox = MathHelper.floor(icon.getMinU() * itempagewidth);
             int oy = MathHelper.floor(icon.getMinV() * itempageheight);

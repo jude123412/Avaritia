@@ -1,12 +1,13 @@
 package morph.avaritia.container.slot;
 
-import morph.avaritia.Avaritia;
-import morph.avaritia.util.TimeTracker;
+import java.util.List;
+import java.util.function.Supplier;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import java.util.List;
-import java.util.function.Supplier;
+import morph.avaritia.Avaritia;
+import morph.avaritia.util.TimeTracker;
 
 /**
  * Created by covers1624 on 22/05/2017.

@@ -1,18 +1,18 @@
 package morph.avaritia.client.render.item;
 
-//import codechicken.lib.colour.Colour;
-//import codechicken.lib.colour.ColourRGBA;
-//import codechicken.lib.util.VertexDataUtils;
-//import codechicken.lib.vec.Vector3;
-//import codechicken.lib.vec.Vertex5;
-//import codechicken.lib.vec.uv.UV;
-import codechicken.lib.colour.Colour;
-import codechicken.lib.colour.ColourRGBA;
-import codechicken.lib.util.VertexDataUtils;
-import codechicken.lib.vec.Vector3;
-import codechicken.lib.vec.Vertex5;
-import codechicken.lib.vec.uv.UV;
-import codechicken.lib.vec.uv.UVTransformation;
+// import codechicken.lib.colour.Colour;
+// import codechicken.lib.colour.ColourRGBA;
+// import codechicken.lib.util.VertexDataUtils;
+// import codechicken.lib.vec.Vector3;
+// import codechicken.lib.vec.Vertex5;
+// import codechicken.lib.vec.uv.UV;
+import static codechicken.lib.util.VertexDataUtils.buildQuad;
+
+import java.awt.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -20,16 +20,13 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
-//import net.minecraft.client.renderer.vertex.VertexFormatElement;
-//import net.minecraft.util.EnumFacing;
-//import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 
-import java.awt.*;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
-import static codechicken.lib.util.VertexDataUtils.buildQuad;
+import codechicken.lib.colour.Colour;
+import codechicken.lib.colour.ColourRGBA;
+import codechicken.lib.util.VertexDataUtils;
+import codechicken.lib.vec.Vector3;
+import codechicken.lib.vec.Vertex5;
+import codechicken.lib.vec.uv.UV;
 
 /**
  * Generates a lattice model same as 1.7's item renderer.
@@ -42,6 +39,7 @@ public class LatticeModelCreator {
         List<BakedQuad> quads = new LinkedList<>();
         VertexFormat format = DefaultVertexFormats.ITEM;
         Colour colour = new ColourRGBA(0xFFFFFFFF) {
+
             @Override
             public int pack() {
                 return 0;
@@ -142,7 +140,8 @@ public class LatticeModelCreator {
         return quads;
     }
 
-    private static BakedQuad buildQuad(VertexFormat format, TextureAtlasSprite sprite, EnumFacing face, Colour colour, int tint, Vertex5 v1, Vertex5 v2, Vertex5 v3, Vertex5 v4) {
+    private static BakedQuad buildQuad(VertexFormat format, TextureAtlasSprite sprite, EnumFacing face, Colour colour,
+                                       int tint, Vertex5 v1, Vertex5 v2, Vertex5 v3, Vertex5 v4) {
         UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
         builder.setQuadTint(tint);
         builder.setQuadOrientation(face);
@@ -156,7 +155,8 @@ public class LatticeModelCreator {
         return VertexDataUtils.copyQuad(builder.build());
     }
 
-    private static void putVertex(UnpackedBakedQuad.Builder builder, VertexFormat format, EnumFacing face, Vertex5 vert, Colour colour) {
+    private static void putVertex(UnpackedBakedQuad.Builder builder, VertexFormat format, EnumFacing face, Vertex5 vert,
+                                  Colour colour) {
         for (int e = 0; e < format.getElementCount(); e++) {
             VertexFormatElement element = format.getElement(e);
             switch (element.getUsage()) {
@@ -169,7 +169,8 @@ public class LatticeModelCreator {
                     builder.put(e, face.getXOffset(), face.getYOffset(), face.getZOffset(), 0);
                     break;
                 case COLOR:
-                    builder.put(e, (colour.r & 0xFF) / 255F, (colour.g & 0xFF) / 255F, (colour.b & 0xFF) / 255F, (colour.a & 0xFF) / 255F);
+                    builder.put(e, (colour.r & 0xFF) / 255F, (colour.g & 0xFF) / 255F, (colour.b & 0xFF) / 255F,
+                            (colour.a & 0xFF) / 255F);
                     break;
                 case UV:
                     UV uv = vert.uv;

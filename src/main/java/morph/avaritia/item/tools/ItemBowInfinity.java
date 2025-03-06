@@ -1,19 +1,7 @@
 package morph.avaritia.item.tools;
 
-import codechicken.lib.model.ModelRegistryHelper;
-import codechicken.lib.model.bakery.IBakeryProvider;
-import codechicken.lib.model.bakery.ModelBakery;
-import codechicken.lib.model.bakery.generation.IBakery;
-import codechicken.lib.util.TransformUtils;
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.ICosmicRenderItem;
-import morph.avaritia.api.registration.IModelRegister;
-import morph.avaritia.client.render.item.CosmicItemRender;
-import morph.avaritia.client.render.item.InfinityBowModelBakery;
-import morph.avaritia.client.render.item.InfinityBowModelWrapper;
-import morph.avaritia.entity.EntityHeavenArrow;
-import morph.avaritia.entity.EntityImmortalItem;
-import morph.avaritia.init.AvaritiaTextures;
+import java.util.List;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -42,13 +30,26 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
+import codechicken.lib.model.ModelRegistryHelper;
+import codechicken.lib.model.bakery.IBakeryProvider;
+import codechicken.lib.model.bakery.ModelBakery;
+import codechicken.lib.model.bakery.generation.IBakery;
+import codechicken.lib.util.TransformUtils;
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.ICosmicRenderItem;
+import morph.avaritia.api.registration.IModelRegister;
+import morph.avaritia.client.render.item.CosmicItemRender;
+import morph.avaritia.client.render.item.InfinityBowModelBakery;
+import morph.avaritia.client.render.item.InfinityBowModelWrapper;
+import morph.avaritia.entity.EntityHeavenArrow;
+import morph.avaritia.entity.EntityImmortalItem;
+import morph.avaritia.init.AvaritiaTextures;
 
 public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRegister, IBakeryProvider {
 
-    //private IIcon[] iconArray;
-    //private IIcon[] maskArray;
-    //private IIcon idleMask;
+    // private IIcon[] iconArray;
+    // private IIcon[] maskArray;
+    // private IIcon idleMask;
 
     public ItemBowInfinity() {
         maxStackSize = 1;
@@ -61,8 +62,10 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (GuiScreen.isShiftKeyDown()) {
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_0.desc"));
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_1.desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_0.desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_1.desc"));
         } else {
             tooltip.add(TextFormatting.GRAY + "" + I18n.translateToLocal("tooltip.item.avaritia:tool.desc"));
         }
@@ -97,7 +100,7 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
         }
 
         EntityArrow arrow = new EntityHeavenArrow(world, player);
-        arrow.shoot(player, player.rotationPitch, player.rotationYaw, 0, f * 3.0F, 1.0F);//TODO, no inaccuracy?
+        arrow.shoot(player, player.rotationPitch, player.rotationYaw, 0, f * 3.0F, 1.0F);// TODO, no inaccuracy?
         arrow.setDamage(20.0);
 
         if (f == 1.0F) {
@@ -121,7 +124,8 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
         }
 
         stack.damageItem(1, player);
-        world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+        world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT,
+                SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
         arrow.pickupStatus = PickupStatus.CREATIVE_ONLY;
 
@@ -142,7 +146,6 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-
         ItemStack stack = player.getHeldItem(hand);
         ActionResult<ItemStack> event = ForgeEventFactory.onArrowNock(stack, world, player, hand, true);
         if (event != null) {
@@ -159,59 +162,60 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
         return 1;
     }
 
-    //@Override
-    //@SideOnly (Side.CLIENT)
-    //public void registerIcons(IIconRegister ir) {
-    //    int pullframes = 3;
-    //    this.itemIcon = ir.registerIcon(this.getIconString() + "_standby");
-    //    this.idleMask = ir.registerIcon(this.getIconString() + "_standby_mask");
-    //    this.iconArray = new IIcon[pullframes];
-    //    this.maskArray = new IIcon[pullframes];
-    //    for (int i = 0; i < pullframes; ++i) {
-    //        this.iconArray[i] = ir.registerIcon(this.getIconString() + "_pulling_" + i);
-    //        this.maskArray[i] = ir.registerIcon(this.getIconString() + "_pulling_mask_" + i);
-    //    }
-    //}
+    // @Override
+    // @SideOnly (Side.CLIENT)
+    // public void registerIcons(IIconRegister ir) {
+    // int pullframes = 3;
+    // this.itemIcon = ir.registerIcon(this.getIconString() + "_standby");
+    // this.idleMask = ir.registerIcon(this.getIconString() + "_standby_mask");
+    // this.iconArray = new IIcon[pullframes];
+    // this.maskArray = new IIcon[pullframes];
+    // for (int i = 0; i < pullframes; ++i) {
+    // this.iconArray[i] = ir.registerIcon(this.getIconString() + "_pulling_" + i);
+    // this.maskArray[i] = ir.registerIcon(this.getIconString() + "_pulling_mask_" + i);
+    // }
+    // }
 
-    //@Override
-    //@SideOnly (Side.CLIENT)
-    //public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
-    //    if (usingItem != null) {
-    //        int max = stack.getMaxItemUseDuration();
-    //        int pull = max - useRemaining;
-    //        if (pull >= (max * 2) / 3.0) {
-    //            return this.iconArray[2];
-    //        }
-    //        if (pull > max / 3.0) {
-    //            return this.iconArray[1];
-    //        }
-    //        if (pull > 0) {
-    //            return this.iconArray[0];
-    //        }
-    //    }
-    //    return getIcon(stack, renderPass);
-    //}
+    // @Override
+    // @SideOnly (Side.CLIENT)
+    // public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
+    // {
+    // if (usingItem != null) {
+    // int max = stack.getMaxItemUseDuration();
+    // int pull = max - useRemaining;
+    // if (pull >= (max * 2) / 3.0) {
+    // return this.iconArray[2];
+    // }
+    // if (pull > max / 3.0) {
+    // return this.iconArray[1];
+    // }
+    // if (pull > 0) {
+    // return this.iconArray[0];
+    // }
+    // }
+    // return getIcon(stack, renderPass);
+    // }
 
-    //@Override
-    //@SideOnly (Side.CLIENT)
-    //public IIcon getIcon(ItemStack stack, int pass) {
-    //    return super.getIcon(stack, pass);
-    //}
+    // @Override
+    // @SideOnly (Side.CLIENT)
+    // public IIcon getIcon(ItemStack stack, int pass) {
+    // return super.getIcon(stack, pass);
+    // }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean isFull3D() {
         return true;
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public TextureAtlasSprite getMaskTexture(ItemStack stack, EntityLivingBase player) {
         int frame = -1;
         if (player != null) {
             frame = InfinityBowModelWrapper.getBowFrame(player);
         }
-        //Lumberjack.info(frame);
+        // Lumberjack.info(frame);
         if (frame != -1) {
             System.out.println(frame);
             return AvaritiaTextures.INFINITY_BOW_PULL_MASK[frame];
@@ -220,13 +224,13 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public float getMaskOpacity(ItemStack stack, EntityLivingBase player) {
         return 1.0f;
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public void registerModels() {
         ModelBakery.registerItemKeyGenerator(this, stack -> {
             String key = ModelBakery.defaultItemKeyGenerator.generateKey(stack);
@@ -240,7 +244,6 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
         IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_BOW, modelRegistry -> actualModel);
         ModelRegistryHelper.register(location, wrapped);
         ModelLoader.setCustomMeshDefinition(this, stack -> location);
-
     }
 
     @Override

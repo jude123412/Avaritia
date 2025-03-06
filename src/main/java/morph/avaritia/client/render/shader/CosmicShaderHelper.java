@@ -1,10 +1,12 @@
 package morph.avaritia.client.render.shader;
 
-import morph.avaritia.client.AvaritiaClientEventHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
 import org.lwjgl.opengl.ARBShaderObjects;
+
+import morph.avaritia.client.AvaritiaClientEventHandler;
 
 public class CosmicShaderHelper {
 
@@ -19,9 +21,10 @@ public class CosmicShaderHelper {
 
     static {
         shaderCallback = new ShaderCallback() {
+
             @Override
             public void call(int shader) {
-                //TODO, This can be optimized.
+                // TODO, This can be optimized.
                 Minecraft mc = Minecraft.getMinecraft();
 
                 float yaw = 0;
@@ -36,7 +39,8 @@ public class CosmicShaderHelper {
                 }
 
                 // Prevents Cosmic Opacity from being less than 1.0f
-                // This fixes Desync between Rendering Infinity Armor Cosmic Model and Items with Cosmic Opacity less than 1.0f in JEI
+                // This fixes Desync between Rendering Infinity Armor Cosmic Model and Items with Cosmic Opacity less
+                // than 1.0f in JEI
                 if (cosmicOpacity < 1.0f) {
                     cosmicOpacity = 1.0f;
                 }
@@ -62,6 +66,7 @@ public class CosmicShaderHelper {
 
     static {
         alternateShaderCallback = new ShaderCallback() {
+
             @Override
             public void call(int shader) {
                 // Alternate Shader
@@ -72,7 +77,8 @@ public class CosmicShaderHelper {
                 float scale = 25.0f;
 
                 // Prevents Cosmic Opacity from being less than 1.0f
-                // This fixes Desync between Rendering Infinity Armor Cosmic Model and Items with Cosmic Opacity less than 1.0f in JEI
+                // This fixes Desync between Rendering Infinity Armor Cosmic Model and Items with Cosmic Opacity less
+                // than 1.0f in JEI
                 if (cosmicOpacity < 1.0f) {
                     cosmicOpacity = 1.0f;
                 }
@@ -109,7 +115,6 @@ public class CosmicShaderHelper {
     }
 
     public static void setLightFromLocation(World world, BlockPos pos) {
-
         // This is a temporary fix for Light From Location
 
         if (world == null) {
@@ -129,7 +134,8 @@ public class CosmicShaderHelper {
 
         int lightcolour = my * 16 + mx;
 
-        setLightLevel(((lightcolour >> 16) & 0xFF) / 256.0f, ((lightcolour >> 8) & 0xFF) / 256.0f, ((lightcolour) & 0xFF) / 256.0f);
+        setLightLevel(((lightcolour >> 16) & 0xFF) / 256.0f, ((lightcolour >> 8) & 0xFF) / 256.0f,
+                ((lightcolour) & 0xFF) / 256.0f);
     }
 
     public static void setLightLevel(float level) {

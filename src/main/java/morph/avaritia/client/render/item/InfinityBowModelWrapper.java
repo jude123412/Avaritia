@@ -1,14 +1,16 @@
 package morph.avaritia.client.render.item;
 
-import codechicken.lib.math.MathHelper;
-import codechicken.lib.model.bakery.CCBakeryModel;
-import codechicken.lib.util.ItemNBTUtils;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.google.common.collect.ImmutableList;
+
+import codechicken.lib.math.MathHelper;
+import codechicken.lib.model.bakery.CCBakeryModel;
+import codechicken.lib.util.ItemNBTUtils;
 
 /**
  * Created by covers1624 on 17/04/2017.
@@ -34,14 +36,14 @@ public class InfinityBowModelWrapper extends CCBakeryModel {
         }
 
         @Override
-        public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
+        public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world,
+                                           EntityLivingBase entity) {
             if (entity != null) {
                 stack = stack.copy();
                 ItemNBTUtils.setInteger(stack, "frame", getBowFrame(entity));
             }
             return superList.handleItemState(originalModel, stack, world, entity);
         }
-
     }
 
     public static int getBowFrame(EntityLivingBase entity) {

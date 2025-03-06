@@ -1,15 +1,17 @@
 package net.covers1624.lib.gui;
 
-import codechicken.lib.gui.GuiDraw;
-import codechicken.lib.texture.TextureUtils;
-import codechicken.lib.vec.Rectangle4i;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.util.ResourceLocation;
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.awt.*;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
+
+import net.minecraft.client.gui.Gui;
+import net.minecraft.util.ResourceLocation;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import codechicken.lib.gui.GuiDraw;
+import codechicken.lib.texture.TextureUtils;
+import codechicken.lib.vec.Rectangle4i;
 
 /**
  * Created by covers1624 on 21/05/2017.
@@ -18,17 +20,19 @@ public class DrawableGuiElement {
 
     private final Gui parent;
     private final ResourceLocation SPRITE_LOCATION;
-    //The location of the sprite on the texture.
+    // The location of the sprite on the texture.
     private final Rectangle4i SPRITE;
-    //Returns the top left point of the GUI to render at.
+    // Returns the top left point of the GUI to render at.
     private final Point GUI_LOCATION;
-    //Returns the current and max for animation.
+    // Returns the current and max for animation.
     private final Supplier<Pair<Integer, Integer>> animSupplier;
     private final AnimationDirection ANIMATION_DIRECTION;
     private final BooleanSupplier renderPredicate;
     private final Supplier<String> tooltipSupplier;
 
-    public DrawableGuiElement(Gui parent, ResourceLocation spriteLocation, Rectangle4i sprite, Point location, AnimationDirection animDirection, Supplier<Pair<Integer, Integer>> animationSupplier, BooleanSupplier renderPredicate, Supplier<String> tooltipSupplier) {
+    public DrawableGuiElement(Gui parent, ResourceLocation spriteLocation, Rectangle4i sprite, Point location,
+                              AnimationDirection animDirection, Supplier<Pair<Integer, Integer>> animationSupplier,
+                              BooleanSupplier renderPredicate, Supplier<String> tooltipSupplier) {
         this.parent = parent;
         SPRITE_LOCATION = spriteLocation;
         SPRITE = sprite;
@@ -109,5 +113,4 @@ public class DrawableGuiElement {
         LEFT_RIGHT,
         RIGHT_LEFT;
     }
-
 }

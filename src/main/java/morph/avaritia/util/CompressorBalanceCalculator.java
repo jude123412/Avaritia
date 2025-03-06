@@ -1,14 +1,15 @@
 package morph.avaritia.util;
 
-import morph.avaritia.handler.ConfigHandler;
 import net.minecraftforge.fml.common.Loader;
+
+import morph.avaritia.handler.ConfigHandler;
 
 public class CompressorBalanceCalculator {
 
     public static int modifier = 0;
     public static int multiplier = 1;
 
-    public static void gatherBalanceModifier() {//TODO, Update these for the correct ModID's
+    public static void gatherBalanceModifier() {// TODO, Update these for the correct ModID's
         if (Loader.isModLoaded("thaumcraft")) {
             modifier += 100;
         }
@@ -16,7 +17,8 @@ public class CompressorBalanceCalculator {
             modifier += 100;
             multiplier += 1;
         }
-        if (Loader.isModLoaded("thermalexpansion") || Loader.isModLoaded("ic2") || Loader.isModLoaded("thaumictinkerer")) {
+        if (Loader.isModLoaded("thermalexpansion") || Loader.isModLoaded("ic2") ||
+                Loader.isModLoaded("thaumictinkerer")) {
             modifier += 300;
         }
         if (Loader.isModLoaded("technom")) {
@@ -33,7 +35,7 @@ public class CompressorBalanceCalculator {
         }
         if (Loader.isModLoaded("bigreactors")) {
             modifier += 100;
-        }//The mod name is ExtremeReactors but in game still uses bigreactors for items
+        }// The mod name is ExtremeReactors but in game still uses bigreactors for items
         if (Loader.isModLoaded("ee3")) {
             multiplier += 1;
         } else if (Loader.isModLoaded("projecte")) {
@@ -75,5 +77,4 @@ public class CompressorBalanceCalculator {
     public static int balanceCost(int cost) {
         return (cost + modifier) * multiplier;
     }
-
 }

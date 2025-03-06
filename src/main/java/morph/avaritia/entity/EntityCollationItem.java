@@ -1,5 +1,9 @@
 package morph.avaritia.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -12,10 +16,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 @Deprecated // maybe someday... but not today
 public class EntityCollationItem extends EntityItem {
@@ -68,11 +68,12 @@ public class EntityCollationItem extends EntityItem {
         }
     }
 
-    /*@Override
-    public boolean combineItems(EntityItem other) {
-        return false;
-    }
-    */
+    /*
+     * @Override
+     * public boolean combineItems(EntityItem other) {
+     * return false;
+     * }
+     */
     // and the big one!
     @Override
     public void onCollideWithPlayer(EntityPlayer player) {
@@ -97,13 +98,17 @@ public class EntityCollationItem extends EntityItem {
 
                 ItemStack itemstack = new ItemStack(list.getCompoundTagAt(i));
 
-                if (!cannotPickup() && (owner == null || lifespan - getAge() <= 200 || owner.equals(player.getDisplayName())) && (event.getResult() == Event.Result.ALLOW || player.inventory.addItemStackToInventory(itemstack))) {
+                if (!cannotPickup() &&
+                        (owner == null || lifespan - getAge() <= 200 || owner.equals(player.getDisplayName())) &&
+                        (event.getResult() == Event.Result.ALLOW ||
+                                player.inventory.addItemStackToInventory(itemstack))) {
 
                     FMLCommonHandler.instance().firePlayerItemPickupEvent(player, this, itemstack);
                     player.addStat(StatList.getObjectsPickedUpStats(itemstack.getItem()), itemstack.getCount());
-                    //TODO
-                    //this.worldObj.playSoundAtEntity(player, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-                    //player.onItemPickup(this, itemstack.stackSize);
+                    // TODO
+                    // this.worldObj.playSoundAtEntity(player, "random.pop", 0.2F, ((this.rand.nextFloat() -
+                    // this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                    // player.onItemPickup(this, itemstack.stackSize);
 
                     if (itemstack.isEmpty()) {
                         removed.add(i);
@@ -113,11 +118,11 @@ public class EntityCollationItem extends EntityItem {
 
             removed.forEach(list::removeTag);
 
-            //TODO
-            //            for (int i = 0; i < removed.size(); i++) {
-            //                int index = removed.get(i);
-            //                list.removeTag(index);
-            //            }
+            // TODO
+            // for (int i = 0; i < removed.size(); i++) {
+            // int index = removed.get(i);
+            // list.removeTag(index);
+            // }
 
             if (list.tagCount() == 0) {
                 setDead();

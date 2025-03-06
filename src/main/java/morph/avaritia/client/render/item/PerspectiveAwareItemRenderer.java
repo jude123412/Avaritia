@@ -1,7 +1,7 @@
 package morph.avaritia.client.render.item;
 
-import codechicken.lib.render.item.IItemRenderer;
-import com.google.common.collect.ImmutableList;
+import javax.annotation.Nullable;
+
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,7 +11,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.IModelState;
 
-import javax.annotation.Nullable;
+import com.google.common.collect.ImmutableList;
+
+import codechicken.lib.render.item.IItemRenderer;
 
 /**
  * Created by covers1624 on 13/04/2017.
@@ -19,8 +21,8 @@ import javax.annotation.Nullable;
  */
 public abstract class PerspectiveAwareItemRenderer implements IItemRenderer, IEntityItemTickCallback {
 
-    //This can be null if rendered in a gui, ALWAYS null check this.
-    //Havent traced all routes, but only hand rendering may fire this..
+    // This can be null if rendered in a gui, ALWAYS null check this.
+    // Havent traced all routes, but only hand rendering may fire this..
     @Nullable
     protected EntityLivingBase renderEntity;
 
@@ -65,10 +67,10 @@ public abstract class PerspectiveAwareItemRenderer implements IItemRenderer, IEn
         entityPos = item.getPosition();
     }
 
-    //This is so we can sniff the entity rendering the item.
-    //I use "entity rendering the item" in a loose context.
-    //The entity has no control over such rendering,
-    //This simply represents the entity "holding" the item as such.
+    // This is so we can sniff the entity rendering the item.
+    // I use "entity rendering the item" in a loose context.
+    // The entity has no control over such rendering,
+    // This simply represents the entity "holding" the item as such.
     private static class EntityCachingOverrideList extends ItemOverrideList {
 
         private IEntityCallback callback;
@@ -79,7 +81,8 @@ public abstract class PerspectiveAwareItemRenderer implements IItemRenderer, IEn
         }
 
         @Override
-        public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
+        public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world,
+                                           EntityLivingBase entity) {
             callback.onEntityStuffs(entity, world);
             return super.handleItemState(originalModel, stack, world, entity);
         }

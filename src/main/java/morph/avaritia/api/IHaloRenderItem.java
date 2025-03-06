@@ -7,19 +7,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface IHaloRenderItem {
 
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     boolean shouldDrawHalo(ItemStack stack);
 
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     TextureAtlasSprite getHaloTexture(ItemStack stack);
 
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     int getHaloColour(ItemStack stack);
 
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     int getHaloSize(ItemStack stack);
 
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     boolean shouldDrawPulse(ItemStack stack);
-
 }

@@ -1,20 +1,20 @@
 package morph.avaritia.recipe;
 
-import codechicken.lib.reflect.ObfMapping;
-import codechicken.lib.reflect.ReflectionManager;
-import com.google.gson.*;
-import morph.avaritia.Avaritia;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.recipe.compressor.CompressorRecipe;
-import morph.avaritia.recipe.compressor.ICompressorRecipe;
-import morph.avaritia.recipe.extreme.ExtremeShapedRecipe;
-import morph.avaritia.recipe.extreme.ExtremeShapelessRecipe;
-import morph.avaritia.recipe.extreme.IExtremeRecipe;
-import morph.avaritia.util.Lumberjack;
-import morph.avaritia.util.TriConsumer;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -23,24 +23,22 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
+
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
+import com.google.gson.*;
 
+import codechicken.lib.reflect.ObfMapping;
+import codechicken.lib.reflect.ReflectionManager;
+import morph.avaritia.recipe.compressor.CompressorRecipe;
+import morph.avaritia.recipe.compressor.ICompressorRecipe;
+import morph.avaritia.recipe.extreme.ExtremeShapedRecipe;
+import morph.avaritia.recipe.extreme.ExtremeShapelessRecipe;
+import morph.avaritia.recipe.extreme.IExtremeRecipe;
+import morph.avaritia.util.Lumberjack;
+import morph.avaritia.util.TriConsumer;
 
 /**
  * Created by covers1624 on 10/10/2017.
@@ -73,24 +71,24 @@ public class AvaritiaRecipeManager {
         loader.setActiveModContainer(null);
         loader.getActiveModList().forEach(AvaritiaRecipeManager::loadFactories);
         loader.getActiveModList().forEach(mod ->//
-                loadRecipes(mod, "extreme", (json, ctx, key) -> {
-                    IExtremeRecipe recipe = getRecipe(json, ctx, extremeRecipeFactories::get);
-                    EXTREME_RECIPES.put(key, recipe.setRegistryName(key));
-                })//
+        loadRecipes(mod, "extreme", (json, ctx, key) -> {
+            IExtremeRecipe recipe = getRecipe(json, ctx, extremeRecipeFactories::get);
+            EXTREME_RECIPES.put(key, recipe.setRegistryName(key));
+        })//
         );
         loader.getActiveModList().forEach(mod ->//
-                loadRecipes(mod, "compressor", (json, ctx, key) -> {
-                    ICompressorRecipe recipe = getRecipe(json, ctx, compressorRecipeFactories::get);
-                    if (recipe != null) {
-                        recipe.setRegistryName(key);
-                        COMPRESSOR_RECIPES.put(key, recipe);
-                    }
-                })//
+        loadRecipes(mod, "compressor", (json, ctx, key) -> {
+            ICompressorRecipe recipe = getRecipe(json, ctx, compressorRecipeFactories::get);
+            if (recipe != null) {
+                recipe.setRegistryName(key);
+                COMPRESSOR_RECIPES.put(key, recipe);
+            }
+        })//
         );
         loader.setActiveModContainer(me);
     }
 
-    @SuppressWarnings ("unchecked")
+    @SuppressWarnings("unchecked")
     private static void loadFactories(ModContainer mod) {
         FileSystem fs = null;
         BufferedReader reader = null;
@@ -101,7 +99,8 @@ public class AvaritiaRecipeManager {
                 fs = FileSystems.newFileSystem(mod.getSource().toPath(), (ClassLoader) null);
                 fPath = fs.getPath("/assets/" + ctx.getModId() + "/avaritia_recipes/_factories.json");
             } else if (mod.getSource().isDirectory()) {
-                fPath = mod.getSource().toPath().resolve("assets/" + ctx.getModId() + "/avaritia_recipes/_factories.json");
+                fPath = mod.getSource().toPath()
+                        .resolve("assets/" + ctx.getModId() + "/avaritia_recipes/_factories.json");
             }
             if (fPath != null && Files.exists(fPath)) {
                 reader = Files.newBufferedReader(fPath);
@@ -110,7 +109,8 @@ public class AvaritiaRecipeManager {
                     if (json.has("extreme")) {
                         for (Entry<String, JsonElement> entry : JsonUtils.getJsonObject(json, "extreme").entrySet()) {
                             ResourceLocation key = new ResourceLocation(ctx.getModId(), entry.getKey());
-                            String clazzName = JsonUtils.getString(entry.getValue(), "extreme[" + entry.getValue() + "]");
+                            String clazzName = JsonUtils.getString(entry.getValue(),
+                                    "extreme[" + entry.getValue() + "]");
                             extremeRecipeFactories.put(key, newClass(clazzName, IRecipeFactory.class));
                         }
                     }
@@ -123,7 +123,8 @@ public class AvaritiaRecipeManager {
         }
     }
 
-    private static void loadRecipes(ModContainer mod, String type, TriConsumer<JsonObject, JsonContext, ResourceLocation> loadRecipe) {
+    private static void loadRecipes(ModContainer mod, String type,
+                                    TriConsumer<JsonObject, JsonContext, ResourceLocation> loadRecipe) {
         JsonContext ctx = new JsonContext(mod.getModId());
         CraftingHelper.findFiles(mod, "assets/" + mod.getModId() + "/avaritia_recipes/" + type, root -> {
             Path fPath = root.resolve("_constants.json");
@@ -156,7 +157,8 @@ public class AvaritiaRecipeManager {
             try {
                 reader = Files.newBufferedReader(file);
                 JsonObject json = JsonUtils.fromJson(GSON, reader, JsonObject.class);
-                if (json.has("conditions") && !CraftingHelper.processConditions(JsonUtils.getJsonArray(json, "conditions"), ctx)) {
+                if (json.has("conditions") &&
+                        !CraftingHelper.processConditions(JsonUtils.getJsonArray(json, "conditions"), ctx)) {
                     return true;
                 }
                 loadRecipe.accept(json, ctx, key);
@@ -173,7 +175,8 @@ public class AvaritiaRecipeManager {
         });
     }
 
-    private static <T> T getRecipe(JsonObject obj, JsonContext ctx, Function<ResourceLocation, IRecipeFactory<T>> getter) {
+    private static <T> T getRecipe(JsonObject obj, JsonContext ctx,
+                                   Function<ResourceLocation, IRecipeFactory<T>> getter) {
         if (obj == null || obj.isJsonNull()) {
             throw new JsonSyntaxException("Json cannot be null");
         }
@@ -262,5 +265,4 @@ public class AvaritiaRecipeManager {
         }
         return stacks;
     }
-
 }

@@ -1,25 +1,26 @@
 /**
  * Original class written by Vazkii for Botania.
  */
-
 // TEMA: this is the main shader stuff, where the programs are loaded and compiled for the card.
 // other relevant files are the shader in /assets/physis/shader/, and the tesr in /client/render/tile/
 // they have other comments like this in.
 
 package morph.avaritia.client.render.shader;
 
-import morph.avaritia.util.Lumberjack;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
+
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.opengl.GL11;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import morph.avaritia.util.Lumberjack;
 
 public final class ShaderHelper {
 
@@ -54,7 +55,8 @@ public final class ShaderHelper {
             if (mc.player != null && mc.player.world != null) {
 
                 // at 12000 ticks starts the render in reverse at the correct time
-                ARBShaderObjects.glUniform1iARB(time, animationTime <= 12000 ? animationTime : animationTime * -1 + 24000);
+                ARBShaderObjects.glUniform1iARB(time,
+                        animationTime <= 12000 ? animationTime : animationTime * -1 + 24000);
             }
 
             if (callback != null) {
@@ -100,13 +102,15 @@ public final class ShaderHelper {
         }
 
         ARBShaderObjects.glLinkProgramARB(program);
-        if (ARBShaderObjects.glGetObjectParameteriARB(program, ARBShaderObjects.GL_OBJECT_LINK_STATUS_ARB) == GL11.GL_FALSE) {
+        if (ARBShaderObjects.glGetObjectParameteriARB(program, ARBShaderObjects.GL_OBJECT_LINK_STATUS_ARB) ==
+                GL11.GL_FALSE) {
             Lumberjack.log(Level.ERROR, getLogInfo(program));
             return 0;
         }
 
         ARBShaderObjects.glValidateProgramARB(program);
-        if (ARBShaderObjects.glGetObjectParameteriARB(program, ARBShaderObjects.GL_OBJECT_VALIDATE_STATUS_ARB) == GL11.GL_FALSE) {
+        if (ARBShaderObjects.glGetObjectParameteriARB(program, ARBShaderObjects.GL_OBJECT_VALIDATE_STATUS_ARB) ==
+                GL11.GL_FALSE) {
             Lumberjack.log(Level.ERROR, getLogInfo(program));
             return 0;
         }
@@ -126,7 +130,8 @@ public final class ShaderHelper {
             ARBShaderObjects.glShaderSourceARB(shader, readFileAsString(filename));
             ARBShaderObjects.glCompileShaderARB(shader);
 
-            if (ARBShaderObjects.glGetObjectParameteriARB(shader, ARBShaderObjects.GL_OBJECT_COMPILE_STATUS_ARB) == GL11.GL_FALSE) {
+            if (ARBShaderObjects.glGetObjectParameteriARB(shader, ARBShaderObjects.GL_OBJECT_COMPILE_STATUS_ARB) ==
+                    GL11.GL_FALSE) {
                 throw new RuntimeException("Error creating shader \"" + filename + "\": " + getLogInfo(shader));
             }
 
@@ -139,7 +144,8 @@ public final class ShaderHelper {
     }
 
     private static String getLogInfo(int obj) {
-        return ARBShaderObjects.glGetInfoLogARB(obj, ARBShaderObjects.glGetObjectParameteriARB(obj, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
+        return ARBShaderObjects.glGetInfoLogARB(obj,
+                ARBShaderObjects.glGetObjectParameteriARB(obj, ARBShaderObjects.GL_OBJECT_INFO_LOG_LENGTH_ARB));
     }
 
     private static String readFileAsString(String filename) throws Exception {

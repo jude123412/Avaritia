@@ -1,8 +1,9 @@
 package morph.avaritia.network;
 
+import net.minecraft.entity.player.EntityPlayer;
+
 import codechicken.lib.packet.PacketCustom;
 import morph.avaritia.tile.TileMachineBase;
-import net.minecraft.entity.player.EntityPlayer;
 
 /**
  * Created by covers1624 on 20/05/2017.
@@ -25,5 +26,4 @@ public class NetworkDispatcher {
         machineTile.writeGuiData(packet, isFullSync);
         packet.sendToPlayer(player);
     }
-
 }

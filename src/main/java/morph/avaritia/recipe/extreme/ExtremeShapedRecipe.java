@@ -1,10 +1,12 @@
 package morph.avaritia.recipe.extreme;
 
-import com.google.common.collect.Maps;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.annotation.Nonnull;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -15,11 +17,11 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.CraftingHelper.ShapedPrimer;
 import net.minecraftforge.common.crafting.JsonContext;
 
-import javax.annotation.Nonnull;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import com.google.common.collect.Maps;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 
 /**
  * Created by covers1624 on 9/10/2017.
@@ -65,7 +67,8 @@ public class ExtremeShapedRecipe extends ExtremeRecipeBase {
     }
 
     /**
-     * Based on {@link net.minecraftforge.oredict.ShapedOreRecipe#checkMatch(net.minecraft.inventory.InventoryCrafting, int, int, boolean)}
+     * Based on
+     * {@link net.minecraftforge.oredict.ShapedOreRecipe#checkMatch(net.minecraft.inventory.InventoryCrafting, int, int, boolean)}
      */
     protected boolean checkMatch(InventoryCrafting inv, int startX, int startY, boolean mirror) {
         for (int x = 0; x < MAX_CRAFT_GRID_WIDTH; x++) {
@@ -116,11 +119,11 @@ public class ExtremeShapedRecipe extends ExtremeRecipeBase {
     }
 
     public static ExtremeShapedRecipe fromJson(JsonContext context, JsonObject json) {
-
         Map<Character, Ingredient> ingMap = Maps.newHashMap();
         for (Entry<String, JsonElement> entry : JsonUtils.getJsonObject(json, "key").entrySet()) {
             if (entry.getKey().length() != 1) {
-                throw new JsonSyntaxException("Invalid key entry: '" + entry.getKey() + "' is an invalid symbol (must be 1 character only).");
+                throw new JsonSyntaxException(
+                        "Invalid key entry: '" + entry.getKey() + "' is an invalid symbol (must be 1 character only).");
             }
             if (" ".equals(entry.getKey())) {
                 throw new JsonSyntaxException("Invalid key entry: ' ' is a reserved symbol.");
@@ -160,7 +163,8 @@ public class ExtremeShapedRecipe extends ExtremeRecipeBase {
             for (char chr : line.toCharArray()) {
                 Ingredient ing = ingMap.get(chr);
                 if (ing == null) {
-                    throw new JsonSyntaxException("Pattern references symbol '" + chr + "' but it's not defined in the key");
+                    throw new JsonSyntaxException(
+                            "Pattern references symbol '" + chr + "' but it's not defined in the key");
                 }
                 primer.input.set(x++, ing);
                 keys.remove(chr);

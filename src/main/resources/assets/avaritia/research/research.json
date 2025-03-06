@@ -1,11 +1,20 @@
 {
     "entries": [
       {
+        "key": "INFCATALYST",
+        "name": "avaritia.research.INFCATALYST.title",
+        "icons": [ "avaritia:textures/items/resource/infinity_catalyst.png" ],
+        "category": "INFINITY", "location": [ -0,0 ],
+        "meta": [ "ROUND","HIDDEN" ],
+        "stages": [{"text": "avaritia.research.INFCATALYST.stage.1"}]
+      },
+      {
         "key": "DARKHOLD",
         "name": "avaritia.research.darkhold.title",
-        "icons": ["avaritia:darkhold"], "location": [-2, 2],
-        "category": "ELDRITCH",
-        "parents": ["VOIDSEERPEARL", "VOIDROBEARMOR"],
+        "icons": ["avaritia:textures/items/darkhold.png"], "location": [-2, 2],
+        "category": "INFINITY",
+        "parents": ["INFCATALYST", "VOIDSEERPEARL", "VOIDROBEARMOR"],
+        "meta": ["ROUND"],
         "stages": [
           {
             "text": "avaritia.research.darkhold.stage.1",

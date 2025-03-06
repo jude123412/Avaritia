@@ -1,12 +1,7 @@
 package morph.avaritia.item.tools;
 
-import codechicken.lib.raytracer.RayTracer;
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.ICosmicRenderItem;
-import morph.avaritia.entity.EntityImmortalItem;
-import morph.avaritia.init.AvaritiaTextures;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.util.ToolHelper;
+import java.util.List;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
@@ -32,15 +27,23 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import codechicken.lib.raytracer.RayTracer;
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.ICosmicRenderItem;
+import morph.avaritia.entity.EntityImmortalItem;
+import morph.avaritia.init.AvaritiaTextures;
+import morph.avaritia.init.ModItems;
+import morph.avaritia.util.ToolHelper;
 
 public class ItemShovelInfinity extends ItemSpade implements ICosmicRenderItem {
 
-    private static final ToolMaterial TOOL_MATERIAL = EnumHelper.addToolMaterial("INFINITY_SHOVEL", 32, 9999, 9999F, 7.0F, 200);
+    private static final ToolMaterial TOOL_MATERIAL = EnumHelper.addToolMaterial("INFINITY_SHOVEL", 32, 9999, 9999F,
+            7.0F, 200);
 
-    //private IIcon destroyer;
+    // private IIcon destroyer;
 
     public ItemShovelInfinity() {
         super(TOOL_MATERIAL);
@@ -52,9 +55,12 @@ public class ItemShovelInfinity extends ItemSpade implements ICosmicRenderItem {
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (GuiScreen.isShiftKeyDown()) {
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_0.desc"));
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_1.desc"));
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_2.desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_0.desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_1.desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_2.desc"));
         } else {
             tooltip.add(TextFormatting.GRAY + "" + I18n.translateToLocal("tooltip.item.avaritia:tool.desc"));
         }
@@ -83,27 +89,27 @@ public class ItemShovelInfinity extends ItemSpade implements ICosmicRenderItem {
         return Math.max(super.getDestroySpeed(stack, state), 1.0F);
     }
 
-    //@SideOnly(Side.CLIENT)
-    //public void registerIcons(IIconRegister ir) {
-    //    this.itemIcon = ir.registerIcon("avaritia:infinity_shovel");
-    //    destroyer = ir.registerIcon("avaritia:infinity_destroyer");
-    //}
+    // @SideOnly(Side.CLIENT)
+    // public void registerIcons(IIconRegister ir) {
+    // this.itemIcon = ir.registerIcon("avaritia:infinity_shovel");
+    // destroyer = ir.registerIcon("avaritia:infinity_destroyer");
+    // }
 
-    //@Override
-    //public IIcon getIcon(ItemStack stack, int pass){
-    //    NBTTagCompound tags = stack.getTagCompound();
-    //    if(tags != null){
-    //        if(tags.getBoolean("destroyer"))
-    //            return destroyer;
-    //    }
-    //    return itemIcon;
-    //}
+    // @Override
+    // public IIcon getIcon(ItemStack stack, int pass){
+    // NBTTagCompound tags = stack.getTagCompound();
+    // if(tags != null){
+    // if(tags.getBoolean("destroyer"))
+    // return destroyer;
+    // }
+    // return itemIcon;
+    // }
 
-    //@SideOnly(Side.CLIENT)
-    //@Override
-    //public IIcon getIconIndex(ItemStack stack){
-    //    return getIcon(stack, 0);
-    //}
+    // @SideOnly(Side.CLIENT)
+    // @Override
+    // public IIcon getIconIndex(ItemStack stack){
+    // return getIcon(stack, 0);
+    // }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
@@ -132,7 +138,6 @@ public class ItemShovelInfinity extends ItemSpade implements ICosmicRenderItem {
     }
 
     public void breakOtherBlock(EntityPlayer player, ItemStack stack, BlockPos pos, EnumFacing sideHit) {
-
         World world = player.world;
         IBlockState state = world.getBlockState(pos);
         Material mat = state.getMaterial();
@@ -151,7 +156,6 @@ public class ItemShovelInfinity extends ItemSpade implements ICosmicRenderItem {
         BlockPos max = new BlockPos(range, doY ? range * 2 - 2 : range, range);
 
         ToolHelper.aoeBlocks(player, stack, world, pos, min, max, null, ItemPickaxeInfinity.MATERIALS, false);
-
     }
 
     @Override
@@ -165,14 +169,13 @@ public class ItemShovelInfinity extends ItemSpade implements ICosmicRenderItem {
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack par1ItemStack) {
         return false;
     }
 
     @Override
     public TextureAtlasSprite getMaskTexture(ItemStack stack, @Nullable EntityLivingBase player) {
-
         if (stack.hasTagCompound()) {
             assert stack.getTagCompound() != null;
             if (stack.getTagCompound().getBoolean("destroyer")) {

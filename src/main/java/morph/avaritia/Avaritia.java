@@ -1,15 +1,8 @@
 package morph.avaritia;
 
-import codechicken.lib.CodeChickenLib;
-import codechicken.lib.gui.SimpleCreativeTab;
-import morph.avaritia.compat.bloodmagic.BloodMagic;
-import morph.avaritia.init.FoodRecipes;
-import morph.avaritia.init.ModBlocks;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.proxy.Proxy;
-import morph.avaritia.recipe.AvaritiaRecipeManager;
-import morph.avaritia.util.CompressorBalanceCalculator;
-import morph.avaritia.util.Lumberjack;
+import static morph.avaritia.Avaritia.*;
+import static morph.avaritia.compat.Compat.*;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -23,12 +16,21 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
-import org.apache.logging.log4j.Level;
 
-import static morph.avaritia.Avaritia.*;
-import static morph.avaritia.compat.Compat.*;
+import codechicken.lib.CodeChickenLib;
+import codechicken.lib.gui.SimpleCreativeTab;
+import morph.avaritia.init.FoodRecipes;
+import morph.avaritia.init.ModBlocks;
+import morph.avaritia.init.ModItems;
+import morph.avaritia.proxy.Proxy;
+import morph.avaritia.recipe.AvaritiaRecipeManager;
+import morph.avaritia.util.CompressorBalanceCalculator;
 
-@Mod (modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, acceptedMinecraftVersions = CodeChickenLib.MC_VERSION_DEP, dependencies = DEPENDENCIES)
+@Mod(modid = MOD_ID,
+     name = MOD_NAME,
+     version = MOD_VERSION,
+     acceptedMinecraftVersions = CodeChickenLib.MC_VERSION_DEP,
+     dependencies = DEPENDENCIES)
 public class Avaritia {
 
     public static final String MOD_ID = Tags.MODID;
@@ -38,10 +40,10 @@ public class Avaritia {
 
     public static CreativeTabs tab = new SimpleCreativeTab(MOD_ID, "avaritia:resource", 5);
 
-    @Mod.Instance (MOD_ID)
+    @Mod.Instance(MOD_ID)
     public static Avaritia instance;
 
-    @SidedProxy (clientSide = "morph.avaritia.proxy.ProxyClient", serverSide = "morph.avaritia.proxy.Proxy")
+    @SidedProxy(clientSide = "morph.avaritia.proxy.ProxyClient", serverSide = "morph.avaritia.proxy.Proxy")
     public static Proxy proxy;
 
     @Mod.EventHandler

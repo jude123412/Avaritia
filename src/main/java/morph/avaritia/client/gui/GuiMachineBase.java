@@ -1,8 +1,9 @@
 package morph.avaritia.client.gui;
 
+import net.covers1624.lib.gui.GuiAnimBase;
+
 import morph.avaritia.container.ContainerMachineBase;
 import morph.avaritia.tile.TileMachineBase;
-import net.covers1624.lib.gui.GuiAnimBase;
 
 /**
  * Created by covers1624 on 21/05/2017.

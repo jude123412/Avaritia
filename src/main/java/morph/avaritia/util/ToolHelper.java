@@ -4,14 +4,11 @@
  * Get the original source here:
  * https://github.com/Vazkii/Botania/blob/master/src/main/java/vazkii/botania/common/item/equipment/tool/ToolCommons.java
  */
-
 package morph.avaritia.util;
 
-import codechicken.lib.util.ItemUtils;
-import com.google.common.collect.Sets;
-import morph.avaritia.handler.AvaritiaEventHandler;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.item.ItemMatterCluster;
+import java.util.*;
+import java.util.Map.Entry;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -27,19 +24,27 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.oredict.OreDictionary;
+
 import org.lwjgl.input.Keyboard;
 
-import java.util.*;
-import java.util.Map.Entry;
+import com.google.common.collect.Sets;
+
+import codechicken.lib.util.ItemUtils;
+import morph.avaritia.handler.AvaritiaEventHandler;
+import morph.avaritia.init.ModItems;
+import morph.avaritia.item.ItemMatterCluster;
 
 public class ToolHelper {
 
-    public static Material[] materialsPick = new Material[] { Material.ROCK, Material.IRON, Material.ICE, Material.GLASS, Material.PISTON, Material.ANVIL };
-    public static Material[] materialsShovel = new Material[] { Material.GRASS, Material.GROUND, Material.SAND, Material.SNOW, Material.CRAFTED_SNOW, Material.CLAY };
-    public static Set<Material> materialsAxe = Sets.newHashSet(Material.CORAL, Material.LEAVES, Material.PLANTS, Material.WOOD, Material.VINE);
+    public static Material[] materialsPick = new Material[] { Material.ROCK, Material.IRON, Material.ICE,
+            Material.GLASS, Material.PISTON, Material.ANVIL };
+    public static Material[] materialsShovel = new Material[] { Material.GRASS, Material.GROUND, Material.SAND,
+            Material.SNOW, Material.CRAFTED_SNOW, Material.CLAY };
+    public static Set<Material> materialsAxe = Sets.newHashSet(Material.CORAL, Material.LEAVES, Material.PLANTS,
+            Material.WOOD, Material.VINE);
 
-    public static void aoeBlocks(EntityPlayer player, ItemStack stack, World world, BlockPos origin, BlockPos min, BlockPos max, Block target, Set<Material> validMaterials, boolean filterTrash) {
-
+    public static void aoeBlocks(EntityPlayer player, ItemStack stack, World world, BlockPos origin, BlockPos min,
+                                 BlockPos max, Block target, Set<Material> validMaterials, boolean filterTrash) {
         AvaritiaEventHandler.enableItemCapture();
 
         for (int lx = min.getX(); lx < max.getX(); lx++) {
@@ -62,10 +67,10 @@ public class ToolHelper {
                 ItemUtils.dropItem(world, origin, cluster);
             }
         }
-
     }
 
-    public static void removeBlockWithDrops(EntityPlayer player, ItemStack stack, World world, BlockPos pos, Block target, Set<Material> validMaterials) {
+    public static void removeBlockWithDrops(EntityPlayer player, ItemStack stack, World world, BlockPos pos,
+                                            Block target, Set<Material> validMaterials) {
         if (!world.isBlockLoaded(pos)) {
             return;
         }
@@ -89,7 +94,7 @@ public class ToolHelper {
                     TileEntity tile = world.getTileEntity(pos);
                     block.onBlockHarvested(world, pos, state, player);
                     if (block.removedByPlayer(state, world, pos, player, true)) {
-//                        block.onBlockDestroyedByPlayer(world, pos, state);
+                        // block.onBlockDestroyedByPlayer(world, pos, state);
                         block.harvestBlock(world, player, pos, state, tile, stack);
                     }
                 } else {
@@ -103,7 +108,7 @@ public class ToolHelper {
         Set<ItemStack> trashItems = new HashSet<>();
         for (ItemStack drop : drops) {
             if (isTrash(holdingStack, drop)) {
-                //Lumberjack.info("Removing: " + drop.toString());
+                // Lumberjack.info("Removing: " + drop.toString());
                 trashItems.add(drop);
             }
         }
@@ -180,5 +185,4 @@ public class ToolHelper {
     public static boolean isHoldingControl() {
         return Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157);
     }
-
 }

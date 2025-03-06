@@ -1,10 +1,7 @@
 package morph.avaritia.init;
 
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.registration.IModelRegister;
-import morph.avaritia.handler.ConfigHandler;
-import morph.avaritia.item.*;
-import morph.avaritia.item.tools.*;
+import java.util.function.Consumer;
+
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
@@ -17,7 +14,11 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import java.util.function.Consumer;
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.registration.IModelRegister;
+import morph.avaritia.handler.ConfigHandler;
+import morph.avaritia.item.*;
+import morph.avaritia.item.tools.*;
 
 /**
  * Created by covers1624 on 11/04/2017.
@@ -94,23 +95,22 @@ public class ModItems {
     public static ItemStack record_fragment;
 
     public static void init() {
-
         resource = registerItem(new ItemResource(Avaritia.tab, "resource"));
-        //0
+        // 0
         diamond_lattice = resource.registerItem("diamond_lattice", EnumRarity.UNCOMMON);
-        //1
+        // 1
         crystal_matrix_ingot = resource.registerItem("crystal_matrix_ingot", EnumRarity.RARE);
-        //2
+        // 2
         neutron_pile = resource.registerItem("neutron_pile", EnumRarity.UNCOMMON);
-        //3
+        // 3
         neutron_nugget = resource.registerItem("neutron_nugget", EnumRarity.UNCOMMON);
-        //4
+        // 4
         neutronium_ingot = resource.registerItem("neutronium_ingot", EnumRarity.RARE);
-        //5
+        // 5
         infinity_catalyst = resource.registerItem("infinity_catalyst", EnumRarity.EPIC);
-        //6
+        // 6
         infinity_ingot = resource.registerItem("infinity_ingot", COSMIC_RARITY);
-        //7
+        // 7
         record_fragment = resource.registerItem("record_fragment", COSMIC_RARITY);
 
         singularity = registerItem(new ItemSingularity(Avaritia.tab, "singularity"));
@@ -164,11 +164,13 @@ public class ModItems {
 
         ultimate_stew = new ItemFood(20, 20, false);
         registerItem(ultimate_stew.setRegistryName("ultimate_stew"));
-        ultimate_stew.setPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 1), 1.0F).setTranslationKey("avaritia:ultimate_stew").setCreativeTab(Avaritia.tab);
+        ultimate_stew.setPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 1), 1.0F)
+                .setTranslationKey("avaritia:ultimate_stew").setCreativeTab(Avaritia.tab);
 
         cosmic_meatballs = new ItemFood(20, 20, false);
         registerItem(cosmic_meatballs.setRegistryName("cosmic_meatballs"));
-        cosmic_meatballs.setPotionEffect(new PotionEffect(MobEffects.STRENGTH, 300, 1), 1.0F).setTranslationKey("avaritia:cosmic_meatballs").setCreativeTab(Avaritia.tab);
+        cosmic_meatballs.setPotionEffect(new PotionEffect(MobEffects.STRENGTH, 300, 1), 1.0F)
+                .setTranslationKey("avaritia:cosmic_meatballs").setCreativeTab(Avaritia.tab);
 
         if (ConfigHandler.fracturedOres) {
             fractured_ore = registerItem(new ItemFracturedOre());
@@ -192,5 +194,4 @@ public class ModItems {
 
         return registryObject;
     }
-
 }

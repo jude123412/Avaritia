@@ -1,16 +1,17 @@
 package morph.avaritia.container;
 
-import morph.avaritia.container.slot.OutputSlot;
-import morph.avaritia.container.slot.ScrollingFakeSlot;
-import morph.avaritia.container.slot.StaticFakeSlot;
-import morph.avaritia.recipe.AvaritiaRecipeManager;
-import morph.avaritia.tile.TileNeutroniumCompressor;
+import java.awt.*;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import java.awt.*;
+import morph.avaritia.container.slot.OutputSlot;
+import morph.avaritia.container.slot.ScrollingFakeSlot;
+import morph.avaritia.container.slot.StaticFakeSlot;
+import morph.avaritia.recipe.AvaritiaRecipeManager;
+import morph.avaritia.tile.TileNeutroniumCompressor;
 
 public class ContainerNeutroniumCompressor extends ContainerMachineBase<TileNeutroniumCompressor> {
 

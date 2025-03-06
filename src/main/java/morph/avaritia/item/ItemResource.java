@@ -1,14 +1,10 @@
 package morph.avaritia.item;
 
-import codechicken.lib.item.ItemMultiType;
-import codechicken.lib.model.ModelRegistryHelper;
-import codechicken.lib.util.TransformUtils;
-import com.google.common.collect.Sets;
-import morph.avaritia.api.IHaloRenderItem;
-import morph.avaritia.api.registration.IModelRegister;
-import morph.avaritia.client.render.item.HaloRenderItem;
-import morph.avaritia.entity.EntityImmortalItem;
-import morph.avaritia.init.AvaritiaTextures;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -23,10 +19,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
+import com.google.common.collect.Sets;
+
+import codechicken.lib.item.ItemMultiType;
+import codechicken.lib.model.ModelRegistryHelper;
+import codechicken.lib.util.TransformUtils;
+import morph.avaritia.api.IHaloRenderItem;
+import morph.avaritia.api.registration.IModelRegister;
+import morph.avaritia.client.render.item.HaloRenderItem;
+import morph.avaritia.entity.EntityImmortalItem;
+import morph.avaritia.init.AvaritiaTextures;
 
 /**
  * Created by covers1624 on 11/04/2017.
@@ -54,19 +56,20 @@ public class ItemResource extends ItemMultiType implements IHaloRenderItem, IMod
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         int meta = stack.getItemDamage();
         if (meta != 0) {
-            tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + ".desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + ".desc"));
         }
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean shouldDrawHalo(ItemStack stack) {
         int meta = stack.getItemDamage();
         return (meta >= 2 && meta <= 6);
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public TextureAtlasSprite getHaloTexture(ItemStack stack) {
         int meta = stack.getItemDamage();
         if (meta == 2 || meta == 3 || meta == 4) {
@@ -76,7 +79,7 @@ public class ItemResource extends ItemMultiType implements IHaloRenderItem, IMod
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public int getHaloSize(ItemStack stack) {
         int meta = stack.getItemDamage();
         switch (meta) {
@@ -88,14 +91,14 @@ public class ItemResource extends ItemMultiType implements IHaloRenderItem, IMod
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean shouldDrawPulse(ItemStack stack) {
         int meta = stack.getItemDamage();
         return meta == 5 || meta == 6;
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public int getHaloColour(ItemStack stack) {
         int meta = stack.getItemDamage();
         if (meta == 2) {
@@ -123,7 +126,7 @@ public class ItemResource extends ItemMultiType implements IHaloRenderItem, IMod
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public void registerModels() {
         super.registerModels();
         Set<Integer> toRegister = Sets.newHashSet(2, 3, 4, 5, 6);
@@ -131,7 +134,8 @@ public class ItemResource extends ItemMultiType implements IHaloRenderItem, IMod
         for (int meta : toRegister) {
             String name = names.get(meta);
             final ModelResourceLocation location = new ModelResourceLocation(getRegistryName(), "type=" + name);
-            IBakedModel wrapped = new HaloRenderItem(TransformUtils.DEFAULT_ITEM, modelRegistry -> modelRegistry.getObject(location));
+            IBakedModel wrapped = new HaloRenderItem(TransformUtils.DEFAULT_ITEM,
+                    modelRegistry -> modelRegistry.getObject(location));
             ModelRegistryHelper.register(location, wrapped);
         }
     }

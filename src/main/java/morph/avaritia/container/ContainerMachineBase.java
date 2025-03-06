@@ -1,7 +1,7 @@
 package morph.avaritia.container;
 
-import morph.avaritia.network.NetworkDispatcher;
-import morph.avaritia.tile.TileMachineBase;
+import java.awt.*;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -9,7 +9,8 @@ import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
-import java.awt.*;
+import morph.avaritia.network.NetworkDispatcher;
+import morph.avaritia.tile.TileMachineBase;
 
 /**
  * Created by covers1624 on 20/05/2017.
@@ -17,7 +18,7 @@ import java.awt.*;
 public abstract class ContainerMachineBase<T extends TileMachineBase> extends Container {
 
     protected final T machineTile;
-    //Internal flag for the first packet set when the gui is opened.
+    // Internal flag for the first packet set when the gui is opened.
     private boolean isFirstPacket;
 
     public ContainerMachineBase(T machineTile) {
@@ -27,14 +28,14 @@ public abstract class ContainerMachineBase<T extends TileMachineBase> extends Co
     protected abstract Point getPlayerInvOffset();
 
     protected void bindPlayerInventory(InventoryPlayer playerInventory) {
-
         Point offset = getPlayerInvOffset();
         int xOffset = offset.x;
         int yOffset = offset.y;
 
         for (int row = 0; row < 3; ++row) {
             for (int slot = 0; slot < 9; ++slot) {
-                addSlotToContainer(new Slot(playerInventory, slot + row * 9 + 9, xOffset + slot * 18, yOffset + row * 18));
+                addSlotToContainer(
+                        new Slot(playerInventory, slot + row * 9 + 9, xOffset + slot * 18, yOffset + row * 18));
             }
         }
 
@@ -58,7 +59,8 @@ public abstract class ContainerMachineBase<T extends TileMachineBase> extends Co
 
         for (IContainerListener listener : listeners) {
             if (listener instanceof EntityPlayer) {
-                NetworkDispatcher.dispatchGuiChanges(((EntityPlayer) listener), machineTile, isFirstPacket | machineTile.fullContainerSync);
+                NetworkDispatcher.dispatchGuiChanges(((EntityPlayer) listener), machineTile,
+                        isFirstPacket | machineTile.fullContainerSync);
             }
         }
         machineTile.fullContainerSync = false;

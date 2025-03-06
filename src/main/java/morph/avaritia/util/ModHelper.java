@@ -1,5 +1,8 @@
 package morph.avaritia.util;
 
+import java.util.Objects;
+import java.util.function.Predicate;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -7,9 +10,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-
-import java.util.Objects;
-import java.util.function.Predicate;
 
 /**
  * Created by covers1624 on 23/04/2017.
@@ -29,7 +29,7 @@ public class ModHelper {
         return isPlayerHolding(entity, item -> Objects.equals(item, tinkersCleaver));
     }
 
-    //TODO, move to ccl -covers
+    // TODO, move to ccl -covers
     public static boolean isPlayerHolding(EntityLivingBase entity, Predicate<Item> predicate) {
         for (EnumHand hand : EnumHand.values()) {
             ItemStack stack = entity.getHeldItem(hand);
@@ -41,5 +41,4 @@ public class ModHelper {
         }
         return false;
     }
-
 }

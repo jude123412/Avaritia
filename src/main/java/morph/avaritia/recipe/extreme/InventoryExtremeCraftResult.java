@@ -1,8 +1,9 @@
 package morph.avaritia.recipe.extreme;
 
-import morph.avaritia.tile.TileDireCraftingTable;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.item.ItemStack;
+
+import morph.avaritia.tile.TileDireCraftingTable;
 
 public class InventoryExtremeCraftResult extends InventoryCraftResult {
 
@@ -32,5 +33,4 @@ public class InventoryExtremeCraftResult extends InventoryCraftResult {
     public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
         craft.setInventorySlotContents(0, par2ItemStack);
     }
-
 }

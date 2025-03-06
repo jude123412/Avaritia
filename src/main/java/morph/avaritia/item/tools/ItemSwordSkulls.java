@@ -1,6 +1,7 @@
 package morph.avaritia.item.tools;
 
-import morph.avaritia.Avaritia;
+import java.util.List;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.EnumRarity;
@@ -10,7 +11,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
-import java.util.List;
+import morph.avaritia.Avaritia;
 
 public class ItemSwordSkulls extends ItemSword {
 
@@ -26,7 +27,7 @@ public class ItemSwordSkulls extends ItemSword {
         return EnumRarity.EPIC;
     }
 
-    @SuppressWarnings ({ "unchecked", "rawtypes" })
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (GuiScreen.isShiftKeyDown()) {

@@ -1,17 +1,9 @@
 package morph.avaritia.client.render.item;
 
-import codechicken.lib.colour.Colour;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
-import codechicken.lib.model.ItemQuadBakery;
-import codechicken.lib.model.bakedmodels.ModelProperties;
-import codechicken.lib.model.bakedmodels.PerspectiveAwareBakedModel;
-import codechicken.lib.util.TransformUtils;
-import com.google.common.collect.ImmutableList;
-import morph.avaritia.api.ICosmicRenderItem;
-import morph.avaritia.api.IHaloRenderItem;
-import morph.avaritia.client.render.shader.CosmicShaderHelper;
-
-import morph.avaritia.init.AvaritiaTextures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -27,16 +19,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.IModelState;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import com.google.common.collect.ImmutableList;
+
+import codechicken.lib.colour.Colour;
+import codechicken.lib.model.ItemQuadBakery;
+import codechicken.lib.model.bakedmodels.ModelProperties;
+import codechicken.lib.model.bakedmodels.PerspectiveAwareBakedModel;
+import codechicken.lib.util.TransformUtils;
+import morph.avaritia.api.ICosmicRenderItem;
+import morph.avaritia.api.IHaloRenderItem;
+import morph.avaritia.client.render.shader.CosmicShaderHelper;
+import morph.avaritia.init.AvaritiaTextures;
 
 /**
  * Created by xXjudeXx on 28/12/2024.
  */
 public class CosmicHaloItemRender extends WrappedItemRenderer {
     // This the Class Other mods can use to take advantage of Halo Render Item and Cosmic Item Render
-    // Use this class instead of CosmicItemRender or HaloRenderItem if you want to render a Halo and Cosmic Effect on an ItemStack
+    // Use this class instead of CosmicItemRender or HaloRenderItem if you want to render a Halo and Cosmic Effect on an
+    // ItemStack
 
     private static final HashMap<TextureAtlasSprite, IBakedModel> spriteQuadCache = new HashMap();
     private Random randy = new Random();
@@ -44,6 +45,7 @@ public class CosmicHaloItemRender extends WrappedItemRenderer {
     public CosmicHaloItemRender(IModelState state, IBakedModel model) {
         super(state, model);
     }
+
     public CosmicHaloItemRender(IModelState state, WrappedItemRenderer.IWrappedModelGetter getter) {
         super(state, getter);
     }
@@ -54,16 +56,17 @@ public class CosmicHaloItemRender extends WrappedItemRenderer {
         BufferBuilder buffer = tess.getBuffer();
         this.processLightLevel(transformType);
         if (stack.getItem() instanceof IHaloRenderItem && transformType == ItemCameraTransforms.TransformType.GUI) {
-            IHaloRenderItem hri = (IHaloRenderItem)stack.getItem();
+            IHaloRenderItem hri = (IHaloRenderItem) stack.getItem();
             GlStateManager.pushMatrix();
             GlStateManager.enableBlend();
             GlStateManager.disableDepth();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
+                    GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.disableAlpha();
             if (hri.shouldDrawHalo(stack)) {
                 Colour.glColourARGB(hri.getHaloColour(stack));
                 TextureAtlasSprite sprite = hri.getHaloTexture(stack);
-                double spread = (double)hri.getHaloSize(stack) / 16.0;
+                double spread = (double) hri.getHaloSize(stack) / 16.0;
                 double min = 0.0 - spread;
                 double max = 1.0 + spread;
                 float minU = sprite.getMinU();
@@ -71,10 +74,10 @@ public class CosmicHaloItemRender extends WrappedItemRenderer {
                 float minV = sprite.getMinV();
                 float maxV = sprite.getMaxV();
                 buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-                buffer.pos(max, max, 0.0).tex((double)maxU, (double)minV).endVertex();
-                buffer.pos(min, max, 0.0).tex((double)minU, (double)minV).endVertex();
-                buffer.pos(min, min, 0.0).tex((double)minU, (double)maxV).endVertex();
-                buffer.pos(max, min, 0.0).tex((double)maxU, (double)maxV).endVertex();
+                buffer.pos(max, max, 0.0).tex((double) maxU, (double) minV).endVertex();
+                buffer.pos(min, max, 0.0).tex((double) minU, (double) minV).endVertex();
+                buffer.pos(min, min, 0.0).tex((double) minU, (double) maxV).endVertex();
+                buffer.pos(max, min, 0.0).tex((double) maxU, (double) maxV).endVertex();
                 tess.draw();
             }
 
@@ -101,8 +104,8 @@ public class CosmicHaloItemRender extends WrappedItemRenderer {
         } else {
             this.renderSimple(stack, this.renderEntity);
         }
-
     }
+
     protected void renderSimple(ItemStack stack, EntityLivingBase player) {
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
@@ -112,14 +115,15 @@ public class CosmicHaloItemRender extends WrappedItemRenderer {
         IBakedModel model = this.wrapped.getOverrides().handleItemState(this.wrapped, stack, world, player);
         renderModel(model, stack);
         if (stack.getItem() instanceof ICosmicRenderItem) {
-            ICosmicRenderItem cri = (ICosmicRenderItem)stack.getItem();
+            ICosmicRenderItem cri = (ICosmicRenderItem) stack.getItem();
             GlStateManager.disableAlpha();
             GlStateManager.depthFunc(514);
             TextureAtlasSprite cosmicSprite = cri.getMaskTexture(stack, player);
             if (cosmicSprite == null) {
                 cosmicSprite = AvaritiaTextures.FALLBACK;
             }
-            IBakedModel cosmicModel = (IBakedModel)spriteQuadCache.computeIfAbsent(cosmicSprite, CosmicHaloItemRender::computeModel);
+            IBakedModel cosmicModel = (IBakedModel) spriteQuadCache.computeIfAbsent(cosmicSprite,
+                    CosmicHaloItemRender::computeModel);
             CosmicShaderHelper.cosmicOpacity = cri.getMaskOpacity(stack, player);
             CosmicShaderHelper.useShader();
             renderModel(cosmicModel, stack);
@@ -130,10 +134,12 @@ public class CosmicHaloItemRender extends WrappedItemRenderer {
         GlStateManager.disableBlend();
         GlStateManager.popMatrix();
     }
+
     private static IBakedModel computeModel(TextureAtlasSprite sprite) {
         List<BakedQuad> quads = ItemQuadBakery.bakeItem(ImmutableList.of(sprite));
         return new PerspectiveAwareBakedModel(quads, TransformUtils.DEFAULT_ITEM, new ModelProperties(true, false));
     }
+
     protected void renderInventory(ItemStack stack, EntityLivingBase player) {
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
@@ -144,17 +150,19 @@ public class CosmicHaloItemRender extends WrappedItemRenderer {
         IBakedModel model = this.wrapped.getOverrides().handleItemState(this.wrapped, stack, world, player);
         renderModel(model, stack);
         if (stack.getItem() instanceof ICosmicRenderItem) {
-            ICosmicRenderItem cri = (ICosmicRenderItem)stack.getItem();
+            ICosmicRenderItem cri = (ICosmicRenderItem) stack.getItem();
             GlStateManager.pushMatrix();
             GlStateManager.enableBlend();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA,
+                    GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             GlStateManager.disableAlpha();
             GlStateManager.disableDepth();
             TextureAtlasSprite sprite = cri.getMaskTexture(stack, player);
             if (sprite == null) {
                 sprite = AvaritiaTextures.FALLBACK;
             }
-            IBakedModel cosmicModel = (IBakedModel)spriteQuadCache.computeIfAbsent(sprite, CosmicHaloItemRender::computeModel);
+            IBakedModel cosmicModel = (IBakedModel) spriteQuadCache.computeIfAbsent(sprite,
+                    CosmicHaloItemRender::computeModel);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             CosmicShaderHelper.cosmicOpacity = cri.getMaskOpacity(stack, player);
             CosmicShaderHelper.useAlternateShader();
@@ -168,6 +176,7 @@ public class CosmicHaloItemRender extends WrappedItemRenderer {
         GlStateManager.disableBlend();
         GlStateManager.popMatrix();
     }
+
     protected void processLightLevel(ItemCameraTransforms.TransformType transformType) {
         switch (transformType) {
             case GROUND:

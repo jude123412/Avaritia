@@ -1,9 +1,10 @@
 package morph.avaritia.recipe.extreme;
 
-import morph.avaritia.tile.TileDireCraftingTable;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
+
+import morph.avaritia.tile.TileDireCraftingTable;
 
 public class InventoryExtremeCrafting extends InventoryCrafting {
 
@@ -59,5 +60,4 @@ public class InventoryExtremeCrafting extends InventoryCrafting {
         craft.setInventorySlotContents(slot + 1, itemstack);
         container.onCraftMatrixChanged(this);
     }
-
 }

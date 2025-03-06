@@ -1,12 +1,13 @@
 package morph.avaritia.compat.jei.extreme;
 
+import java.util.List;
+
+import net.minecraft.item.ItemStack;
+
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import morph.avaritia.compat.jei.AvaritiaJEIPlugin;
 import morph.avaritia.recipe.extreme.IExtremeRecipe;
-import net.minecraft.item.ItemStack;
-
-import java.util.List;
 
 /**
  * Created by covers1624 on 31/07/2017.
@@ -33,29 +34,3 @@ public class ExtremeRecipeWrapper implements IRecipeWrapper {
         return recipe.getRecipeOutput();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -45,8 +45,7 @@ public class EntityImmortalItem extends EntityItem {
     }
 
     @Override
-    protected void dealFireDamage(int damage) {
-    }
+    protected void dealFireDamage(int damage) {}
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float damage) {
@@ -55,7 +54,6 @@ public class EntityImmortalItem extends EntityItem {
         }
         return false;
     }
-
 
     public void onUpdate() {
         ItemStack stack = getItem();
@@ -91,15 +89,16 @@ public class EntityImmortalItem extends EntityItem {
                 }
 
                 // Technically not needed
-//                if (!world.isRemote) {
-//                    searchForOtherItemsNearby();
-//                }
+                // if (!world.isRemote) {
+                // searchForOtherItemsNearby();
+                // }
             }
 
             float f = 0.98F;
 
             if (onGround) {
-                f = world.getBlockState(new BlockPos(posX, getEntityBoundingBox().minY - 1, posZ)).getBlock().slipperiness * 0.98F;
+                f = world.getBlockState(new BlockPos(posX, getEntityBoundingBox().minY - 1, posZ))
+                        .getBlock().slipperiness * 0.98F;
             }
 
             motionX *= f;
@@ -116,12 +115,13 @@ public class EntityImmortalItem extends EntityItem {
 
             if (!world.isRemote && age >= lifespan) {
                 if (!item.isEmpty()) {
-                    ItemExpireEvent event = new ItemExpireEvent(this, (item.getItem() == null ? 6000 : item.getItem().getEntityLifespan(item, Minecraft.getMinecraft().world)));
+                    ItemExpireEvent event = new ItemExpireEvent(this, (item.getItem() == null ? 6000 :
+                            item.getItem().getEntityLifespan(item, Minecraft.getMinecraft().world)));
                     if (MinecraftForge.EVENT_BUS.post(event)) {
-					    lifespan += extraLife;
-					} else {
-					    this.setDead();
-					}
+                        lifespan += extraLife;
+                    } else {
+                        this.setDead();
+                    }
                 } else {
                     setDead();
                 }

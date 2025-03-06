@@ -1,14 +1,8 @@
 package morph.avaritia.client.render.item;
 
-import codechicken.lib.model.ItemQuadBakery;
-import codechicken.lib.model.bakedmodels.ModelProperties;
-import codechicken.lib.model.bakedmodels.PerspectiveAwareBakedModel;
-import codechicken.lib.util.ResourceUtils;
-import codechicken.lib.util.TransformUtils;
-import com.google.common.collect.ImmutableList;
-import morph.avaritia.api.ICosmicRenderItem;
-import morph.avaritia.client.render.shader.CosmicShaderHelper;
-import morph.avaritia.init.AvaritiaTextures;
+import java.util.HashMap;
+import java.util.List;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
@@ -20,10 +14,19 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.IModelState;
+
 import org.lwjgl.opengl.GL11;
 
-import java.util.HashMap;
-import java.util.List;
+import com.google.common.collect.ImmutableList;
+
+import codechicken.lib.model.ItemQuadBakery;
+import codechicken.lib.model.bakedmodels.ModelProperties;
+import codechicken.lib.model.bakedmodels.PerspectiveAwareBakedModel;
+import codechicken.lib.util.ResourceUtils;
+import codechicken.lib.util.TransformUtils;
+import morph.avaritia.api.ICosmicRenderItem;
+import morph.avaritia.client.render.shader.CosmicShaderHelper;
+import morph.avaritia.init.AvaritiaTextures;
 
 /**
  * Created by covers1624 on 13/04/2017.
@@ -38,7 +41,6 @@ public class CosmicItemRender extends WrappedItemRenderer {
 
     public CosmicItemRender(IModelState state, IBakedModel wrapped) {
         super(state, wrapped);
-
     }
 
     public CosmicItemRender(IModelState state, IWrappedModelGetter getter) {
@@ -56,7 +58,6 @@ public class CosmicItemRender extends WrappedItemRenderer {
     }
 
     protected void renderSimple(ItemStack stack, EntityLivingBase player) {
-
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
@@ -96,7 +97,6 @@ public class CosmicItemRender extends WrappedItemRenderer {
     }
 
     protected void renderInventory(ItemStack stack, EntityLivingBase player) {
-
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);

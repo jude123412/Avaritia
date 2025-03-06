@@ -1,20 +1,22 @@
 package net.covers1624.lib.gui;
 
-import codechicken.lib.texture.TextureUtils;
-import codechicken.lib.vec.Rectangle4i;
+import java.awt.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.BooleanSupplier;
+import java.util.function.Supplier;
+
 import net.covers1624.lib.gui.DrawableGuiElement.AnimationDirection;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.awt.*;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.BooleanSupplier;
-import java.util.function.Supplier;
+import codechicken.lib.texture.TextureUtils;
+import codechicken.lib.vec.Rectangle4i;
 
 /**
  * Created by covers1624 on 21/05/2017.
@@ -67,7 +69,8 @@ public abstract class GuiAnimBase extends GuiContainer {
     }
 
     protected DrawableBuilder drawableBuilder() {
-        return new DrawableBuilder().setParent(this).setSpriteLocation(BACKGROUND_TEX).setAnimationDirection(AnimationDirection.STATIC);
+        return new DrawableBuilder().setParent(this).setSpriteLocation(BACKGROUND_TEX)
+                .setAnimationDirection(AnimationDirection.STATIC);
     }
 
     protected Point getGuiPos() {
@@ -93,8 +96,7 @@ public abstract class GuiAnimBase extends GuiContainer {
         private AnimationDirection animationDirection;
         private Supplier<String> tooltipSupplier;
 
-        public DrawableBuilder() {
-        }
+        public DrawableBuilder() {}
 
         public DrawableBuilder setParent(Gui parent) {
             this.parent = parent;
@@ -145,7 +147,8 @@ public abstract class GuiAnimBase extends GuiContainer {
         }
 
         public DrawableGuiElement build() {
-            return new DrawableGuiElement(parent, spriteLocation, sprite, location, animationDirection, animationSupplier, renderPredicate, tooltipSupplier);
+            return new DrawableGuiElement(parent, spriteLocation, sprite, location, animationDirection,
+                    animationSupplier, renderPredicate, tooltipSupplier);
         }
     }
 }

@@ -1,8 +1,7 @@
 package morph.avaritia.block;
 
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.registration.IModelRegister;
-import morph.avaritia.tile.TileDireCraftingTable;
+import javax.annotation.Nullable;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -24,7 +23,9 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.registration.IModelRegister;
+import morph.avaritia.tile.TileDireCraftingTable;
 
 public class BlockExtremeCraftingTable extends BlockContainer implements IModelRegister {
 
@@ -40,7 +41,8 @@ public class BlockExtremeCraftingTable extends BlockContainer implements IModelR
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+                                    EnumFacing side, float hitX, float hitY, float hitZ) {
         if (world.isRemote) {
             return true;
         } else {
@@ -60,10 +62,11 @@ public class BlockExtremeCraftingTable extends BlockContainer implements IModelR
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public void registerModels() {
         ModelResourceLocation loc = new ModelResourceLocation("avaritia:crafting", "type=extreme");
         ModelLoader.setCustomStateMapper(this, new StateMapperBase() {
+
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 return loc;
@@ -73,7 +76,8 @@ public class BlockExtremeCraftingTable extends BlockContainer implements IModelR
     }
 
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, @Nullable ItemStack stack) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state,
+                             @Nullable TileEntity te, @Nullable ItemStack stack) {
         player.addStat(StatList.getBlockStats(this));
         player.addExhaustion(0.025F);
         stack = getItemBlockWithNBT(te);

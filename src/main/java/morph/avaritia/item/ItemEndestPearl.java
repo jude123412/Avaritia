@@ -1,13 +1,5 @@
 package morph.avaritia.item;
 
-import codechicken.lib.model.ModelRegistryHelper;
-import codechicken.lib.util.TransformUtils;
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.IHaloRenderItem;
-import morph.avaritia.api.registration.IModelRegister;
-import morph.avaritia.client.render.item.HaloRenderItem;
-import morph.avaritia.entity.EntityEndestPearl;
-import morph.avaritia.init.AvaritiaTextures;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -25,6 +17,15 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import codechicken.lib.model.ModelRegistryHelper;
+import codechicken.lib.util.TransformUtils;
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.IHaloRenderItem;
+import morph.avaritia.api.registration.IModelRegister;
+import morph.avaritia.client.render.item.HaloRenderItem;
+import morph.avaritia.entity.EntityEndestPearl;
+import morph.avaritia.init.AvaritiaTextures;
+
 public class ItemEndestPearl extends ItemEnderPearl implements IHaloRenderItem, IModelRegister {
 
     public ItemEndestPearl() {
@@ -41,7 +42,8 @@ public class ItemEndestPearl extends ItemEnderPearl implements IHaloRenderItem, 
             stack.shrink(1);
         }
 
-        world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERPEARL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERPEARL_THROW,
+                SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
         if (!world.isRemote) {
             EntityEndestPearl pearl = new EntityEndestPearl(world, player);
@@ -58,41 +60,42 @@ public class ItemEndestPearl extends ItemEnderPearl implements IHaloRenderItem, 
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean shouldDrawHalo(ItemStack stack) {
         return true;
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public TextureAtlasSprite getHaloTexture(ItemStack stack) {
         return AvaritiaTextures.HALO;
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public int getHaloSize(ItemStack stack) {
         return 4;
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean shouldDrawPulse(ItemStack stack) {
         return true;
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public int getHaloColour(ItemStack stack) {
         return 0xFF000000;
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public void registerModels() {
         ModelResourceLocation pearl = new ModelResourceLocation("avaritia:resource", "type=endest_pearl");
         ModelLoader.registerItemVariants(this, pearl);
-        IBakedModel wrapped = new HaloRenderItem(TransformUtils.DEFAULT_ITEM, modelRegistry -> modelRegistry.getObject(pearl));
+        IBakedModel wrapped = new HaloRenderItem(TransformUtils.DEFAULT_ITEM,
+                modelRegistry -> modelRegistry.getObject(pearl));
         ModelRegistryHelper.register(pearl, wrapped);
         ModelLoader.setCustomMeshDefinition(this, (ItemStack stack) -> pearl);
     }

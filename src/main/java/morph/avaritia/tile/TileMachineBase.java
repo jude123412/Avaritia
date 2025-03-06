@@ -1,24 +1,25 @@
 package morph.avaritia.tile;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+
 import codechicken.lib.packet.PacketCustom;
 import codechicken.lib.util.BlockUtils;
 import codechicken.lib.util.CommonUtils;
 import morph.avaritia.network.NetworkDispatcher;
 import morph.avaritia.util.TimeTracker;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 
 /**
  * Created by covers1624 on 20/05/2017.
  */
 public abstract class TileMachineBase extends TileBase implements ITickable {
 
-    //The machine is currently doing stuff.
+    // The machine is currently doing stuff.
     protected boolean isActive;
-    //The machine was doing stuff and a client update is pending.
+    // The machine was doing stuff and a client update is pending.
     private boolean wasActive;
-    //Tracks how long the machine has been off for, and then triggers an update after x time.
+    // Tracks how long the machine has been off for, and then triggers an update after x time.
     protected TimeTracker offTracker = new TimeTracker();
 
     private boolean sendUpdatePacket;

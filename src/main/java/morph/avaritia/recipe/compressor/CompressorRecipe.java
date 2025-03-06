@@ -1,8 +1,7 @@
 package morph.avaritia.recipe.compressor;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import morph.avaritia.util.CompressorBalanceCalculator;
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
@@ -11,7 +10,10 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import java.util.List;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import morph.avaritia.util.CompressorBalanceCalculator;
 
 /**
  * Created by covers1624 on 8/11/2017.

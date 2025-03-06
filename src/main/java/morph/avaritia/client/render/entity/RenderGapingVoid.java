@@ -1,11 +1,5 @@
 package morph.avaritia.client.render.entity;
 
-import codechicken.lib.math.MathHelper;
-import codechicken.lib.render.CCModel;
-import codechicken.lib.render.CCRenderState;
-import codechicken.lib.render.OBJParser;
-import codechicken.lib.texture.TextureUtils;
-import morph.avaritia.entity.EntityGapingVoid;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,6 +8,13 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+
+import codechicken.lib.math.MathHelper;
+import codechicken.lib.render.CCModel;
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.OBJParser;
+import codechicken.lib.texture.TextureUtils;
+import morph.avaritia.entity.EntityGapingVoid;
 
 public class RenderGapingVoid extends Render<EntityGapingVoid> {
 
@@ -29,7 +30,6 @@ public class RenderGapingVoid extends Render<EntityGapingVoid> {
 
     @Override
     public void doRender(EntityGapingVoid ent, double x, double y, double z, float entityYaw, float partialTicks) {
-
         Minecraft mc = Minecraft.getMinecraft();
         Tessellator tess = Tessellator.getInstance();
         BufferBuilder buffer = tess.getBuffer();
@@ -63,8 +63,8 @@ public class RenderGapingVoid extends Render<EntityGapingVoid> {
         double yang = Math.atan2(xzlen, dy) * MathHelper.todeg;
         double xang = Math.atan2(dx, dz) * MathHelper.todeg;
 
-//        Lumberjack.info("dx: "+dx+", dy: "+dy+", dz: "+dz+", xang: "+xang);
-//        Lumberjack.info("x: "+x+", y: "+y+", z: "+z);
+        // Lumberjack.info("dx: "+dx+", dy: "+dy+", dz: "+dz+", xang: "+xang);
+        // Lumberjack.info("x: "+x+", y: "+y+", z: "+z);
 
         GlStateManager.disableLighting();
         mc.entityRenderer.disableLightmap();

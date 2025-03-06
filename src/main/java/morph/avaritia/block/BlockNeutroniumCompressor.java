@@ -1,11 +1,5 @@
 package morph.avaritia.block;
 
-import codechicken.lib.util.ItemUtils;
-import codechicken.lib.util.RotationUtils;
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.registration.IModelRegister;
-import morph.avaritia.init.AvaritiaProps;
-import morph.avaritia.tile.TileNeutroniumCompressor;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -29,6 +23,13 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import codechicken.lib.util.ItemUtils;
+import codechicken.lib.util.RotationUtils;
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.registration.IModelRegister;
+import morph.avaritia.init.AvaritiaProps;
+import morph.avaritia.tile.TileNeutroniumCompressor;
+
 public class BlockNeutroniumCompressor extends BlockContainer implements IModelRegister {
 
     public BlockNeutroniumCompressor() {
@@ -39,7 +40,8 @@ public class BlockNeutroniumCompressor extends BlockContainer implements IModelR
         setRegistryName("neutronium_compressor");
         setHarvestLevel("pickaxe", 3);
         setCreativeTab(Avaritia.tab);
-        setDefaultState(getDefaultState().withProperty(AvaritiaProps.HORIZONTAL_FACING, EnumFacing.NORTH).withProperty(AvaritiaProps.ACTIVE, false));
+        setDefaultState(getDefaultState().withProperty(AvaritiaProps.HORIZONTAL_FACING, EnumFacing.NORTH)
+                .withProperty(AvaritiaProps.ACTIVE, false));
     }
 
     @Override
@@ -64,7 +66,8 @@ public class BlockNeutroniumCompressor extends BlockContainer implements IModelR
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+                                    EnumFacing side, float hitX, float hitY, float hitZ) {
         if (world.isRemote) {
             return true;
         } else {
@@ -79,13 +82,13 @@ public class BlockNeutroniumCompressor extends BlockContainer implements IModelR
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player,
+                                ItemStack stack) {
         TileEntity tile = world.getTileEntity(pos);
         if (tile instanceof TileNeutroniumCompressor) {
             TileNeutroniumCompressor machine = (TileNeutroniumCompressor) tile;
             machine.setFacing(RotationUtils.getPlacedRotationHorizontal(player));
         }
-
     }
 
     @Override
@@ -105,10 +108,11 @@ public class BlockNeutroniumCompressor extends BlockContainer implements IModelR
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public void registerModels() {
         ResourceLocation location = new ResourceLocation("avaritia:machine");
         ModelLoader.setCustomStateMapper(this, new StateMapperBase() {
+
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 String modelLoc = "type=neutronium_compressor";
@@ -117,7 +121,8 @@ public class BlockNeutroniumCompressor extends BlockContainer implements IModelR
                 return new ModelResourceLocation(location, modelLoc);
             }
         });
-        ModelResourceLocation invLoc = new ModelResourceLocation(location, "type=neutronium_compressor,facing=north,active=true");
+        ModelResourceLocation invLoc = new ModelResourceLocation(location,
+                "type=neutronium_compressor,facing=north,active=true");
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, invLoc);
         ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(this), stack -> invLoc);
     }

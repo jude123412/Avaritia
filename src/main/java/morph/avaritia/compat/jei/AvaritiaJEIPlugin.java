@@ -1,5 +1,8 @@
 package morph.avaritia.compat.jei;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
 import mezz.jei.api.*;
 import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
@@ -15,8 +18,6 @@ import morph.avaritia.recipe.AvaritiaRecipeManager;
 import morph.avaritia.recipe.compressor.ICompressorRecipe;
 import morph.avaritia.recipe.extreme.ExtremeShapedRecipe;
 import morph.avaritia.recipe.extreme.ExtremeShapelessRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 @JEIPlugin
 public class AvaritiaJEIPlugin implements IModPlugin {
@@ -47,7 +48,8 @@ public class AvaritiaJEIPlugin implements IModPlugin {
         registry.handleRecipes(ExtremeShapedRecipe.class, ExtremeRecipeWrapper::new, EXTREME_CRAFTING);
         registry.handleRecipes(ExtremeShapelessRecipe.class, ExtremeRecipeWrapper::new, EXTREME_CRAFTING);
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.extremeCraftingTable), EXTREME_CRAFTING);
-        registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerExtremeCrafting.class, EXTREME_CRAFTING, 1, 81, 82, 36);
+        registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerExtremeCrafting.class, EXTREME_CRAFTING,
+                1, 81, 82, 36);
         registry.addRecipeClickArea(GUIExtremeCrafting.class, 175, 74, 22, 26, EXTREME_CRAFTING);
 
         registry.addRecipes(AvaritiaRecipeManager.COMPRESSOR_RECIPES.values(), NEUTRONIUM_COMPRESSOR);

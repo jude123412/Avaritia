@@ -1,16 +1,17 @@
 package morph.avaritia.compat.bloodmagic;
 
-import WayofTime.bloodmagic.ConfigHandler;
-import morph.avaritia.recipe.extreme.ExtremeRecipeManager;
+import static morph.avaritia.compat.Compat.*;
+import static morph.avaritia.init.ModItems.registerItem;
+
+import java.util.Objects;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import java.util.Objects;
-
-import static morph.avaritia.compat.Compat.*;
-import static morph.avaritia.init.ModItems.registerItem;
+import WayofTime.bloodmagic.ConfigHandler;
+import morph.avaritia.recipe.extreme.ExtremeRecipeManager;
 
 public class BloodMagic {
 
@@ -23,8 +24,9 @@ public class BloodMagic {
     }
 
     public static void registerRecipes() throws ItemNotFoundException {
-        if(BloodMagicIsLoaded) {
-            ItemStack archOrb = new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(new ResourceLocation("bloodmagic", "blood_orb"))));
+        if (BloodMagicIsLoaded) {
+            ItemStack archOrb = new ItemStack(Objects
+                    .requireNonNull(ForgeRegistries.ITEMS.getValue(new ResourceLocation("bloodmagic", "blood_orb"))));
             NBTTagCompound tag = new NBTTagCompound();
             if (ConfigHandler.general.enableTierSixEvenThoughThereIsNoContent) {
                 tag.setString("orb", "bloodmagic:transcendent");

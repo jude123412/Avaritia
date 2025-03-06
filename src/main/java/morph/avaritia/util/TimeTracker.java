@@ -12,7 +12,6 @@ public class TimeTracker {
     private long lastMark = Long.MIN_VALUE;
 
     public boolean hasDelayPassed(World world, int delay) {
-
         long currentTime = world.getTotalWorldTime();
 
         if (currentTime < lastMark) {
@@ -26,8 +25,6 @@ public class TimeTracker {
     }
 
     public void markTime(World world) {
-
         lastMark = world.getTotalWorldTime();
     }
-
 }

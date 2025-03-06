@@ -1,10 +1,7 @@
 package morph.avaritia.tile;
 
-import codechicken.lib.packet.PacketCustom;
-import codechicken.lib.util.BlockUtils;
-import codechicken.lib.util.ItemUtils;
-import morph.avaritia.handler.ConfigHandler;
-import morph.avaritia.init.ModItems;
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -14,7 +11,11 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-import javax.annotation.Nullable;
+import codechicken.lib.packet.PacketCustom;
+import codechicken.lib.util.BlockUtils;
+import codechicken.lib.util.ItemUtils;
+import morph.avaritia.handler.ConfigHandler;
+import morph.avaritia.init.ModItems;
 
 public class TileNeutronCollector extends TileMachineBase implements IInventory {
 
@@ -137,12 +138,10 @@ public class TileNeutronCollector extends TileMachineBase implements IInventory 
     }
 
     @Override
-    public void openInventory(EntityPlayer player) {
-    }
+    public void openInventory(EntityPlayer player) {}
 
     @Override
-    public void closeInventory(EntityPlayer player) {
-    }
+    public void closeInventory(EntityPlayer player) {}
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer player) {
@@ -185,8 +184,7 @@ public class TileNeutronCollector extends TileMachineBase implements IInventory 
     }
 
     @Override
-    public void setField(int id, int value) {
-    }
+    public void setField(int id, int value) {}
 
     @Override
     public int getFieldCount() {
@@ -194,7 +192,5 @@ public class TileNeutronCollector extends TileMachineBase implements IInventory 
     }
 
     @Override
-    public void clear() {
-    }
-
+    public void clear() {}
 }

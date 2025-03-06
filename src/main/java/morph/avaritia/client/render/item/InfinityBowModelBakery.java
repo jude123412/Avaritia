@@ -1,18 +1,19 @@
 package morph.avaritia.client.render.item;
 
-import codechicken.lib.model.ItemQuadBakery;
-import codechicken.lib.model.bakedmodels.ModelProperties.PerspectiveProperties;
-import codechicken.lib.model.bakery.generation.IItemBakery;
-import codechicken.lib.util.TransformUtils;
-import morph.avaritia.init.AvaritiaTextures;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import codechicken.lib.model.ItemQuadBakery;
+import codechicken.lib.model.bakedmodels.ModelProperties.PerspectiveProperties;
+import codechicken.lib.model.bakery.generation.IItemBakery;
+import codechicken.lib.util.TransformUtils;
+import morph.avaritia.init.AvaritiaTextures;
 
 /**
  * Created by covers1624 on 17/04/2017.
@@ -21,8 +22,7 @@ public class InfinityBowModelBakery implements IItemBakery {
 
     public static final InfinityBowModelBakery INSTANCE = new InfinityBowModelBakery();
 
-    private InfinityBowModelBakery() {
-    }
+    private InfinityBowModelBakery() {}
 
     @Override
     public List<BakedQuad> bakeItemQuads(EnumFacing face, ItemStack stack) {
@@ -30,7 +30,7 @@ public class InfinityBowModelBakery implements IItemBakery {
 
         TextureAtlasSprite sprite = AvaritiaTextures.INFINITY_BOW_IDLE;
 
-        //These flags are set on a copied stack specifically to be handled in here.
+        // These flags are set on a copied stack specifically to be handled in here.
         int frame = -1;
         if (stack.hasTagCompound() && stack.getTagCompound().hasKey("frame")) {
             frame = stack.getTagCompound().getInteger("frame");

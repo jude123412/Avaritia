@@ -1,13 +1,15 @@
 package morph.avaritia.client.gui;
 
-import morph.avaritia.container.ContainerNeutroniumCompressor;
-import morph.avaritia.tile.TileNeutroniumCompressor;
 import net.covers1624.lib.gui.DrawableGuiElement.AnimationDirection;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+
 import org.apache.commons.lang3.tuple.Pair;
+
+import morph.avaritia.container.ContainerNeutroniumCompressor;
+import morph.avaritia.tile.TileNeutroniumCompressor;
 
 public class GUINeutroniumCompressor extends GuiMachineBase<TileNeutroniumCompressor, ContainerNeutroniumCompressor> {
 
@@ -21,15 +23,18 @@ public class GUINeutroniumCompressor extends GuiMachineBase<TileNeutroniumCompre
         builder.setGuiLocation(62, 35).setSpriteSize(176, 0, 22, 16);
         builder.setAnimationDirection(AnimationDirection.LEFT_RIGHT);
         builder.setRenderPredicate(() -> machineTile.getConsumptionProgress() > 0);
-        builder.setAnimationSupplier(() -> Pair.of(kick(machineTile.getConsumptionProgress()), machineTile.getConsumptionTarget()));
+        builder.setAnimationSupplier(
+                () -> Pair.of(kick(machineTile.getConsumptionProgress()), machineTile.getConsumptionTarget()));
         addDrawable(builder.build());
 
         builder = drawableBuilder();
         builder.setGuiLocation(90, 35).setSpriteSize(176, 16, 16, 16);
         builder.setAnimationDirection(AnimationDirection.BOTTOM_UP);
         builder.setRenderPredicate(() -> machineTile.getCompressionProgress() > 0);
-        builder.setAnimationSupplier(() -> Pair.of(kick(machineTile.getCompressionProgress()), machineTile.getCompressionTarget()));
-        builder.setTooltipSupplier(() -> String.format("%.2f%%", scaleF(machineTile.getCompressionProgress(), machine.getCompressionTarget(), 100)));
+        builder.setAnimationSupplier(
+                () -> Pair.of(kick(machineTile.getCompressionProgress()), machineTile.getCompressionTarget()));
+        builder.setTooltipSupplier(() -> String.format("%.2f%%",
+                scaleF(machineTile.getCompressionProgress(), machine.getCompressionTarget(), 100)));
         addDrawable(builder.build());
     }
 

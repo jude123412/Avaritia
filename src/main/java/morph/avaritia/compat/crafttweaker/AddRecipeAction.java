@@ -1,11 +1,12 @@
 package morph.avaritia.compat.crafttweaker;
 
-import crafttweaker.IAction;
+import java.util.Map;
+import java.util.function.Function;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import java.util.Map;
-import java.util.function.Function;
+import crafttweaker.IAction;
 
 /**
  * Created by covers1624 on 19/12/2017.
@@ -31,9 +32,12 @@ public class AddRecipeAction<R extends IForgeRegistryEntry<R>> implements IActio
     @Override
     public String describe() {
         if (desc != null && outputAccessor != null) {
-            return String.format("Adding %s recipe %s for %s", desc, recipe.getRegistryName(), outputAccessor.apply(recipe));
+            return String.format("Adding %s recipe %s for %s", desc, recipe.getRegistryName(),
+                    outputAccessor.apply(recipe));
         } else {
-            return String.format("WARNING, Invalid use of AddRecipeAction!!!, Adding avaritia recipe for the recipe class %s: ", recipe.getClass().getName());
+            return String.format(
+                    "WARNING, Invalid use of AddRecipeAction!!!, Adding avaritia recipe for the recipe class %s: ",
+                    recipe.getClass().getName());
         }
     }
 

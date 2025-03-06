@@ -1,5 +1,24 @@
 package morph.avaritia.compat.bloodmagic;
 
+import java.util.List;
+
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.*;
+import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import org.jetbrains.annotations.Nullable;
+
 import WayofTime.bloodmagic.altar.AltarTier;
 import WayofTime.bloodmagic.core.data.Binding;
 import WayofTime.bloodmagic.core.data.SoulNetwork;
@@ -20,27 +39,9 @@ import morph.avaritia.api.registration.IModelRegister;
 import morph.avaritia.client.render.item.HaloRenderItem;
 import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
-import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
-public class ItemOrbArmok extends ItemBindableBase implements IBloodOrb, IBindable, IOrbBlood, IHaloRenderItem, IModelRegister {
+public class ItemOrbArmok extends ItemBindableBase
+                          implements IBloodOrb, IBindable, IOrbBlood, IHaloRenderItem, IModelRegister {
 
     public ItemOrbArmok() {
         setMaxStackSize(1);
@@ -66,7 +67,8 @@ public class ItemOrbArmok extends ItemBindableBase implements IBloodOrb, IBindab
         tooltip.add(TextHelper.localizeEffect("tooltip.bloodmagic.orb.desc", new Object[0]));
         BloodOrb orb = this.getOrb(stack);
         if (flag.isAdvanced() && orb != null) {
-            tooltip.add(TextHelper.localizeEffect("tooltip.bloodmagic.orb.owner", new Object[]{orb.getRegistryName().getNamespace()}));
+            tooltip.add(TextHelper.localizeEffect("tooltip.bloodmagic.orb.owner",
+                    new Object[] { orb.getRegistryName().getNamespace() }));
         }
         super.addInformation(stack, world, tooltip, flag);
     }
@@ -112,31 +114,31 @@ public class ItemOrbArmok extends ItemBindableBase implements IBloodOrb, IBindab
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean shouldDrawHalo(ItemStack stack) {
         return true;
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public TextureAtlasSprite getHaloTexture(ItemStack stack) {
         return AvaritiaTextures.HALO;
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public int getHaloColour(ItemStack stack) {
         return 0xFFFF0000;
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public int getHaloSize(ItemStack stack) {
         return 4;
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean shouldDrawPulse(ItemStack stack) {
         return true;
     }
@@ -146,7 +148,8 @@ public class ItemOrbArmok extends ItemBindableBase implements IBloodOrb, IBindab
     public void registerModels() {
         ModelResourceLocation orb = new ModelResourceLocation("avaritia:resource", "type=armok_orb");
         ModelLoader.registerItemVariants(this, orb);
-        IBakedModel wrapped = new HaloRenderItem(TransformUtils.DEFAULT_ITEM, modelRegistry -> modelRegistry.getObject(orb));
+        IBakedModel wrapped = new HaloRenderItem(TransformUtils.DEFAULT_ITEM,
+                modelRegistry -> modelRegistry.getObject(orb));
         ModelRegistryHelper.register(orb, wrapped);
         ModelLoader.setCustomMeshDefinition(this, (ItemStack stack) -> orb);
     }

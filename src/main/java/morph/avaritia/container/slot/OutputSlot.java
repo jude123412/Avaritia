@@ -1,10 +1,10 @@
 package morph.avaritia.container.slot;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import javax.annotation.Nullable;
 
 /**
  * Created by covers1624 on 22/05/2017.

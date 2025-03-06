@@ -61,6 +61,5 @@ public class ColourHelper {
         }
 
         return rgb;
-
     }
 }

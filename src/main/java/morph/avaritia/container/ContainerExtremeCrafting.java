@@ -1,10 +1,5 @@
 package morph.avaritia.container;
 
-import morph.avaritia.init.ModBlocks;
-import morph.avaritia.recipe.AvaritiaRecipeManager;
-import morph.avaritia.recipe.extreme.InventoryExtremeCraftResult;
-import morph.avaritia.recipe.extreme.InventoryExtremeCrafting;
-import morph.avaritia.tile.TileDireCraftingTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -14,6 +9,12 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import morph.avaritia.init.ModBlocks;
+import morph.avaritia.recipe.AvaritiaRecipeManager;
+import morph.avaritia.recipe.extreme.InventoryExtremeCraftResult;
+import morph.avaritia.recipe.extreme.InventoryExtremeCrafting;
+import morph.avaritia.tile.TileDireCraftingTable;
 
 public class ContainerExtremeCrafting extends Container {
 
@@ -61,12 +62,12 @@ public class ContainerExtremeCrafting extends Container {
     @Override
     public void onContainerClosed(EntityPlayer player) {
         super.onContainerClosed(player);
-
     }
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
-        return worldObj.getBlockState(pos) == ModBlocks.extremeCraftingTable.getDefaultState() && player.getDistanceSq(pos) <= 64.0D;
+        return worldObj.getBlockState(pos) == ModBlocks.extremeCraftingTable.getDefaultState() &&
+                player.getDistanceSq(pos) <= 64.0D;
     }
 
     @Override
@@ -79,7 +80,7 @@ public class ContainerExtremeCrafting extends Container {
             itemstack = itemstack1.copy();
 
             if (slotNumber == 0) {
-                if (!mergeItemStack(itemstack1, 82, 118, true)) {//83 start??
+                if (!mergeItemStack(itemstack1, 82, 118, true)) {// 83 start??
                     return ItemStack.EMPTY;
                 }
 
@@ -111,5 +112,4 @@ public class ContainerExtremeCrafting extends Container {
 
         return itemstack;
     }
-
 }

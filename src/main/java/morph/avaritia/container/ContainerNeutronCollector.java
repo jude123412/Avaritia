@@ -1,13 +1,14 @@
 package morph.avaritia.container;
 
-import morph.avaritia.container.slot.OutputSlot;
-import morph.avaritia.tile.TileNeutronCollector;
+import java.awt.*;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import java.awt.*;
+import morph.avaritia.container.slot.OutputSlot;
+import morph.avaritia.tile.TileNeutronCollector;
 
 public class ContainerNeutronCollector extends ContainerMachineBase<TileNeutronCollector> {
 

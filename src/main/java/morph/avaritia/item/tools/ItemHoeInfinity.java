@@ -1,14 +1,10 @@
 package morph.avaritia.item.tools;
 
-import codechicken.lib.util.ItemUtils;
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.ICosmicRenderItem;
-import morph.avaritia.entity.EntityImmortalItem;
-import morph.avaritia.handler.AvaritiaEventHandler;
-import morph.avaritia.init.AvaritiaTextures;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.item.ItemMatterCluster;
-import morph.avaritia.util.ToolHelper;
+import static morph.avaritia.util.ToolHelper.isHoldingControl;
+
+import java.util.List;
+import java.util.Set;
+
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
@@ -38,12 +34,18 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Set;
-
-import static morph.avaritia.util.ToolHelper.isHoldingControl;
+import codechicken.lib.util.ItemUtils;
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.ICosmicRenderItem;
+import morph.avaritia.entity.EntityImmortalItem;
+import morph.avaritia.handler.AvaritiaEventHandler;
+import morph.avaritia.init.AvaritiaTextures;
+import morph.avaritia.init.ModItems;
+import morph.avaritia.item.ItemMatterCluster;
+import morph.avaritia.util.ToolHelper;
 
 /**
  * Created by covers1624 on 31/07/2017.
@@ -51,7 +53,8 @@ import static morph.avaritia.util.ToolHelper.isHoldingControl;
  */
 public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
 
-    private static final ToolMaterial TOOL_MATERIAL = EnumHelper.addToolMaterial("INFINITY_HOE", 32, 9999, 9999F, 20.0F, 200);
+    private static final ToolMaterial TOOL_MATERIAL = EnumHelper.addToolMaterial("INFINITY_HOE", 32, 9999, 9999F, 20.0F,
+            200);
 
     public ItemHoeInfinity() {
         super(TOOL_MATERIAL);
@@ -63,15 +66,18 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (GuiScreen.isShiftKeyDown()) {
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + ".desc_0"));
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + ".desc_1"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + ".desc_0"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + ".desc_1"));
         } else {
             tooltip.add(TextFormatting.GRAY + "" + I18n.translateToLocal("tooltip.item.avaritia:tool.desc"));
         }
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos origin, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos origin, EnumHand hand,
+                                      EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
         IBlockState state = world.getBlockState(origin);
         Block block = state.getBlock();
@@ -88,53 +94,63 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
             int aoe_range = 4;
             AvaritiaEventHandler.enableItemCapture();
 
-                for (BlockPos aoePos : BlockPos.getAllInBox(origin.add(-aoe_range, 0, -aoe_range), origin.add(aoe_range, 0, aoe_range))) {
-                    if (!isHoldingControl()) {
-                        if (aoePos.equals(origin)) {
-                            continue;
-                        }
+            for (BlockPos aoePos : BlockPos.getAllInBox(origin.add(-aoe_range, 0, -aoe_range),
+                    origin.add(aoe_range, 0, aoe_range))) {
+                if (!isHoldingControl()) {
+                    if (aoePos.equals(origin)) {
+                        continue;
+                    }
 
-                        boolean airOrReplaceable = world.isAirBlock(aoePos) || world.getBlockState(aoePos).getBlock().isReplaceable(world, aoePos);
-                        boolean lowerBlockOk = world.isSideSolid(aoePos.down(), EnumFacing.UP) || world.getBlockState(aoePos.down()).getBlock() == Blocks.FARMLAND;
-                        boolean waterBlockState = world.getBlockState(aoePos).getBlock() == Blocks.WATER;
+                    boolean airOrReplaceable = world.isAirBlock(aoePos) ||
+                            world.getBlockState(aoePos).getBlock().isReplaceable(world, aoePos);
+                    boolean lowerBlockOk = world.isSideSolid(aoePos.down(), EnumFacing.UP) ||
+                            world.getBlockState(aoePos.down()).getBlock() == Blocks.FARMLAND;
+                    boolean waterBlockState = world.getBlockState(aoePos).getBlock() == Blocks.WATER;
 
+                    if (airOrReplaceable && lowerBlockOk && !waterBlockState && (player.capabilities.isCreativeMode ||
+                            player.inventory.hasItemStack(new ItemStack(Blocks.DIRT)))) {
+                        BlockEvent.PlaceEvent event = ForgeEventFactory.onPlayerBlockPlace(player,
+                                new BlockSnapshot(world, aoePos, Blocks.DIRT.getDefaultState()), EnumFacing.UP,
+                                player.getActiveHand());
 
-                        if (airOrReplaceable && lowerBlockOk && !waterBlockState && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(Blocks.DIRT)))) {
-                            BlockEvent.PlaceEvent event = ForgeEventFactory.onPlayerBlockPlace(player, new BlockSnapshot(world, aoePos, Blocks.DIRT.getDefaultState()), EnumFacing.UP, player.getActiveHand());
-
-                            if (!event.isCanceled() && (player.capabilities.isCreativeMode || consumeStack(new ItemStack(Blocks.DIRT), player.inventory))) {
-                                world.setBlockState(aoePos, Blocks.DIRT.getDefaultState());
-                            }
-                        }
-
-
-                        boolean canDropAbove = world.getBlockState(aoePos.up()).getBlock() == Blocks.DIRT || world.getBlockState(aoePos.up()).getBlock() == Blocks.GRASS || world.getBlockState(aoePos.up()).getBlock() == Blocks.FARMLAND;
-                        boolean canRemoveAbove = canDropAbove || world.getBlockState(aoePos.up()).getBlock().isReplaceable(world, aoePos.up());
-                        boolean up2OK = world.isAirBlock(aoePos.up().up()) || world.getBlockState(aoePos.up().up()).getBlock().isReplaceable(world, aoePos.up().up());
-
-                        if (!world.isAirBlock(aoePos.up()) && canRemoveAbove && up2OK) {
-                            if (!world.isRemote && canDropAbove) {
-                                world.spawnEntity(new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(Blocks.DIRT)));
-                            }
-                            world.setBlockToAir(aoePos.up());
+                        if (!event.isCanceled() && (player.capabilities.isCreativeMode ||
+                                consumeStack(new ItemStack(Blocks.DIRT), player.inventory))) {
+                            world.setBlockState(aoePos, Blocks.DIRT.getDefaultState());
                         }
                     }
 
-                    if (isHoldingControl() && block instanceof IGrowable) {
-                        if (ToolHelper.useBonemeal(world, player, aoePos)) {
-                            if (world.isRemote) {
-                                world.playEvent(2005, aoePos, 0);
-                            }
-                        }
-                        if (ToolHelper.useBonemeal(world, player, origin)) {
-                            if (world.isRemote) {
-                                world.playEvent(2005, origin, 0);
-                            }
-                        }
-                    }
+                    boolean canDropAbove = world.getBlockState(aoePos.up()).getBlock() == Blocks.DIRT ||
+                            world.getBlockState(aoePos.up()).getBlock() == Blocks.GRASS ||
+                            world.getBlockState(aoePos.up()).getBlock() == Blocks.FARMLAND;
+                    boolean canRemoveAbove = canDropAbove ||
+                            world.getBlockState(aoePos.up()).getBlock().isReplaceable(world, aoePos.up());
+                    boolean up2OK = world.isAirBlock(aoePos.up().up()) ||
+                            world.getBlockState(aoePos.up().up()).getBlock().isReplaceable(world, aoePos.up().up());
 
-                    attemptHoe(stack, player, world, aoePos, facing);
+                    if (!world.isAirBlock(aoePos.up()) && canRemoveAbove && up2OK) {
+                        if (!world.isRemote && canDropAbove) {
+                            world.spawnEntity(new EntityItem(world, player.posX, player.posY, player.posZ,
+                                    new ItemStack(Blocks.DIRT)));
+                        }
+                        world.setBlockToAir(aoePos.up());
+                    }
                 }
+
+                if (isHoldingControl() && block instanceof IGrowable) {
+                    if (ToolHelper.useBonemeal(world, player, aoePos)) {
+                        if (world.isRemote) {
+                            world.playEvent(2005, aoePos, 0);
+                        }
+                    }
+                    if (ToolHelper.useBonemeal(world, player, origin)) {
+                        if (world.isRemote) {
+                            world.playEvent(2005, origin, 0);
+                        }
+                    }
+                }
+
+                attemptHoe(stack, player, world, aoePos, facing);
+            }
 
             AvaritiaEventHandler.stopItemCapture();
             Set<ItemStack> drops = AvaritiaEventHandler.getCapturedDrops();
@@ -161,7 +177,8 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
                 continue;
             }
 
-            if (ItemStack.areItemsEqual(stack, s) && stack.getItemDamage() == s.getItemDamage() && s.getCount() >= stack.getCount()) {
+            if (ItemStack.areItemsEqual(stack, s) && stack.getItemDamage() == s.getItemDamage() &&
+                    s.getCount() >= stack.getCount()) {
                 s.shrink(stack.getCount());
                 inventory.markDirty();
                 return true;
@@ -207,7 +224,8 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
                         setBlock(hoeStack, player, world, pos, Blocks.FARMLAND.getDefaultState());
                         return true;
                     case COARSE_DIRT:
-                        setBlock(hoeStack, player, world, pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
+                        setBlock(hoeStack, player, world, pos,
+                                Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
                         return true;
                 }
             }
@@ -250,7 +268,7 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return false;
     }

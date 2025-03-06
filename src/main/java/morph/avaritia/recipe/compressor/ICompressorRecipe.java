@@ -1,10 +1,10 @@
 package morph.avaritia.recipe.compressor;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import java.util.List;
 
 /**
  * Created by covers1624 on 8/11/2017.

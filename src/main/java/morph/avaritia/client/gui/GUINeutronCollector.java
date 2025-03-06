@@ -1,9 +1,5 @@
 package morph.avaritia.client.gui;
 
-import codechicken.lib.math.MathHelper;
-import morph.avaritia.container.ContainerNeutronCollector;
-import morph.avaritia.tile.TileNeutronCollector;
-import morph.avaritia.util.TextUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -11,10 +7,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly (Side.CLIENT)
+import codechicken.lib.math.MathHelper;
+import morph.avaritia.container.ContainerNeutronCollector;
+import morph.avaritia.tile.TileNeutronCollector;
+import morph.avaritia.util.TextUtils;
+
+@SideOnly(Side.CLIENT)
 public class GUINeutronCollector extends GuiMachineBase<TileNeutronCollector, ContainerNeutronCollector> {
 
-    private static final ResourceLocation GUI_TEX = new ResourceLocation("avaritia", "textures/gui/neutron_collector_gui.png");
+    private static final ResourceLocation GUI_TEX = new ResourceLocation("avaritia",
+            "textures/gui/neutron_collector_gui.png");
 
     public GUINeutronCollector(InventoryPlayer player, TileNeutronCollector machine) {
         super(new ContainerNeutronCollector(player, machine));
@@ -49,7 +51,7 @@ public class GUINeutronCollector extends GuiMachineBase<TileNeutronCollector, Co
         String s = I18n.format("container.neutron_collector");
         float scaled_progress = scaleF(machineTile.getProgress(), TileNeutronCollector.productionTicks, 100);
 
-        //Shhhh, Don't tell anyone!
+        // Shhhh, Don't tell anyone!
         if (machineTile.getProductionTicks() > 1) {
             progress = "Progress: " + MathHelper.round(scaled_progress, 10) + "%";
         } else {

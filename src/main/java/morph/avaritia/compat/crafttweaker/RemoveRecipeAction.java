@@ -1,15 +1,17 @@
 package morph.avaritia.compat.crafttweaker;
 
-import com.google.common.base.Joiner;
-import crafttweaker.IAction;
-import morph.avaritia.handler.ConfigHandler;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+
+import com.google.common.base.Joiner;
+
+import crafttweaker.IAction;
+import morph.avaritia.handler.ConfigHandler;
 
 /**
  * Created by covers1624 on 19/12/2017.
@@ -21,7 +23,8 @@ public class RemoveRecipeAction<R extends IForgeRegistryEntry<R>> implements IAc
     private final Function<Collection<R>, List<ResourceLocation>> filter;
     private final String shortDesc;
 
-    public RemoveRecipeAction(String desc, Map<ResourceLocation, R> registry, Function<Collection<R>, List<ResourceLocation>> filter, String shortDesc) {
+    public RemoveRecipeAction(String desc, Map<ResourceLocation, R> registry,
+                              Function<Collection<R>, List<ResourceLocation>> filter, String shortDesc) {
         this.desc = desc;
         this.registry = registry;
         this.filter = filter;

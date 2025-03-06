@@ -1,6 +1,7 @@
 package morph.avaritia.handler;
 
-import morph.avaritia.util.ToolHelper;
+import java.util.Set;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,7 +10,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.Set;
+import morph.avaritia.util.ToolHelper;
 
 public class AEOCrawlerTask {
 
@@ -22,7 +23,8 @@ public class AEOCrawlerTask {
     final boolean force;
     final Set<BlockPos> posChecked;
 
-    AEOCrawlerTask(World world, EntityPlayer player, ItemStack stack, BlockPos origin, int steps, boolean leaves, boolean force, Set<BlockPos> posChecked) {
+    AEOCrawlerTask(World world, EntityPlayer player, ItemStack stack, BlockPos origin, int steps, boolean leaves,
+                   boolean force, Set<BlockPos> posChecked) {
         this.world = world;
         this.player = player;
         this.stack = stack;

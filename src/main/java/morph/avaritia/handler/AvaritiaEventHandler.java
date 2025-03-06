@@ -1,11 +1,7 @@
 package morph.avaritia.handler;
 
-import morph.avaritia.init.ModItems;
-import morph.avaritia.item.ItemArmorInfinity;
-import morph.avaritia.item.ItemFracturedOre;
-import morph.avaritia.item.ItemMatterCluster;
-import morph.avaritia.item.tools.ItemSwordInfinity;
-import morph.avaritia.util.TextUtils;
+import java.util.*;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -42,7 +38,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.*;
+import morph.avaritia.init.ModItems;
+import morph.avaritia.item.ItemArmorInfinity;
+import morph.avaritia.item.ItemFracturedOre;
+import morph.avaritia.item.ItemMatterCluster;
+import morph.avaritia.item.tools.ItemSwordInfinity;
+import morph.avaritia.util.TextUtils;
 
 public class AvaritiaEventHandler {
 
@@ -51,7 +52,7 @@ public class AvaritiaEventHandler {
     private static Set<ItemStack> capturedDrops = new LinkedHashSet<>();
     private static boolean doItemCapture = false;
 
-    //These are defaults, loaded from config.
+    // These are defaults, loaded from config.
     public static final Set<String> defaultTrashOres = new HashSet<>();
 
     public static boolean isInfinite(EntityPlayer player) {
@@ -67,7 +68,7 @@ public class AvaritiaEventHandler {
         return true;
     }
 
-    //region EntityItem capture.
+    // region EntityItem capture.
     public static void enableItemCapture() {
         doItemCapture = true;
     }
@@ -96,9 +97,10 @@ public class AvaritiaEventHandler {
             }
         }
     }
-    //endregion
+    // endregion
 
-    public static AEOCrawlerTask startCrawlerTask(World world, EntityPlayer player, ItemStack stack, BlockPos coords, int steps, boolean leaves, boolean force, Set<BlockPos> posChecked) {
+    public static AEOCrawlerTask startCrawlerTask(World world, EntityPlayer player, ItemStack stack, BlockPos coords,
+                                                  int steps, boolean leaves, boolean force, Set<BlockPos> posChecked) {
         AEOCrawlerTask swapper = new AEOCrawlerTask(world, player, stack, coords, steps, leaves, force, posChecked);
         int dim = world.provider.getDimension();
         if (!crawlerTasks.containsKey(dim)) {
@@ -109,7 +111,7 @@ public class AvaritiaEventHandler {
     }
 
     @SubscribeEvent
-    public void onTickEnd(TickEvent.WorldTickEvent event) {//TODO, clamp at specific num ops per tick.
+    public void onTickEnd(TickEvent.WorldTickEvent event) {// TODO, clamp at specific num ops per tick.
         if (event.phase == TickEvent.Phase.END) {
             int dim = event.world.provider.getDimension();
             if (crawlerTasks.containsKey(dim)) {
@@ -127,7 +129,8 @@ public class AvaritiaEventHandler {
 
     @SubscribeEvent
     public void onPlayerMine(PlayerInteractEvent.LeftClickBlock event) {
-        if (!ConfigHandler.bedrockBreaker || event.getFace() == null || event.getWorld().isRemote || event.getItemStack().isEmpty() || event.getEntityPlayer().capabilities.isCreativeMode) {
+        if (!ConfigHandler.bedrockBreaker || event.getFace() == null || event.getWorld().isRemote ||
+                event.getItemStack().isEmpty() || event.getEntityPlayer().capabilities.isCreativeMode) {
             return;
         }
         World world = event.getWorld();
@@ -135,22 +138,27 @@ public class AvaritiaEventHandler {
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
         int meta = block.getMetaFromState(state);
-        if (state.getBlockHardness(world, event.getPos()) <= -1 && event.getItemStack().getItem() == ModItems.infinity_pickaxe && (state.getMaterial() == Material.ROCK || state.getMaterial() == Material.IRON)) {
+        if (state.getBlockHardness(world, event.getPos()) <= -1 &&
+                event.getItemStack().getItem() == ModItems.infinity_pickaxe &&
+                (state.getMaterial() == Material.ROCK || state.getMaterial() == Material.IRON)) {
 
-            if (event.getItemStack().getTagCompound() != null && event.getItemStack().getTagCompound().getBoolean("hammer")) {
-                ModItems.infinity_pickaxe.onBlockStartBreak(event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND), event.getPos(), event.getEntityPlayer());
-            } else {//TODO, FIXME, HELP!
-                //if (block.quantityDropped(randy) == 0) {
-                //    ItemStack drop = block.getPickBlock(state, ToolHelper.raytraceFromEntity(event.getWorld(), event.getEntityPlayer(), true, 10), event.getWorld(), event.getPos(), event.getEntityPlayer());
-                //    if (drop == null) {
-                //        drop = new ItemStack(block, 1, meta);
-                //    }
-                //    ToolHelper.dropItem(drop, event.getEntityPlayer().worldObj, event.getPos());
-                //} else {
-                //    block.harvestBlock(event.getWorld(), event.getEntityPlayer(), event.getPos(), state, null, null);
-                //}
-                //event.getWorld().setBlockToAir(event.getPos());
-                //event.world.playAuxSFX(2001, event.getPos(), Block.getIdFromBlock(block) + (meta << 12));
+            if (event.getItemStack().getTagCompound() != null &&
+                    event.getItemStack().getTagCompound().getBoolean("hammer")) {
+                ModItems.infinity_pickaxe.onBlockStartBreak(event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND),
+                        event.getPos(), event.getEntityPlayer());
+            } else {// TODO, FIXME, HELP!
+                // if (block.quantityDropped(randy) == 0) {
+                // ItemStack drop = block.getPickBlock(state, ToolHelper.raytraceFromEntity(event.getWorld(),
+                // event.getEntityPlayer(), true, 10), event.getWorld(), event.getPos(), event.getEntityPlayer());
+                // if (drop == null) {
+                // drop = new ItemStack(block, 1, meta);
+                // }
+                // ToolHelper.dropItem(drop, event.getEntityPlayer().worldObj, event.getPos());
+                // } else {
+                // block.harvestBlock(event.getWorld(), event.getEntityPlayer(), event.getPos(), state, null, null);
+                // }
+                // event.getWorld().setBlockToAir(event.getPos());
+                // event.world.playAuxSFX(2001, event.getPos(), Block.getIdFromBlock(block) + (meta << 12));
             }
         }
     }
@@ -168,43 +176,51 @@ public class AvaritiaEventHandler {
     }
 
     public static void applyLuck(HarvestDropsEvent event, int multiplier) {
-        //Only do stuff on rock.
+        // Only do stuff on rock.
         if (event.getState().getMaterial() == Material.ROCK) {
             List<ItemStack> adds = new ArrayList<>();
             List<ItemStack> removals = new ArrayList<>();
 
             for (ItemStack drop : event.getDrops()) {
-                //We are a drop that is not the same as the Blocks ItemBlock and the drop itself is not an ItemBlock, AKA, Redstone, Lapis.
-                if (drop.getItem() != Item.getItemFromBlock(event.getState().getBlock()) && !(drop.getItem() instanceof ItemBlock)) {
-                    //Apply standard Luck modifier
+                // We are a drop that is not the same as the Blocks ItemBlock and the drop itself is not an ItemBlock,
+                // AKA, Redstone, Lapis.
+                if (drop.getItem() != Item.getItemFromBlock(event.getState().getBlock()) &&
+                        !(drop.getItem() instanceof ItemBlock)) {
+                    // Apply standard Luck modifier
                     drop.setCount(Math.min(drop.getCount() * multiplier, drop.getMaxStackSize()));
-                } else if (ConfigHandler.fracturedOres && drop.getItem() == Item.getItemFromBlock(event.getState().getBlock())) {
-                    //kk, we are an ore block, Lets test for oreDict and add fractured ores.
-                    ItemFracturedOre fracturedOre = ModItems.fractured_ore;
-                    int[] iDs = OreDictionary.getOreIDs(drop);
-                    for (int id : iDs) {
-                        String oreName = OreDictionary.getOreName(id);
-                        if (oreName.startsWith("ore")) {
-                            // add the fractured ores
-                            adds.add(fracturedOre.getStackForOre(drop, Math.min(drop.getCount() * (multiplier + 1), drop.getMaxStackSize())));
-                            removals.add(drop);
-                            break;
+                } else if (ConfigHandler.fracturedOres &&
+                        drop.getItem() == Item.getItemFromBlock(event.getState().getBlock())) {
+                            // kk, we are an ore block, Lets test for oreDict and add fractured ores.
+                            ItemFracturedOre fracturedOre = ModItems.fractured_ore;
+                            int[] iDs = OreDictionary.getOreIDs(drop);
+                            for (int id : iDs) {
+                                String oreName = OreDictionary.getOreName(id);
+                                if (oreName.startsWith("ore")) {
+                                    // add the fractured ores
+                                    adds.add(fracturedOre.getStackForOre(drop,
+                                            Math.min(drop.getCount() * (multiplier + 1), drop.getMaxStackSize())));
+                                    removals.add(drop);
+                                    break;
+                                }
+                            }
                         }
-                    }
-                }
             }
             event.getDrops().addAll(adds);
             event.getDrops().removeAll(removals);
         }
     }
 
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onTooltip(ItemTooltipEvent event) {
         if (event.getItemStack().getItem() instanceof ItemSwordInfinity) {
             for (int x = 0; x < event.getToolTip().size(); x++) {
-                if (event.getToolTip().get(x).contains(I18n.translateToLocal("attribute.name.generic.attackDamage")) || event.getToolTip().get(x).contains(I18n.translateToLocal("Attack Damage"))) {
-                    event.getToolTip().set(x, TextFormatting.BLUE + "+" + TextUtils.makeFabulous(I18n.translateToLocal("tip.infinity")) + " " + TextFormatting.BLUE + I18n.translateToLocal("attribute.name.generic.attackDamage"));
+                if (event.getToolTip().get(x).contains(I18n.translateToLocal("attribute.name.generic.attackDamage")) ||
+                        event.getToolTip().get(x).contains(I18n.translateToLocal("Attack Damage"))) {
+                    event.getToolTip().set(x,
+                            TextFormatting.BLUE + "+" + TextUtils.makeFabulous(I18n.translateToLocal("tip.infinity")) +
+                                    " " + TextFormatting.BLUE +
+                                    I18n.translateToLocal("attribute.name.generic.attackDamage"));
                     return;
                 }
             }
@@ -217,7 +233,12 @@ public class AvaritiaEventHandler {
             return;
         }
         EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-        if (!player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItem() == ModItems.infinity_sword && player.isHandActive()) {//TODO Blocking? Maybe add a shield?
+        if (!player.getHeldItemMainhand().isEmpty() &&
+                player.getHeldItemMainhand().getItem() == ModItems.infinity_sword && player.isHandActive()) {// TODO
+                                                                                                             // Blocking?
+                                                                                                             // Maybe
+                                                                                                             // add a
+                                                                                                             // shield?
             event.setCanceled(true);
         }
         if (isInfinite(player) && !event.getSource().damageType.equals("infinity")) {
@@ -241,9 +262,11 @@ public class AvaritiaEventHandler {
 
     @SubscribeEvent
     public void onLivingDrops(LivingDropsEvent event) {
-        if (event.isRecentlyHit() && event.getEntityLiving() instanceof EntitySkeleton && event.getSource().getTrueSource() instanceof EntityPlayer) {
+        if (event.isRecentlyHit() && event.getEntityLiving() instanceof EntitySkeleton &&
+                event.getSource().getTrueSource() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
-            if (!player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.skull_sword) {
+            if (!player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() &&
+                    player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.skull_sword) {
                 // ok, we need to drop a skull then.
                 if (event.getDrops().isEmpty()) {
                     addDrop(event, new ItemStack(Items.SKULL, 1, 1));
@@ -280,7 +303,8 @@ public class AvaritiaEventHandler {
                 if (!event.getEntityLiving().onGround) {
                     event.setNewSpeed(event.getNewSpeed() * 5);
                 }
-                if (!event.getEntityLiving().isInsideOfMaterial(Material.WATER) && !EnchantmentHelper.getAquaAffinityModifier(event.getEntityLiving())) {
+                if (!event.getEntityLiving().isInsideOfMaterial(Material.WATER) &&
+                        !EnchantmentHelper.getAquaAffinityModifier(event.getEntityLiving())) {
                     event.setNewSpeed(event.getNewSpeed() * 5);
                 }
                 if (held.getTagCompound() != null) {
@@ -297,7 +321,8 @@ public class AvaritiaEventHandler {
         if (!event.getEntityLiving().getHeldItem(EnumHand.MAIN_HAND).isEmpty()) {
             ItemStack held = event.getEntityLiving().getHeldItem(EnumHand.MAIN_HAND);
             if (held.getItem() == ModItems.infinity_shovel && event.getTargetBlock().getMaterial() == Material.ROCK) {
-                if (held.getTagCompound() != null && held.getTagCompound().getBoolean("destroyer") && isGarbageBlock(event.getTargetBlock().getBlock())) {
+                if (held.getTagCompound() != null && held.getTagCompound().getBoolean("destroyer") &&
+                        isGarbageBlock(event.getTargetBlock().getBlock())) {
                     event.setResult(Event.Result.ALLOW);
                 }
             }
@@ -327,7 +352,8 @@ public class AvaritiaEventHandler {
     }
 
     private void addDrop(LivingDropsEvent event, ItemStack drop) {
-        EntityItem entityitem = new EntityItem(event.getEntityLiving().world, event.getEntityLiving().posX, event.getEntityLiving().posY, event.getEntityLiving().posZ, drop);
+        EntityItem entityitem = new EntityItem(event.getEntityLiving().world, event.getEntityLiving().posX,
+                event.getEntityLiving().posY, event.getEntityLiving().posZ, drop);
         entityitem.setDefaultPickupDelay();
         event.getDrops().add(entityitem);
     }
@@ -348,5 +374,4 @@ public class AvaritiaEventHandler {
             }
         }
     }
-
 }

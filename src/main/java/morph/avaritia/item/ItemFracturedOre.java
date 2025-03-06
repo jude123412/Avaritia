@@ -1,10 +1,7 @@
 package morph.avaritia.item;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import morph.avaritia.Avaritia;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.util.ItemStackWrapper;
+import java.util.*;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,10 +10,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.*;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
+import morph.avaritia.Avaritia;
+import morph.avaritia.init.ModItems;
+import morph.avaritia.util.ItemStackWrapper;
 
 public class ItemFracturedOre extends Item {
-    //TODO, OreName needs to only be on NBT, so we can have safeguards against removed ores.
+    // TODO, OreName needs to only be on NBT, so we can have safeguards against removed ores.
 
     public static final String OREKEY = "ore";
     protected static List<ItemStack> emulatedOres = new ArrayList<>();
@@ -29,15 +31,15 @@ public class ItemFracturedOre extends Item {
         setHasSubtypes(true);
     }
 
-    //    @SuppressWarnings ({ "rawtypes" })
-    //    @SideOnly (Side.CLIENT)
-    //    @Override
-    //    public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-    //        // for debug purposes only - don't want these cluttering up the tab.
-    //        /*for (ItemStack stack : emulatedOres) {
-    //            list.add(getStackForOre(stack, 1));
-    //        }*/
-    //    }
+    // @SuppressWarnings ({ "rawtypes" })
+    // @SideOnly (Side.CLIENT)
+    // @Override
+    // public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
+    // // for debug purposes only - don't want these cluttering up the tab.
+    // /*for (ItemStack stack : emulatedOres) {
+    // list.add(getStackForOre(stack, 1));
+    // }*/
+    // }
 
     public ItemStack getStackForOre(ItemStack orestack, int stacksize) {
         NBTTagCompound oretag = NameStack.saveStackToNBT(orestack);
@@ -60,7 +62,8 @@ public class ItemFracturedOre extends Item {
             if (namestack != null) {
                 ItemStack orestack = namestack.getStack();
                 Item oreitem = orestack.getItem();
-                return I18n.format("item.avaritia_fracturedore.prefix") + " " + oreitem.getItemStackDisplayName(orestack);
+                return I18n.format("item.avaritia_fracturedore.prefix") + " " +
+                        oreitem.getItemStackDisplayName(orestack);
             }
         }
         return super.getItemStackDisplayName(stack);
@@ -91,14 +94,14 @@ public class ItemFracturedOre extends Item {
 
         for (String name : names) {
             if (name.startsWith("ore") && !name.startsWith("oreberry")) {
-                //Lumberjack.info("ORE: "+name);
+                // Lumberjack.info("ORE: "+name);
 
                 List<ItemStack> ores = OreDictionary.getOres(name);
 
                 for (ItemStack ore : ores) {
                     ItemStackWrapper compare = new ItemStackWrapper(ore);
                     if (!antiDupePool.contains(compare)) {
-                        //Lumberjack.info(ore);
+                        // Lumberjack.info(ore);
                         antiDupePool.add(compare);
                         emulatedOres.add(ore.copy());
 
@@ -116,7 +119,9 @@ public class ItemFracturedOre extends Item {
                 int[] oreids = OreDictionary.getOreIDs(orestack);
                 for (int oreid : oreids) {
                     String oreidname = OreDictionary.getOreName(oreid);
-                    //Lumberjack.info("Registering "+orestack.getItem().getItemStackDisplayName(orestack)+" ("+orestack+") ---> "+stack.getItem().getItemStackDisplayName(stack)+"#"+stack.getItemDamage()+" as "+oreidname);
+                    // Lumberjack.info("Registering "+orestack.getItem().getItemStackDisplayName(orestack)+"
+                    // ("+orestack+") ---> "+stack.getItem().getItemStackDisplayName(stack)+"#"+stack.getItemDamage()+"
+                    // as "+oreidname);
                     OreDictionary.registerOre(oreidname, stack);
                 }
 
@@ -137,7 +142,8 @@ public class ItemFracturedOre extends Item {
         int size;
 
         public NameStack(ItemStack source) {
-            this(source.getItem().delegate.name().getPath(), source.getItemDamage(), source.getCount(), source.getTagCompound());
+            this(source.getItem().delegate.name().getPath(), source.getItemDamage(), source.getCount(),
+                    source.getTagCompound());
         }
 
         public NameStack(String name, int damage, int size, NBTTagCompound nbt) {

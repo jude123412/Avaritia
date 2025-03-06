@@ -1,11 +1,8 @@
 package morph.avaritia.item;
 
-import codechicken.lib.util.ItemUtils;
-import morph.avaritia.api.ICosmicRenderItem;
-import morph.avaritia.init.AvaritiaTextures;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.util.ItemStackWrapper;
-import morph.avaritia.util.ToolHelper;
+import java.util.*;
+import java.util.Map.Entry;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.I18n;
@@ -22,10 +19,15 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.Map.Entry;
+import codechicken.lib.util.ItemUtils;
+import morph.avaritia.api.ICosmicRenderItem;
+import morph.avaritia.init.AvaritiaTextures;
+import morph.avaritia.init.ModItems;
+import morph.avaritia.util.ItemStackWrapper;
+import morph.avaritia.util.ToolHelper;
 
 public class ItemMatterCluster extends Item implements ICosmicRenderItem {
 
@@ -50,7 +52,7 @@ public class ItemMatterCluster extends Item implements ICosmicRenderItem {
         return ModItems.COSMIC_RARITY;
     }
 
-    @SuppressWarnings ({ "unchecked", "rawtypes" })
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey(MAINTAG)) {
@@ -58,7 +60,8 @@ public class ItemMatterCluster extends Item implements ICosmicRenderItem {
         }
         NBTTagCompound clustertag = stack.getTagCompound().getCompoundTag(MAINTAG);
 
-        tooltip.add(clustertag.getInteger(MAINCOUNTTAG) + "/" + CAPACITY + " " + I18n.format("tooltip.matter_cluster.counter"));
+        tooltip.add(clustertag.getInteger(MAINCOUNTTAG) + "/" + CAPACITY + " " +
+                I18n.format("tooltip.matter_cluster.counter"));
         tooltip.add("");
 
         if (GuiScreen.isShiftKeyDown()) {
@@ -68,11 +71,13 @@ public class ItemMatterCluster extends Item implements ICosmicRenderItem {
                 ItemStack countstack = new ItemStack(tag.getCompoundTag(ITEMTAG));
                 int count = tag.getInteger(COUNTTAG);
 
-                tooltip.add(countstack.getItem().getRarity(countstack).getColor() + countstack.getDisplayName() + TextFormatting.GRAY + " x " + count);
+                tooltip.add(countstack.getItem().getRarity(countstack).getColor() + countstack.getDisplayName() +
+                        TextFormatting.GRAY + " x " + count);
             }
         } else {
             tooltip.add(TextFormatting.DARK_GRAY + I18n.format("tooltip.matter_cluster.desc"));
-            tooltip.add(TextFormatting.DARK_GRAY.toString() + TextFormatting.ITALIC + I18n.format("tooltip.matter_cluster.desc2"));
+            tooltip.add(TextFormatting.DARK_GRAY.toString() + TextFormatting.ITALIC +
+                    I18n.format("tooltip.matter_cluster.desc2"));
         }
     }
 
@@ -181,7 +186,7 @@ public class ItemMatterCluster extends Item implements ICosmicRenderItem {
         int donorcount = getClusterSize(donor);
         int recipientcount = getClusterSize(recipient);
 
-        //Lumberjack.log(Level.INFO, donorcount + ", " + recipientcount);
+        // Lumberjack.log(Level.INFO, donorcount + ", " + recipientcount);
         if (donorcount == 0 || donorcount == CAPACITY || recipientcount == CAPACITY) {
             return;
         }

@@ -1,5 +1,14 @@
 package morph.avaritia.compat.crafttweaker;
 
+import java.util.stream.Collectors;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.crafting.CraftingHelper.ShapedPrimer;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
@@ -10,22 +19,14 @@ import morph.avaritia.recipe.AvaritiaRecipeManager;
 import morph.avaritia.recipe.extreme.ExtremeShapedRecipe;
 import morph.avaritia.recipe.extreme.ExtremeShapelessRecipe;
 import morph.avaritia.recipe.extreme.IExtremeRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.crafting.CraftingHelper.ShapedPrimer;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.stream.Collectors;
 
 /**
  * Created by covers1624 on 19/12/2017.
  */
 @ZenRegister
-@ZenClass ("mods.avaritia.ExtremeCrafting")
+@ZenClass("mods.avaritia.ExtremeCrafting")
 public class ExtremeCrafting {
 
     @ZenMethod
@@ -60,7 +61,8 @@ public class ExtremeCrafting {
     @ZenMethod
     public static void remove(IItemStack stack) {
         ItemStack check = CraftTweakerMC.getItemStack(stack);
-        RemoveRecipeAction<IExtremeRecipe> action = new RemoveRecipeAction<>("Extreme", AvaritiaRecipeManager.EXTREME_RECIPES,//
+        RemoveRecipeAction<IExtremeRecipe> action = new RemoveRecipeAction<>("Extreme",
+                AvaritiaRecipeManager.EXTREME_RECIPES,//
                 recipes -> recipes.stream()//
                         .filter(recipe -> recipe.getRecipeOutput().isItemEqual(check))//
                         .map(IForgeRegistryEntry::getRegistryName)//
@@ -72,7 +74,8 @@ public class ExtremeCrafting {
     @ZenMethod
     public static void removeShaped(IItemStack stack) {
         ItemStack check = CraftTweakerMC.getItemStack(stack);
-        RemoveRecipeAction<IExtremeRecipe> action = new RemoveRecipeAction<>("Extreme Shaped", AvaritiaRecipeManager.EXTREME_RECIPES,//
+        RemoveRecipeAction<IExtremeRecipe> action = new RemoveRecipeAction<>("Extreme Shaped",
+                AvaritiaRecipeManager.EXTREME_RECIPES,//
                 recipes -> recipes.stream()//
                         .filter(IExtremeRecipe::isShapedRecipe)//
                         .filter(recipe -> recipe.getRecipeOutput().isItemEqual(check))//
@@ -85,7 +88,8 @@ public class ExtremeCrafting {
     @ZenMethod
     public static void removeShapeless(IItemStack stack) {
         ItemStack check = CraftTweakerMC.getItemStack(stack);
-        RemoveRecipeAction<IExtremeRecipe> action = new RemoveRecipeAction<>("Extreme Shapeless", AvaritiaRecipeManager.EXTREME_RECIPES,//
+        RemoveRecipeAction<IExtremeRecipe> action = new RemoveRecipeAction<>("Extreme Shapeless",
+                AvaritiaRecipeManager.EXTREME_RECIPES,//
                 recipes -> recipes.stream()//
                         .filter(r -> !r.isShapedRecipe())//
                         .filter(r -> r.getRecipeOutput().isItemEqual(check))//
@@ -97,7 +101,8 @@ public class ExtremeCrafting {
 
     @ZenMethod
     public static void removeAll() {
-        RemoveRecipeAction<IExtremeRecipe> action = new RemoveRecipeAction<>("All Extreme", AvaritiaRecipeManager.EXTREME_RECIPES,//
+        RemoveRecipeAction<IExtremeRecipe> action = new RemoveRecipeAction<>("All Extreme",
+                AvaritiaRecipeManager.EXTREME_RECIPES,//
                 recipes -> recipes.stream()//
                         .map(IForgeRegistryEntry::getRegistryName)//
                         .collect(Collectors.toList()),//
@@ -107,7 +112,8 @@ public class ExtremeCrafting {
 
     @ZenMethod
     public static void removeAllShaped() {
-        RemoveRecipeAction<IExtremeRecipe> action = new RemoveRecipeAction<>("All Extreme Shaped", AvaritiaRecipeManager.EXTREME_RECIPES,//
+        RemoveRecipeAction<IExtremeRecipe> action = new RemoveRecipeAction<>("All Extreme Shaped",
+                AvaritiaRecipeManager.EXTREME_RECIPES,//
                 recipes -> recipes.stream()//
                         .filter(IExtremeRecipe::isShapedRecipe)//
                         .map(IForgeRegistryEntry::getRegistryName)//
@@ -118,7 +124,8 @@ public class ExtremeCrafting {
 
     @ZenMethod
     public static void removeAllShapeless() {
-        RemoveRecipeAction<IExtremeRecipe> action = new RemoveRecipeAction<>("All Extreme Shapeless", AvaritiaRecipeManager.EXTREME_RECIPES,//
+        RemoveRecipeAction<IExtremeRecipe> action = new RemoveRecipeAction<>("All Extreme Shapeless",
+                AvaritiaRecipeManager.EXTREME_RECIPES,//
                 recipes -> recipes.stream()//
                         .filter(r -> !r.isShapedRecipe())//
                         .map(IForgeRegistryEntry::getRegistryName)//
@@ -141,5 +148,4 @@ public class ExtremeCrafting {
         }
         return ingredients;
     }
-
 }

@@ -1,10 +1,13 @@
 package morph.avaritia.tile;
 
-import codechicken.lib.packet.PacketCustom;
-import codechicken.lib.util.ItemUtils;
-import morph.avaritia.handler.ConfigHandler;
-import morph.avaritia.recipe.AvaritiaRecipeManager;
-import morph.avaritia.recipe.compressor.ICompressorRecipe;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -16,23 +19,22 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
+import codechicken.lib.packet.PacketCustom;
+import codechicken.lib.util.ItemUtils;
+import morph.avaritia.handler.ConfigHandler;
+import morph.avaritia.recipe.AvaritiaRecipeManager;
+import morph.avaritia.recipe.compressor.ICompressorRecipe;
 
 public class TileNeutroniumCompressor extends TileMachineBase implements ISidedInventory {
 
-    //Number of ticks needed to consume an item.
+    // Number of ticks needed to consume an item.
     public static int CONSUME_TICKS = ConfigHandler.compressor_duration;
 
-    //The consumption progress.
+    // The consumption progress.
     private int consumption_progress;
-    //The production progress.
+    // The production progress.
     private int compression_progress;
-    //What we are creating.
+    // What we are creating.
     private ItemStack target_stack = ItemStack.EMPTY;
     private int compression_target;
 
@@ -46,7 +48,6 @@ public class TileNeutroniumCompressor extends TileMachineBase implements ISidedI
 
     @Override
     public void doWork() {
-
         boolean dirty = false;
 
         if (target_stack.isEmpty()) {
@@ -96,12 +97,13 @@ public class TileNeutroniumCompressor extends TileMachineBase implements ISidedI
         if (input.isEmpty()) {
             return false;
         }
-        if(!target_stack.isEmpty()) {
+        if (!target_stack.isEmpty()) {
             ICompressorRecipe recipe = AvaritiaRecipeManager.getCompressorRecipeFromResult(target_stack);
             return recipe.matches(input);
         }
         ICompressorRecipe recipe = AvaritiaRecipeManager.getCompressorRecipeFromInput(input);
-        return recipe != null && (output.isEmpty() || (recipe.getResult().isItemEqual(output) && output.getCount() < Math.min(output.getMaxStackSize(), getInventoryStackLimit())));
+        return recipe != null && (output.isEmpty() || (recipe.getResult().isItemEqual(output) &&
+                output.getCount() < Math.min(output.getMaxStackSize(), getInventoryStackLimit())));
     }
 
     @Override
@@ -120,7 +122,8 @@ public class TileNeutroniumCompressor extends TileMachineBase implements ISidedI
             if (!target_stack.isEmpty()) {
                 ings = AvaritiaRecipeManager.getCompressorRecipeFromResult(target_stack).getIngredients();
             }
-            List<ItemStack> inputs = ings.stream().flatMap(l -> Arrays.stream(l.getMatchingStacks())).collect(Collectors.toList());
+            List<ItemStack> inputs = ings.stream().flatMap(l -> Arrays.stream(l.getMatchingStacks()))
+                    .collect(Collectors.toList());
 
             packet.writeInt(inputs.size());
             for (ItemStack input : inputs) {
@@ -186,7 +189,7 @@ public class TileNeutroniumCompressor extends TileMachineBase implements ISidedI
         compression_progress = tag.getInteger("compression_progress");
 
         target_stack = new ItemStack(tag.getCompoundTag("target"));
-        //Calc compression target.
+        // Calc compression target.
         if (!target_stack.isEmpty()) {
             compression_target = AvaritiaRecipeManager.getCompressorRecipeFromResult(target_stack).getCost();
         }
@@ -292,7 +295,8 @@ public class TileNeutroniumCompressor extends TileMachineBase implements ISidedI
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer player) {
-        return world.getTileEntity(getPos()) == this && player.getDistanceSq(getPos().getX() + 0.5D, getPos().getY() + 0.5D, getPos().getZ() + 0.5D) <= 64.0D;
+        return world.getTileEntity(getPos()) == this &&
+                player.getDistanceSq(getPos().getX() + 0.5D, getPos().getY() + 0.5D, getPos().getZ() + 0.5D) <= 64.0D;
     }
 
     @Override

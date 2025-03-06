@@ -1,8 +1,5 @@
 package morph.avaritia.block;
 
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.registration.IModelRegister;
-import morph.avaritia.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,12 +19,17 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.registration.IModelRegister;
+import morph.avaritia.init.ModBlocks;
+
 /**
  * Created by covers1624 on 11/04/2017.
  */
 public class BlockResource extends Block implements IModelRegister {
 
-    public static final PropertyEnum<BlockResource.Type> VARIANT = PropertyEnum.create("type", BlockResource.Type.class);
+    public static final PropertyEnum<BlockResource.Type> VARIANT = PropertyEnum.create("type",
+            BlockResource.Type.class);
 
     public BlockResource() {
         super(Material.IRON);
@@ -47,9 +49,9 @@ public class BlockResource extends Block implements IModelRegister {
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-        //TODO
+        // TODO
         for (int i = 0; i < Type.METADATA_LOOKUP.length; i++) {
             list.add(new ItemStack(this, 1, i));
         }
@@ -81,9 +83,11 @@ public class BlockResource extends Block implements IModelRegister {
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public void registerModels() {
-        ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(ModBlocks.resource), stack -> new ModelResourceLocation("avaritia:block_resource", "type=" + BlockResource.Type.byMetadata(stack.getMetadata()).getName()));
+        ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(ModBlocks.resource),
+                stack -> new ModelResourceLocation("avaritia:block_resource",
+                        "type=" + BlockResource.Type.byMetadata(stack.getMetadata()).getName()));
     }
 
     public static enum Type implements IStringSerializable {
@@ -97,24 +101,20 @@ public class BlockResource extends Block implements IModelRegister {
         private final String name;
 
         Type(int metadata, String name) {
-
             this.metadata = metadata;
             this.name = name;
         }
 
         public int getMetadata() {
-
             return metadata;
         }
 
         @Override
         public String getName() {
-
             return name;
         }
 
         public static Type byMetadata(int metadata) {
-
             if (metadata < 0 || metadata >= METADATA_LOOKUP.length) {
                 metadata = 0;
             }
@@ -127,5 +127,4 @@ public class BlockResource extends Block implements IModelRegister {
             }
         }
     }
-
 }

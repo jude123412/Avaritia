@@ -1,7 +1,5 @@
 package morph.avaritia.tile;
 
-import codechicken.lib.util.ArrayUtils;
-import codechicken.lib.util.BlockUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -11,6 +9,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+
+import codechicken.lib.util.ArrayUtils;
+import codechicken.lib.util.BlockUtils;
 
 public class TileDireCraftingTable extends TileBase implements IInventory, ISidedInventory {
 
@@ -77,7 +78,6 @@ public class TileDireCraftingTable extends TileBase implements IInventory, ISide
 
     @Override
     public ItemStack decrStackSize(int slot, int decrement) {
-
         if (slot == 0) {
             if (!result.isEmpty()) {
                 for (int x = 1; x <= matrix.length; x++) {
@@ -139,12 +139,10 @@ public class TileDireCraftingTable extends TileBase implements IInventory, ISide
     }
 
     @Override
-    public void openInventory(EntityPlayer player) {
-    }
+    public void openInventory(EntityPlayer player) {}
 
     @Override
-    public void closeInventory(EntityPlayer player) {
-    }
+    public void closeInventory(EntityPlayer player) {}
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer player) {
@@ -153,7 +151,6 @@ public class TileDireCraftingTable extends TileBase implements IInventory, ISide
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack) {
-
         return false;
     }
 
@@ -210,8 +207,7 @@ public class TileDireCraftingTable extends TileBase implements IInventory, ISide
     }
 
     @Override
-    public void setField(int id, int value) {
-    }
+    public void setField(int id, int value) {}
 
     @Override
     public int getField(int id) {
@@ -225,5 +221,4 @@ public class TileDireCraftingTable extends TileBase implements IInventory, ISide
             matrix[x] = ItemStack.EMPTY;
         }
     }
-
 }

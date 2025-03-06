@@ -1,5 +1,13 @@
 package morph.avaritia.compat.crafttweaker;
 
+import java.util.stream.Collectors;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
@@ -9,22 +17,15 @@ import crafttweaker.api.minecraft.CraftTweakerMC;
 import morph.avaritia.recipe.AvaritiaRecipeManager;
 import morph.avaritia.recipe.compressor.CompressorRecipe;
 import morph.avaritia.recipe.compressor.ICompressorRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.stream.Collectors;
 
 /**
  * Created by covers1624 on 19/12/2017.
  */
 @ZenRegister
-@ZenClass ("mods.avaritia.Compressor")
+@ZenClass("mods.avaritia.Compressor")
 public class Compressor {
 
     @ZenMethod
@@ -45,7 +46,8 @@ public class Compressor {
     @ZenMethod
     public static void remove(IItemStack stack) {
         ItemStack check = CraftTweakerMC.getItemStack(stack);
-        RemoveRecipeAction<ICompressorRecipe> action = new RemoveRecipeAction<>("Compressor", AvaritiaRecipeManager.COMPRESSOR_RECIPES,//
+        RemoveRecipeAction<ICompressorRecipe> action = new RemoveRecipeAction<>("Compressor",
+                AvaritiaRecipeManager.COMPRESSOR_RECIPES,//
                 recipes -> recipes.stream()//
                         .filter(recipe -> recipe.getResult().isItemEqual(check))//
                         .map(IForgeRegistryEntry::getRegistryName)//
@@ -56,7 +58,8 @@ public class Compressor {
 
     @ZenMethod
     public static void removeAll() {
-        RemoveRecipeAction<ICompressorRecipe> action = new RemoveRecipeAction<>("All Comoressor", AvaritiaRecipeManager.COMPRESSOR_RECIPES,//
+        RemoveRecipeAction<ICompressorRecipe> action = new RemoveRecipeAction<>("All Comoressor",
+                AvaritiaRecipeManager.COMPRESSOR_RECIPES,//
                 recipes -> recipes.stream()//
                         .map(IForgeRegistryEntry::getRegistryName)//
                         .collect(Collectors.toList()),//
@@ -65,10 +68,10 @@ public class Compressor {
     }
 
     private static IAction createAction(ICompressorRecipe recipe) {
-        AddRecipeAction<ICompressorRecipe> action = new AddRecipeAction<>(recipe, AvaritiaRecipeManager.COMPRESSOR_RECIPES);
+        AddRecipeAction<ICompressorRecipe> action = new AddRecipeAction<>(recipe,
+                AvaritiaRecipeManager.COMPRESSOR_RECIPES);
         action.setDesc("Compressor");
         action.setOutputAccessor(r -> r.getResult().getDisplayName());
         return action;
     }
-
 }

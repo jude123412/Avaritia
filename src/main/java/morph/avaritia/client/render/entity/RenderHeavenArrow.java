@@ -29,8 +29,10 @@ public class RenderHeavenArrow extends RenderArrow<EntityArrow> {
         bindEntityTexture(entityArrow);
         GlStateManager.pushMatrix();
         GlStateManager.translate((float) x, (float) y, (float) z);
-        GlStateManager.rotate(entityArrow.prevRotationYaw + (entityArrow.rotationYaw - entityArrow.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate(entityArrow.prevRotationPitch + (entityArrow.rotationPitch - entityArrow.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
+        GlStateManager.rotate(entityArrow.prevRotationYaw +
+                (entityArrow.rotationYaw - entityArrow.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(entityArrow.prevRotationPitch +
+                (entityArrow.rotationPitch - entityArrow.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
         Tessellator tess = Tessellator.getInstance();
         BufferBuilder buffer = tess.getBuffer();
 

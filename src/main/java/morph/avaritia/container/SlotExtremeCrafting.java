@@ -1,12 +1,13 @@
 package morph.avaritia.container;
 
-import morph.avaritia.recipe.AvaritiaRecipeManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+
+import morph.avaritia.recipe.AvaritiaRecipeManager;
 
 /**
  * Created by brandon3055 on 18/02/2017.
@@ -17,7 +18,8 @@ public class SlotExtremeCrafting extends Slot {
     private final EntityPlayer player;
     private int amountCrafted;
 
-    public SlotExtremeCrafting(EntityPlayer player, InventoryCrafting craftingInventory, IInventory inventoryIn, int slotIndex, int xPosition, int yPosition) {
+    public SlotExtremeCrafting(EntityPlayer player, InventoryCrafting craftingInventory, IInventory inventoryIn,
+                               int slotIndex, int xPosition, int yPosition) {
         super(inventoryIn, slotIndex, xPosition, yPosition);
         this.player = player;
         craftMatrix = craftingInventory;
@@ -47,7 +49,8 @@ public class SlotExtremeCrafting extends Slot {
     protected void onCrafting(ItemStack stack) {
         if (amountCrafted > 0) {
             stack.onCrafting(player.world, player, amountCrafted);
-            net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerCraftingEvent(player, stack, craftMatrix);
+            net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerCraftingEvent(player, stack,
+                    craftMatrix);
         }
 
         amountCrafted = 0;
@@ -72,12 +75,14 @@ public class SlotExtremeCrafting extends Slot {
             if (!itemstack1.isEmpty()) {
                 if (itemstack.isEmpty()) {
                     craftMatrix.setInventorySlotContents(i, itemstack1);
-                } else if (ItemStack.areItemsEqual(itemstack, itemstack1) && ItemStack.areItemStackTagsEqual(itemstack, itemstack1)) {
-                    itemstack1.grow(itemstack.getCount());
-                    craftMatrix.setInventorySlotContents(i, itemstack1);
-                } else if (!player.inventory.addItemStackToInventory(itemstack1)) {
-                    player.dropItem(itemstack1, false);
-                }
+                } else if (ItemStack.areItemsEqual(itemstack, itemstack1) &&
+                        ItemStack.areItemStackTagsEqual(itemstack, itemstack1)) {
+                            itemstack1.grow(itemstack.getCount());
+                            craftMatrix.setInventorySlotContents(i, itemstack1);
+                        } else
+                    if (!player.inventory.addItemStackToInventory(itemstack1)) {
+                        player.dropItem(itemstack1, false);
+                    }
             }
         }
         return stack;

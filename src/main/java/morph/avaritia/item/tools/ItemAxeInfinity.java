@@ -1,20 +1,15 @@
 /*
  *
  * Code blatantly jacked from Vazkii
- * Get the original here: https://github.com/Vazkii/Botania/blob/master/src/main/java/vazkii/botania/common/item/equipment/tool/terrasteel/ItemTerraAxe.java
+ * Get the original here:
+ * https://github.com/Vazkii/Botania/blob/master/src/main/java/vazkii/botania/common/item/equipment/tool/terrasteel/
+ * ItemTerraAxe.java
  */
-
 package morph.avaritia.item.tools;
 
-import codechicken.lib.raytracer.RayTracer;
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.ICosmicRenderItem;
-import morph.avaritia.entity.EntityImmortalItem;
-import morph.avaritia.handler.AvaritiaEventHandler;
-import morph.avaritia.init.AvaritiaTextures;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.util.TextUtils;
-import morph.avaritia.util.ToolHelper;
+import java.util.HashSet;
+import java.util.List;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
@@ -35,18 +30,25 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.List;
+import codechicken.lib.raytracer.RayTracer;
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.ICosmicRenderItem;
+import morph.avaritia.entity.EntityImmortalItem;
+import morph.avaritia.handler.AvaritiaEventHandler;
+import morph.avaritia.init.AvaritiaTextures;
+import morph.avaritia.init.ModItems;
+import morph.avaritia.util.ToolHelper;
 
 public class ItemAxeInfinity extends ItemAxe implements ICosmicRenderItem {
 
-    private static final ToolMaterial opAxe = EnumHelper.addToolMaterial("INFINITY_PICKAXE", 32, 9999, 9999F, 20.0F, 200);
+    private static final ToolMaterial opAxe = EnumHelper.addToolMaterial("INFINITY_PICKAXE", 32, 9999, 9999F, 20.0F,
+            200);
 
     public ItemAxeInfinity() {
         super(opAxe, 20.0F, -3.0F);
@@ -58,7 +60,8 @@ public class ItemAxeInfinity extends ItemAxe implements ICosmicRenderItem {
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (GuiScreen.isShiftKeyDown()) {
-            tooltip.add(TextFormatting.DARK_GRAY + "" + I18n.translateToLocal("tooltip." + getTranslationKey(stack) + ".desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + ".desc"));
         } else {
             tooltip.add(TextFormatting.GRAY + "" + I18n.translateToLocal("tooltip.item.avaritia:tool.desc"));
         }
@@ -92,14 +95,14 @@ public class ItemAxeInfinity extends ItemAxe implements ICosmicRenderItem {
             BlockPos min = new BlockPos(-range, -3, -range);
             BlockPos max = new BlockPos(range, range * 2 - 3, range);
 
-            ToolHelper.aoeBlocks(player, stack, world, player.getPosition(), min, max, null, ToolHelper.materialsAxe, false);
+            ToolHelper.aoeBlocks(player, stack, world, player.getPosition(), min, max, null, ToolHelper.materialsAxe,
+                    false);
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
     @Override
     public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
-
         RayTraceResult traceResult = RayTracer.retrace(player, 10, true);
         if (traceResult != null) {
             breakOtherBlock(player, stack, pos, traceResult.sideHit);
@@ -125,7 +128,7 @@ public class ItemAxeInfinity extends ItemAxe implements ICosmicRenderItem {
     }
 
     @Override
-    @SideOnly (Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack par1ItemStack) {
         return false;
     }

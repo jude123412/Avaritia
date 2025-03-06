@@ -1,11 +1,7 @@
 package morph.avaritia.init;
 
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.registration.IModelRegister;
-import morph.avaritia.block.*;
-import morph.avaritia.tile.TileDireCraftingTable;
-import morph.avaritia.tile.TileNeutronCollector;
-import morph.avaritia.tile.TileNeutroniumCompressor;
+import java.util.function.Consumer;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -13,7 +9,12 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import java.util.function.Consumer;
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.registration.IModelRegister;
+import morph.avaritia.block.*;
+import morph.avaritia.tile.TileDireCraftingTable;
+import morph.avaritia.tile.TileNeutronCollector;
+import morph.avaritia.tile.TileNeutroniumCompressor;
 
 public class ModBlocks {
 
@@ -74,5 +75,4 @@ public class ModBlocks {
         registerItem(itemBlock.setRegistryName(block.getRegistryName()));
         return itemBlock;
     }
-
 }
