@@ -58,6 +58,8 @@ item.avaritia:matter_cluster.full.name=Critical Matter Cluster
 # Integration
 item.avaritia:armok_orb.name=Armok's Blood Orb
 item.avaritia:darkhold.name=Darkhold
+tc.aspect.ascension=God, Heaven, Transcendent
+tc.aspect.terminus=End, Apocalypse, Extinction
 
 # Thaumcraft research
 avaritia.research.darkhold.title=The Darkhold
@@ -128,4 +130,3 @@ death.attack.infinity.1=%1$s was sliced to ribbons by %2$s
 death.attack.infinity.2=%1$s was excised from existence by %2$s
 death.attack.infinity.3=%1$s was overkilled by %2$s
 death.attack.infinity.4=%1$s was annihilated by %2$s
-tc.research_category.INFINITY=Infinity

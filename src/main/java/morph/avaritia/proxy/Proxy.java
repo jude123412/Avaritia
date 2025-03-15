@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -49,7 +50,7 @@ public class Proxy {
         }
 
         try {
-            Thaumcraft.registerItems();
+            Thaumcraft.preInit();
         } catch (Throwable e) {
             Lumberjack.log(Level.INFO, "Avaritia decided to research everything instead.");
             e.printStackTrace();
@@ -68,6 +69,8 @@ public class Proxy {
                 "HeavenArrow", 3, Avaritia.instance, 32, 1, true);
         EntityRegistry.registerModEntity(new ResourceLocation("avaritia:heaven_sub_arrow"), EntityHeavenSubArrow.class,
                 "HeavenSubArrow", 4, Avaritia.instance, 32, 2, true);
+
+
     }
 
     public void init(FMLInitializationEvent event) {
@@ -79,7 +82,9 @@ public class Proxy {
         }
     }
 
-    public void postInit(FMLPostInitializationEvent event) {}
+    public void postInit(FMLPostInitializationEvent event) {
+
+    }
 
     public static void initRecipes(RegistryEvent.Register<IRecipe> event) {
         try {

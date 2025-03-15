@@ -1,8 +1,9 @@
 package morph.avaritia;
 
 import static morph.avaritia.Avaritia.*;
-import static morph.avaritia.compat.Compat.*;
 
+import morph.avaritia.compat.thaumcraft.Thaumcraft;
+import morph.avaritia.util.Lumberjack;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -10,6 +11,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -25,6 +27,8 @@ import morph.avaritia.init.ModItems;
 import morph.avaritia.proxy.Proxy;
 import morph.avaritia.recipe.AvaritiaRecipeManager;
 import morph.avaritia.util.CompressorBalanceCalculator;
+import org.apache.logging.log4j.Level;
+import thaumcraft.api.aspects.AspectRegistryEvent;
 
 @Mod(modid = MOD_ID,
      name = MOD_NAME,
@@ -69,6 +73,17 @@ public class Avaritia {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+    }
+
+    @SubscribeEvent
+    @Optional.Method(modid = "thaumcraft")
+    public void registerAspectItems(AspectRegistryEvent event) {
+        try {
+            Thaumcraft.aspectInit();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia decided that aspects aren't important");
+            e.printStackTrace();
+        }
     }
 
     @SubscribeEvent
