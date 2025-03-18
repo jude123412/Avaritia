@@ -256,6 +256,19 @@
 				"type": "minecraft:item",
 				"item": "#iridium_singularity"
 			}
+		},
+		{
+			"type": "codechickenlib:conditional",
+			"conditions": [
+				{
+					"type": "avaritia:mod_exists",
+					"mod": "thaumcraft"
+				}
+			],
+			"pass": {
+				"type": "forge:ore_dict",
+				"ore": "pearlExtreme"
+			}
 		}
 	]
 }

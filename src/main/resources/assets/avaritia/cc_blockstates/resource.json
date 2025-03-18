@@ -78,6 +78,11 @@
 				"textures": {
 					"layer0": "items/darkhold"
 				}
+			},
+			"extremely_primordial_pearl": {
+				"textures": {
+					"layer0": "items/big_pearl"
+				}
 			}
 		},
 		"matter_cluster": {

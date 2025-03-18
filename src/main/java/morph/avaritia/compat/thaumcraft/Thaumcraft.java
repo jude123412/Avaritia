@@ -6,11 +6,13 @@ import static morph.avaritia.init.ModItems.registerItem;
 
 import morph.avaritia.init.ModBlocks;
 import morph.avaritia.init.ModItems;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 
 import morph.avaritia.Avaritia;
+import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectEventProxy;
@@ -27,12 +29,16 @@ public class Thaumcraft {
 
 
     public static ItemDarkhold darkhold;
+    public static ItemBigPearl bigPearl;
 
     public static void preInit() throws ItemNotFoundException {
         ULTRA_DEATH = new Aspect("terminus", 0xb90000, new Aspect[]{Aspect.DEATH, Aspect.ELDRITCH}, new ResourceLocation("avaritia", "textures/misc/terminus.png"), 771);
         LIMITLESS = new Aspect("ascension", 0x000087, new Aspect[]{Aspect.DESIRE, ULTRA_DEATH}, new ResourceLocation("avaritia", "textures/misc/ascension.png"), 771);
 
         darkhold = registerItem(new ItemDarkhold());
+        bigPearl = registerItem(new ItemBigPearl());
+
+        OreDictionary.registerOre("pearlExtreme", new ItemStack(bigPearl, 1));
     }
 
     public static void registerInit() throws ItemNotFoundException {
@@ -40,8 +46,8 @@ public class Thaumcraft {
                 "DARKHOLD",
                 new ItemStack(darkhold),
                 12,
-                new AspectList().add(Aspect.MAGIC, 500).add(Aspect.AURA, 250).add(Aspect.FLUX, 250)
-                        .add(Aspect.DARKNESS, 250).add(Aspect.ELDRITCH, 250).add(Aspect.SOUL, 250).add(Aspect.MAN, 250),
+                new AspectList().add(Aspect.MAGIC, 500).add(Aspect.AURA, 250).add(Aspect.FLUX, 250).add(Aspect.DARKNESS, 250).add(Aspect.ELDRITCH, 250)
+                        .add(Aspect.SOUL, 250).add(Aspect.MAN, 250).add(ULTRA_DEATH, 125).add(LIMITLESS, 125),
                 Ingredient.fromItem(ItemsTC.thaumonomicon),
                 "gemInfinityCatalyst",
                 "gemInfinityCatalyst",
@@ -53,6 +59,21 @@ public class Thaumcraft {
                 "blockCosmicNeutronium",
                 Ingredient.fromItem(ItemsTC.primordialPearl),
                 Ingredient.fromItem(ItemsTC.primordialPearl)));
+
+        ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation(Avaritia.MOD_ID, "big_pearl"), new InfusionRecipe(
+                "BIG_PEARL",
+                new ItemStack(bigPearl),
+                12,
+                new AspectList().add(Aspect.AIR, 250).add(Aspect.FIRE, 250).add(Aspect.WATER, 250).add(Aspect.EARTH, 250).add(Aspect.ORDER, 250).add(Aspect.ENTROPY, 250).add(Aspect.MAGIC, 250).add(Aspect.ELDRITCH, 250).add(ULTRA_DEATH, 125),
+                Ingredient.fromItem(ItemsTC.primordialPearl),
+                Ingredient.fromItem(ItemsTC.primordialPearl),
+                Ingredient.fromItem(ItemsTC.primordialPearl),
+                Ingredient.fromItem(ItemsTC.primordialPearl),
+                Ingredient.fromItem(ItemsTC.primordialPearl),
+                Ingredient.fromItem(ItemsTC.primordialPearl),
+                Ingredient.fromItem(ItemsTC.primordialPearl),
+                Ingredient.fromItem(ItemsTC.primordialPearl)
+        ));
 
         ThaumcraftApi.registerResearchLocation(new ResourceLocation(Avaritia.MOD_ID, "research/research.json"));
     }

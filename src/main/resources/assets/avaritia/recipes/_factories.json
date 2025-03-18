@@ -1,5 +1,7 @@
 {
 	"conditions": {
-		"config": "morph.avaritia.recipe.ConfigConditionalFactory"
+		"config": "morph.avaritia.recipe.ConfigConditionalFactory",
+		"mod_exists": "morph.avaritia.recipe.ModExistsConditionalFactory",
+		"ore_exists": "morph.avaritia.recipe.OreExistsSafeConditionalFactory"
 	}
 }

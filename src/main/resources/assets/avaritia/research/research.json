@@ -3,19 +3,53 @@
       {
         "key": "DARKHOLD",
         "name": "avaritia.research.darkhold.title",
-        "icons": ["avaritia:textures/items/darkhold.png"], "location": [-3, 3],
+        "icons": ["avaritia:textures/items/darkhold.png"],
+        "location": [-3, 3],
         "category": "ELDRITCH",
         "parents": ["VOIDSEERPEARL", "VOIDROBEARMOR"],
-        "meta": ["ROUND"],
+        "meta": ["ROUND", "HIDDEN"],
         "stages": [
           {
-            "text": "avaritia.research.darkhold.stage.1",
-            "required_knowledge": ["OBSERVATION;ELDRITCH;6", "THEORY;ELDRITCH;6", "THEORY;INFUSION;6"],
-            "warp": 20
+            "text": "avaritia.research.darkhold.text",
+            "required_research":["!terminus"],
+            "required_knowledge": [
+              "OBSERVATION;ELDRITCH;6",
+              "THEORY;ELDRITCH;6",
+              "THEORY;INFUSION;6"
+            ]
           },
           {
-            "text": "avaritia.research.darkhold.stage.2",
-            "recipes": ["avaritia:darkhold"]
+            "text": "avaritia.research.darkhold.complete.text",
+            "recipes": ["avaritia:darkhold"],
+            "warp": 20
+          }
+        ]
+      },
+      {
+        "key": "BIG_PEARL",
+        "name": "avaritia.research.big_pearl.title",
+        "category": "BASICS",
+        "meta": ["ROUND", "HIDDEN"],
+        "icons": ["avaritia:extremely_primordial_pearl"],
+        "parents": ["PRIMPEARL"],
+        "location": [-9, 6],
+        "stages": [
+          {
+            "text": "avaritia.research.big_pearl.text",
+            "required_research":["!terminus"],
+            "required_knowledge": [
+              "THEORY;BASICS;6",
+              "THEORY;ALCHEMY;6",
+              "THEORY;AUROMANCY;6",
+              "THEORY;ARTIFICE;6",
+              "THEORY;INFUSION;6",
+              "THEORY;ELDRITCH;6"
+            ]
+          },
+          {
+            "text": "avaritia.research.big_pearl.complete.text",
+            "recipes": ["avaritia:big_pearl"],
+            "warp": 3
           }
         ]
       }
