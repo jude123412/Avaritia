@@ -112,7 +112,7 @@
               "THEORY;ELDRITCH;6"
             ],
             "required_item": [
-              "thaumcraft:caster_basic;1;0"
+              "thaumcraft:caster_basic;"
             ]
           },
           {
