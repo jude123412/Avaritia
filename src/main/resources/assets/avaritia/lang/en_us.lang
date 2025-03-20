@@ -59,16 +59,21 @@ item.avaritia:matter_cluster.full.name=Critical Matter Cluster
 item.avaritia:armok_orb.name=Armok's Blood Orb
 item.avaritia:darkhold.name=Darkhold
 item.avaritia:extremely_primordial_pearl.name=Extremly Primordial Pearl
+item.avaritia:akashic_record.name=Akashic Record
 tc.aspect.ascension=God, Heaven, Transcendent
 tc.aspect.terminus=End, Apocalypse, Extinction
 
 # Thaumcraft research
 avaritia.research.darkhold.title=The Darkhold
-avaritia.research.darkhold.text=The delicate balance between Light and Dark, long a source of both fascination and fear, revealed a new truth to me. By delving into the forbidden arts, I discovered a profound understanding of Warp's chaotic energies. This knowledge, forged in the crucible of darkness, unveiled a method to both cleanse and amplify its influence, a power capable of shaping the very fabric of reality itself.
-avaritia.research.darkhold.complete.text=This tome, a sinister artifact crafted by demonic hands, holds the power to manipulate the Warp itself. A simple right-click upon its leather-bound cover unleashes a torrent of chaotic energy, amplifying the Warp's influence around you. But beware, for a shift-right-click can reverse this process, purging the accumulated Warp with a chillingly swiftness.
+avaritia.research.darkhold.text=The delicate balance between Light and Dark, long a source of both fascination and fear, revealed a new truth to me.<BR>By delving into the forbidden arts, I discovered a profound understanding of Warp's chaotic energies.<BR>This knowledge, forged in the crucible of darkness, unveiled a method to both cleanse and amplify its influence, a power capable of shaping the very fabric of reality itself.
+avaritia.research.darkhold.complete.text=This tome, a sinister artifact crafted by demonic hands, holds the power to manipulate the Warp itself.<BR>A simple right-click upon its leather-bound cover unleashes a torrent of chaotic energy, amplifying the Warp's influence around you. But beware, for a shift-right-click can reverse this process, purging the accumulated Warp with a chillingly swiftness.
 avaritia.research.big_pearl.title=Extremely Primordial Pearl
-avaritia.research.big_pearl.text=The Primordial Pearl, a treasure of unparalleled beauty, pulsed with a subtle magic in my palm. Its perfectly formed structure, a reflection of the Primordial Origin itself, resonated with an internal harmony, each aspect interacting without discord. As I manipulated it, waves of energy emanated from its surface, a testament to the vibrant dance of its internal structure. Gazing at the pearl, I couldn't help but wonder, "Is this the very essence of the universe in its nascent form?" But a nagging thought lingered: "Is this pearl... truly large enough?"
-avaritia.research.big_pearl.complete.text=My heart pounded with a mixture of excitement and trepidation as I gathered the Primordial Pearls, their delicate beauty a testament to the ancient power they held. With a surge of raw magic, I forced them to merge, their essence swirling and coalescing in a dazzling spectacle of light and energy. When the fusion subsided, a single, magnificent pearl lay before me, its radiance surpassing even the combined brilliance of its predecessors. It was a breathtaking sight, a testament to the power I had unleashed. But the question remained: what extraordinary abilities did this newly formed pearl possess?
+avaritia.research.big_pearl.text=The Primordial Pearl, a treasure of unparalleled beauty, pulsed with a subtle magic in my palm.<BR>Its perfectly formed structure, a reflection of the Primordial Origin itself, resonated with an internal harmony, each aspect interacting without discord.<BR>As I manipulated it, waves of energy emanated from its surface, a testament to the vibrant dance of its internal structure.<BR>Gazing at the pearl, I couldn't help but wonder, "Is this the very essence of the universe in its nascent form?" But a nagging thought lingered: "Is this pearl... truly large enough?"
+avaritia.research.big_pearl.complete.text=My heart pounded with a mixture of excitement and trepidation as I gathered the Primordial Pearls, their delicate beauty a testament to the ancient power they held.<BR>With a surge of raw magic, I forced them to merge, their essence swirling and coalescing in a dazzling spectacle of light and energy.<BR>When the fusion subsided, a single, magnificent pearl lay before me, its radiance surpassing even the combined brilliance of its predecessors.<BR>It was a breathtaking sight, a testament to the power I had unleashed. But the question remained: what extraordinary abilities did this newly formed pearl possess?
+avaritia.research.akashicrecord.title=Akashic Record
+avaritia.research.akashicrecord.text=The Thaumonomicon, a tome whispered about in hushed tones, lay open before me. Its pages, filled with intricate hieroglyphs, seemed to pulse with an ancient power.<BR>These symbols, a language older than time itself, held secrets whispered in the very fabric of reality.<BR>They spoke of a primordial knowledge, a truth encoded in the Akashic Records, the cosmic library that holds the echoes of every thought and action.But what did it all mean? Could these cryptic symbols truly hold the key to understanding the universe's deepest mysteries? Or were they simply a relic of a bygone era, a testament to the human tendency to find patterns in the chaos?
+avaritia.research.akashicrecord.complete.text="Master," I breathed, a wave of understanding washing over me. "It's true. Everything I see, everything I can comprehend, everything I can't... it's all Prajna. It's all ignorance."<BR>The tablet from Heaven, its surface etched with celestial script, pulsed with an otherworldly energy.<BR>As I absorbed its wisdom, the veil of ignorance lifted, revealing the tapestry of existence in its entirety. The past, present, and future, all unfolded before me, a symphony of cause and effect.<BR>I now possessed a knowledge that dwarfed even the Gods themselves, a truth so vast it defied comprehension. But even with this newfound understanding, a single question remained: What does it all mean?
+
 ##############
 #   Blocks   #
 ##############
@@ -118,6 +123,7 @@ tooltip.item.avaritia:infinity_shovel_1.desc=In Destroyer mode breaks a 16x16 ra
 tooltip.item.avaritia:infinity_shovel_2.desc=This excludes Axe or Pick blocks.
 tooltip.item.avaritia:infinity_sword.desc=Effectively preforms the /kill command on any entity you attack.
 tooltip.item.avaritia:darkhold.desc=Simply right click or shift right click to gain or subtract warp!
+tooltip.item.avaritia:akashic_record.desc=Right Click to gain Observation and Theory Notes from Thaumcraft.
 #
 # Other
 itemGroup.avaritia=Avaritia

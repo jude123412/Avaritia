@@ -52,6 +52,46 @@
             "warp": 3
           }
         ]
+      },
+      {
+        "key": "AKASHIC_RECORD",
+        "name": "avaritia.research.akashicrecord.title",
+        "category": "BASICS",
+        "icons": [
+          "avaritia:akashic_record"
+        ],
+        "meta": [
+          "ROUND", "HIDDEN"
+        ],
+        "parents": [
+          "PRIMPEARL"
+        ],
+        "location": [
+          -7, 6
+        ],
+        "stages": [
+          {
+            "text": "avaritia.research.akashicrecord.text",
+            "required_research":["!terminus"],
+            "required_knowledge": [
+              "OBSERVATION;BASICS;6",
+              "OBSERVATION;ALCHEMY;6",
+              "OBSERVATION;AUROMANCY;6",
+              "OBSERVATION;ARTIFICE;6",
+              "OBSERVATION;INFUSION;6",
+              "OBSERVATION;ELDRITCH;6"
+            ],
+            "required_item": [
+              "thaumcraft:curio;1;0", "thaumcraft:curio;1;1", "thaumcraft:curio;1;2", "thaumcraft:curio;1;3", "thaumcraft:curio;1;4", "thaumcraft:curio;1;5"
+            ]
+          },
+          {
+            "text": "avaritia.research.akashicrecord.complete.text",
+            "recipes": [
+              "avaritia:akashic_record"
+            ]
+          }
+        ]
       }
     ]
   }

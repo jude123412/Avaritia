@@ -30,6 +30,7 @@ public class Thaumcraft {
 
     public static ItemDarkhold darkhold;
     public static ItemBigPearl bigPearl;
+    public static ItemAkashicRecord akashicRecord;
 
     public static void preInit() throws ItemNotFoundException {
         ULTRA_DEATH = new Aspect("terminus", 0xb90000, new Aspect[]{Aspect.DEATH, Aspect.ELDRITCH}, new ResourceLocation("avaritia", "textures/misc/terminus.png"), 771);
@@ -37,6 +38,7 @@ public class Thaumcraft {
 
         darkhold = registerItem(new ItemDarkhold());
         bigPearl = registerItem(new ItemBigPearl());
+        akashicRecord = registerItem(new ItemAkashicRecord());
 
         OreDictionary.registerOre("pearlExtreme", new ItemStack(bigPearl, 1));
     }
@@ -73,6 +75,22 @@ public class Thaumcraft {
                 Ingredient.fromItem(ItemsTC.primordialPearl),
                 Ingredient.fromItem(ItemsTC.primordialPearl),
                 Ingredient.fromItem(ItemsTC.primordialPearl)
+        ));
+
+        ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation(Avaritia.MOD_ID, "akashic_record"), new InfusionRecipe(
+                "AKASHIC_RECORD",
+                new ItemStack(akashicRecord),
+                12,
+                new AspectList().add(Aspect.MIND, 250).add(Aspect.MAGIC, 250).add(ULTRA_DEATH, 125),
+                new ItemStack(ItemsTC.curio, 1, 4),
+                "ingotInfinity",
+                "ingotCrystalMatrix",
+                "ingotInfinity",
+                "ingotCrystalMatrix",
+                "ingotInfinity",
+                "ingotCrystalMatrix",
+                "ingotInfinity",
+                "ingotCrystalMatrix"
         ));
 
         ThaumcraftApi.registerResearchLocation(new ResourceLocation(Avaritia.MOD_ID, "research/research.json"));

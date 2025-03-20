@@ -83,6 +83,11 @@
 				"textures": {
 					"layer0": "items/big_pearl"
 				}
+			},
+			"akashic_record": {
+				"textures": {
+					"layer0": "items/akashic_record"
+				}
 			}
 		},
 		"matter_cluster": {
