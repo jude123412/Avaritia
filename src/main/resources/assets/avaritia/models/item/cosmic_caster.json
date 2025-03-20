@@ -1,0 +1,13 @@
+{
+    "parent": "thaumcraft:item/caster_gauntlet",
+    "overrides": [
+      {
+        "predicate": { "focus": 0 },
+        "model": "avaritia:item/cosmic_caster_model"
+      },
+      {
+        "predicate": { "focus": 1 },
+        "model": "avaritia:item/cosmic_caster_focus_model"
+      }
+    ]
+  }

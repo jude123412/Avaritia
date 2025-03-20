@@ -55,23 +55,15 @@
       },
       {
         "key": "AKASHIC_RECORD",
-        "name": "avaritia.research.akashicrecord.title",
+        "name": "avaritia.research.akashic_record.title",
         "category": "BASICS",
-        "icons": [
-          "avaritia:akashic_record"
-        ],
-        "meta": [
-          "ROUND", "HIDDEN"
-        ],
-        "parents": [
-          "PRIMPEARL"
-        ],
-        "location": [
-          -7, 6
-        ],
+        "icons": ["avaritia:akashic_record"],
+        "meta": ["ROUND", "HIDDEN"],
+        "parents": ["PRIMPEARL", "AKASHIC_RECORD"],
+        "location": [-7, 6],
         "stages": [
           {
-            "text": "avaritia.research.akashicrecord.text",
+            "text": "avaritia.research.akashic_record.text",
             "required_research":["!terminus"],
             "required_knowledge": [
               "OBSERVATION;BASICS;6",
@@ -86,9 +78,47 @@
             ]
           },
           {
-            "text": "avaritia.research.akashicrecord.complete.text",
+            "text": "avaritia.research.akashic_record.complete.text",
             "recipes": [
               "avaritia:akashic_record"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "COSMIC_CASTER",
+        "name": "avaritia.research.cosmic_caster.title",
+        "category": "AUROMANCY",
+        "icons": ["avaritia:textures/items/resource/diamond_lattice.png"],
+        "meta": ["ROUND", "HIDDEN"],
+        "parents": ["FOCUSGREATER", "VISBATTERY"],
+        "location": [-4,-4],
+        "stages": [
+          {
+            "text": "avaritia.research.cosmic_caster.text",
+            "required_research":["!terminus", "!ascension"],
+            "required_knowledge": [
+              "OBSERVATION;BASICS;6",
+              "OBSERVATION;ALCHEMY;6",
+              "OBSERVATION;AUROMANCY;6",
+              "OBSERVATION;ARTIFICE;6",
+              "OBSERVATION;INFUSION;6",
+              "OBSERVATION;ELDRITCH;6",
+              "THEORY;BASICS;6",
+              "THEORY;ALCHEMY;6",
+              "THEORY;AUROMANCY;6",
+              "THEORY;ARTIFICE;6",
+              "THEORY;INFUSION;6",
+              "THEORY;ELDRITCH;6"
+            ],
+            "required_item": [
+              "thaumcraft:caster_basic;1;0"
+            ]
+          },
+          {
+            "text": "avaritia.research.cosmic_caster.complete.text",
+            "recipes": [
+              "avaritia:cosmic_caster"
             ]
           }
         ]

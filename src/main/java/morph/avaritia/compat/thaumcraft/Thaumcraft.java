@@ -1,12 +1,10 @@
 package morph.avaritia.compat.thaumcraft;
 
 import static morph.avaritia.compat.Compat.*;
-import static morph.avaritia.compat.Compat.ThaumcraftIsLoaded;
 import static morph.avaritia.init.ModItems.registerItem;
 
 import morph.avaritia.init.ModBlocks;
 import morph.avaritia.init.ModItems;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -17,10 +15,8 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectEventProxy;
 import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.aspects.AspectRegistryEvent;
 import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.items.ItemsTC;
-import thaumcraft.api.research.ResearchCategories;
 
 public class Thaumcraft {
 
@@ -31,6 +27,7 @@ public class Thaumcraft {
     public static ItemDarkhold darkhold;
     public static ItemBigPearl bigPearl;
     public static ItemAkashicRecord akashicRecord;
+    public static ItemCosmicCaster cosmicCaster;
 
     public static void preInit() throws ItemNotFoundException {
         ULTRA_DEATH = new Aspect("terminus", 0xb90000, new Aspect[]{Aspect.DEATH, Aspect.ELDRITCH}, new ResourceLocation("avaritia", "textures/misc/terminus.png"), 771);
@@ -39,6 +36,7 @@ public class Thaumcraft {
         darkhold = registerItem(new ItemDarkhold());
         bigPearl = registerItem(new ItemBigPearl());
         akashicRecord = registerItem(new ItemAkashicRecord());
+        cosmicCaster = registerItem(new ItemCosmicCaster());
 
         OreDictionary.registerOre("pearlExtreme", new ItemStack(bigPearl, 1));
     }
@@ -47,7 +45,7 @@ public class Thaumcraft {
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation(Avaritia.MOD_ID, "darkhold"), new InfusionRecipe(
                 "DARKHOLD",
                 new ItemStack(darkhold),
-                12,
+                35,
                 new AspectList().add(Aspect.MAGIC, 500).add(Aspect.AURA, 250).add(Aspect.FLUX, 250).add(Aspect.DARKNESS, 250).add(Aspect.ELDRITCH, 250)
                         .add(Aspect.SOUL, 250).add(Aspect.MAN, 250).add(ULTRA_DEATH, 125).add(LIMITLESS, 125),
                 Ingredient.fromItem(ItemsTC.thaumonomicon),
@@ -65,7 +63,7 @@ public class Thaumcraft {
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation(Avaritia.MOD_ID, "big_pearl"), new InfusionRecipe(
                 "BIG_PEARL",
                 new ItemStack(bigPearl),
-                12,
+                20,
                 new AspectList().add(Aspect.AIR, 250).add(Aspect.FIRE, 250).add(Aspect.WATER, 250).add(Aspect.EARTH, 250).add(Aspect.ORDER, 250).add(Aspect.ENTROPY, 250).add(Aspect.MAGIC, 250).add(Aspect.ELDRITCH, 250).add(ULTRA_DEATH, 125),
                 Ingredient.fromItem(ItemsTC.primordialPearl),
                 Ingredient.fromItem(ItemsTC.primordialPearl),
@@ -80,7 +78,7 @@ public class Thaumcraft {
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation(Avaritia.MOD_ID, "akashic_record"), new InfusionRecipe(
                 "AKASHIC_RECORD",
                 new ItemStack(akashicRecord),
-                12,
+                20,
                 new AspectList().add(Aspect.MIND, 250).add(Aspect.MAGIC, 250).add(ULTRA_DEATH, 125),
                 new ItemStack(ItemsTC.curio, 1, 4),
                 "ingotInfinity",
@@ -91,6 +89,32 @@ public class Thaumcraft {
                 "ingotCrystalMatrix",
                 "ingotInfinity",
                 "ingotCrystalMatrix"
+        ));
+
+        ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation(Avaritia.MOD_ID, "cosmic_caster"), new InfusionRecipe(
+                "COSMIC_CASTER",
+                new ItemStack(cosmicCaster),
+                35,
+                new AspectList().add(Aspect.DESIRE, 500).add(Aspect.AURA, 500).add(Aspect.ENERGY, 500).add(Aspect.MAGIC, 250).add(Aspect.MAGIC, 250).add(Aspect.ELDRITCH, 250).add(LIMITLESS, 250).add(ULTRA_DEATH, 125),
+                new ItemStack(ItemsTC.casterBasic),
+                "blockInfinity",
+                "blockCrystalMatrix",
+                "blockInfinity",
+                "blockCrystalMatrix",
+                "blockInfinity",
+                "blockCrystalMatrix",
+                "blockInfinity",
+                "blockCrystalMatrix",
+                "blockInfinity",
+                "blockCrystalMatrix",
+                "blockCosmicNeutronium",
+                "blockCosmicNeutronium",
+                "blockCosmicNeutronium",
+                "blockCosmicNeutronium",
+                "blockCosmicNeutronium",
+                "blockCosmicNeutronium",
+                "blockCosmicNeutronium",
+                "blockCosmicNeutronium"
         ));
 
         ThaumcraftApi.registerResearchLocation(new ResourceLocation(Avaritia.MOD_ID, "research/research.json"));
