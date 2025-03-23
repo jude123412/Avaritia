@@ -18,6 +18,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -33,8 +34,12 @@ import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.util.ModHelper;
 import morph.avaritia.util.TextUtils;
+import thaumcraft.api.items.IGoggles;
+import thaumcraft.api.items.IVisDiscountGear;
 
-public class ItemArmorInfinity extends ItemArmor implements ICosmicRenderItem {
+@Optional.Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "thaumcraft")
+@Optional.Interface(iface = "thaumcraft.api.items.IGoggles", modid = "thaumcraft")
+public class ItemArmorInfinity extends ItemArmor implements IVisDiscountGear, IGoggles, ICosmicRenderItem {
 
     public static final ArmorMaterial infinite_armor = EnumHelper.addArmorMaterial("avaritia_infinity", "", 9999,
             new int[] { 6, 16, 12, 6 }, 1000, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
@@ -136,5 +141,17 @@ public class ItemArmorInfinity extends ItemArmor implements ICosmicRenderItem {
     @Override
     public float getMaskOpacity(ItemStack stack, @Nullable EntityLivingBase player) {
         return 1.0f;
+    }
+
+    @Override
+    @Optional.Method(modid = "thaumcraft")
+    public boolean showIngamePopups(ItemStack itemStack, EntityLivingBase entityLivingBase) {
+        return true;
+    }
+
+    @Override
+    @Optional.Method(modid = "thaumcraft")
+    public int getVisDiscount(ItemStack itemStack, EntityPlayer entityPlayer) {
+        return 20;
     }
 }
