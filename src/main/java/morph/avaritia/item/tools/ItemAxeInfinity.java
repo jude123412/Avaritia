@@ -47,11 +47,12 @@ import morph.avaritia.util.ToolHelper;
 
 public class ItemAxeInfinity extends ItemAxe implements ICosmicRenderItem {
 
-    private static final ToolMaterial opAxe = EnumHelper.addToolMaterial("INFINITY_PICKAXE", 32, 9999, 9999F, 20.0F,
+    private static final ToolMaterial TOOL_MATERIAL = EnumHelper.addToolMaterial("INFINITY_PICKAXE", 32, 9999, 9999F,
+            20.0F,
             200);
 
     public ItemAxeInfinity() {
-        super(opAxe, 20.0F, -3.0F);
+        super(TOOL_MATERIAL, 20.0F, -3.0F);
         setTranslationKey("avaritia:infinity_axe");
         setRegistryName("infinity_axe");
         setCreativeTab(Avaritia.tab);

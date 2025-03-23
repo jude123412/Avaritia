@@ -2,8 +2,6 @@ package morph.avaritia;
 
 import static morph.avaritia.Avaritia.*;
 
-import morph.avaritia.compat.thaumcraft.Thaumcraft;
-import morph.avaritia.util.Lumberjack;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -19,15 +17,18 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
+import org.apache.logging.log4j.Level;
+
 import codechicken.lib.CodeChickenLib;
 import codechicken.lib.gui.SimpleCreativeTab;
+import morph.avaritia.compat.thaumcraft.Thaumcraft;
 import morph.avaritia.init.FoodRecipes;
 import morph.avaritia.init.ModBlocks;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.proxy.Proxy;
 import morph.avaritia.recipe.AvaritiaRecipeManager;
 import morph.avaritia.util.CompressorBalanceCalculator;
-import org.apache.logging.log4j.Level;
+import morph.avaritia.util.Lumberjack;
 import thaumcraft.api.aspects.AspectRegistryEvent;
 
 @Mod(modid = MOD_ID,

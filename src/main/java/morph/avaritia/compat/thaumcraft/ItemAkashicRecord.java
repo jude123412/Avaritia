@@ -1,7 +1,8 @@
 package morph.avaritia.compat.thaumcraft;
 
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.registration.IModelRegister;
+import java.util.Collection;
+import java.util.List;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
@@ -15,13 +16,13 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.registration.IModelRegister;
 import thaumcraft.api.capabilities.IPlayerKnowledge;
 import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchCategory;
 import thaumcraft.common.lib.research.ResearchManager;
-
-import java.util.Collection;
-import java.util.List;
 
 public class ItemAkashicRecord extends Item implements IModelRegister {
 
@@ -34,7 +35,7 @@ public class ItemAkashicRecord extends Item implements IModelRegister {
 
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
-        if(!world.isRemote) {
+        if (!world.isRemote) {
             Collection<ResearchCategory> researchCategory = ResearchCategories.researchCategories.values();
             for (ResearchCategory catagory : researchCategory) {
                 ResearchManager.addKnowledge(player, IPlayerKnowledge.EnumKnowledgeType.OBSERVATION, catagory, 999);

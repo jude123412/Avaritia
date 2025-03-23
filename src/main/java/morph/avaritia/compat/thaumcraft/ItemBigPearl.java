@@ -1,11 +1,5 @@
 package morph.avaritia.compat.thaumcraft;
 
-import codechicken.lib.model.ModelRegistryHelper;
-import codechicken.lib.util.TransformUtils;
-import morph.avaritia.Avaritia;
-import morph.avaritia.api.IHaloRenderItem;
-import morph.avaritia.api.registration.IModelRegister;
-import morph.avaritia.client.render.item.HaloRenderItem;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -13,6 +7,13 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+
+import codechicken.lib.model.ModelRegistryHelper;
+import codechicken.lib.util.TransformUtils;
+import morph.avaritia.Avaritia;
+import morph.avaritia.api.IHaloRenderItem;
+import morph.avaritia.api.registration.IModelRegister;
+import morph.avaritia.client.render.item.HaloRenderItem;
 
 public class ItemBigPearl extends Item implements IModelRegister, IHaloRenderItem {
 
