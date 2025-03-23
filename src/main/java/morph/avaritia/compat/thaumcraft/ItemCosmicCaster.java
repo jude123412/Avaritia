@@ -37,6 +37,21 @@ public class ItemCosmicCaster extends ItemCaster implements IModelRegister {
         super("cosmic_caster", 0);
     }
 
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        ItemStack focus = this.getFocusStack(stack);
+        if (focus != null && !focus.isEmpty()) {
+            tooltip.add(TextFormatting.AQUA + I18n.translateToLocal("tc.vis.cost") +
+                    TextUtils.makeFabulous(" " + "0.0" + " " + I18n.translateToLocal("item.Focus.cost1")));
+        }
+
+        if (this.getFocus(stack) != null) {
+            tooltip.add(String.valueOf(TextFormatting.BOLD) + TextFormatting.ITALIC + TextFormatting.GREEN +
+                    this.getFocus(stack).getItemStackDisplayName(this.getFocusStack(stack)));
+            this.getFocus(stack).addFocusInformation(this.getFocusStack(stack), worldIn, tooltip, flagIn);
+        }
+    }
+
     public String getItemStackDisplayName(ItemStack stack) {
         return I18n.translateToLocal("item.avaritia:cosmic_caster.name");
     }
@@ -86,21 +101,6 @@ public class ItemCosmicCaster extends ItemCaster implements IModelRegister {
     public void getSubItems(CreativeTabs tabs, NonNullList<ItemStack> itemStacks) {
         if (tabs == Avaritia.tab || tabs == CreativeTabs.SEARCH) {
             itemStacks.add(new ItemStack(this));
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        ItemStack focus = this.getFocusStack(stack);
-        if (focus != null && !focus.isEmpty()) {
-            tooltip.add(TextFormatting.AQUA + I18n.translateToLocal("tc.vis.cost") +
-                    TextUtils.makeFabulous(" " + "0.0" + " " + I18n.translateToLocal("item.Focus.cost1")));
-        }
-
-        if (this.getFocus(stack) != null) {
-            tooltip.add(String.valueOf(TextFormatting.BOLD) + TextFormatting.ITALIC + TextFormatting.GREEN +
-                    this.getFocus(stack).getItemStackDisplayName(this.getFocusStack(stack)));
-            this.getFocus(stack).addFocusInformation(this.getFocusStack(stack), worldIn, tooltip, flagIn);
         }
     }
 }
