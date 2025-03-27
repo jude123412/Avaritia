@@ -59,7 +59,7 @@
         "category": "BASICS",
         "icons": ["avaritia:akashic_record"],
         "meta": ["ROUND", "HIDDEN"],
-        "parents": ["PRIMPEARL", "AKASHIC_RECORD"],
+        "parents": ["PRIMPEARL"],
         "location": [-7, 6],
         "stages": [
           {
