@@ -9,6 +9,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -16,20 +17,26 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
+import org.apache.logging.log4j.Level;
+
 import codechicken.lib.CodeChickenLib;
 import codechicken.lib.gui.SimpleCreativeTab;
+import morph.avaritia.compat.thaumcraft.Thaumcraft;
 import morph.avaritia.init.FoodRecipes;
 import morph.avaritia.init.ModBlocks;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.proxy.Proxy;
 import morph.avaritia.recipe.AvaritiaRecipeManager;
 import morph.avaritia.util.CompressorBalanceCalculator;
+import morph.avaritia.util.Lumberjack;
+import thaumcraft.api.aspects.AspectRegistryEvent;
 
 @Mod(modid = MOD_ID,
      name = MOD_NAME,
      version = MOD_VERSION,
      acceptedMinecraftVersions = CodeChickenLib.MC_VERSION_DEP,
      dependencies = DEPENDENCIES)
+@Optional.Interface(iface = "thaumcraft.api.aspects.AspectRegistryEvent", modid = "thaumcraft")
 public class Avaritia {
 
     public static final String MOD_ID = Tags.MODID;
@@ -68,6 +75,17 @@ public class Avaritia {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+    }
+
+    @SubscribeEvent
+    @Optional.Method(modid = "thaumcraft")
+    public void registerAspectItems(AspectRegistryEvent event) {
+        try {
+            Thaumcraft.aspectInit();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia decided that aspects aren't important");
+            e.printStackTrace();
+        }
     }
 
     @SubscribeEvent
