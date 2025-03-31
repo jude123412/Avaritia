@@ -41,6 +41,7 @@ public class Proxy {
     public void preInit(FMLPreInitializationEvent event) {
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         ModItems.init();
+
         try {
             BloodMagic.registerItems();
         } catch (Throwable e) {
