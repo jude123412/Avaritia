@@ -42,7 +42,7 @@ public class Avaritia {
     public static final String MOD_ID = Tags.MODID;
     public static final String MOD_NAME = Tags.MODNAME;
     public static final String MOD_VERSION = Tags.VERSION;
-    public static final String DEPENDENCIES = "required-after:codechickenlib@[3.2.3,);required-after:mixinbooter;";
+    public static final String DEPENDENCIES = "required-after:codechickenlib@[3.2.3,);required-after:mixinbooter@[10.5,);";
 
     public static CreativeTabs tab = new SimpleCreativeTab(MOD_ID, "avaritia:resource", 5);
 
