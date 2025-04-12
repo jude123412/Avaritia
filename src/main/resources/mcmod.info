@@ -5,7 +5,7 @@
 		"description": "A mod to see how hard people are willing to grind.",
 		"version": "${version}",
 		"mcversion": "${mcversion}",
-		"url": "",
+		"url": "https://www.curseforge.com/minecraft/mc-mods/avaritia-1-1x-unofficial",
 		"authorList": [
 			"SpitefulFox",
 			"TTFTCUTS",
@@ -14,7 +14,7 @@
 			"Morpheus11011",
 			"xXjudeXx"
 		],
-		"credits": "Vazkii, Greg, brandon3055, vswe, Algorithm, Covers1624, Morpheus11011",
+		"credits": "Vazkii, Greg, brandon3055, vswe, Algorithm, Covers1624, Morpheus11011, The GregTech CEu Dev Team",
 		"dependencies": []
 	}
 ]
