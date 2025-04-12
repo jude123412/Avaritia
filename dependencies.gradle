@@ -1,0 +1,89 @@
+//file:noinspection DependencyNotationArgument
+// TODO remove when fixed in RFG ^
+/*
+ * Add your dependencies here. Supported configurations:
+ *  - api("group:name:version:classifier"): if you use the types from this dependency in the public API of this mod
+ *       Available at runtime and compiletime for mods depending on this mod
+ *  - implementation("g:n:v:c"): if you need this for internal implementation details of the mod, but none of it is visible via the public API
+ *       Available at runtime but not compiletime for mods depending on this mod
+ *  - compileOnly("g:n:v:c"): if the mod you're building doesn't need this dependency during runtime at all, e.g. for optional mods
+ *       Not available at all for mods depending on this mod, only visible at compiletime for this mod
+ *  - compileOnlyApi("g:n:v:c"): like compileOnly, but also visible at compiletime for mods depending on this mod
+ *       Available at compiletime but not runtime for mods depending on this mod
+ *  - runtimeOnlyNonPublishable("g:n:v:c"): if you want to include a mod in this mod's runClient/runServer runs, but not publish it as a dependency
+ *       Not available at all for mods depending on this mod, only visible at runtime for this mod
+ *  - devOnlyNonPublishable("g:n:v:c"): a combination of runtimeOnlyNonPublishable and compileOnly for dependencies present at both compiletime and runtime,
+ *       but not published as Maven dependencies - useful for RFG-deobfuscated dependencies or local testing
+ *  - runtimeOnly("g:n:v:c"): if you don't need this at compile time, but want it to be present at runtime
+ *       Available at runtime for mods depending on this mod
+ *  - annotationProcessor("g:n:v:c"): mostly for java compiler plugins, if you know you need this, use it, otherwise don't worry
+ *  - testCONFIG("g:n:v:c") - replace CONFIG by one of the above (except api), same as above but for the test sources instead of main
+ *
+ *  - shadowImplementation("g:n:v:c"): effectively the same as API, but the dependency is included in your jar under a renamed package name
+ *       Requires you to enable usesShadowedDependencies in gradle.properties
+ *       For more info, see https://github.com/GregTechCEu/Buildscripts/blob/master/docs/shadow.md
+ *
+ * You can exclude transitive dependencies (dependencies of the chosen dependency) by appending { transitive = false } if needed,
+ * but use this sparingly as it can break using your mod as another mod's dependency if you're not careful.
+ *
+ * To depend on obfuscated jars you can use `devOnlyNonPublishable(rfg.deobf("dep:spec:1.2.3"))` to fetch an obfuscated jar from maven,
+ * or `devOnlyNonPublishable(rfg.deobf(project.files("libs/my-mod-jar.jar")))` to use a file.
+ *
+ * To add a mod with CurseMaven, replace '("g:n:v:c")' in the above with 'rfg.deobf("curse.maven:project_slug-project_id:file_id")'
+ * Example: devOnlyNonPublishable(rfg.deobf("curse.maven:top-245211:2667280"))
+ *
+ * Gradle names for some of the configuration can be misleading, compileOnlyApi and runtimeOnly both get published as dependencies in Maven, but compileOnly does not.
+ * The buildscript adds runtimeOnlyNonPublishable to also have a runtime dependency that's not published.
+ *
+ * For more details, see https://docs.gradle.org/8.4/userguide/java_library_plugin.html#sec:java_library_configurations_graph
+ */
+dependencies {
+    // Published dependencies
+    api("codechicken:codechickenlib:3.2.3.358") // Code Chicken Lib 3.2.3.358
+    api("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.700") // CraftTweaker 4.1.20.700
+
+    compileOnly rfg.deobf("curse.maven:blood-magic-2.4.3-105-224791:2822288") // Blood Magic 2.4.3-105
+    compileOnly rfg.deobf("curse.maven:tinkers-construct-2.13.0.183-74072:2902483") // Tinkers Construct 2.13.0.183
+    compileOnly rfg.deobf("curse.maven:mantle-1.3.3.55-74924:2713386") // Mantle 1.3.3.55
+    compileOnly rfg.deobf("curse.maven:forestry-5.8.2.424-59751:2684780") // Forestry 5.8.2.387
+    compileOnly rfg.deobf("curse.maven:draconic-evolution-2.3.28.354-223565:3431261") // Draconic Evolution 2.3.28.254
+    compileOnly rfg.deobf("curse.maven:thaumcraft-1.12.2-6.1.beta-26-223628:2629023") // Thaumcraft 6.1.beta-26
+
+    // Mods with Soft Compatibility
+    // Uncomment Any of these to test them in-game
+
+    // Blood Magic
+//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:blood-magic-2.4.3-105-224791:2822288") // Blood Magic 2.4.3-105
+//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:guide-api-1.12-2.1.8-63-228832:2645992") // Guide API 2.1.8-63
+    // Blood Magic
+
+    // Forestry
+//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:forestry-5.8.2.424-59751:2684780") // Forestry 5.8.2.387
+//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:jei-bees-0.9.0.5-248370:2490058") // JEI Bees 0.0.0.5
+    // Forestry
+
+    // Draconic Evolution
+//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:draconic-evolution-2.3.28.354-223565:3431261") // Draconic Evolution 2.3.28.254
+//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:brandons-core-2.4.20.162-231382:3408276") // Brandon's Core 2.4.20.162
+//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:redstone-flux-2.1.1.1-270789:2920436") // Redstone Flux 2.1.1.1
+    // Draconic Evolution
+
+    // Thaumcraft
+//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:thaumic-jei-1.12.2-1.7.0-285492:5646810") // Thaumic JEI
+//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:thaumcraft-1.12.2-6.1.beta-26-223628:2629023") // Thaumcraft 6.1.beta-26
+    // Thaumcraft
+
+    // Tinkers Construct
+//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:tinkers-construct-2.13.0.183-74072:2902483") // Tinkers Construct 2.13.0.183
+    // Tinkers Construct
+
+    // Others
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:biomesoplenty-7.0.1.2445-220318:2715506") // Biomes O Plenty 7.0.1.2445
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:baubles-1.12-1.5.2-227083:2518667") // Baubles
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:mantle-1.3.3.55-74924:2713386") // Mantle 1.3.3.55
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:ore-dict-tips-2.0.2-252832:2545766") // OreDictTips 2.0.2
+
+    // Needed for Integration stuff
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:mixin-booter-10.6-419286:6344449") // Mixin Booter 10.6
+
+}
