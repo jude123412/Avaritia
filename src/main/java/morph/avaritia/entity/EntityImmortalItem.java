@@ -1,7 +1,6 @@
 package morph.avaritia.entity;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
@@ -10,8 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.item.ItemExpireEvent;
 
 public class EntityImmortalItem extends EntityItem {
 
@@ -115,13 +112,13 @@ public class EntityImmortalItem extends EntityItem {
 
             if (!world.isRemote && age >= lifespan) {
                 if (!item.isEmpty()) {
-                    ItemExpireEvent event = new ItemExpireEvent(this, (item.getItem() == null ? 6000 :
-                            item.getItem().getEntityLifespan(item, Minecraft.getMinecraft().world)));
-                    if (MinecraftForge.EVENT_BUS.post(event)) {
-                        lifespan += extraLife;
-                    } else {
-                        this.setDead();
-                    }
+                    // ItemExpireEvent event = new ItemExpireEvent(this, (item.getItem() == null ? 6000 :
+                    // item.getItem().getEntityLifespan(item, Minecraft.getMinecraft().world)));
+                    // if (MinecraftForge.EVENT_BUS.post(event)) {
+                    // lifespan += extraLife;
+                    // } else {
+                    // this.setDead();
+                    // }
                 } else {
                     setDead();
                 }
