@@ -3,6 +3,7 @@ package morph.avaritia.proxy;
 import java.util.HashSet;
 import java.util.Set;
 
+import morph.avaritia.compat.CompatClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -211,6 +212,7 @@ public class ProxyClient extends Proxy {
             });
         }
 
+        CompatClient.compatPreInit();
         registerRenderers();
         PacketCustom.assignHandler(NetworkDispatcher.NET_CHANNEL, new ClientPacketHandler());
     }

@@ -48,6 +48,7 @@ dependencies {
     compileOnly rfg.deobf("curse.maven:forestry-5.8.2.424-59751:2684780") // Forestry 5.8.2.387
     compileOnly rfg.deobf("curse.maven:draconic-evolution-2.3.28.354-223565:3431261") // Draconic Evolution 2.3.28.254
     compileOnly rfg.deobf("curse.maven:thaumcraft-1.12.2-6.1.beta-26-223628:2629023") // Thaumcraft 6.1.beta-26
+    compileOnly rfg.deobf("curse.maven:botania-r1.10-364.4-225643:3330934") // Botania r1.10-364.4
 
     // Mods with Soft Compatibility
     // Uncomment Any of these to test them in-game
@@ -76,6 +77,10 @@ dependencies {
     // Tinkers Construct
 //    runtimeOnlyNonPublishable rfg.deobf("curse.maven:tinkers-construct-2.13.0.183-74072:2902483") // Tinkers Construct 2.13.0.183
     // Tinkers Construct
+
+    // Botania
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:botania-r1.10-364.4-225643:3330934") // Botania r1.10-364.4
+    // Botania
 
     // Others
     runtimeOnlyNonPublishable rfg.deobf("curse.maven:biomesoplenty-7.0.1.2445-220318:2715506") // Biomes O Plenty 7.0.1.2445

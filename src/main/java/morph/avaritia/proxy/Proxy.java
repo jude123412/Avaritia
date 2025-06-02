@@ -2,6 +2,7 @@ package morph.avaritia.proxy;
 
 import java.util.UUID;
 
+import morph.avaritia.compat.botania.Botania;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -56,6 +57,13 @@ public class Proxy {
             e.printStackTrace();
         }
 
+        try {
+            Botania.preInit();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia lost its mana tablet again.");
+            e.printStackTrace();
+        }
+
         ModBlocks.init();
         NetworkRegistry.INSTANCE.registerGuiHandler(Avaritia.instance, new GUIHandler());
         MinecraftForge.EVENT_BUS.register(new AbilityHandler());
@@ -76,6 +84,13 @@ public class Proxy {
             Thaumcraft.registerInit();
         } catch (Throwable e) {
             Lumberjack.log(Level.INFO, "Avaritia decided to research everything instead.");
+            e.printStackTrace();
+        }
+
+        try {
+            Botania.init();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia lost its mana tablet again.");
             e.printStackTrace();
         }
     }
