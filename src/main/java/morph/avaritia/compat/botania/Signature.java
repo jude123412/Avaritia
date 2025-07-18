@@ -1,11 +1,11 @@
 package morph.avaritia.compat.botania;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.model.Models;
-import vazkii.botania.api.subtile.signature.SubTileSignature;
 
-import java.util.List;
+import vazkii.botania.api.subtile.signature.SubTileSignature;
 
 public class Signature implements SubTileSignature {
 

@@ -6,6 +6,7 @@ import vazkii.botania.api.lexicon.LexiconCategory;
 import vazkii.botania.api.lexicon.LexiconEntry;
 
 public class LudicrousLexicon extends LexiconEntry implements IAddonEntry {
+
     public LudicrousLexicon(String unlocalizedName, LexiconCategory category) {
         super(unlocalizedName, category);
         BotaniaAPI.addEntry(this, category);
@@ -20,5 +21,4 @@ public class LudicrousLexicon extends LexiconEntry implements IAddonEntry {
     public String getUnlocalizedName() {
         return "avaritia.lexicon." + super.getUnlocalizedName();
     }
-
 }

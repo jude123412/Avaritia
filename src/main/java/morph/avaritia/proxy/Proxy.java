@@ -2,7 +2,6 @@ package morph.avaritia.proxy;
 
 import java.util.UUID;
 
-import morph.avaritia.compat.botania.Tsundere;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -22,6 +21,7 @@ import morph.avaritia.Avaritia;
 import morph.avaritia.api.registration.IModelRegister;
 import morph.avaritia.client.gui.GUIHandler;
 import morph.avaritia.compat.bloodmagic.BloodMagic;
+import morph.avaritia.compat.botania.Tsundere;
 import morph.avaritia.compat.thaumcraft.Thaumcraft;
 import morph.avaritia.entity.EntityEndestPearl;
 import morph.avaritia.entity.EntityGapingVoid;

@@ -3,7 +3,6 @@ package morph.avaritia.proxy;
 import java.util.HashSet;
 import java.util.Set;
 
-import morph.avaritia.compat.CompatClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -33,6 +32,7 @@ import morph.avaritia.client.render.entity.RenderHeavenArrow;
 import morph.avaritia.client.render.entity.WrappedEntityItemRenderer;
 import morph.avaritia.client.render.item.CosmicItemRender;
 import morph.avaritia.client.render.shader.ShaderHelper;
+import morph.avaritia.compat.CompatClient;
 import morph.avaritia.entity.EntityEndestPearl;
 import morph.avaritia.entity.EntityGapingVoid;
 import morph.avaritia.entity.EntityHeavenArrow;
