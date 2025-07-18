@@ -5,9 +5,9 @@ import vazkii.botania.api.subtile.SubTileGenerating;
 
 public class SubTileAsgardandelion extends SubTileGenerating {
 
-    public static LexiconEntry lexiconEntry;
+    public static LexiconEntry lexicon;
 
-    private int maxMana = 1000000;
+    private final int maxMana = 1000000;
 
     @Override
     public boolean canGeneratePassively() {
@@ -35,6 +35,6 @@ public class SubTileAsgardandelion extends SubTileGenerating {
     }
 
     public LexiconEntry getEntry() {
-        return lexiconEntry;
+        return lexicon;
     }
 }

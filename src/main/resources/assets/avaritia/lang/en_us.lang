@@ -63,6 +63,11 @@ item.avaritia:akashic_record.name=Akashic Record
 item.avaritia:cosmic_caster.name=(REDACTED) Caster's Gauntlet
 tc.aspect.ascension=God, Heaven, Transcendent
 tc.aspect.terminus=End, Apocalypse, Extinction
+avaritia.flower.asgardandelion.name=Asgardandelion
+tile.botania:flower.asgardandelion.name=Asgardandelion
+tile.avaritia.flower.asgardandelion.lore=Watered with Vazkii's tears :c
+avaritia.lexicon.asgardandelion=Asgardandelion
+avaritia.lexicon.asgardandelion.0=Rumors abound about some kind of godlike flower that can produce a never-ending torrent of mana. If such a mythical flower were to exist, it would probably require wealth and resources beyond mortal reckoning. &oStill not a SAO reference.&r
 
 # Thaumcraft research
 avaritia.research.darkhold.title=The Darkhold

@@ -8,5 +8,6 @@ public class CompatClient {
     public static void compatPreInit() {
 
         BotaniaAPIClient.registerSubtileModel("asgardandelion", new ModelResourceLocation("botania:" + "asgardandelion"));
+
     }
 }

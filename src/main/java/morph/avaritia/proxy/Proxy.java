@@ -2,7 +2,7 @@ package morph.avaritia.proxy;
 
 import java.util.UUID;
 
-import morph.avaritia.compat.botania.Botania;
+import morph.avaritia.compat.botania.Tsundere;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -58,7 +58,7 @@ public class Proxy {
         }
 
         try {
-            Botania.preInit();
+            Tsundere.preInit();
         } catch (Throwable e) {
             Lumberjack.log(Level.INFO, "Avaritia lost its mana tablet again.");
             e.printStackTrace();
@@ -88,14 +88,21 @@ public class Proxy {
         }
 
         try {
-            Botania.init();
+            Tsundere.init();
         } catch (Throwable e) {
             Lumberjack.log(Level.INFO, "Avaritia lost its mana tablet again.");
             e.printStackTrace();
         }
     }
 
-    public void postInit(FMLPostInitializationEvent event) {}
+    public void postInit(FMLPostInitializationEvent event) {
+        try {
+            Tsundere.postInit();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia lost its mana tablet again.");
+            e.printStackTrace();
+        }
+    }
 
     public static void initRecipes(RegistryEvent.Register<IRecipe> event) {
         try {
@@ -109,6 +116,13 @@ public class Proxy {
             Thaumcraft.registerRecipes();
         } catch (Throwable e) {
             Lumberjack.log(Level.INFO, "Avaritia decided to research everything instead.");
+            e.printStackTrace();
+        }
+
+        try {
+            Tsundere.registerRecipes();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia ran out of dayblooms.");
             e.printStackTrace();
         }
     }
