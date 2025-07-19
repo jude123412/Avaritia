@@ -24,7 +24,7 @@ public class ExtremeRecipeManager {
      *                This is the full Example of how to use this
      *                ExtremeCraftingRecipeManager.addExtremeShapedRecipe("armok_orb", new ItemStack(ModItems.armok_orb,
      *                1),
-     *                " NNNNN ",
+     *                "  NNNNN  ",
      *                " NNNNNNN ",
      *                "NNNIIINNN",
      *                "NNIOIOINN",
@@ -32,7 +32,7 @@ public class ExtremeRecipeManager {
      *                "NNIOIOINN",
      *                "NNNIIINNN",
      *                " NNNNNNN ",
-     *                " NNNNN ",
+     *                "  NNNNN  ",
      *                'I', "ingotInfinity",
      *                'X', new ItemStack(ModItems.resource, 1, 5),
      *                'N', "ingotCosmicNeutronium",

@@ -44,7 +44,6 @@ public class Tsundere {
                                         'N', new ItemStack(ModItems.resource, 1, 4),
                                         'n', new ItemStack(ModItems.resource, 1, 3)))))
                 .setIcon(asgardandelion);
-        SubTileAsgardandelion.lexicon.setIcon(asgardandelion);
     }
 
     public static void registerRecipes() throws Compat.ItemNotFoundException {

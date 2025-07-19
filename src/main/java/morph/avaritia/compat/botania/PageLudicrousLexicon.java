@@ -7,6 +7,7 @@ import java.util.Arrays;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -112,7 +113,13 @@ public class PageLudicrousLexicon extends PageRecipe {
     @SideOnly(Side.CLIENT)
     public void renderItemAtLudicrousGridPos(IGuiLexiconEntry gui, int x, int y, Ingredient ingredient,
                                              boolean accountForContainer) {
-        ItemStack stack = ingredient.getMatchingStacks()[0];
+        ItemStack stack;
+        try {
+            stack = ingredient.getMatchingStacks()[0];
+        } catch (Throwable e){
+            stack = new ItemStack(Blocks.AIR, 1);
+        }
+
         if (stack == null || stack.isEmpty())
             return;
         stack = stack.copy();
