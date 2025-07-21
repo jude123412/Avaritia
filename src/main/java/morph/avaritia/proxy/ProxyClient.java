@@ -3,6 +3,7 @@ package morph.avaritia.proxy;
 import java.util.HashSet;
 import java.util.Set;
 
+import morph.avaritia.util.Lumberjack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -42,6 +43,7 @@ import morph.avaritia.init.ModItems;
 import morph.avaritia.item.ItemMatterCluster;
 import morph.avaritia.network.ClientPacketHandler;
 import morph.avaritia.network.NetworkDispatcher;
+import org.apache.logging.log4j.Level;
 
 public class ProxyClient extends Proxy {
 
@@ -212,7 +214,13 @@ public class ProxyClient extends Proxy {
             });
         }
 
-        CompatClient.compatPreInit();
+        try {
+            CompatClient.compatPreInit();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia decided that missing textures looks best");
+            e.printStackTrace();
+        }
+
         registerRenderers();
         PacketCustom.assignHandler(NetworkDispatcher.NET_CHANNEL, new ClientPacketHandler());
     }

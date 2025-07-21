@@ -6,7 +6,7 @@ import vazkii.botania.api.BotaniaAPIClient;
 
 public class CompatClient {
 
-    public static void compatPreInit() {
+    public static void compatPreInit() throws Compat.ItemNotFoundException {
         BotaniaAPIClient.registerSubtileModel("asgardandelion",
                 new ModelResourceLocation("botania:" + "asgardandelion"));
     }
