@@ -15,7 +15,7 @@ import morph.avaritia.tile.TileDireCraftingTable;
 public class GUIExtremeCrafting extends GuiContainer {
 
     private static final ResourceLocation GUI_TEX = new ResourceLocation("avaritia",
-            "textures/gui/dire_crafting_gui.png");
+            "textures/gui/dire_crafting_gui_new.png");
 
     public GUIExtremeCrafting(InventoryPlayer par1InventoryPlayer, World par2World, BlockPos pos,
                               TileDireCraftingTable table) {
