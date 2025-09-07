@@ -29,12 +29,16 @@ public class CosmicShaderHelper {
 
     public static boolean isHalloween = false;
 
+    public static Calendar calendar = Calendar.getInstance();
+
+    public static int month = calendar.get(2) + 1;
+    public static int day = calendar.get(5);
+
     static {
         shaderCallback = new ShaderCallback() {
 
             @Override
             public void call(int shader) {
-                Calendar calendar = Calendar.getInstance();
 
                 // TODO, This can be optimized.
                 Minecraft mc = Minecraft.getMinecraft();
@@ -58,7 +62,7 @@ public class CosmicShaderHelper {
                 }
 
                 // Xmas
-                if (calendar.get(2) + 1 == 12 && calendar.get(5) >= 24 && calendar.get(5) <= 26) {
+                if (month == 12 && day >= 24 && day <= 26) {
                     cosmicChannelRedBackground = 0.8f;
                     cosmicChannelGreenBackground = 0.1f;
                     cosmicChannelBlueBackground = 0.0f;
@@ -66,7 +70,7 @@ public class CosmicShaderHelper {
                 }
 
                 // Halloween
-                if (calendar.get(2) + 1 == 10 && calendar.get(5) >= 29) {
+                if (month == 10 && day >= 29) {
                     isHalloween = true;
                     cosmicChannelRedBackground = 0.8f;
                     cosmicChannelGreenBackground = 0.4f;
