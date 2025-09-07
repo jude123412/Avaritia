@@ -40,6 +40,17 @@ public class AvaritiaTextures implements IIconRegister {
         COSMIC_8 = register(SHADER_ + "cosmic_8");
         COSMIC_9 = register(SHADER_ + "cosmic_9");
 
+        HALLOWEEN_0 = register(SHADER_ + "halloween_0");
+        HALLOWEEN_1 = register(SHADER_ + "halloween_1");
+        HALLOWEEN_2 = register(SHADER_ + "halloween_2");
+        HALLOWEEN_3 = register(SHADER_ + "halloween_3");
+        HALLOWEEN_4 = register(SHADER_ + "halloween_4");
+        HALLOWEEN_5 = register(SHADER_ + "halloween_5");
+        HALLOWEEN_6 = register(SHADER_ + "halloween_6");
+        HALLOWEEN_7 = register(SHADER_ + "halloween_7");
+        HALLOWEEN_8 = register(SHADER_ + "halloween_8");
+        HALLOWEEN_9 = register(SHADER_ + "halloween_9");
+
         INFINITY_SWORD_MASK   = register(TOOLS_ + "infinity_sword/mask");
 
         INFINITY_BOW_IDLE = register(TOOLS_ + "infinity_bow/idle");
@@ -73,7 +84,6 @@ public class AvaritiaTextures implements IIconRegister {
                 INFINITY_BOW_PULL_2_MASK
         };
 
-
         COSMIC = new TextureAtlasSprite[] {
                 COSMIC_0,
                 COSMIC_1,
@@ -86,6 +96,20 @@ public class AvaritiaTextures implements IIconRegister {
                 COSMIC_8,
                 COSMIC_9
         };
+
+        HALLOWEEN = new TextureAtlasSprite[] {
+                HALLOWEEN_0,
+                HALLOWEEN_1,
+                HALLOWEEN_2,
+                HALLOWEEN_3,
+                HALLOWEEN_4,
+                HALLOWEEN_5,
+                HALLOWEEN_6,
+                HALLOWEEN_7,
+                HALLOWEEN_8,
+                HALLOWEEN_9
+        };
+
 
         CLUSTER_EMPTY = register(CLUSTER_ + "empty_mask");
         CLUSTER_FULL = register(CLUSTER_ + "full_mask");
@@ -130,6 +154,18 @@ public class AvaritiaTextures implements IIconRegister {
     public static TextureAtlasSprite COSMIC_7;
     public static TextureAtlasSprite COSMIC_8;
     public static TextureAtlasSprite COSMIC_9;
+
+    public static TextureAtlasSprite[] HALLOWEEN;
+    public static TextureAtlasSprite HALLOWEEN_0;
+    public static TextureAtlasSprite HALLOWEEN_1;
+    public static TextureAtlasSprite HALLOWEEN_2;
+    public static TextureAtlasSprite HALLOWEEN_3;
+    public static TextureAtlasSprite HALLOWEEN_4;
+    public static TextureAtlasSprite HALLOWEEN_5;
+    public static TextureAtlasSprite HALLOWEEN_6;
+    public static TextureAtlasSprite HALLOWEEN_7;
+    public static TextureAtlasSprite HALLOWEEN_8;
+    public static TextureAtlasSprite HALLOWEEN_9;
 
     public static TextureAtlasSprite INFINITY_SWORD_MASK;
     public static TextureAtlasSprite INFINITY_SHOVEL_MASK_0;

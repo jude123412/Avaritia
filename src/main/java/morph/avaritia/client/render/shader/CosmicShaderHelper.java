@@ -8,6 +8,8 @@ import org.lwjgl.opengl.ARBShaderObjects;
 
 import morph.avaritia.client.AvaritiaClientEventHandler;
 
+import java.util.Calendar;
+
 public class CosmicShaderHelper {
 
     public static final ShaderCallback shaderCallback;
@@ -19,11 +21,21 @@ public class CosmicShaderHelper {
 
     public static float cosmicOpacity = 1.0f;
 
+    // Default colors for cosmic shader
+    public static float cosmicChannelRedBackground = 0.1f;
+    public static float cosmicChannelGreenBackground = 0.225f;
+    public static float cosmicChannelBlueBackground = 0.35f;
+    public static float cosmicChannelAlphaBackground = 1.0f;
+
+    public static boolean isHalloween = false;
+
     static {
         shaderCallback = new ShaderCallback() {
 
             @Override
             public void call(int shader) {
+                Calendar calendar = Calendar.getInstance();
+
                 // TODO, This can be optimized.
                 Minecraft mc = Minecraft.getMinecraft();
 
@@ -45,6 +57,23 @@ public class CosmicShaderHelper {
                     cosmicOpacity = 1.0f;
                 }
 
+                // Xmas
+                if (calendar.get(2) + 1 == 12 && calendar.get(5) >= 24 && calendar.get(5) <= 26) {
+                    cosmicChannelRedBackground = 0.8f;
+                    cosmicChannelGreenBackground = 0.1f;
+                    cosmicChannelBlueBackground = 0.0f;
+                    cosmicChannelAlphaBackground = 1.0f;
+                }
+
+                // Halloween
+                if (calendar.get(2) + 1 == 10 && calendar.get(5) >= 29) {
+                    isHalloween = true;
+                    cosmicChannelRedBackground = 0.8f;
+                    cosmicChannelGreenBackground = 0.4f;
+                    cosmicChannelBlueBackground = 0.0f;
+                    cosmicChannelAlphaBackground = 1.0f;
+                }
+
                 int x = ARBShaderObjects.glGetUniformLocationARB(shader, "yaw");
                 int z = ARBShaderObjects.glGetUniformLocationARB(shader, "pitch");
                 int l = ARBShaderObjects.glGetUniformLocationARB(shader, "lightlevel");
@@ -52,6 +81,10 @@ public class CosmicShaderHelper {
                 int uvs = ARBShaderObjects.glGetUniformLocationARB(shader, "cosmicuvs");
                 int s = ARBShaderObjects.glGetUniformLocationARB(shader, "externalScale");
                 int o = ARBShaderObjects.glGetUniformLocationARB(shader, "opacity");
+                int r = ARBShaderObjects.glGetUniformLocationARB(shader, "channelRedBackground");
+                int g = ARBShaderObjects.glGetUniformLocationARB(shader, "channelGreenBackground");
+                int b = ARBShaderObjects.glGetUniformLocationARB(shader, "channelBlueBackground");
+                int a = ARBShaderObjects.glGetUniformLocationARB(shader, "channelAlphaBackground");
 
                 ARBShaderObjects.glUniform1fARB(x, yaw);
                 ARBShaderObjects.glUniform1fARB(z, pitch);
@@ -60,6 +93,10 @@ public class CosmicShaderHelper {
                 ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
                 ARBShaderObjects.glUniform1fARB(s, scale);
                 ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
+                ARBShaderObjects.glUniform1fARB(r, cosmicChannelRedBackground);
+                ARBShaderObjects.glUniform1fARB(g, cosmicChannelGreenBackground);
+                ARBShaderObjects.glUniform1fARB(b, cosmicChannelBlueBackground);
+                ARBShaderObjects.glUniform1fARB(a, cosmicChannelAlphaBackground);
             }
         };
     }

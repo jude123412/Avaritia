@@ -17,6 +17,11 @@ uniform float externalScale;
 uniform float lightmix;
 uniform float opacity;
 
+uniform float channelRedBackground;
+uniform float channelGreenBackground;
+uniform float channelBlueBackground;
+uniform float channelAlphaBackground;
+
 uniform mat2 cosmicuvs[cosmiccount];
 
 varying vec3 position;
@@ -50,12 +55,12 @@ void main (void)
     int uvtiles = 16;
     
     // background colour
-    vec4 col = vec4(0.1,0.0,0.0,1.0);
+    vec4 col = vec4(channelRedBackground,channelGreenBackground,channelBlueBackground,channelAlphaBackground);
     
     float pulse = mod(time,400)/400.0;
     
-    col.g = sin(pulse*M_PI*2) * 0.075 + 0.225;
-    col.b = cos(pulse*M_PI*2) * 0.05 + 0.3;
+//    col.g = sin(pulse*M_PI*2) * 0.075 + 0.225;
+//    col.b = cos(pulse*M_PI*2) * 0.05 + 0.3;
     
     // get ray from camera to fragment
     vec4 dir = normalize(vec4( -position, 0));
@@ -115,18 +120,18 @@ void main (void)
 		
 		// if it's an icon, then add the colour!
 		if (symbol >= 0 && symbol < cosmiccount) {
-			
+
 			vec2 cosmictex = vec2(1.0,1.0);
 			vec4 tcol = vec4(1.0,0.0,0.0,1.0);
-			
+
 			// get uv within the tile
 			float ru = clamp(mod(u,1.0)*uvtiles - tu, 0.0, 1.0);
 			float rv = clamp(mod(v,1.0)*uvtiles - tv, 0.0, 1.0);
-			
+
 			if (flip) {
 				ru = 1.0 - ru;
 			}
-			
+
 			float oru = ru;
 			float orv = rv;
 
@@ -141,7 +146,7 @@ void main (void)
 				oru = rv;
 				orv = 1.0-ru;
 			}
-			
+
 			// get the iicon uvs for the tile
 			float umin = cosmicuvs[symbol][0][0];
 			float umax = cosmicuvs[symbol][1][0];
@@ -151,17 +156,17 @@ void main (void)
 			// interpolate based on tile uvs
 			cosmictex.x = umin * (1.0-oru) + umax * oru;
 			cosmictex.y = vmin * (1.0-orv) + vmax * orv;
-			
+
 			tcol = texture2D(texture0, cosmictex);
-			
+
 			// set the alpha, blending out at the bunched ends
 			float a = tcol.r * (0.5 + (1.0/mult) * 1.0) * (1.0-smoothstep(0.15, 0.48, abs(rawv-0.5)));
-			
+
 			// get fancy colours
 			float r = (mod(rand1, 29.0)/29.0) * 0.3 + 0.4;
 	    	float g = (mod(rand2, 35.0)/35.0) * 0.4 + 0.6;
 	    	float b = (mod(rand1, 17.0)/17.0) * 0.3 + 0.7;
-			
+
 			// mix the colours
 			//col = col*(1-a) + vec4(r,g,b,1)*a;
 			col = col + vec4(r,g,b,1)*a;
