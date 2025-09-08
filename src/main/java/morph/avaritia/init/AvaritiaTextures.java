@@ -51,6 +51,17 @@ public class AvaritiaTextures implements IIconRegister {
         HALLOWEEN_8 = register(SHADER_ + "halloween_8");
         HALLOWEEN_9 = register(SHADER_ + "halloween_9");
 
+        XMAS_0 = register(SHADER_ + "xmas_0");
+        XMAS_1 = register(SHADER_ + "xmas_1");
+        XMAS_2 = register(SHADER_ + "xmas_2");
+        XMAS_3 = register(SHADER_ + "xmas_3");
+        XMAS_4 = register(SHADER_ + "xmas_4");
+        XMAS_5 = register(SHADER_ + "xmas_5");
+        XMAS_6 = register(SHADER_ + "xmas_6");
+        XMAS_7 = register(SHADER_ + "xmas_7");
+        XMAS_8 = register(SHADER_ + "xmas_8");
+        XMAS_9 = register(SHADER_ + "xmas_9");
+
         INFINITY_SWORD_MASK   = register(TOOLS_ + "infinity_sword/mask");
 
         INFINITY_BOW_IDLE = register(TOOLS_ + "infinity_bow/idle");
@@ -110,6 +121,18 @@ public class AvaritiaTextures implements IIconRegister {
                 HALLOWEEN_9
         };
 
+        XMAS = new TextureAtlasSprite[] {
+                XMAS_0,
+                XMAS_1,
+                XMAS_2,
+                XMAS_3,
+                XMAS_4,
+                XMAS_5,
+                XMAS_6,
+                XMAS_7,
+                XMAS_8,
+                XMAS_9
+        };
 
         CLUSTER_EMPTY = register(CLUSTER_ + "empty_mask");
         CLUSTER_FULL = register(CLUSTER_ + "full_mask");
@@ -166,6 +189,18 @@ public class AvaritiaTextures implements IIconRegister {
     public static TextureAtlasSprite HALLOWEEN_7;
     public static TextureAtlasSprite HALLOWEEN_8;
     public static TextureAtlasSprite HALLOWEEN_9;
+
+    public static TextureAtlasSprite[] XMAS;
+    public static TextureAtlasSprite XMAS_0;
+    public static TextureAtlasSprite XMAS_1;
+    public static TextureAtlasSprite XMAS_2;
+    public static TextureAtlasSprite XMAS_3;
+    public static TextureAtlasSprite XMAS_4;
+    public static TextureAtlasSprite XMAS_5;
+    public static TextureAtlasSprite XMAS_6;
+    public static TextureAtlasSprite XMAS_7;
+    public static TextureAtlasSprite XMAS_8;
+    public static TextureAtlasSprite XMAS_9;
 
     public static TextureAtlasSprite INFINITY_SWORD_MASK;
     public static TextureAtlasSprite INFINITY_SHOVEL_MASK_0;

@@ -38,6 +38,10 @@ public class AvaritiaClientEventHandler {
             textures = AvaritiaTextures.HALLOWEEN;
         }
 
+        if (CosmicShaderHelper.isXmas) {
+            textures = AvaritiaTextures.XMAS;
+        }
+
         if (event.phase == TickEvent.Phase.START) {
             cosmicUVs = BufferUtils.createFloatBuffer(4 * textures.length);
             TextureAtlasSprite icon;

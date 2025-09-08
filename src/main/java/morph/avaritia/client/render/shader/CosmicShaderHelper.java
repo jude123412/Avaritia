@@ -28,6 +28,7 @@ public class CosmicShaderHelper {
     public static float cosmicChannelAlphaBackground = 1.0f;
 
     public static boolean isHalloween = false;
+    public static boolean isXmas = false;
 
     public static Calendar calendar = Calendar.getInstance();
 
@@ -55,7 +56,7 @@ public class CosmicShaderHelper {
                 }
 
                 // Prevents Cosmic Opacity from being less than 1.0f
-                // This fixes Desync between Rendering Infinity Armor Cosmic Model and Items with Cosmic Opacity less
+                // This fixes a Desync when Rendering Infinity Armor Cosmic Model and Items with Cosmic Opacity less
                 // than 1.0f in JEI
                 if (cosmicOpacity < 1.0f) {
                     cosmicOpacity = 1.0f;
@@ -63,9 +64,10 @@ public class CosmicShaderHelper {
 
                 // Xmas
                 if (month == 12 && day >= 24 && day <= 26) {
+                    isXmas = true;
                     cosmicChannelRedBackground = 0.8f;
-                    cosmicChannelGreenBackground = 0.1f;
-                    cosmicChannelBlueBackground = 0.0f;
+                    cosmicChannelGreenBackground = 1.0f;
+                    cosmicChannelBlueBackground = 1.0f;
                     cosmicChannelAlphaBackground = 1.0f;
                 }
 
