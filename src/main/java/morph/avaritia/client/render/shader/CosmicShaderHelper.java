@@ -1,5 +1,6 @@
 package morph.avaritia.client.render.shader;
 
+import morph.avaritia.handler.ConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -9,6 +10,8 @@ import org.lwjgl.opengl.ARBShaderObjects;
 import morph.avaritia.client.AvaritiaClientEventHandler;
 
 import java.util.Calendar;
+
+import static morph.avaritia.handler.ConfigHandler.*;
 
 public class CosmicShaderHelper {
 
@@ -62,22 +65,24 @@ public class CosmicShaderHelper {
                     cosmicOpacity = 1.0f;
                 }
 
-                // Xmas
-                if (month == 12 && day >= 24 && day <= 26) {
-                    isXmas = true;
-                    cosmicChannelRedBackground = 0.8f;
-                    cosmicChannelGreenBackground = 1.0f;
-                    cosmicChannelBlueBackground = 1.0f;
-                    cosmicChannelAlphaBackground = 1.0f;
-                }
+                if(ConfigHandler.seasonal_effects) {
+                    // Xmas
+                    if (month == 12 && day >= 24 && day <= 26) {
+                        isXmas = true;
+                        cosmicChannelRedBackground = 0.8f;
+                        cosmicChannelGreenBackground = 1.0f;
+                        cosmicChannelBlueBackground = 1.0f;
+                        cosmicChannelAlphaBackground = 1.0f;
+                    }
 
-                // Halloween
-                if (month == 10 && day >= 29) {
-                    isHalloween = true;
-                    cosmicChannelRedBackground = 0.8f;
-                    cosmicChannelGreenBackground = 0.4f;
-                    cosmicChannelBlueBackground = 0.0f;
-                    cosmicChannelAlphaBackground = 1.0f;
+                    // Halloween
+                    if (month == 10 && day >= 29) {
+                        isHalloween = true;
+                        cosmicChannelRedBackground = 0.8f;
+                        cosmicChannelGreenBackground = 0.4f;
+                        cosmicChannelBlueBackground = 0.0f;
+                        cosmicChannelAlphaBackground = 1.0f;
+                    }
                 }
 
                 int x = ARBShaderObjects.glGetUniformLocationARB(shader, "yaw");

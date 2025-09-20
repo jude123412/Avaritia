@@ -2,12 +2,12 @@ package morph.avaritia.handler;
 
 import java.io.File;
 
+import codechicken.lib.configuration.ConfigTag;
 import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.Lists;
 
 import codechicken.lib.configuration.ConfigFile;
-import codechicken.lib.configuration.ConfigTag;
 import morph.avaritia.util.Lumberjack;
 
 public class ConfigHandler {
@@ -41,6 +41,7 @@ public class ConfigHandler {
 
     public static int collector_duration = 6000;
 
+    public static boolean seasonal_effects = true;
     // public static boolean storagedrawers = false;
     // public static boolean refinedstorage = false;
     // public static boolean tconstruct = false;
@@ -151,6 +152,14 @@ public class ConfigHandler {
             tag.setComment("How long it takes for the compressor to output a neutron. Can't be less than 1.");
             collector_duration = Math.max(tag.setDefaultInt(6000).getInt(), 1);
         }
+
+        {
+            ConfigTag cosmic_effects = config.getTag("cosmic_effects");
+            cosmic_effects.setComment("Effects for the Cosmic Render.");
+
+            tag = cosmic_effects.getTag("seasonal_boolean");
+            tag.setComment("Boolean for Seasonal Effects. Can be true or false.");
+            seasonal_effects = tag.setDefaultBoolean(true).getBoolean();
 
         // {
         // ConfigTag creative = config.getTag("creative");
