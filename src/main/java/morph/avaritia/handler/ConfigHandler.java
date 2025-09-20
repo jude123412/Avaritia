@@ -160,7 +160,7 @@ public class ConfigHandler {
             tag = cosmic_effects.getTag("seasonal_boolean");
             tag.setComment("Boolean for Seasonal Effects. Can be true or false.");
             seasonal_effects = tag.setDefaultBoolean(true).getBoolean();
-
+        }
         // {
         // ConfigTag creative = config.getTag("creative");
         // creative.setComment("Enable / Disable Extreme recipes for creative items from other mods.");
