@@ -55,7 +55,7 @@ void main (void)
     int uvtiles = 16;
     
     // background colour
-    vec4 col = vec4(channelRedBackground,channelGreenBackground,channelBlueBackground,channelAlphaBackground);
+    vec4 col = vec4(channelRedBackground,channelGreenBackground,channelBlueBackground,1.0);
     
     float pulse = mod(time,400)/400.0;
     

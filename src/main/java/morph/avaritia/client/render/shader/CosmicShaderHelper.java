@@ -28,7 +28,6 @@ public class CosmicShaderHelper {
     public static float cosmicChannelRedBackground = 0.1f;
     public static float cosmicChannelGreenBackground = 0.225f;
     public static float cosmicChannelBlueBackground = 0.35f;
-    public static float cosmicChannelAlphaBackground = 1.0f;
 
     public static boolean isHalloween = false;
     public static boolean isXmas = false;
@@ -72,7 +71,6 @@ public class CosmicShaderHelper {
                         cosmicChannelRedBackground = 0.8f;
                         cosmicChannelGreenBackground = 1.0f;
                         cosmicChannelBlueBackground = 1.0f;
-                        cosmicChannelAlphaBackground = 1.0f;
                     }
 
                     // Halloween
@@ -81,7 +79,6 @@ public class CosmicShaderHelper {
                         cosmicChannelRedBackground = 0.8f;
                         cosmicChannelGreenBackground = 0.4f;
                         cosmicChannelBlueBackground = 0.0f;
-                        cosmicChannelAlphaBackground = 1.0f;
                     }
                 }
 
@@ -95,7 +92,6 @@ public class CosmicShaderHelper {
                 int r = ARBShaderObjects.glGetUniformLocationARB(shader, "channelRedBackground");
                 int g = ARBShaderObjects.glGetUniformLocationARB(shader, "channelGreenBackground");
                 int b = ARBShaderObjects.glGetUniformLocationARB(shader, "channelBlueBackground");
-                int a = ARBShaderObjects.glGetUniformLocationARB(shader, "channelAlphaBackground");
 
                 ARBShaderObjects.glUniform1fARB(x, yaw);
                 ARBShaderObjects.glUniform1fARB(z, pitch);
@@ -107,7 +103,6 @@ public class CosmicShaderHelper {
                 ARBShaderObjects.glUniform1fARB(r, cosmicChannelRedBackground);
                 ARBShaderObjects.glUniform1fARB(g, cosmicChannelGreenBackground);
                 ARBShaderObjects.glUniform1fARB(b, cosmicChannelBlueBackground);
-                ARBShaderObjects.glUniform1fARB(a, cosmicChannelAlphaBackground);
             }
         };
     }
