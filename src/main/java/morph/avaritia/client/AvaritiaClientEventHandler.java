@@ -32,10 +32,20 @@ public class AvaritiaClientEventHandler {
 
     @SubscribeEvent
     public void onRenderTick(TickEvent.RenderTickEvent event) {
+        TextureAtlasSprite[] textures = AvaritiaTextures.COSMIC;
+
+        if (CosmicShaderHelper.isHalloween) {
+            textures = AvaritiaTextures.HALLOWEEN;
+        }
+
+        if (CosmicShaderHelper.isXmas) {
+            textures = AvaritiaTextures.XMAS;
+        }
+
         if (event.phase == TickEvent.Phase.START) {
-            cosmicUVs = BufferUtils.createFloatBuffer(4 * AvaritiaTextures.COSMIC.length);
+            cosmicUVs = BufferUtils.createFloatBuffer(4 * textures.length);
             TextureAtlasSprite icon;
-            for (TextureAtlasSprite cosmicIcon : AvaritiaTextures.COSMIC) {
+            for (TextureAtlasSprite cosmicIcon : textures) {
                 icon = cosmicIcon;
 
                 cosmicUVs.put(icon.getMinU());

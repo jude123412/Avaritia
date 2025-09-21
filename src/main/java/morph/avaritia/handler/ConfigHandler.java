@@ -2,12 +2,12 @@ package morph.avaritia.handler;
 
 import java.io.File;
 
+import codechicken.lib.configuration.ConfigTag;
 import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.Lists;
 
 import codechicken.lib.configuration.ConfigFile;
-import codechicken.lib.configuration.ConfigTag;
 import morph.avaritia.util.Lumberjack;
 
 public class ConfigHandler {
@@ -40,6 +40,12 @@ public class ConfigHandler {
     public static int compressor_duration = 1;
 
     public static int collector_duration = 6000;
+
+    public static boolean seasonal_effects = true;
+
+    public static float cosmicChannelRed = 0.1f;
+    public static float cosmicChannelGreen = 0.225f;
+    public static float cosmicChannelBlue = 0.35f;
 
     // public static boolean storagedrawers = false;
     // public static boolean refinedstorage = false;
@@ -150,6 +156,27 @@ public class ConfigHandler {
             tag = collector_balance.getTag("duration");
             tag.setComment("How long it takes for the compressor to output a neutron. Can't be less than 1.");
             collector_duration = Math.max(tag.setDefaultInt(6000).getInt(), 1);
+        }
+
+        {
+            ConfigTag cosmic_effects = config.getTag("cosmic_effects");
+            cosmic_effects.setComment("Effects for the Cosmic Render.");
+
+            tag = cosmic_effects.getTag("seasonal_effects");
+            tag.setComment("Can be true or false.");
+            seasonal_effects = tag.setDefaultBoolean(true).getBoolean();
+
+            tag = cosmic_effects.getTag("red");
+            tag.setComment("Can be any value from 0 to 1000. Default : 100.");
+            cosmicChannelRed = (float) tag.setDefaultInt(100).getInt() / 1000;
+
+            tag = cosmic_effects.getTag("green");
+            tag.setComment("Can be any value from 0 to 1000. Default : 225.");
+            cosmicChannelGreen = (float) tag.setDefaultInt(225).getInt() / 1000;
+
+            tag = cosmic_effects.getTag("blue");
+            tag.setComment("Can be any value from 0 to 1000. Default : 350.");
+            cosmicChannelBlue = (float) tag.setDefaultInt(350).getInt() / 1000;
         }
 
         // {

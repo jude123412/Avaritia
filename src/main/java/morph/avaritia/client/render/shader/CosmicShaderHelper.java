@@ -1,5 +1,6 @@
 package morph.avaritia.client.render.shader;
 
+import morph.avaritia.handler.ConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -7,6 +8,10 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.ARBShaderObjects;
 
 import morph.avaritia.client.AvaritiaClientEventHandler;
+
+import java.util.Calendar;
+
+import static morph.avaritia.handler.ConfigHandler.*;
 
 public class CosmicShaderHelper {
 
@@ -19,11 +24,20 @@ public class CosmicShaderHelper {
 
     public static float cosmicOpacity = 1.0f;
 
+    public static boolean isHalloween = false;
+    public static boolean isXmas = false;
+
+    public static Calendar calendar = Calendar.getInstance();
+
+    public static int month = calendar.get(2) + 1;
+    public static int day = calendar.get(5);
+
     static {
         shaderCallback = new ShaderCallback() {
 
             @Override
             public void call(int shader) {
+
                 // TODO, This can be optimized.
                 Minecraft mc = Minecraft.getMinecraft();
 
@@ -39,10 +53,29 @@ public class CosmicShaderHelper {
                 }
 
                 // Prevents Cosmic Opacity from being less than 1.0f
-                // This fixes Desync between Rendering Infinity Armor Cosmic Model and Items with Cosmic Opacity less
+                // This fixes a Desync when Rendering Infinity Armor Cosmic Model and Items with Cosmic Opacity less
                 // than 1.0f in JEI
                 if (cosmicOpacity < 1.0f) {
                     cosmicOpacity = 1.0f;
+                }
+
+                // Seasonal Effects
+                if(ConfigHandler.seasonal_effects) {
+                    // Xmas
+                    if (month == 12 && day >= 24 && day <= 26) {
+                        isXmas = true;
+                        cosmicChannelRed = 0.8f;
+                        cosmicChannelGreen = 1.0f;
+                        cosmicChannelBlue = 1.0f;
+                    }
+
+                    // Halloween
+                    if (month == 10 && day >= 29) {
+                        isHalloween = true;
+                        cosmicChannelRed = 0.8f;
+                        cosmicChannelGreen = 0.4f;
+                        cosmicChannelBlue = 0.0f;
+                    }
                 }
 
                 int x = ARBShaderObjects.glGetUniformLocationARB(shader, "yaw");
@@ -52,6 +85,9 @@ public class CosmicShaderHelper {
                 int uvs = ARBShaderObjects.glGetUniformLocationARB(shader, "cosmicuvs");
                 int s = ARBShaderObjects.glGetUniformLocationARB(shader, "externalScale");
                 int o = ARBShaderObjects.glGetUniformLocationARB(shader, "opacity");
+                int r = ARBShaderObjects.glGetUniformLocationARB(shader, "channelRedBackground");
+                int g = ARBShaderObjects.glGetUniformLocationARB(shader, "channelGreenBackground");
+                int b = ARBShaderObjects.glGetUniformLocationARB(shader, "channelBlueBackground");
 
                 ARBShaderObjects.glUniform1fARB(x, yaw);
                 ARBShaderObjects.glUniform1fARB(z, pitch);
@@ -60,6 +96,9 @@ public class CosmicShaderHelper {
                 ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
                 ARBShaderObjects.glUniform1fARB(s, scale);
                 ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
+                ARBShaderObjects.glUniform1fARB(r, cosmicChannelRed);
+                ARBShaderObjects.glUniform1fARB(g, cosmicChannelGreen);
+                ARBShaderObjects.glUniform1fARB(b, cosmicChannelBlue);
             }
         };
     }
@@ -83,6 +122,25 @@ public class CosmicShaderHelper {
                     cosmicOpacity = 1.0f;
                 }
 
+                // Seasonal Effects
+                if(ConfigHandler.seasonal_effects) {
+                    // Xmas
+                    if (month == 12 && day >= 24 && day <= 26) {
+                        isXmas = true;
+                        cosmicChannelRed = 0.8f;
+                        cosmicChannelGreen = 1.0f;
+                        cosmicChannelBlue = 1.0f;
+                    }
+
+                    // Halloween
+                    if (month == 10 && day >= 29) {
+                        isHalloween = true;
+                        cosmicChannelRed = 0.8f;
+                        cosmicChannelGreen = 0.4f;
+                        cosmicChannelBlue = 0.0f;
+                    }
+                }
+
                 int x = ARBShaderObjects.glGetUniformLocationARB(shader, "yaw");
                 int z = ARBShaderObjects.glGetUniformLocationARB(shader, "pitch");
                 int l = ARBShaderObjects.glGetUniformLocationARB(shader, "lightlevel");
@@ -90,6 +148,9 @@ public class CosmicShaderHelper {
                 int uvs = ARBShaderObjects.glGetUniformLocationARB(shader, "cosmicuvs");
                 int s = ARBShaderObjects.glGetUniformLocationARB(shader, "externalScale");
                 int o = ARBShaderObjects.glGetUniformLocationARB(shader, "opacity");
+                int r = ARBShaderObjects.glGetUniformLocationARB(shader, "channelRedBackground");
+                int g = ARBShaderObjects.glGetUniformLocationARB(shader, "channelGreenBackground");
+                int b = ARBShaderObjects.glGetUniformLocationARB(shader, "channelBlueBackground");
 
                 ARBShaderObjects.glUniform1fARB(x, yaw);
                 ARBShaderObjects.glUniform1fARB(z, pitch);
@@ -98,6 +159,10 @@ public class CosmicShaderHelper {
                 ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
                 ARBShaderObjects.glUniform1fARB(s, scale);
                 ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
+                ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
+                ARBShaderObjects.glUniform1fARB(r, cosmicChannelRed);
+                ARBShaderObjects.glUniform1fARB(g, cosmicChannelGreen);
+                ARBShaderObjects.glUniform1fARB(b, cosmicChannelBlue);
             }
         };
     }
