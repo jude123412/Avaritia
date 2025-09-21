@@ -42,6 +42,11 @@ public class ConfigHandler {
     public static int collector_duration = 6000;
 
     public static boolean seasonal_effects = true;
+
+    public static float cosmicChannelRed = 0.1f;
+    public static float cosmicChannelGreen = 0.225f;
+    public static float cosmicChannelBlue = 0.35f;
+
     // public static boolean storagedrawers = false;
     // public static boolean refinedstorage = false;
     // public static boolean tconstruct = false;
@@ -157,10 +162,23 @@ public class ConfigHandler {
             ConfigTag cosmic_effects = config.getTag("cosmic_effects");
             cosmic_effects.setComment("Effects for the Cosmic Render.");
 
-            tag = cosmic_effects.getTag("seasonal_boolean");
-            tag.setComment("Boolean for Seasonal Effects. Can be true or false.");
+            tag = cosmic_effects.getTag("seasonal_effects");
+            tag.setComment("Can be true or false.");
             seasonal_effects = tag.setDefaultBoolean(true).getBoolean();
+
+            tag = cosmic_effects.getTag("red");
+            tag.setComment("Can be any value from 0 to 1000. Default : 100.");
+            cosmicChannelRed = (float) tag.setDefaultInt(100).getInt() / 1000;
+
+            tag = cosmic_effects.getTag("green");
+            tag.setComment("Can be any value from 0 to 1000. Default : 225.");
+            cosmicChannelGreen = (float) tag.setDefaultInt(225).getInt() / 1000;
+
+            tag = cosmic_effects.getTag("blue");
+            tag.setComment("Can be any value from 0 to 1000. Default : 350.");
+            cosmicChannelBlue = (float) tag.setDefaultInt(350).getInt() / 1000;
         }
+
         // {
         // ConfigTag creative = config.getTag("creative");
         // creative.setComment("Enable / Disable Extreme recipes for creative items from other mods.");

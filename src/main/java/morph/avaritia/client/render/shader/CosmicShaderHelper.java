@@ -24,11 +24,6 @@ public class CosmicShaderHelper {
 
     public static float cosmicOpacity = 1.0f;
 
-    // Default colors for cosmic shader
-    public static float cosmicChannelRedBackground = 0.1f;
-    public static float cosmicChannelGreenBackground = 0.225f;
-    public static float cosmicChannelBlueBackground = 0.35f;
-
     public static boolean isHalloween = false;
     public static boolean isXmas = false;
 
@@ -64,21 +59,22 @@ public class CosmicShaderHelper {
                     cosmicOpacity = 1.0f;
                 }
 
+                // Seasonal Effects
                 if(ConfigHandler.seasonal_effects) {
                     // Xmas
                     if (month == 12 && day >= 24 && day <= 26) {
                         isXmas = true;
-                        cosmicChannelRedBackground = 0.8f;
-                        cosmicChannelGreenBackground = 1.0f;
-                        cosmicChannelBlueBackground = 1.0f;
+                        cosmicChannelRed = 0.8f;
+                        cosmicChannelGreen = 1.0f;
+                        cosmicChannelBlue = 1.0f;
                     }
 
                     // Halloween
                     if (month == 10 && day >= 29) {
                         isHalloween = true;
-                        cosmicChannelRedBackground = 0.8f;
-                        cosmicChannelGreenBackground = 0.4f;
-                        cosmicChannelBlueBackground = 0.0f;
+                        cosmicChannelRed = 0.8f;
+                        cosmicChannelGreen = 0.4f;
+                        cosmicChannelBlue = 0.0f;
                     }
                 }
 
@@ -100,9 +96,9 @@ public class CosmicShaderHelper {
                 ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
                 ARBShaderObjects.glUniform1fARB(s, scale);
                 ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
-                ARBShaderObjects.glUniform1fARB(r, cosmicChannelRedBackground);
-                ARBShaderObjects.glUniform1fARB(g, cosmicChannelGreenBackground);
-                ARBShaderObjects.glUniform1fARB(b, cosmicChannelBlueBackground);
+                ARBShaderObjects.glUniform1fARB(r, cosmicChannelRed);
+                ARBShaderObjects.glUniform1fARB(g, cosmicChannelGreen);
+                ARBShaderObjects.glUniform1fARB(b, cosmicChannelBlue);
             }
         };
     }
@@ -126,6 +122,25 @@ public class CosmicShaderHelper {
                     cosmicOpacity = 1.0f;
                 }
 
+                // Seasonal Effects
+                if(ConfigHandler.seasonal_effects) {
+                    // Xmas
+                    if (month == 12 && day >= 24 && day <= 26) {
+                        isXmas = true;
+                        cosmicChannelRed = 0.8f;
+                        cosmicChannelGreen = 1.0f;
+                        cosmicChannelBlue = 1.0f;
+                    }
+
+                    // Halloween
+                    if (month == 10 && day >= 29) {
+                        isHalloween = true;
+                        cosmicChannelRed = 0.8f;
+                        cosmicChannelGreen = 0.4f;
+                        cosmicChannelBlue = 0.0f;
+                    }
+                }
+
                 int x = ARBShaderObjects.glGetUniformLocationARB(shader, "yaw");
                 int z = ARBShaderObjects.glGetUniformLocationARB(shader, "pitch");
                 int l = ARBShaderObjects.glGetUniformLocationARB(shader, "lightlevel");
@@ -133,6 +148,9 @@ public class CosmicShaderHelper {
                 int uvs = ARBShaderObjects.glGetUniformLocationARB(shader, "cosmicuvs");
                 int s = ARBShaderObjects.glGetUniformLocationARB(shader, "externalScale");
                 int o = ARBShaderObjects.glGetUniformLocationARB(shader, "opacity");
+                int r = ARBShaderObjects.glGetUniformLocationARB(shader, "channelRedBackground");
+                int g = ARBShaderObjects.glGetUniformLocationARB(shader, "channelGreenBackground");
+                int b = ARBShaderObjects.glGetUniformLocationARB(shader, "channelBlueBackground");
 
                 ARBShaderObjects.glUniform1fARB(x, yaw);
                 ARBShaderObjects.glUniform1fARB(z, pitch);
@@ -141,6 +159,10 @@ public class CosmicShaderHelper {
                 ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
                 ARBShaderObjects.glUniform1fARB(s, scale);
                 ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
+                ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
+                ARBShaderObjects.glUniform1fARB(r, cosmicChannelRed);
+                ARBShaderObjects.glUniform1fARB(g, cosmicChannelGreen);
+                ARBShaderObjects.glUniform1fARB(b, cosmicChannelBlue);
             }
         };
     }
