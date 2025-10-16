@@ -2,12 +2,12 @@ package morph.avaritia.handler;
 
 import java.io.File;
 
-import codechicken.lib.configuration.ConfigTag;
 import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.Lists;
 
 import codechicken.lib.configuration.ConfigFile;
+import codechicken.lib.configuration.ConfigTag;
 import morph.avaritia.util.Lumberjack;
 
 public class ConfigHandler {

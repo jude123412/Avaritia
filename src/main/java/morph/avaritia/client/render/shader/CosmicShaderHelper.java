@@ -1,6 +1,9 @@
 package morph.avaritia.client.render.shader;
 
-import morph.avaritia.handler.ConfigHandler;
+import static morph.avaritia.handler.ConfigHandler.*;
+
+import java.util.Calendar;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -8,10 +11,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.ARBShaderObjects;
 
 import morph.avaritia.client.AvaritiaClientEventHandler;
-
-import java.util.Calendar;
-
-import static morph.avaritia.handler.ConfigHandler.*;
+import morph.avaritia.handler.ConfigHandler;
 
 public class CosmicShaderHelper {
 
@@ -37,7 +37,6 @@ public class CosmicShaderHelper {
 
             @Override
             public void call(int shader) {
-
                 // TODO, This can be optimized.
                 Minecraft mc = Minecraft.getMinecraft();
 
@@ -60,9 +59,9 @@ public class CosmicShaderHelper {
                 }
 
                 // Seasonal Effects
-                if(ConfigHandler.seasonal_effects) {
+                if (ConfigHandler.seasonal_effects) {
                     // Xmas
-                    if (month == 12 && day >= 24 && day <= 26) {
+                    if (month == 10 && day >= 24 && day <= 26) {
                         isXmas = true;
                         cosmicChannelRed = 0.8f;
                         cosmicChannelGreen = 1.0f;
@@ -123,7 +122,7 @@ public class CosmicShaderHelper {
                 }
 
                 // Seasonal Effects
-                if(ConfigHandler.seasonal_effects) {
+                if (ConfigHandler.seasonal_effects) {
                     // Xmas
                     if (month == 12 && day >= 24 && day <= 26) {
                         isXmas = true;
