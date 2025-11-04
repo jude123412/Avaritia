@@ -84,7 +84,6 @@ public class Avaritia {
             Thaumcraft.aspectInit();
         } catch (Throwable e) {
             Lumberjack.log(Level.INFO, "Avaritia decided that aspects aren't important");
-            e.printStackTrace();
         }
     }
 

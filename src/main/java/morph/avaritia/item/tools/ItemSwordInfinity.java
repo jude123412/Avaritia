@@ -166,7 +166,7 @@ public class ItemSwordInfinity extends ItemSword implements ICosmicRenderItem, I
     @SideOnly(Side.CLIENT)
     public void registerModels() {
         ModelResourceLocation sword = new ModelResourceLocation("avaritia:tools", "type=infinity_sword");
-        ModelLoader.registerItemVariants(ModItems.infinity_pickaxe, sword);
+        ModelLoader.registerItemVariants(ModItems.infinity_sword, sword);
         IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
                 modelRegistry -> modelRegistry.getObject(sword));
         ModelRegistryHelper.register(sword, wrapped);

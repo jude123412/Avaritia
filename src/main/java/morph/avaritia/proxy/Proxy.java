@@ -46,14 +46,12 @@ public class Proxy {
             BloodMagic.registerItems();
         } catch (Throwable e) {
             Lumberjack.log(Level.INFO, "Avaritia decided to use the Healing Axe instead.");
-            e.printStackTrace();
         }
 
         try {
             Thaumcraft.preInit();
         } catch (Throwable e) {
             Lumberjack.log(Level.INFO, "Avaritia decided to research everything instead.");
-            e.printStackTrace();
         }
 
         ModBlocks.init();
@@ -76,7 +74,6 @@ public class Proxy {
             Thaumcraft.registerInit();
         } catch (Throwable e) {
             Lumberjack.log(Level.INFO, "Avaritia decided to research everything instead.");
-            e.printStackTrace();
         }
     }
 
@@ -87,14 +84,12 @@ public class Proxy {
             BloodMagic.registerRecipes();
         } catch (Throwable e) {
             Lumberjack.log(Level.INFO, "Avaritia decided to use the Healing Axe instead.");
-            e.printStackTrace();
         }
 
         try {
             Thaumcraft.registerRecipes();
         } catch (Throwable e) {
             Lumberjack.log(Level.INFO, "Avaritia decided to research everything instead.");
-            e.printStackTrace();
         }
     }
 

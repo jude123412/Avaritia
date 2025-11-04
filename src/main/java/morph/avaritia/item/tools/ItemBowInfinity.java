@@ -2,6 +2,7 @@ package morph.avaritia.item.tools;
 
 import java.util.List;
 
+import morph.avaritia.init.ModItems;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -217,7 +218,6 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
         }
         // Lumberjack.info(frame);
         if (frame != -1) {
-            System.out.println(frame);
             return AvaritiaTextures.INFINITY_BOW_PULL_MASK[frame];
         }
         return AvaritiaTextures.INFINITY_BOW_IDLE_MASK;
@@ -232,18 +232,19 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
     @Override
     @SideOnly(Side.CLIENT)
     public void registerModels() {
-        ModelBakery.registerItemKeyGenerator(this, stack -> {
+        ModelBakery.registerItemKeyGenerator(ModItems.infinity_bow, stack -> {
             String key = ModelBakery.defaultItemKeyGenerator.generateKey(stack);
             if (stack.hasTagCompound() && stack.getTagCompound().hasKey("frame")) {
                 key += "@pull=" + stack.getTagCompound().getInteger("frame");
             }
             return key;
         });
-        ModelResourceLocation location = new ModelResourceLocation("avaritia:bow", "bow");
+        ModelResourceLocation location = new ModelResourceLocation("avaritia:tools", "type=infinity_bow");
         IBakedModel actualModel = new InfinityBowModelWrapper();
         IBakedModel wrapped = new CosmicItemRender(TransformUtils.DEFAULT_BOW, modelRegistry -> actualModel);
         ModelRegistryHelper.register(location, wrapped);
-        ModelLoader.setCustomMeshDefinition(this, stack -> location);
+        ModelLoader.registerItemVariants(ModItems.infinity_bow, location);
+        ModelLoader.setCustomMeshDefinition(ModItems.infinity_bow, stack -> location);
     }
 
     @Override

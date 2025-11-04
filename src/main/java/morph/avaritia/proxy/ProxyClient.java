@@ -123,9 +123,9 @@ public class ProxyClient extends Proxy {
 
         {
             ModelResourceLocation axe = new ModelResourceLocation(tools, "type=infinity_axe");
-            IBakedModel axerWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
+            IBakedModel axeWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
                     modelRegistry -> modelRegistry.getObject(axe));
-            ModelRegistryHelper.register(axe, axerWrapped);
+            ModelRegistryHelper.register(axe, axeWrapped);
             ModelLoader.registerItemVariants(ModItems.infinity_axe, axe);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_axe, (ItemStack stack) -> axe);
         }
@@ -135,7 +135,7 @@ public class ProxyClient extends Proxy {
             IBakedModel hoeWrapped = new CosmicItemRender(TransformUtils.DEFAULT_TOOL,
                     modelRegistry -> modelRegistry.getObject(hoe));
             ModelRegistryHelper.register(hoe, hoeWrapped);
-            ModelLoader.registerItemVariants(ModItems.infinity_axe, hoe);
+            ModelLoader.registerItemVariants(ModItems.infinity_hoe, hoe);
             ModelLoader.setCustomMeshDefinition(ModItems.infinity_hoe, (ItemStack stack) -> hoe);
         }
 
