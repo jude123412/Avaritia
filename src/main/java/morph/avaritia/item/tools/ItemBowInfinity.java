@@ -2,7 +2,6 @@ package morph.avaritia.item.tools;
 
 import java.util.List;
 
-import morph.avaritia.init.ModItems;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -45,6 +44,7 @@ import morph.avaritia.client.render.item.InfinityBowModelWrapper;
 import morph.avaritia.entity.EntityHeavenArrow;
 import morph.avaritia.entity.EntityImmortalItem;
 import morph.avaritia.init.AvaritiaTextures;
+import morph.avaritia.init.ModItems;
 
 public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRegister, IBakeryProvider {
 
