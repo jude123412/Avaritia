@@ -165,7 +165,7 @@ public class CosmicHaloItemRender extends WrappedItemRenderer {
                     CosmicHaloItemRender::computeModel);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             CosmicShaderHelper.cosmicOpacity = cri.getMaskOpacity(stack, player);
-            CosmicShaderHelper.useAlternateShader();
+            CosmicShaderHelper.useShader();
             renderModel(cosmicModel, stack);
             CosmicShaderHelper.releaseShader();
             GlStateManager.popMatrix();

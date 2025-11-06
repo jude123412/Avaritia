@@ -128,7 +128,7 @@ public class CosmicItemRender extends WrappedItemRenderer {
 
             GlStateManager.color(1F, 1F, 1F, 1F);
             CosmicShaderHelper.cosmicOpacity = cri.getMaskOpacity(stack, player);
-            CosmicShaderHelper.useAlternateShader();
+            CosmicShaderHelper.useShader();
 
             renderModel(cosmicModel, stack);
 
