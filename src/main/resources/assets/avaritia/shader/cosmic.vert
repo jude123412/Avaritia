@@ -1,5 +1,7 @@
 #version 120
 
+uniform vec3 playerPosition;
+
 vec4 Ambient;
 vec4 Diffuse;
 vec4 Specular;
@@ -7,7 +9,8 @@ vec4 Specular;
 attribute float activelights;
 
 varying vec3 position;
- 
+varying vec3 eyeSpacePlayer;
+
 void pointLight(in int i, in vec3 normal, in vec3 eye, in vec3 ecPosition3)
 {
    float nDotVP;       // normal . light direction
@@ -166,7 +169,7 @@ void flight(in vec3 normal, in vec4 ecPosition, float alphaFade)
 	vec3 ecPosition3;
 	vec3 eye;
 	int i;
- 
+
 	ecPosition3 = (vec3 (ecPosition)) / ecPosition.w;
 	eye = vec3 (0.0, 0.0, 1.0);
  
@@ -200,25 +203,31 @@ void flight(in vec3 normal, in vec4 ecPosition, float alphaFade)
     gl_FrontColor = color;
     gl_FrontColor.a *= alphaFade;
 }
- 
+
 void main (void)
 {
-	vec3  transformedNormal;
-	float alphaFade = 1.0;
- 
-	// Eye-coordinate position of vertex, needed in various calculations
-	vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
- 
-	// Do fixed functionality vertex transform
-	gl_Position = ftransform();
-	transformedNormal = fnormal();
-	flight(transformedNormal, ecPosition, alphaFade);
- 
-	//Enable texture coordinates
-	gl_TexCoord[0] = gl_MultiTexCoord0;
-	//gl_TexCoord[1] = gl_MultiTexCoord1;
-	//gl_TexCoord[2] = gl_MultiTexCoord2;
-	//gl_TexCoord[3] = gl_MultiTexCoord3;
-	
-	position = (gl_ModelViewMatrix * gl_Vertex).xyz;
+    vec3 transformedNormal;
+
+    // Transform vertex to world space
+    vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
+    vec3 playerEye = (gl_ModelViewMatrix * vec4(playerPosition, 1.0)).xyz;
+
+    // Compute distance to player
+    float distanceToPlayer = length(ecPosition.xyz - playerPosition);
+    float alphaFade = 1.0 + smoothstep(10.0, 20.0, distanceToPlayer);
+
+    // Standard vertex transform
+    gl_Position = ftransform();
+    transformedNormal = fnormal();
+    flight(transformedNormal, ecPosition, alphaFade);
+
+    // Pass texture coordinates
+    gl_TexCoord[0] = gl_MultiTexCoord0;
+    //gl_TexCoord[1] = gl_MultiTexCoord1;
+    //gl_TexCoord[2] = gl_MultiTexCoord2;
+    //gl_TexCoord[3] = gl_MultiTexCoord3;
+
+    // Compute position relative to player
+    position = ecPosition.xyz;
+    eyeSpacePlayer = playerEye;
 }

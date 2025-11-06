@@ -29,8 +29,8 @@ public class CosmicShaderHelper {
 
     public static Calendar calendar = Calendar.getInstance();
 
-    public static int month = calendar.get(2) + 1;
-    public static int day = calendar.get(5);
+    public static int month = calendar.get(Calendar.MONTH) + 1;
+    public static int day = calendar.get(Calendar.DATE);
 
     static {
         shaderCallback = new ShaderCallback() {
@@ -42,13 +42,11 @@ public class CosmicShaderHelper {
 
                 float yaw = 0;
                 float pitch = 0;
-                float scale = 1.0f;
+                float scale = 25.0f;
 
                 if (!inventoryRender) {
-                    yaw = (float) ((mc.player.rotationYaw * 2 * Math.PI) / 360.0);
-                    pitch = -(float) ((mc.player.rotationPitch * 2 * Math.PI) / 360.0);
-                } else {
-                    scale = 25.0f;
+                    yaw = (float) ((mc.player.rotationYaw * 2 * Math.PI) / 3600.0);
+                    pitch = -(float) ((mc.player.rotationPitch * 2 * Math.PI) / 3600.0);
                 }
 
                 // Prevents Cosmic Opacity from being less than 1.0f
@@ -157,7 +155,6 @@ public class CosmicShaderHelper {
                 ARBShaderObjects.glUniform1fARB(lightmix, 0.2f);
                 ARBShaderObjects.glUniformMatrix2ARB(uvs, false, AvaritiaClientEventHandler.cosmicUVs);
                 ARBShaderObjects.glUniform1fARB(s, scale);
-                ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
                 ARBShaderObjects.glUniform1fARB(o, cosmicOpacity);
                 ARBShaderObjects.glUniform1fARB(r, cosmicChannelRed);
                 ARBShaderObjects.glUniform1fARB(g, cosmicChannelGreen);

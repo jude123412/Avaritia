@@ -25,6 +25,7 @@ uniform float channelAlphaBackground;
 uniform mat2 cosmicuvs[cosmiccount];
 
 varying vec3 position;
+varying vec3 eyeSpacePlayer;
 
 float rand2d(vec2 x) {
 	return fract(sin(mod(dot(x, vec2(12.9898, 78.233)), M_PI)) * 43758.5453);
@@ -51,64 +52,68 @@ void main (void)
     light.rgb *= lightlevel;
 
     float oneOverExternalScale = 1.0/externalScale;
-    
+
     int uvtiles = 16;
-    
+
     // background colour
     vec4 col = vec4(channelRedBackground,channelGreenBackground,channelBlueBackground,1.0);
-    
+
     float pulse = mod(time,400)/400.0;
-    
+
 //    col.g = sin(pulse*M_PI*2) * 0.075 + 0.225;
 //    col.b = cos(pulse*M_PI*2) * 0.05 + 0.3;
-    
-    // get ray from camera to fragment
-    vec4 dir = normalize(vec4( -position, 0));
 
-	// rotate the ray to show the right bit of the sphere for the angle
+
+    float distanceToPlayer = length(position - eyeSpacePlayer);
+    vec3 offset = normalize(position - eyeSpacePlayer) * (distanceToPlayer * 0.05);
+
+    // get ray from camera to fragment
+    vec4 dir = normalize(vec4(position - offset, 0.0));
+
+    // rotate the ray to show the right bit of the sphere for the angle
 	float sb = sin(pitch);
 	float cb = cos(pitch);
 	dir = normalize(vec4(dir.x, dir.y * cb - dir.z * sb, dir.y * sb + dir.z * cb, 0));
-	
+
 	float sa = sin(-yaw);
 	float ca = cos(-yaw);
 	dir = normalize(vec4(dir.z * sa + dir.x * ca, dir.y, dir.z * ca - dir.x * sa, 0));
-	
+
 	vec4 ray;
-	
+
 	// draw the layers
 	for (int i=0; i<16; i++) {
 		int mult = 16-i;
-	
+
 		// get semi-random stuff
 		int j = i + 7;
 		float rand1 = (j * j * 4321 + j * 8) * 2.0;
 		int k = j + 1;
 		float rand2 = (k * k * k * 239 + k * 37) * 3.6;
 		float rand3 = rand1 * 347.4 + rand2 * 63.4;
-		
+
 		// random rotation matrix by random rotation around random axis
 		vec3 axis = normalize(vec3(sin(rand1), sin(rand2) , cos(rand3)));
-		
+
 		// apply
 		ray = dir * rotationMatrix(axis, mod(rand3, 2*M_PI));
-		
+
 		// calcuate the UVs from the final ray
 		float rawu = 0.5 + (atan(ray.z,ray.x)/(2*M_PI));
 		float rawv = 0.5 + (asin(ray.y)/M_PI);
-		
+
 		// get UV scaled for layers and offset by time;
 		float scale = mult*0.5 + 2.75;
 		float u = rawu * scale * externalScale;
 		//float v = (rawv + time * 0.00006) * scale * 0.6;
 		float v = (rawv + time * 0.0002 * oneOverExternalScale) * scale * 0.6 * externalScale;
-		
+
 		vec2 tex = vec2( u, v );
-		
+
 		// tile position of the current uv
 		int tu = int(mod(floor(u*uvtiles),uvtiles));
-		int tv = int(mod(floor(v*uvtiles),uvtiles)); 
-		
+		int tv = int(mod(floor(v*uvtiles),uvtiles));
+
 		// get pseudorandom variants
 		int symbol = int(rand2d(vec2(tu, tv + i * 10.0)) * cosmicoutof);
 		int rotation = int(mod(pow(tu,float(tv)) + tu + 3 + tv*i, 8));
@@ -117,7 +122,7 @@ void main (void)
 			rotation -= 4;
 			flip = true;
 		}
-		
+
 		// if it's an icon, then add the colour!
 		if (symbol >= 0 && symbol < cosmiccount) {
 
@@ -176,11 +181,11 @@ void main (void)
 	// apply lighting
     vec3 shade = light.rgb * (lightmix) + vec3(1.0-lightmix,1.0-lightmix,1.0-lightmix);
     col.rgb *= shade;
-    
+
     // apply mask
     col.a *= mask.r * opacity;
-    
+
 	col = clamp(col,0.0,1.0);
-	
+
     gl_FragColor = col;
 }

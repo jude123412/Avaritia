@@ -30,6 +30,7 @@ public final class ShaderHelper {
 
     public static int cosmicShader = 0;
 
+
     public static void initShaders() {
         if (!useShaders()) {
             return;
@@ -51,8 +52,11 @@ public final class ShaderHelper {
 
             // Limits the animation time to a max value of 24000 ticks before resetting to 0
             int animationTime = mc.player.ticksExisted % 24000;
+            int playerPosLocation = ARBShaderObjects.glGetUniformLocationARB(shader, "playerPosition");
 
             if (mc.player != null && mc.player.world != null) {
+                // Send player position to shader
+                ARBShaderObjects.glUniform3fARB(playerPosLocation, (float) mc.player.posX, (float) mc.player.posY, (float) mc.player.posZ);
 
                 // at 12000 ticks starts the render in reverse at the correct time
                 ARBShaderObjects.glUniform1iARB(time,
