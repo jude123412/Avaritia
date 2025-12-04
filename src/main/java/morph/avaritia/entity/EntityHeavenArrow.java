@@ -46,7 +46,7 @@ public class EntityHeavenArrow extends EntityArrow {
             }
         }
 
-        if (inGround && timeInGround >= 100) {
+        if (inGround && timeInGround >= 100 || ticksInAir >= 200) {
             setDead();
         }
     }

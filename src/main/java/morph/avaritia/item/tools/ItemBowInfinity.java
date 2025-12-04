@@ -11,7 +11,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
@@ -100,9 +99,10 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
             f = 1.0F;
         }
 
-        EntityArrow arrow = new EntityHeavenArrow(world, player);
-        arrow.shoot(player, player.rotationPitch, player.rotationYaw, 0, f * 3.0F, 1.0F);// TODO, no inaccuracy?
+        EntityHeavenArrow arrow = new EntityHeavenArrow(world, player);
+        arrow.shoot(player, player.rotationPitch, player.rotationYaw, 0, f * 3.0F, 0.0F);// TODO, no inaccuracy?
         arrow.setDamage(20.0);
+        arrow.setNoGravity(true);
 
         if (f == 1.0F) {
             arrow.setIsCritical(true);

@@ -2,6 +2,8 @@ package morph.avaritia.proxy;
 
 import java.util.UUID;
 
+import mcjty.theoneprobe.keys.KeyInputHandler;
+import morph.avaritia.settings.KeyBindings;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -70,6 +72,9 @@ public class Proxy {
     }
 
     public void init(FMLInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new KeyInputHandler());
+        KeyBindings.init();
+
         try {
             Thaumcraft.registerInit();
         } catch (Throwable e) {
