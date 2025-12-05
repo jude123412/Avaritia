@@ -3,10 +3,8 @@ package morph.avaritia.item.tools;
 import java.util.List;
 import java.util.Set;
 
-import morph.avaritia.Tags;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.util.ITooltipFlag;
@@ -44,8 +42,6 @@ import morph.avaritia.handler.AvaritiaEventHandler;
 import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.util.ToolHelper;
-
-import static morph.avaritia.settings.KeyBindings.modeSwitch;
 
 public class ItemPickaxeInfinity extends ItemPickaxe implements ICosmicRenderItem {
 
@@ -112,25 +108,22 @@ public class ItemPickaxeInfinity extends ItemPickaxe implements ICosmicRenderIte
     }
 
     @Override
-    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        if(entityIn instanceof EntityPlayer) {
-            EntityPlayer playerIn = (EntityPlayer) entityIn;
-
-            ItemStack pickaxeStack = playerIn.getHeldItemMainhand();
-
-            if (pickaxeStack == stack && modeSwitch.isPressed() && modeSwitch.isKeyDown()) {
-                NBTTagCompound tags = pickaxeStack.getTagCompound();
-                if (tags == null) {
-                    tags = new NBTTagCompound();
-                    pickaxeStack.setTagCompound(tags);
-                }
-                if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, pickaxeStack) < 10) {
-                    pickaxeStack.addEnchantment(Enchantments.FORTUNE, 10);
-                }
-                tags.setBoolean("hammer", !tags.getBoolean("hammer"));
-                playerIn.swingArm(EnumHand.MAIN_HAND);
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+        ItemStack stack = player.getHeldItem(hand);
+        if (player.isSneaking()) {
+            NBTTagCompound tags = stack.getTagCompound();
+            if (tags == null) {
+                tags = new NBTTagCompound();
+                stack.setTagCompound(tags);
             }
+            if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack) < 10) {
+                stack.addEnchantment(Enchantments.FORTUNE, 10);
+            }
+            tags.setBoolean("hammer", !tags.getBoolean("hammer"));
+            player.swingArm(hand);
+            return new ActionResult<>(EnumActionResult.SUCCESS, stack);
         }
+        return new ActionResult<>(EnumActionResult.PASS, stack);
     }
 
     @Override
