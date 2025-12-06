@@ -66,6 +66,8 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
                     I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_0.desc"));
             tooltip.add(TextFormatting.DARK_GRAY + "" +
                     I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_1.desc"));
+            tooltip.add(TextFormatting.DARK_GRAY + "" +
+                    I18n.translateToLocal("tooltip." + getTranslationKey(stack) + "_2.desc"));
         } else {
             tooltip.add(TextFormatting.GRAY + "" + I18n.translateToLocal("tooltip.item.avaritia:tool.desc"));
         }
