@@ -7,7 +7,10 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.world.World;
+
+import morph.avaritia.util.DamageSourceInfinitySword;
 
 public class EntityHeavenArrow extends EntityArrow {
 
@@ -30,6 +33,7 @@ public class EntityHeavenArrow extends EntityArrow {
         rotationPitch = 0;
         rotationYaw = 0;
         super.onUpdate();
+
         if (!impacted) {
             try {
                 if (inGround) {
@@ -41,13 +45,27 @@ public class EntityHeavenArrow extends EntityArrow {
 
             if (impacted) {
                 if (!world.isRemote) {
-                    barrage();
+                    if (!shootingEntity.isSneaking()) {
+                        barrage();
+                    }
                 }
             }
         }
 
         if (inGround && timeInGround >= 100 || ticksInAir >= 200) {
             setDead();
+        }
+    }
+
+    @Override
+    protected void arrowHit(EntityLivingBase living) {
+        if (shootingEntity.isSneaking()) {
+            if (!shootingEntity.world.isRemote) {
+                living.getCombatTracker().trackDamage(new DamageSourceInfinitySword(shootingEntity), living.getHealth(),
+                        living.getHealth());
+                living.setHealth(0);
+                living.onDeath(new EntityDamageSource("infinity", shootingEntity));
+            }
         }
     }
 

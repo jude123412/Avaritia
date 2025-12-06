@@ -100,9 +100,11 @@ public class ItemBowInfinity extends Item implements ICosmicRenderItem, IModelRe
         }
 
         EntityHeavenArrow arrow = new EntityHeavenArrow(world, player);
-        arrow.shoot(player, player.rotationPitch, player.rotationYaw, 0, f * 3.0F, 0.0F);// TODO, no inaccuracy?
+        arrow.shoot(player, player.rotationPitch, player.rotationYaw, 0, f * 3.0F, 0.0F);
         arrow.setDamage(20.0);
-        arrow.setNoGravity(true);
+        if (player.isSneaking()) {
+            arrow.setNoGravity(true);
+        }
 
         if (f == 1.0F) {
             arrow.setIsCritical(true);
