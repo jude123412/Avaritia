@@ -198,7 +198,7 @@ public class AbilityHandler {
             // * (swimming ? 1.2f : 1.0f)
                     * (sneaking ? 0.1f : 1.0f);
 
-            if (GameSettings.isKeyDown(gameSettings.keyBindSprint)) {
+            if (GameSettings.isKeyDown(gameSettings.keyBindSprint) || entity.isSprinting()) {
                 if (entity.moveForward > 0f) {
                     entity.moveRelative(0f, 0f, 1f, speed);
                 } else if (entity.moveForward < 0f) {
