@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -189,6 +190,7 @@ public class AbilityHandler {
     private static void tickBootsAbilities(EntityLivingBase entity) {
         boolean flying = entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying;
         boolean swimming = entity.isInsideOfMaterial(Material.WATER) || entity.isInWater();
+        GameSettings gameSettings = new GameSettings();
         if (entity.onGround || flying || swimming) {
             boolean sneaking = entity.isSneaking();
 
@@ -196,14 +198,16 @@ public class AbilityHandler {
             // * (swimming ? 1.2f : 1.0f)
                     * (sneaking ? 0.1f : 1.0f);
 
-            if (entity.moveForward > 0f) {
-                entity.moveRelative(0f, 0f, 1f, speed);
-            } else if (entity.moveForward < 0f) {
-                entity.moveRelative(0f, 0f, 1f, -speed * 0.3f);
-            }
+            if (GameSettings.isKeyDown(gameSettings.keyBindSprint)) {
+                if (entity.moveForward > 0f) {
+                    entity.moveRelative(0f, 0f, 1f, speed);
+                } else if (entity.moveForward < 0f) {
+                    entity.moveRelative(0f, 0f, 1f, -speed * 0.3f);
+                }
 
-            if (entity.moveStrafing != 0f) {
-                entity.moveRelative(1f, 0f, 0f, speed * 0.5f * Math.signum(entity.moveStrafing));
+                if (entity.moveStrafing != 0f) {
+                    entity.moveRelative(1f, 0f, 0f, speed * 0.5f * Math.signum(entity.moveStrafing));
+                }
             }
         }
     }

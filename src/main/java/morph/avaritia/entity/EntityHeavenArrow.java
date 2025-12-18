@@ -7,7 +7,6 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EntityDamageSource;
 import net.minecraft.world.World;
 
 import morph.avaritia.util.DamageSourceInfinitySword;
