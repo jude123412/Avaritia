@@ -64,7 +64,6 @@ public class EntityHeavenArrow extends EntityArrow {
                 living.getCombatTracker().trackDamage(new DamageSourceInfinitySword(shootingEntity), living.getHealth(),
                         living.getHealth());
                 living.setHealth(0);
-                living.onDeath(new EntityDamageSource("infinity", shootingEntity));
             }
         }
     }
