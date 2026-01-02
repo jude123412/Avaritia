@@ -3,6 +3,7 @@ package morph.avaritia.client.render.entity;
 import java.util.ArrayList;
 import java.util.Random;
 
+import morph.avaritia.handler.ConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
@@ -186,38 +187,40 @@ public class ModelArmorInfinity extends ModelBiped {
         GlStateManager.color(1, 1, 1, 1);
 
         // WINGS
-        if (isFlying && !CosmicShaderHelper.inventoryRender) {
-            setWings();
-            mc.renderEngine.bindTexture(wingTex);
-            super.render(entity, f, f1, f2, f3, f4, f5);
+        if (ConfigHandler.wingRender) {
+            if (isFlying && !CosmicShaderHelper.inventoryRender) {
+                setWings();
+                mc.renderEngine.bindTexture(wingTex);
+                super.render(entity, f, f1, f2, f3, f4, f5);
 
-            CosmicShaderHelper.useShader();
-            TextureUtils.bindBlockTexture();
-            GlStateManager.disableAlpha();
-            GlStateManager.enableBlend();
-            GlStateManager.depthMask(false);
-            overlay.render(entity, f, f1, f2, f3, f4, f5);
+                CosmicShaderHelper.useShader();
+                TextureUtils.bindBlockTexture();
+                GlStateManager.disableAlpha();
+                GlStateManager.enableBlend();
+                GlStateManager.depthMask(false);
+                overlay.render(entity, f, f1, f2, f3, f4, f5);
 
-            CosmicShaderHelper.releaseShader();
+                CosmicShaderHelper.releaseShader();
 
-            mc.renderEngine.bindTexture(wingGlowTex);
-            GlStateManager.disableLighting();
-            mc.entityRenderer.disableLightmap();
+                mc.renderEngine.bindTexture(wingGlowTex);
+                GlStateManager.disableLighting();
+                mc.entityRenderer.disableLightmap();
 
-            GlStateManager.color(0.84F, 1F, 0.95F, (float) (pulse_mag_sqr * 0.5));
+                GlStateManager.color(0.84F, 1F, 0.95F, (float) (pulse_mag_sqr * 0.5));
 
-            GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE);
-            super.render(entity, f, f1, f2, f3, f4, f5);
-            GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+                GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE);
+                super.render(entity, f, f1, f2, f3, f4, f5);
+                GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
 
-            GlStateManager.depthMask(true);
-            GlStateManager.disableBlend();
-            GlStateManager.enableAlpha();
-            if (!CosmicShaderHelper.inventoryRender) {
-                mc.entityRenderer.enableLightmap();
+                GlStateManager.depthMask(true);
+                GlStateManager.disableBlend();
+                GlStateManager.enableAlpha();
+                if (!CosmicShaderHelper.inventoryRender) {
+                    mc.entityRenderer.enableLightmap();
+                }
+                GlStateManager.enableLighting();
+                GlStateManager.color(1, 1, 1, 1);
             }
-            GlStateManager.enableLighting();
-            GlStateManager.color(1, 1, 1, 1);
         }
     }
 
@@ -369,7 +372,7 @@ public class ModelArmorInfinity extends ModelBiped {
         bipedLeftArm.showModel = false;
         bipedRightLeg.showModel = false;
         bipedLeftLeg.showModel = false;
-        bipedHeadwear.showModel = showHat ? true : false;
+        bipedHeadwear.showModel = showHat && ConfigHandler.invulnRender;
     }
 
     public void setGems() {

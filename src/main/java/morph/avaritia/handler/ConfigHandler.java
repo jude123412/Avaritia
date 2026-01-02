@@ -47,6 +47,10 @@ public class ConfigHandler {
     public static float cosmicChannelGreen = 0.225f;
     public static float cosmicChannelBlue = 0.35f;
 
+    public static boolean invulnRender = true;
+    public static boolean wingRender = true;
+    public static boolean betterSpeedControl = true;
+
     // public static boolean storagedrawers = false;
     // public static boolean refinedstorage = false;
     // public static boolean tconstruct = false;
@@ -179,6 +183,23 @@ public class ConfigHandler {
             cosmicChannelBlue = (float) tag.setDefaultInt(350).getInt() / 1000;
         }
 
+
+        {
+            ConfigTag armor_configuartion = config.getTag("armor_configuration");
+            armor_configuartion.setComment("Main Armor Configuartion");
+
+            tag = armor_configuartion.getTag("invulnerable_render");
+            tag.setComment("Disables Infinity Armor invulnerable render when false");
+            invulnRender = tag.setDefaultBoolean(true).getBoolean();
+
+            tag = armor_configuartion.getTag("wing_render");
+            tag.setComment("Disables Infinity Armor wing render when false");
+            wingRender = tag.setDefaultBoolean(true).getBoolean();
+
+            tag = armor_configuartion.getTag("better_speed_control");
+            tag.setComment("Disables Infinity Boots better movement control when false");
+            betterSpeedControl = tag.setDefaultBoolean(true).getBoolean();
+        }
         // {
         // ConfigTag creative = config.getTag("creative");
         // creative.setComment("Enable / Disable Extreme recipes for creative items from other mods.");
