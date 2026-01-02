@@ -183,7 +183,6 @@ public class ConfigHandler {
             cosmicChannelBlue = (float) tag.setDefaultInt(350).getInt() / 1000;
         }
 
-
         {
             ConfigTag armor_configuartion = config.getTag("armor_configuration");
             armor_configuartion.setComment("Main Armor Configuartion");

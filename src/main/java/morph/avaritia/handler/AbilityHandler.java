@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -200,16 +199,16 @@ public class AbilityHandler {
                     * (sneaking ? 0.1f : 1.0f);
 
             if (ConfigHandler.betterSpeedControl) {
-               if (GameSettings.isKeyDown(gameSettings.keyBindSprint) || entity.isSprinting()) {
-                   if (entity.moveForward > 0f) {
-                       entity.moveRelative(0f, 0f, 1f, speed);
-                   } else if (entity.moveForward < 0f) {
-                       entity.moveRelative(0f, 0f, 1f, -speed * 0.3f);
-                   }
+                if (GameSettings.isKeyDown(gameSettings.keyBindSprint) || entity.isSprinting()) {
+                    if (entity.moveForward > 0f) {
+                        entity.moveRelative(0f, 0f, 1f, speed);
+                    } else if (entity.moveForward < 0f) {
+                        entity.moveRelative(0f, 0f, 1f, -speed * 0.3f);
+                    }
 
-                   if (entity.moveStrafing != 0f) {
-                       entity.moveRelative(1f, 0f, 0f, speed * 0.5f * Math.signum(entity.moveStrafing));
-                   }
+                    if (entity.moveStrafing != 0f) {
+                        entity.moveRelative(1f, 0f, 0f, speed * 0.5f * Math.signum(entity.moveStrafing));
+                    }
                 }
             } else {
                 if (entity.moveForward > 0f) {

@@ -3,7 +3,6 @@ package morph.avaritia.client.render.entity;
 import java.util.ArrayList;
 import java.util.Random;
 
-import morph.avaritia.handler.ConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
@@ -29,6 +28,7 @@ import codechicken.lib.math.MathHelper;
 import codechicken.lib.texture.TextureUtils;
 import morph.avaritia.client.ColourHelper;
 import morph.avaritia.client.render.shader.CosmicShaderHelper;
+import morph.avaritia.handler.ConfigHandler;
 import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 
