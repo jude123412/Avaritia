@@ -146,3 +146,6 @@ death.attack.infinity.1=%1$s was sliced to ribbons by %2$s
 death.attack.infinity.2=%1$s was excised from existence by %2$s
 death.attack.infinity.3=%1$s was overkilled by %2$s
 death.attack.infinity.4=%1$s was annihilated by %2$s
+item.for.bee.modifier.production=Production: %.2fx
+item.for.bee.modifier.mutation=Mutation Multiplier: %.2fx
+item.for.bee.modifier.lifespan=Lifespan Modifier: %.2fx

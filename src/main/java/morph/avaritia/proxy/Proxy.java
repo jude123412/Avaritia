@@ -2,6 +2,7 @@ package morph.avaritia.proxy;
 
 import java.util.UUID;
 
+import morph.avaritia.compat.forestry.Mellifera;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -52,6 +53,12 @@ public class Proxy {
             Thaumcraft.preInit();
         } catch (Throwable e) {
             Lumberjack.log(Level.INFO, "Avaritia decided to research everything instead.");
+        }
+
+        try {
+            Mellifera.registerItems();
+        } catch (Throwable e) {
+            Lumberjack.log(Level.INFO, "Avaritia realised it is allergic to bees");
         }
 
         ModBlocks.init();

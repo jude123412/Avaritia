@@ -58,8 +58,8 @@ dependencies {
     // Blood Magic
 
     // Forestry
-//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:forestry-5.8.2.424-59751:2684780") // Forestry 5.8.2.387
-//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:jei-bees-0.9.0.5-248370:2490058") // JEI Bees 0.0.0.5
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:forestry-5.8.2.424-59751:2684780") // Forestry 5.8.2.387
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:jei-bees-0.9.0.5-248370:2490058") // JEI Bees 0.0.0.5
     // Forestry
 
     // Draconic Evolution

@@ -6,6 +6,7 @@ public class Compat {
 
     public static boolean BloodMagicIsLoaded = Loader.isModLoaded("bloodmagic");
     public static boolean ThaumcraftIsLoaded = Loader.isModLoaded("thaumcraft");
+    public static boolean ForestryIsModLoaded = Loader.isModLoaded("forestry");
 
     public static class ItemNotFoundException extends Exception {
 
