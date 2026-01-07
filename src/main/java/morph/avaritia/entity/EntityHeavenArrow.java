@@ -14,6 +14,7 @@ import morph.avaritia.util.DamageSourceInfinitySword;
 public class EntityHeavenArrow extends EntityArrow {
 
     public boolean impacted = false;
+    private int upwardTicks;
 
     public EntityHeavenArrow(World world, double x, double y, double z) {
         super(world, x, y, z);
@@ -51,7 +52,21 @@ public class EntityHeavenArrow extends EntityArrow {
             }
         }
 
-        if (inGround && timeInGround >= 100 || ticksInAir >= 200) {
+        if (motionY > 0) {
+            upwardTicks++;
+        } else {
+            upwardTicks = 0;
+        }
+
+        boolean goingUpTooLong = upwardTicks > 10;
+        boolean almostVertical = (motionX * motionX + motionZ * motionZ) < 0.0001;
+        boolean verySlow = (motionX * motionX + motionY * motionY + motionZ * motionZ) < 0.001;
+
+        if (goingUpTooLong && almostVertical && verySlow) {
+            setDead();
+        }
+
+        if (inGround && timeInGround >= 100) {
             setDead();
         }
     }
