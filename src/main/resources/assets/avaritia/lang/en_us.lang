@@ -8,8 +8,8 @@
 item.resource.diamond_lattice.name=Diamond Lattice
 item.resource.crystal_matrix_ingot.name=Crystal Matrix Ingot
 item.resource.neutron_pile.name=Pile of Neutrons
-item.resource.neutron_nugget.name=Neutronium Nugget
-item.resource.neutronium_ingot.name=Neutronium Ingot
+item.resource.neutron_nugget.name=Cosmic Neutronium Nugget
+item.resource.neutronium_ingot.name=Cosmic Neutronium Ingot
 item.resource.infinity_catalyst.name=Infinity Catalyst
 item.resource.infinity_ingot.name=Infinity Ingot
 item.resource.record_fragment.name=Record Fragment
@@ -61,6 +61,8 @@ item.avaritia:darkhold.name=Darkhold
 item.avaritia:extremely_primordial_pearl.name=Extremly Primordial Pearl
 item.avaritia:akashic_record.name=Akashic Record
 item.avaritia:cosmic_caster.name=(REDACTED) Caster's Gauntlet
+item.avaritia:infinity_frame.name=Infinity Frame
+item.avaritia:cosmic_neutronium_frame.name=Cosmic Neutronium Frame
 tc.aspect.ascension=God, Heaven, Transcendent
 tc.aspect.terminus=End, Apocalypse, Extinction
 
@@ -129,6 +131,8 @@ tooltip.item.avaritia:infinity_shovel_2.desc=This excludes Axe or Pick blocks.
 tooltip.item.avaritia:infinity_sword.desc=Effectively preforms the /kill command on any entity you attack.
 tooltip.item.avaritia:darkhold.desc=Simply right click or shift right click to gain or subtract warp!
 tooltip.item.avaritia:akashic_record.desc=Right Click to gain Observation and Theory Notes from Thaumcraft.
+tooltip.item.avaritia:infinity_frame.desc=Bees go burrrrrrrrr
+tooltip.item.avaritia:cosmic_neutronium_frame.desc=May chaos take the world and rain bees from above
 #
 # Other
 itemGroup.avaritia=Avaritia
@@ -147,5 +151,6 @@ death.attack.infinity.2=%1$s was excised from existence by %2$s
 death.attack.infinity.3=%1$s was overkilled by %2$s
 death.attack.infinity.4=%1$s was annihilated by %2$s
 item.for.bee.modifier.production=Production: %.2fx
-item.for.bee.modifier.mutation=Mutation Multiplier: %.2fx
-item.for.bee.modifier.lifespan=Lifespan Modifier: %.2fx
+item.for.bee.modifier.mutation=Mutation: %.2fx
+item.for.bee.modifier.lifespan=Lifespan: %.2fx
+item.for.bee.modifier.genetic_decay=Genetic Decay: %.2fx

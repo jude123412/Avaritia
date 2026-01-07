@@ -88,6 +88,16 @@
 				"textures": {
 					"layer0": "items/akashic_record"
 				}
+			},
+			"infinity_frame": {
+				"textures": {
+					"layer0": "items/infinity_frame"
+				}
+			},
+			"cosmic_neutronium_frame": {
+				"textures": {
+					"layer0": "items/cosmic_neutronium_frame"
+				}
 			}
 		},
 		"matter_cluster": {

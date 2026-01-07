@@ -12,8 +12,8 @@ public class Mellifera {
 
     public static void registerItems() throws Compat.ItemNotFoundException {
         if (ForestryIsModLoaded) {
-            infinityFrame = registerItem(new ItemInfinityFrame(0.0F, 999.0F, 0.0F, "infinity_frame"));
-            cosmicFrame = registerItem(new ItemInfinityFrame(999.0F, 0.0F, 999.0F, "cosmic_frame"));
+            infinityFrame = registerItem(new ItemInfinityFrame("infinity_frame", 20.0F, 1.0F, 5.0F, 0.0F));
+            cosmicFrame = registerItem(new ItemInfinityFrame("cosmic_neutronium_frame", 0.0F, 25.0F, 0.0F, 2.0F));
         }
     }
 }

@@ -60,6 +60,7 @@ dependencies {
     // Forestry
     runtimeOnlyNonPublishable rfg.deobf("curse.maven:forestry-5.8.2.424-59751:2684780") // Forestry 5.8.2.387
     runtimeOnlyNonPublishable rfg.deobf("curse.maven:jei-bees-0.9.0.5-248370:2490058") // JEI Bees 0.0.0.5
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:binnies-mods-223525:2916129") // Extra Bees 2.5.1.203
     // Forestry
 
     // Draconic Evolution
@@ -76,6 +77,10 @@ dependencies {
     // Tinkers Construct
 //    runtimeOnlyNonPublishable rfg.deobf("curse.maven:tinkers-construct-2.13.0.183-74072:2902483") // Tinkers Construct 2.13.0.183
     // Tinkers Construct
+
+    // GregTech
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:gregtech-557242:5519022") // GregTech 2.8.10
+    // GregTech
 
     // Others
     runtimeOnlyNonPublishable rfg.deobf("curse.maven:biomesoplenty-7.0.1.2445-220318:2715506") // Biomes O Plenty 7.0.1.2445
