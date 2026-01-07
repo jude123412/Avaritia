@@ -78,7 +78,7 @@ dependencies {
     // Tinkers Construct
 
     // Others
-    runtimeOnlyNonPublishable rfg.deobf("curse.maven:biomesoplenty-7.0.1.2445-220318:2715506") // Biomes O Plenty 7.0.1.2445
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:biomesoplenty-7.0.1.2445-220318:3558882") // Biomes O Plenty 7.0.1.2445
     runtimeOnlyNonPublishable rfg.deobf("curse.maven:baubles-1.12-1.5.2-227083:2518667") // Baubles
     runtimeOnlyNonPublishable rfg.deobf("curse.maven:mantle-1.3.3.55-74924:2713386") // Mantle 1.3.3.55
     runtimeOnlyNonPublishable rfg.deobf("curse.maven:ore-dict-tips-2.0.2-252832:2545766") // OreDictTips 2.0.2
