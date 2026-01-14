@@ -45,7 +45,7 @@ dependencies {
     compileOnly rfg.deobf("curse.maven:blood-magic-2.4.3-105-224791:2822288") // Blood Magic 2.4.3-105
     compileOnly rfg.deobf("curse.maven:tinkers-construct-2.13.0.183-74072:2902483") // Tinkers Construct 2.13.0.183
     compileOnly rfg.deobf("curse.maven:mantle-1.3.3.55-74924:2713386") // Mantle 1.3.3.55
-    compileOnly rfg.deobf("curse.maven:forestry-5.8.2.424-59751:2684780") // Forestry 5.8.2.387
+    compileOnly rfg.deobf("curse.maven:forestry-5.8.2.424-59751:2684780") // Forestry 5.8.2.424
     compileOnly rfg.deobf("curse.maven:draconic-evolution-2.3.28.354-223565:3431261") // Draconic Evolution 2.3.28.254
     compileOnly rfg.deobf("curse.maven:thaumcraft-1.12.2-6.1.beta-26-223628:2629023") // Thaumcraft 6.1.beta-26
 
@@ -58,7 +58,7 @@ dependencies {
     // Blood Magic
 
     // Forestry
-    runtimeOnlyNonPublishable rfg.deobf("curse.maven:forestry-5.8.2.424-59751:2684780") // Forestry 5.8.2.387
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:forestry-5.8.2.424-59751:2684780") // Forestry 5.8.2.424
     runtimeOnlyNonPublishable rfg.deobf("curse.maven:jei-bees-0.9.0.5-248370:2490058") // JEI Bees 0.0.0.5
     runtimeOnlyNonPublishable rfg.deobf("curse.maven:binnies-mods-223525:2916129") // Extra Bees 2.5.1.203
     // Forestry
@@ -79,7 +79,7 @@ dependencies {
     // Tinkers Construct
 
     // GregTech
-    runtimeOnlyNonPublishable rfg.deobf("curse.maven:gregtech-557242:5519022") // GregTech 2.8.10
+//    runtimeOnlyNonPublishable rfg.deobf("curse.maven:gregtech-557242:5519022") // GregTech 2.8.10
     // GregTech
 
     // Others

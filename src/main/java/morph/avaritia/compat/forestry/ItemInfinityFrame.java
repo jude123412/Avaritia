@@ -38,12 +38,12 @@ public class ItemInfinityFrame extends ItemForestry implements IHiveFrame, IHalo
     private final InfinityFrameBeeModifier beeModifier;
     private final String regName;
 
-    public ItemInfinityFrame( String regName, float productionModifier, float mutationModifier, float lifespanModifier, float geneticDecayModifier) {
+    public ItemInfinityFrame(String regName, float productionModifier, float mutationModifier, float lifespanModifier, float geneticDecayModifier, boolean isSealed, boolean isSelfLighted, boolean isSunlightSimulated) {
         setMaxStackSize(1);
         setTranslationKey("avaritia:" + regName);
         setRegistryName(regName);
         setCreativeTab(Avaritia.tab);
-        this.beeModifier = new InfinityFrameBeeModifier(productionModifier, mutationModifier, lifespanModifier, geneticDecayModifier);
+        this.beeModifier = new InfinityFrameBeeModifier(productionModifier, mutationModifier, lifespanModifier, geneticDecayModifier, isSealed, isSelfLighted, isSunlightSimulated);
         this.regName = regName;
     }
 
@@ -125,12 +125,16 @@ public class ItemInfinityFrame extends ItemForestry implements IHiveFrame, IHalo
         private final float mutationModifier;
         private final float lifespanModifier;
         private final float geneticDecayModifier;
+        private final boolean isSealed, isSelfLighted, isSunlightSimulated;
 
-        public InfinityFrameBeeModifier(float productionModifier, float mutationModifier, float lifespanModifier, float geneticDecayModifier) {
+        public InfinityFrameBeeModifier(float productionModifier, float mutationModifier, float lifespanModifier, float geneticDecayModifier, boolean isSealed, boolean isSelfLighted, boolean isSunlightSimulated) {
             this.productionModifier = productionModifier;
             this.mutationModifier = mutationModifier;
             this.lifespanModifier = lifespanModifier;
             this.geneticDecayModifier = geneticDecayModifier;
+            this.isSealed = isSealed;
+            this.isSelfLighted = isSelfLighted;
+            this.isSunlightSimulated = isSunlightSimulated;
         }
 
         @Override
@@ -151,6 +155,21 @@ public class ItemInfinityFrame extends ItemForestry implements IHiveFrame, IHalo
         @Override
         public float getGeneticDecay(IBeeGenome genome, float currentModifier) {
             return this.geneticDecayModifier;
+        }
+
+        @Override
+        public boolean isSealed() {
+            return isSealed;
+        }
+
+        @Override
+        public boolean isSelfLighted() {
+            return isSelfLighted;
+        }
+
+        @Override
+        public boolean isSunlightSimulated() {
+            return isSunlightSimulated;
         }
 
         @SideOnly(Side.CLIENT)
