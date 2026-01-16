@@ -59,12 +59,12 @@ public class ExtremeCraftingCategory implements IRecipeCategory<ExtremeRecipeWra
     public void setRecipe(IRecipeLayout layout, ExtremeRecipeWrapper wrapper, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = layout.getItemStacks();
 
-        guiItemStacks.init(craftOutputSlot, false, 73, 199);
+        guiItemStacks.init(craftOutputSlot, false, 72, 168);
 
         for (int y = 0; y < 9; ++y) {
             for (int x = 0; x < 9; ++x) {
                 int index = craftInputSlot1 + x + (y * 9);
-                guiItemStacks.init(index, true, (x * 18) + 1, (y * 18) + 1);
+                guiItemStacks.init(index, true, x * 18, y * 18);
             }
         }
         List<List<ItemStack>> inputs = ingredients.getInputs(ItemStack.class);
@@ -92,5 +92,6 @@ public class ExtremeCraftingCategory implements IRecipeCategory<ExtremeRecipeWra
             layout.setShapeless();
         }
         guiItemStacks.set(ingredients);
+        layout.setRecipeTransferButton(162, 21);
     }
 }
