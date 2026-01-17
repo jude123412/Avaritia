@@ -32,6 +32,9 @@ public class AvaritiaJEIPlugin implements IModPlugin {
 
     public static IDrawableStatic static_singularity;
 
+    private static final int extremeOffsetX = 0;
+    private static final int extremeOffsetY = 15;
+
     @Override
     public void registerCategories(IRecipeCategoryRegistration registry) {
         registry.addRecipeCategories(new ExtremeCraftingCategory(registry.getJeiHelpers().getGuiHelper()));
@@ -50,7 +53,7 @@ public class AvaritiaJEIPlugin implements IModPlugin {
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.extremeCraftingTable), EXTREME_CRAFTING);
         registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerExtremeCrafting.class, EXTREME_CRAFTING,
                 1, 81, 82, 36);
-        registry.addRecipeClickArea(GUIExtremeCrafting.class, 175, 74, 22, 26, EXTREME_CRAFTING);
+        registry.addRecipeClickArea(GUIExtremeCrafting.class, 175 + extremeOffsetX, 74 + extremeOffsetY, 22, 26, EXTREME_CRAFTING);
 
         registry.addRecipes(AvaritiaRecipeManager.COMPRESSOR_RECIPES.values(), NEUTRONIUM_COMPRESSOR);
         registry.handleRecipes(ICompressorRecipe.class, CompressorRecipeWrapper::new, NEUTRONIUM_COMPRESSOR);

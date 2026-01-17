@@ -26,29 +26,32 @@ public class ContainerExtremeCrafting extends Container {
     protected World worldObj;
     protected BlockPos pos;
 
+    protected int offsetX = 0;
+    protected int offsetY = 15;
+
     public ContainerExtremeCrafting(InventoryPlayer player, World world, BlockPos pos, TileDireCraftingTable table) {
         worldObj = world;
         this.pos = pos;
         craftMatrix = new InventoryExtremeCrafting(this, table);
         craftResult = new InventoryExtremeCraftResult(table);
-        addSlotToContainer(new SlotExtremeCrafting(player.player, craftMatrix, craftResult, 0, 210, 80));
+        addSlotToContainer(new SlotExtremeCrafting(player.player, craftMatrix, craftResult, 0, 210 + offsetX, 80 + offsetY));
         int wy;
         int ex;
 
         for (wy = 0; wy < 9; ++wy) {
             for (ex = 0; ex < 9; ++ex) {
-                addSlotToContainer(new Slot(craftMatrix, ex + wy * 9, 12 + ex * 18, 8 + wy * 18));
+                addSlotToContainer(new Slot(craftMatrix, ex + wy * 9, 12 + ex * 18 + offsetX, 8 + wy * 18 + offsetY));
             }
         }
 
         for (wy = 0; wy < 3; ++wy) {
             for (ex = 0; ex < 9; ++ex) {
-                addSlotToContainer(new Slot(player, ex + wy * 9 + 9, 12 + ex * 18, 174 + wy * 18));
+                addSlotToContainer(new Slot(player, ex + wy * 9 + 9, 12 + ex * 18 + offsetX, 174 + wy * 18 + offsetY));
             }
         }
 
         for (ex = 0; ex < 9; ++ex) {
-            addSlotToContainer(new Slot(player, ex, 12 + ex * 18, 232));
+            addSlotToContainer(new Slot(player, ex, 12 + ex * 18 + offsetX, 232 + offsetY));
         }
 
         onCraftMatrixChanged(craftMatrix);
