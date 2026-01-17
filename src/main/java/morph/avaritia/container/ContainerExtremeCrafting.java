@@ -34,7 +34,8 @@ public class ContainerExtremeCrafting extends Container {
         this.pos = pos;
         craftMatrix = new InventoryExtremeCrafting(this, table);
         craftResult = new InventoryExtremeCraftResult(table);
-        addSlotToContainer(new SlotExtremeCrafting(player.player, craftMatrix, craftResult, 0, 210 + offsetX, 80 + offsetY));
+        addSlotToContainer(
+                new SlotExtremeCrafting(player.player, craftMatrix, craftResult, 0, 210 + offsetX, 80 + offsetY));
         int wy;
         int ex;
 

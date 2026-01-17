@@ -53,7 +53,8 @@ public class AvaritiaJEIPlugin implements IModPlugin {
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.extremeCraftingTable), EXTREME_CRAFTING);
         registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerExtremeCrafting.class, EXTREME_CRAFTING,
                 1, 81, 82, 36);
-        registry.addRecipeClickArea(GUIExtremeCrafting.class, 175 + extremeOffsetX, 74 + extremeOffsetY, 22, 26, EXTREME_CRAFTING);
+        registry.addRecipeClickArea(GUIExtremeCrafting.class, 175 + extremeOffsetX, 74 + extremeOffsetY, 22, 26,
+                EXTREME_CRAFTING);
 
         registry.addRecipes(AvaritiaRecipeManager.COMPRESSOR_RECIPES.values(), NEUTRONIUM_COMPRESSOR);
         registry.handleRecipes(ICompressorRecipe.class, CompressorRecipeWrapper::new, NEUTRONIUM_COMPRESSOR);

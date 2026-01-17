@@ -11,10 +11,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import org.lwjgl.opengl.GL11;
+
 import codechicken.lib.texture.TextureUtils;
 import morph.avaritia.container.ContainerExtremeCrafting;
 import morph.avaritia.tile.TileDireCraftingTable;
-import org.lwjgl.opengl.GL11;
 
 public class GUIExtremeCrafting extends GuiContainer {
 
@@ -53,10 +54,10 @@ public class GUIExtremeCrafting extends GuiContainer {
         float g = 1f / texH;
 
         buf.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-        buf.pos(x,     y + h, this.zLevel).tex(u * f,       (v + h) * g).endVertex();
+        buf.pos(x, y + h, this.zLevel).tex(u * f, (v + h) * g).endVertex();
         buf.pos(x + w, y + h, this.zLevel).tex((u + w) * f, (v + h) * g).endVertex();
-        buf.pos(x + w, y,     this.zLevel).tex((u + w) * f, v * g).endVertex();
-        buf.pos(x,     y,     this.zLevel).tex(u * f,       v * g).endVertex();
+        buf.pos(x + w, y, this.zLevel).tex((u + w) * f, v * g).endVertex();
+        buf.pos(x, y, this.zLevel).tex(u * f, v * g).endVertex();
         tess.draw();
     }
 
