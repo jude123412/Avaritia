@@ -1,11 +1,13 @@
 package morph.avaritia.item.tools;
 
-import static morph.avaritia.util.ToolHelper.isHoldingControl;
-
 import java.util.List;
 import java.util.Set;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockGrass;
+import net.minecraft.block.BlockGrassPath;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -15,9 +17,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -45,7 +49,6 @@ import morph.avaritia.handler.AvaritiaEventHandler;
 import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.item.ItemMatterCluster;
-import morph.avaritia.util.ToolHelper;
 
 /**
  * Created by covers1624 on 31/07/2017.
@@ -83,6 +86,7 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
         Block block = state.getBlock();
 
         if (player.isSneaking()) {
+            if (useBonemeal(world, player, origin)) if (world.isRemote) world.playEvent(2005, origin, 0);
             return super.onItemUse(player, world, origin, hand, facing, hitX, hitY, hitZ);
         } else {
             if (!attemptHoe(stack, player, world, origin, facing)) {
@@ -96,7 +100,7 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
 
             for (BlockPos aoePos : BlockPos.getAllInBox(origin.add(-aoe_range, 0, -aoe_range),
                     origin.add(aoe_range, 0, aoe_range))) {
-                if (!isHoldingControl()) {
+                if (!(block instanceof BlockBush)) {
                     if (aoePos.equals(origin)) {
                         continue;
                     }
@@ -136,17 +140,9 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
                     }
                 }
 
-                if (isHoldingControl() && block instanceof IGrowable) {
-                    if (ToolHelper.useBonemeal(world, player, aoePos)) {
-                        if (world.isRemote) {
-                            world.playEvent(2005, aoePos, 0);
-                        }
-                    }
-                    if (ToolHelper.useBonemeal(world, player, origin)) {
-                        if (world.isRemote) {
-                            world.playEvent(2005, origin, 0);
-                        }
-                    }
+                if (block instanceof BlockBush) {
+                    if (useBonemeal(world, player, aoePos)) if (world.isRemote) world.playEvent(2005, aoePos, 0);
+                    if (useBonemeal(world, player, origin)) if (world.isRemote) world.playEvent(2005, origin, 0);
                 }
 
                 attemptHoe(stack, player, world, aoePos, facing);
@@ -212,7 +208,7 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
 
-        if (face != EnumFacing.DOWN && world.isAirBlock(pos.up()) && !isHoldingControl()) {
+        if (face != EnumFacing.DOWN && world.isAirBlock(pos.up())) {
             if (block instanceof BlockGrass || block instanceof BlockGrassPath) {
                 setBlock(hoeStack, player, world, pos, Blocks.FARMLAND.getDefaultState());
                 return true;
@@ -231,11 +227,16 @@ public class ItemHoeInfinity extends ItemHoe implements ICosmicRenderItem {
             }
         }
 
-        if (block instanceof IGrowable && isHoldingControl()) {
+        if (block instanceof BlockBush) {
             return true;
         }
 
         return false;
+    }
+
+    public static boolean useBonemeal(World world, EntityPlayer player, BlockPos position) {
+        ItemStack stack = new ItemStack(Items.DYE, 1, 15);
+        return ItemDye.applyBonemeal(stack, world, position, player, EnumHand.MAIN_HAND);
     }
 
     @Override

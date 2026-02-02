@@ -14,18 +14,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.oredict.OreDictionary;
-
-import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.Sets;
 
@@ -175,14 +170,5 @@ public class ToolHelper {
         }
 
         return counts;
-    }
-
-    public static boolean useBonemeal(World world, EntityPlayer player, BlockPos position) {
-        ItemStack stack = new ItemStack(Items.DYE, 1, 15);
-        return ItemDye.applyBonemeal(stack, world, position, player, EnumHand.MAIN_HAND);
-    }
-
-    public static boolean isHoldingControl() {
-        return Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157);
     }
 }
