@@ -45,8 +45,10 @@ public class EntityHeavenArrow extends EntityArrow {
 
             if (impacted) {
                 if (!world.isRemote) {
-                    if (!shootingEntity.isSneaking()) {
-                        barrage();
+                    if (shootingEntity != null) {
+                        if (!shootingEntity.isSneaking()) {
+                            barrage();
+                        }
                     }
                 }
             }
@@ -73,11 +75,14 @@ public class EntityHeavenArrow extends EntityArrow {
 
     @Override
     protected void arrowHit(EntityLivingBase living) {
-        if (shootingEntity.isSneaking()) {
-            if (!shootingEntity.world.isRemote) {
-                living.getCombatTracker().trackDamage(new DamageSourceInfinitySword(shootingEntity), living.getHealth(),
-                        living.getHealth());
-                living.setHealth(0);
+        if (shootingEntity != null) {
+            if (shootingEntity.isSneaking()) {
+                if (!shootingEntity.world.isRemote) {
+                    living.getCombatTracker().trackDamage(new DamageSourceInfinitySword(shootingEntity),
+                            living.getHealth(),
+                            living.getHealth());
+                    living.setHealth(0);
+                }
             }
         }
     }
