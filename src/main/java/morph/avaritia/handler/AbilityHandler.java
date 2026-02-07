@@ -7,8 +7,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -191,7 +189,6 @@ public class AbilityHandler {
     private static void tickBootsAbilities(EntityLivingBase entity) {
         boolean flying = entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying;
         boolean swimming = entity.isInsideOfMaterial(Material.WATER) || entity.isInWater();
-        Minecraft mc = Minecraft.getMinecraft();
         if (entity.onGround || flying || swimming) {
             boolean sneaking = entity.isSneaking();
 
@@ -200,7 +197,7 @@ public class AbilityHandler {
                     * (sneaking ? 0.1f : 1.0f);
 
             if (ConfigHandler.betterSpeedControl) {
-                if (GameSettings.isKeyDown(mc.gameSettings.keyBindSprint) || entity.isSprinting()) {
+                if (entity.isSprinting()) {
                     if (entity.moveForward > 0f) {
                         entity.moveRelative(0f, 0f, 1f, speed);
                     } else if (entity.moveForward < 0f) {
