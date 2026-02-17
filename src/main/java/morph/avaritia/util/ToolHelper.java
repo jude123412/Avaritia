@@ -9,7 +9,6 @@ package morph.avaritia.util;
 import java.util.*;
 import java.util.Map.Entry;
 
-import morph.avaritia.handler.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -27,6 +26,7 @@ import com.google.common.collect.Sets;
 
 import codechicken.lib.util.ItemUtils;
 import morph.avaritia.handler.AvaritiaEventHandler;
+import morph.avaritia.handler.ConfigHandler;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.item.ItemMatterCluster;
 
