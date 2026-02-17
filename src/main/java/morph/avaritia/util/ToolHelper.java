@@ -9,6 +9,7 @@ package morph.avaritia.util;
 import java.util.*;
 import java.util.Map.Entry;
 
+import morph.avaritia.handler.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -46,6 +47,13 @@ public class ToolHelper {
             for (int ly = min.getY(); ly < max.getY(); ly++) {
                 for (int lz = min.getZ(); lz < max.getZ(); lz++) {
                     BlockPos pos = origin.add(lx, ly, lz);
+                    IBlockState state = world.getBlockState(pos);
+                    if (!ConfigHandler.bedrockBreaker) {
+                        if (state.getBlockHardness(world, pos) <= -1) {
+                            // Filter unbreakable blocks only if config allows it
+                            continue;
+                        }
+                    }
                     removeBlockWithDrops(player, stack, world, pos, target, validMaterials);
                 }
             }
