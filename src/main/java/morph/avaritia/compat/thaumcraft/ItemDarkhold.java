@@ -72,26 +72,31 @@ public class ItemDarkhold extends Item implements IHaloRenderItem, IModelRegiste
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public boolean shouldDrawHalo(ItemStack stack) {
         return true;
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public TextureAtlasSprite getHaloTexture(ItemStack stack) {
         return AvaritiaTextures.HALO_GODLY;
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public int getHaloColour(ItemStack stack) {
         return 0xFF150026;
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public int getHaloSize(ItemStack stack) {
         return 5;
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public boolean shouldDrawPulse(ItemStack stack) {
         return false;
     }

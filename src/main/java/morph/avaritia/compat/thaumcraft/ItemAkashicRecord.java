@@ -16,6 +16,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import morph.avaritia.Avaritia;
 import morph.avaritia.api.registration.IModelRegister;
@@ -62,6 +64,7 @@ public class ItemAkashicRecord extends Item implements IModelRegister {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void registerModels() {
         ModelResourceLocation record = new ModelResourceLocation("avaritia:resource", "type=akashic_record");
         ModelLoader.registerItemVariants(this, record);

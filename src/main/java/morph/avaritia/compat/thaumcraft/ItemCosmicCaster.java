@@ -92,6 +92,7 @@ public class ItemCosmicCaster extends ItemCaster implements IModelRegister {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void registerModels() {
         ModelLoader.setCustomModelResourceLocation(this, 0,
                 new ModelResourceLocation("avaritia:cosmic_caster", "inventory"));
